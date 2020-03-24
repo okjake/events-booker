@@ -90,4 +90,3 @@ This is the schema of our database
 - express
 - postgresql
 - antd-design
-- javascript
