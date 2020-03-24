@@ -1,0 +1,44 @@
+{
+  "name": "events-booker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server/index.js",
+    "dev": "NODE_ENV=development nodemon server/index.js",
+    "project-setup": "npm install && cd client && npm install",
+    "kill": "fuser -k 5000/tcp",
+    "kill-run": "npm run kill && NODE_ENV=development npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSG-G8/events-booker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSG-G8/events-booker/issues"
+  },
+  "homepage": "https://github.com/GSG-G8/events-booker#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "cookie-parser": "^1.4.5",
+    "env2": "^2.2.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.18.2",
+    "yup": "^0.28.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
+  }
+}
