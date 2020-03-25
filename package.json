@@ -8,7 +8,8 @@
     "dev": "NODE_ENV=development nodemon server/index.js",
     "project-setup": "npm install && cd client && npm install",
     "kill": "fuser -k 5000/tcp",
-    "kill-run": "npm run kill && NODE_ENV=development npm run dev"
+    "kill-run": "npm run kill && NODE_ENV=development npm run dev",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
