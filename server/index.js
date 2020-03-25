@@ -1,0 +1,12 @@
+const express = require('express');
+const { join } = require('path');
+
+const app = express();
+
+app.use(express.static(join(__dirname, '..', 'client', 'build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
+});
+
+app.listen(process.env.PORT || 8000);
