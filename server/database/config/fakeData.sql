@@ -23,6 +23,13 @@ VALUES
         0511111111,
         'john@gmail.com',
         'Gaza'
+    ),
+    (
+        'Oyama',
+        'Kun',
+        0522222222,
+        'kun@hotmail.com',
+        'Gaza'
     );
 
 INSERT INTO
@@ -46,6 +53,9 @@ VALUES
         '120'
     );
 
-
+INSERT INTO
+    user_event(user_id, event_id, user_code)
+VALUES
+(4, 1, 'abc');
 
 COMMIT;
