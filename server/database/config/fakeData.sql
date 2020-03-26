@@ -48,7 +48,7 @@ VALUES
         302,
         'Code Academy',
         'lorem ipsum',
-        'https://cdn.discordapp.com/attachments/690170174116331638/692532090889306182/control_panel_3.jpg',
+        'https://i.imgur.com/VgTVTNA.jpg',
         '2038-01-09 03:14:07',
         120
     );
