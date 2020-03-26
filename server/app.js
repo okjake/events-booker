@@ -10,7 +10,7 @@ const app = express();
 app.disabled('x-powered-by');
 app.use(compression());
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8000);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
