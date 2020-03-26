@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
-const { clientError, serverError } = require('../controller');
+const { serverError, clientError } = require('../controller');
+
 
 //cancel user registration
 
