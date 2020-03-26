@@ -86,7 +86,7 @@ This is the schema of our database
 
 ## Technologies
 
-- reactjs
-- express
-- postgresql
-- antd-design
+- Reactjs
+- Express
+- Postgresql
+- Antd-design
