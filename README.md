@@ -82,11 +82,11 @@ Now the app is in your device and it's working.
 
 This is the schema of our database
 
-![schema](https://cdn.discordapp.com/attachments/690170174116331638/691695650659893319/schema.png)
+![schema](https://cdn.discordapp.com/attachments/690170174116331638/692742024796831744/schema.png)
 
 ## Technologies
 
-- reactjs
-- express
-- postgresql
-- antd-design
+- Reactjs
+- Express
+- Postgresql
+- Antd-design

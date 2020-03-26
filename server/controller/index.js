@@ -3,5 +3,5 @@ const { clientError } = require('./error/client');
 
 module.exports = {
   serverError,
-  clientError
-}
+  clientError,
+};
