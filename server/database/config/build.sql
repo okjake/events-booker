@@ -9,7 +9,7 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    mobile INT NOT NULL,
+    mobile VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL,
     location VARCHAR(100) NOT NULL
 );
@@ -17,12 +17,12 @@ CREATE TABLE users (
 CREATE TABLE events (
     id SERIAL PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
-    event_code VARCHAR(50) NOT NULL,
+    event_code INT NOT NULL,
     category VARCHAR(50) NOT NULL,
     details TEXT NOT NULL,
     image TEXT NOT NULL,
     date TIMESTAMP,
-    duration VARCHAR(50),
+    duration INT,
     expired BOOLEAN DEFAULT false
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE user_event (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE,
     event_id INTEGER REFERENCES events(id) ON UPDATE CASCADE,
-    user_code VARCHAR(50) NOT NULL,
+    user_code INT NOT NULL,
     attendance BOOLEAN DEFAULT false
 );
 
