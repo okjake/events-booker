@@ -1,12 +1,7 @@
-const express = require('express');
-const { join } = require('path');
+const app = require('./app');
 
-const app = express();
-
-app.use(express.static(join(__dirname, '..', 'client', 'build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
+const port = app.get('port');
+app.listen(port, () => {
+  // eslint-disable-next-line no-console
+  console.log('http://localhost:3000');
 });
-
-app.listen(process.env.PORT || 8000);
