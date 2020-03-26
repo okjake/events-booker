@@ -1,7 +1,7 @@
-const clientError = require('./error/client');
-const serverError = require('./error/server');
+const { serverError } = require('./error/server');
+const { clientError } = require('./error/client');
 
 module.exports = {
-  clientError,
-  serverError
-};
+  serverError,
+  clientError
+}

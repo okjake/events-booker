@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
-const { clientError, serverError } = require('../controller');
+const { serverError, clientError } = require('../controller');
+
 
 router.use(clientError);
 router.use(serverError);
