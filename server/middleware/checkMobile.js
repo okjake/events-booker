@@ -4,7 +4,7 @@ const checkMobileIfRegister = (req, res, next) => {
   const data = req.body;
   checkMobile(data).then((result) => {
     if (result.rows.length) {
-      res.everUserId = result.rows.id;
+      req.eventUserId = result.rows.id;
       next();
     } else {
       const error = new Error();
