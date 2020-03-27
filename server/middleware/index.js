@@ -1,3 +1,4 @@
 const { validationCancelReg } = require('./validation');
+const { checkMobileIfRegister } = require('./checkMobile');
 
-module.exports = { validationCancelReg };
+module.exports = { validationCancelReg, checkMobileIfRegister };
