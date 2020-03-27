@@ -3,8 +3,8 @@ const yup = require('yup');
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
   const schema = yup.object().shape({
-    mobile: yup.string().matches(mobileRegExp, 'Mobile number is not valid'),
-    code: yup
+    mobileNum: yup.string().matches(mobileRegExp),
+    eventCode: yup
       .number()
       .required()
       .positive()
