@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
-const { serverError, clientError } = require('../controller');
+const { serverError, clientError, checkUser } = require('../controller');
 
-router.post('/checkUser', (req, res) => res.json(req.body));
+router.post('/checkUser', checkUser);
 router.use(clientError);
 router.use(serverError);
 
