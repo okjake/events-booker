@@ -1,6 +1,6 @@
 const yup = require('yup');
 
-const checkUser = async (req, res, next) => {
+const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
   const schema = yup.object().shape({
     mobile: yup.string().matches(mobileRegExp, 'Mobile number is not valid'),
@@ -12,7 +12,7 @@ const checkUser = async (req, res, next) => {
       .min(100)
       .max(999),
   });
-  const result = await schema.isValid(req.body);
+  const result = schema.isValidSync(req.body);
   if (!result) {
     const err = new Error();
     err.msg = 'invalid inputs';
