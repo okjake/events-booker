@@ -20,6 +20,6 @@ app.use(express.static(join(__dirname, '..', 'client', 'build')));
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
 });
-app.use(router);
+app.use('/api/v1', router);
 
 module.exports = app;
