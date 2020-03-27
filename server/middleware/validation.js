@@ -9,7 +9,9 @@ const validationCancelReg = (req, res, next) => {
     mobile: req.body.mobile,
     event_code: req.body.event_code,
   }, { abortEarly: false })
-    .then(next)
+    .then(() => {
+      next();
+    })
     .catch((err) => {
       res.status(400).json({ msg: err.message });
     });

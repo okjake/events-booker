@@ -1,7 +1,7 @@
 const { cancelPopUp } = require('../../../database/queries/cancelRegistratinQ');
 
 const cancelRegistration = (req, res, next) => {
-  const id = req.eventUserId;
+  const id = res.eventUserId;
   cancelPopUp(id).then((result) => {
     if (result.rows.length) {
       res.json('deleted!!');
