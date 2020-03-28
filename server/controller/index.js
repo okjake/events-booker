@@ -1,7 +1,7 @@
 const { serverError } = require('./error/server');
 const { clientError } = require('./error/client');
 const {
-  checkUser, checkEventExist, generateCode, userWillAttend, checkAlreadBooked,
+  checkUser, checkEventExist, generateCode, userWillAttend, checkAlreadBooked, sendInvitation,
 } = require('./routes/user/registeration');
 
 module.exports = {
@@ -12,4 +12,5 @@ module.exports = {
   checkAlreadBooked,
   generateCode,
   userWillAttend,
+  sendInvitation,
 };

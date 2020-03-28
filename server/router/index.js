@@ -8,6 +8,7 @@ const {
   checkAlreadBooked,
   generateCode,
   userWillAttend,
+  sendInvitation,
 } = require('../controller');
 
 router.post(
@@ -17,6 +18,7 @@ router.post(
   checkAlreadBooked,
   generateCode,
   userWillAttend,
+  sendInvitation,
 );
 router.use(clientError);
 router.use(serverError);

@@ -1,4 +1,7 @@
 const yup = require('yup');
+const nodemailer = require('nodemailer');
+const ical = require('ical-generator');
+const moment = require('moment');
 
 const checkUserExist = require('../../../database/queries/checkUserExist');
 const getEventDetalis = require('../../../database/queries/getEventDetalis');
@@ -31,7 +34,7 @@ const checkUser = (req, res, next) => {
       if (rows.length === 0) {
         const err = new Error();
         err.status = 401;
-        err.msg = 'user doesn\'t exist, please register';
+        err.msg = "user doesn't exist, please register";
         next(err);
       } else {
         const [user] = rows;
@@ -58,15 +61,17 @@ const checkEventExist = (req, res, next) => {
 };
 
 const checkAlreadBooked = (req, res, next) => {
-  alreadyBooked(req.user.id, req.event.id).then(({ rows }) => {
-    if (rows.length === 0) next();
-    else {
-      const err = new Error();
-      err.status = 400;
-      err.msg = 'you have already booked this event';
-      next(err);
-    }
-  }).catch(next);
+  alreadyBooked(req.user.id, req.event.id)
+    .then(({ rows }) => {
+      if (rows.length === 0) next();
+      else {
+        const err = new Error();
+        err.status = 400;
+        err.msg = 'you have already booked this event';
+        next(err);
+      }
+    })
+    .catch(next);
 };
 
 const generateRandom = (prevCodes) => {
@@ -76,20 +81,79 @@ const generateRandom = (prevCodes) => {
 };
 
 const generateCode = (req, res, next) => {
-  getUsersCode(req.event.id).then(({ rows }) => {
-    const codes = rows.map((event) => event.user_code);
-    const randomCode = generateRandom(codes);
-    req.user.userCode = randomCode;
-    next();
-  }).catch(next);
+  getUsersCode(req.event.id)
+    .then(({ rows }) => {
+      const codes = rows.map((event) => event.user_code);
+      const randomCode = generateRandom(codes);
+      req.user.userCode = randomCode;
+      next();
+    })
+    .catch(next);
 };
 
 const userWillAttend = (req, res, next) => {
-  signUserAttend(req.user.id, req.event.id, req.user.userCode).then(() => {
-    res.json({ msg: 'all good' });
-  }).catch(next);
+  signUserAttend(req.user.id, req.event.id, req.user.userCode)
+    .then(() => {
+      next();
+    })
+    .catch(next);
+};
+
+const sendInvitation = (req, res, next) => {
+  const cal = ical({
+    events: [
+      {
+        start: moment(new Date(req.event.date)),
+        end: moment(new Date(req.event.date))
+          .add(req.event.duration, 'm')
+          .toDate(),
+        summary: `Invitation to ${req.event.title}`,
+        organizer: {
+          name: 'Gaza Sky Geeks',
+          email: process.env.EMAIL_ADMIN,
+        },
+      },
+    ],
+  }).toString();
+
+  const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    secure: false,
+    auth: {
+      user: process.env.EMAIL_ADMIN,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const options = {
+    from: `"Gaza Sky Geeks" <${process.env.EMAIL_ADMIN}>`,
+    to: req.user.email,
+    subject: `Invitation to ${req.event.title}`,
+    html: `<h4 style="text-align : left">Dear ${req.user.first_name} ${req.user.last_name}</h4>
+           <p style="text-align : left; margin-bottom:0px;">We would love to see you among us at ${req.event.title} in Gaza Sky Geeks so, add this event to your calendar to be remembered 
+           </p> 
+           <p style="text-align : left; margin-top:0px;">You will need this code to confirm attendance : ${req.user.userCode}</p>
+           <p style="text-align : left">Gaza Sky Geeks Team</p>
+          `,
+    icalEvent: {
+      filename: 'invitation.ics',
+      method: 'request',
+      content: cal,
+    },
+  };
+
+  transporter
+    .sendMail(options)
+    .then((info) => res.json(info))
+    .catch(next);
 };
 
 module.exports = {
-  checkUser, checkEventExist, checkAlreadBooked, generateCode, userWillAttend,
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+  sendInvitation,
 };
