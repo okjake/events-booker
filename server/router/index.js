@@ -9,7 +9,10 @@ const {
   generateCode,
   userWillAttend,
   sendInvitation,
+  cancelRegistration,
 } = require('../controller');
+
+const { validationCancelReg } = require('../middleware');
 
 router.post(
   '/checkUser',
@@ -20,6 +23,9 @@ router.post(
   userWillAttend,
   sendInvitation,
 );
+
+router.post('/cancelUser', validationCancelReg, cancelRegistration);
+
 router.use(clientError);
 router.use(serverError);
 
