@@ -2,6 +2,7 @@ const yup = require('yup');
 
 const checkUserExist = require('../../../database/queries/checkUserExist');
 const getEventId = require('../../../database/queries/getEventId');
+const getUsersCode = require('../../../database/queries/getUsersCode');
 
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
@@ -49,10 +50,24 @@ const checkEventExist = (req, res, next) => {
     } else {
       const [{ id }] = rows;
       req.user.eventId = id;
-      res.json(req.user);
+      next();
     }
   });
 };
 
+const generateRandom = (prevCodes) => {
+  const random = Math.floor(Math.random() * (999 - 100 + 1) + 100);
+  if (prevCodes.indexOf(random) === -1) return random;
+  return generateRandom(prevCodes);
+};
 
-module.exports = { checkUser, checkEventExist };
+const generateCode = (req, res, next) => {
+  getUsersCode(req.user.eventId).then(({ rows }) => {
+    const codes = rows.map((event) => event.user_code);
+    const randomCode = generateRandom(codes);
+    req.user.userCode = randomCode;
+    res.json(req.user);
+  }).catch(next);
+};
+
+module.exports = { checkUser, checkEventExist, generateCode };
