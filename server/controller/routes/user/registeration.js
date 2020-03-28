@@ -145,7 +145,12 @@ const sendInvitation = (req, res, next) => {
 
   transporter
     .sendMail(options)
-    .then((info) => res.json(info))
+    .then(() => res
+      .status(201)
+      .json({
+        msg:
+            'Event Booked Successfully, you will receive and email with the details',
+      }))
     .catch(next);
 };
 
