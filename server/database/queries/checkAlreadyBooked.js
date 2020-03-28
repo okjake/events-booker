@@ -1,9 +1,9 @@
 const connction = require('../config/connection');
 
-module.exports = ({ id, eventId }) => {
+module.exports = (userId, eventId) => {
   const sql = {
     text: 'select * from user_event where user_id = $1 and event_id = $2',
-    values: [id, eventId],
+    values: [userId, eventId],
   };
   return connction.query(sql);
 };
