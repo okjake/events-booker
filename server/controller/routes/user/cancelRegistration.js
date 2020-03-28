@@ -1,13 +1,13 @@
 const { cancelPopUp } = require('../../../database/queries/cancelRegistratinQ');
 
 const cancelRegistration = (req, res, next) => {
-  const id = req.eventUserId;
-  cancelPopUp(id).then(({ rows }) => {
+  const data = req.body;
+  cancelPopUp(data).then(({ rows }) => {
     if (rows.length) {
       res.json('your registration is cancelled');
     } else {
       const error = new Error();
-      error.msg = 'erorr on delete prosess';
+      error.msg = 'mobile dosent register on this event';
       error.status = 400;
       next(error);
     }
