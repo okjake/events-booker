@@ -1,5 +1,7 @@
 const yup = require('yup');
 
+const checkUserExist = require('../../../database/queries/checkUserExist');
+
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
   const schema = yup.object().shape({
@@ -19,7 +21,17 @@ const checkUser = (req, res, next) => {
     err.status = 400;
     return next(err);
   }
-  res.json({ msg: 'all good' });
+
+  checkUserExist(req.body.mobileNum)
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        const err = new Error();
+        err.status = 401;
+        err.msg = 'user doesn\'t exist, please register';
+        next(err);
+      } else res.json(rows);
+    })
+    .catch(next);
 };
 
 module.exports = { checkUser };
