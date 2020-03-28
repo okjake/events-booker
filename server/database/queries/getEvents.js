@@ -8,6 +8,6 @@ LEFT JOIN user_event
 ON (user_event.event_id = events.id)
 WHERE events.expired = false
 GROUP BY event_id, events.id'
-)
+);
 
 module.exports = getAllEvents;
