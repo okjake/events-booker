@@ -149,7 +149,7 @@ const sendInvitation = (req, res, next) => {
       .status(201)
       .json({
         msg:
-            'Event Booked Successfully, you will receive and email with the details',
+            'Event has been booked successfully, you will receive an email with the details',
       }))
     .catch(next);
 };
