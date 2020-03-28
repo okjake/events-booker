@@ -3,6 +3,7 @@ const yup = require('yup');
 const checkUserExist = require('../../../database/queries/checkUserExist');
 const getEventId = require('../../../database/queries/getEventId');
 const getUsersCode = require('../../../database/queries/getUsersCode');
+const signUserAttend = require('../../../database/queries/signUserAttend');
 
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
@@ -66,8 +67,16 @@ const generateCode = (req, res, next) => {
     const codes = rows.map((event) => event.user_code);
     const randomCode = generateRandom(codes);
     req.user.userCode = randomCode;
-    res.json(req.user);
+    next();
   }).catch(next);
 };
 
-module.exports = { checkUser, checkEventExist, generateCode };
+const userWillAttend = (req, res, next) => {
+  signUserAttend(req.user).then(() => {
+    res.json({ msg: 'all good' });
+  }).catch(next);
+};
+
+module.exports = {
+  checkUser, checkEventExist, generateCode, userWillAttend,
+};
