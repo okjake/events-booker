@@ -4,6 +4,7 @@ const checkUserExist = require('../../../database/queries/checkUserExist');
 const getEventId = require('../../../database/queries/getEventId');
 const getUsersCode = require('../../../database/queries/getUsersCode');
 const signUserAttend = require('../../../database/queries/signUserAttend');
+const alreadyBooked = require('../../../database/queries/checkAlreadyBooked');
 
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
@@ -56,6 +57,18 @@ const checkEventExist = (req, res, next) => {
   });
 };
 
+const checkAlreadBooked = (req, res, next) => {
+  alreadyBooked(req.user).then(({ rows }) => {
+    if (rows.length === 0) next();
+    else {
+      const err = new Error();
+      err.status = 400;
+      err.msg = 'you have already booked this event';
+      next(err);
+    }
+  }).catch(next);
+};
+
 const generateRandom = (prevCodes) => {
   const random = Math.floor(Math.random() * (999 - 100 + 1) + 100);
   if (prevCodes.indexOf(random) === -1) return random;
@@ -78,5 +91,5 @@ const userWillAttend = (req, res, next) => {
 };
 
 module.exports = {
-  checkUser, checkEventExist, generateCode, userWillAttend,
+  checkUser, checkEventExist, checkAlreadBooked, generateCode, userWillAttend,
 };

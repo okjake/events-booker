@@ -1,10 +1,23 @@
 const router = require('express').Router();
 
 const {
-  serverError, clientError, checkUser, checkEventExist, generateCode, userWillAttend,
+  serverError,
+  clientError,
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
 } = require('../controller');
 
-router.post('/checkUser', checkUser, checkEventExist, generateCode, userWillAttend);
+router.post(
+  '/checkUser',
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+);
 router.use(clientError);
 router.use(serverError);
 
