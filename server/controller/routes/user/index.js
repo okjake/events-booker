@@ -1,5 +1,5 @@
-/const getEvents = require("./mainPage");
+const getEvents = require("./mainPage");
 
 module.exports = {
-  getEvents,
+  getEvents
 };

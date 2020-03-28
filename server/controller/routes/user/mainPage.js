@@ -3,7 +3,9 @@ const getAllEvents = require("../../../database/queries/getEvents");
 const getEvents = (req, res) => {
   getAllEvents()
     .then(({ rows }) => res.json(rows))
-    .catch(err => console.error(err));
+    .catch(() => {
+      res.status(400).json({ error: "Page Not Found" });
+    });
 };
 
 module.exports = { getEvents };
