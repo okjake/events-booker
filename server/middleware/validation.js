@@ -5,9 +5,10 @@ const validationCancelReg = (req, res, next) => {
     mobile: number().positive().integer().required(),
     event_code: number().positive().integer().required(),
   });
+  const { mobile, eventCode } = req.body;
   schema.validate({
-    mobile: req.body.mobile,
-    event_code: req.body.event_code,
+    mobile,
+    event_code: eventCode,
   }, { abortEarly: false })
     .then(() => {
       next();
