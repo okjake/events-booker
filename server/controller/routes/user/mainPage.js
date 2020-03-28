@@ -7,7 +7,7 @@ const getEvents = (req, res, next) => {
         res.json(rows);
       } else {
         const error = new Error();
-        error.msg = "This page is not found";
+        error.msg = "There is no fetch data";
         error.status = 400;
         next(error);
       }
