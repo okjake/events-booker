@@ -1,6 +1,7 @@
 const yup = require('yup');
 
 const checkUserExist = require('../../../database/queries/checkUserExist');
+const getEventId = require('../../../database/queries/getEventId');
 
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
@@ -29,9 +30,29 @@ const checkUser = (req, res, next) => {
         err.status = 401;
         err.msg = 'user doesn\'t exist, please register';
         next(err);
-      } else res.json(rows);
+      } else {
+        const [user] = rows;
+        req.user = user;
+        next();
+      }
     })
     .catch(next);
 };
 
-module.exports = { checkUser };
+const checkEventExist = (req, res, next) => {
+  getEventId(req.body.eventCode).then(({ rows }) => {
+    if (rows.length === 0) {
+      const err = new Error();
+      err.status = 404;
+      err.msg = 'the event you are trying to book does not exist';
+      next(err);
+    } else {
+      const [{ id }] = rows;
+      req.user.eventId = id;
+      res.json(req.user);
+    }
+  });
+};
+
+
+module.exports = { checkUser, checkEventExist };

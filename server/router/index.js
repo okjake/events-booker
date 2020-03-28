@@ -1,8 +1,10 @@
 const router = require('express').Router();
 
-const { serverError, clientError, checkUser } = require('../controller');
+const {
+  serverError, clientError, checkUser, checkEventExist,
+} = require('../controller');
 
-router.post('/checkUser', checkUser);
+router.post('/checkUser', checkUser, checkEventExist);
 router.use(clientError);
 router.use(serverError);
 
