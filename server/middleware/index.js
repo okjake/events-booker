@@ -1,3 +1,3 @@
-const { validationCancelReg } = require('./validation');
+const { validationCancelReg, loginValidation } = require('./validation');
 
-module.exports = { validationCancelReg };
+module.exports = { validationCancelReg, loginValidation };

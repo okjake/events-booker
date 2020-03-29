@@ -13,7 +13,7 @@ const {
   getEvents,
 } = require('../controller');
 
-const { validationCancelReg } = require('../middleware');
+const { validationCancelReg, loginValidation } = require('../middleware');
 
 router.get('/getevents', getEvents);
 
@@ -28,7 +28,7 @@ router.post(
 );
 
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
-router.post('/login', (req, res) => {
+router.post('/login', loginValidation, (req, res) => {
   res.json('admin login');
 });
 
