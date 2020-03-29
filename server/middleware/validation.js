@@ -21,7 +21,7 @@ const validationCancelReg = (req, res, next) => {
 const loginValidation = (req, res, next) => {
   const schema = object().shape({
     email: string().email().required(),
-    password: number().positive().integer().required(),
+    password: string().min(8).required(),
   });
   const { email, password } = req.body;
   schema.validate({

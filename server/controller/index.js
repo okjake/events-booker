@@ -4,6 +4,7 @@ const {
   checkUser, checkEventExist, generateCode, userWillAttend, checkAlreadBooked, sendInvitation,
 } = require('./routes/user/registeration');
 const { cancelRegistration, getEvents } = require('./routes/user');
+const { login } = require('./routes/admin');
 
 module.exports = {
   serverError,
@@ -16,4 +17,5 @@ module.exports = {
   sendInvitation,
   cancelRegistration,
   getEvents,
+  login,
 };

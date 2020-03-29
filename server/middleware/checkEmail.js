@@ -6,6 +6,7 @@ const checkEmailIfExist = (req, res, next) => {
     .then(({ rows }) => {
       if (rows[0]) {
         req.adminPassword = rows[0].password;
+        req.adminId = rows[0].id;
         next();
       } else {
         const error = new Error();

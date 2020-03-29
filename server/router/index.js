@@ -11,9 +11,12 @@ const {
   sendInvitation,
   cancelRegistration,
   getEvents,
+  login,
 } = require('../controller');
 
-const { validationCancelReg, loginValidation } = require('../middleware');
+const {
+  validationCancelReg, loginValidation, checkEmailIfExist, checkPassword,
+} = require('../middleware');
 
 router.get('/getevents', getEvents);
 
@@ -28,9 +31,7 @@ router.post(
 );
 
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
-router.post('/login', loginValidation, (req, res) => {
-  res.json('admin login');
-});
+router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 
 router.use(clientError);
 router.use(serverError);
