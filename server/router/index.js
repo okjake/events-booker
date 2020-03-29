@@ -19,8 +19,14 @@ const {
 
 const { validationCancelReg } = require('../middleware');
 
-router.post('/register', registerValidation, newUserExist, generateCode, addUserToDB, sendSms);
 router.get('/getevents', getEvents);
+router.post('/register',
+  registerValidation,
+  newUserExist,
+  generateCode,
+  addUserToDB,
+  userWillAttend,
+  sendSms);
 
 router.post(
   '/checkUser',

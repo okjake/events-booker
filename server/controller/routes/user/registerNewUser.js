@@ -20,7 +20,6 @@ const registerValidation = (req, res, next) => {
     email: req.body.email,
     location: req.body.location,
     mobile: req.body.mobile,
-    eventCode: req.body.eventCode,
 
   }, { abortEarly: false }).then(() => {
     next();
@@ -48,6 +47,7 @@ const addUserToDB = (req, res, next) => {
     next();
   }).catch(next);
 };
+
 
 module.exports = {
   registerValidation,

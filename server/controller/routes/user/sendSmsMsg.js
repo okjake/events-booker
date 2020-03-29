@@ -11,8 +11,6 @@ const nexmo = new Nexmo(
 );
 
 const sendSms = (req, res, next) => {
-  console.log('the data from smsSend function', req.body);
-
   const { mobile, userCode } = req.body;
   const text = `Hi, Your validation code is  ${userCode}`;
   nexmo.message.sendSms(
@@ -27,7 +25,6 @@ const sendSms = (req, res, next) => {
         error.status = 400;
         next(error);
       } else {
-        console.dir(responseData);
         const data = {
           id: responseData.messages[0]['message-id'],
           number: responseData.messages[0].to,
