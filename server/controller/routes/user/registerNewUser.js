@@ -14,14 +14,7 @@ const registerValidation = (req, res, next) => {
 
   });
 
-  schema.validate({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    location: req.body.location,
-    mobile: req.body.mobile,
-
-  }, { abortEarly: false }).then(() => {
+  schema.validate(req.body, { abortEarly: false }).then(() => {
     next();
   }).catch((err) => {
     res.status(400).json({ message: err.message });

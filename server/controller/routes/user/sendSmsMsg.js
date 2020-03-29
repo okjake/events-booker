@@ -4,8 +4,8 @@ const Nexmo = require('nexmo');
 // Init Nexmo
 const nexmo = new Nexmo(
   {
-    apiKey: '6bce011d',
-    apiSecret: 'C0RAsVGz6UvFWs9N',
+    apiKey: process.env.NEXMO_API_KEY,
+    apiSecret: process.env.NEXMO_API_SECRET,
   },
   { debug: true },
 );
@@ -13,7 +13,7 @@ const nexmo = new Nexmo(
 const sendSms = (req, res, next) => {
   const { mobile } = req.body;
   const { userCode } = req.user;
-  const text = `Hi, Your validation code is  ${userCode}`;
+  const text = ` thanks for your registration, this your confirmation attendance code :  ${userCode}`;
   nexmo.message.sendSms(
     'GSG',
     mobile,
@@ -26,6 +26,7 @@ const sendSms = (req, res, next) => {
         error.status = 400;
         next(error);
       } else {
+        console.dir(responseData);
         const data = {
           id: responseData.messages[0]['message-id'],
           number: responseData.messages[0].to,
