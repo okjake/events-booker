@@ -28,6 +28,9 @@ router.post(
 );
 
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
+router.post('/login', (req, res) => {
+  res.json('admin login');
+});
 
 router.use(clientError);
 router.use(serverError);
