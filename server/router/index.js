@@ -11,6 +11,8 @@ const {
   sendInvitation,
   cancelRegistration,
   getEvents,
+  validateEvent,
+  createEvent,
 } = require('../controller');
 
 const { validationCancelReg } = require('../middleware');
@@ -28,6 +30,8 @@ router.post(
 );
 
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
+
+router.post('/event', validateEvent, createEvent);
 
 router.use(clientError);
 router.use(serverError);
