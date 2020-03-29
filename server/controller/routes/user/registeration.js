@@ -32,10 +32,7 @@ const checkUser = (req, res, next) => {
   checkUserExist(req.body.mobileNum)
     .then(({ rows }) => {
       if (rows.length === 0) {
-        const err = new Error();
-        err.status = 401;
-        err.msg = "user doesn't exist, please register";
-        next(err);
+        res.json({ msg: "user doesn't exist, please register" });
       } else {
         const [user] = rows;
         req.user = user;
@@ -49,7 +46,7 @@ const checkEventExist = (req, res, next) => {
   getEventDetalis(req.body.eventCode).then(({ rows }) => {
     if (rows.length === 0) {
       const err = new Error();
-      err.status = 404;
+      err.status = 400;
       err.msg = 'the event you are trying to book does not exist';
       next(err);
     } else {
