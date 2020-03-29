@@ -5,13 +5,15 @@ const {
   clientError,
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
   generateCode,
   userWillAttend,
+  checkAlreadBooked,
   sendInvitation,
   cancelRegistration,
   getEvents,
   validateEvent,
+  createEvent,
+  validateAttendence,
   checkUserBooking,
   signAttendance,
 } = require('../controller');
@@ -29,9 +31,11 @@ router.post(
   userWillAttend,
   sendInvitation,
 );
-
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
-router.patch('/attendance', validateEvent, checkUserBooking, signAttendance);
+
+// should be protected
+router.post('/event', validateEvent, createEvent);
+router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 
 router.use(clientError);
 router.use(serverError);

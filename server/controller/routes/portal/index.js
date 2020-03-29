@@ -1,5 +1,5 @@
-const { validateEvent, checkUserBooking, signAttendance } = require('./attendance');
+const { validateAttendence, checkUserBooking, signAttendance } = require('./attendance');
 
 module.exports = {
-  validateEvent, checkUserBooking, signAttendance,
+  validateAttendence, checkUserBooking, signAttendance,
 };

@@ -3,7 +3,7 @@ const getEventDetalis = require('../../../database/queries/getEventDetalis');
 const userHasBooked = require('../../../database/queries/userHasBooked');
 const signAttendanceSql = require('../../../database/queries/signAttendanceSql');
 
-const validateEvent = (req, res, next) => {
+const validateAttendence = (req, res, next) => {
   const schema = yup.object().shape({
     userCode: yup
       .number()
@@ -63,7 +63,7 @@ const signAttendance = (req, res, next) => {
 };
 
 module.exports = {
-  validateEvent,
+  validateAttendence,
   checkUserBooking,
   signAttendance,
 };
