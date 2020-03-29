@@ -5,13 +5,34 @@ const {
   clientError,
   registerValidation,
   newUserExist,
-  generatCode,
   addUserToDB,
   sendSms,
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+  sendInvitation,
+  cancelRegistration,
+  getEvents,
 } = require('../controller');
 
-router.post('/register', registerValidation, newUserExist, generatCode, addUserToDB);
-// router.post('/sendSms', sendSms);
+const { validationCancelReg } = require('../middleware');
+
+router.post('/register', registerValidation, newUserExist, generateCode, addUserToDB, sendSms);
+router.get('/getevents', getEvents);
+
+router.post(
+  '/checkUser',
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+  sendInvitation,
+);
+
+router.post('/cancelUser', validationCancelReg, cancelRegistration);
 
 router.use(clientError);
 router.use(serverError);

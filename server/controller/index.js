@@ -1,19 +1,36 @@
 const { serverError } = require('./error/server');
 const { clientError } = require('./error/client');
+const { sendSms } = require('./routes/user/sendSmsMsg');
+const { cancelRegistration, getEvents } = require('./routes/user');
+
 const {
   registerValidation,
   newUserExist,
-  generatCode,
   addUserToDB,
 } = require('./routes/user/registerNewUser');
-const { sendSms } = require('./routes/user/sendSmsMsg');
+
+const {
+  checkUser,
+  checkEventExist,
+  generateCode,
+  userWillAttend,
+  checkAlreadBooked,
+  sendInvitation,
+} = require('./routes/user/registeration');
 
 module.exports = {
   serverError,
   clientError,
   registerValidation,
   newUserExist,
-  generatCode,
   addUserToDB,
   sendSms,
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+  sendInvitation,
+  cancelRegistration,
+  getEvents,
 };
