@@ -48,9 +48,17 @@ const addUserToDB = (req, res, next) => {
   }).catch(next);
 };
 
+const getUserID = (req, res, next) => {
+  getUser(req.body.email).then(({ rows }) => {
+    const [user] = rows;
+    req.user = user;
+    next();
+  });
+};
 
 module.exports = {
   registerValidation,
   newUserExist,
   addUserToDB,
+  getUserID,
 };

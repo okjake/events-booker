@@ -6,6 +6,7 @@ const {
   registerValidation,
   newUserExist,
   addUserToDB,
+  getUserID,
   sendSms,
   checkUser,
   checkEventExist,
@@ -23,10 +24,14 @@ router.get('/getevents', getEvents);
 router.post('/register',
   registerValidation,
   newUserExist,
-  generateCode,
   addUserToDB,
+  getUserID,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
   userWillAttend,
-  sendSms);
+  sendSms,
+  sendInvitation);
 
 router.post(
   '/checkUser',

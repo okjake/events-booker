@@ -11,7 +11,8 @@ const nexmo = new Nexmo(
 );
 
 const sendSms = (req, res, next) => {
-  const { mobile, userCode } = req.body;
+  const { mobile } = req.body;
+  const { userCode } = req.user;
   const text = `Hi, Your validation code is  ${userCode}`;
   nexmo.message.sendSms(
     'GSG',
@@ -29,9 +30,10 @@ const sendSms = (req, res, next) => {
           id: responseData.messages[0]['message-id'],
           number: responseData.messages[0].to,
         };
-        res.json({
-          msg: `Message sent successfuly to ${data.number}`,
-        });
+        // I've added the user number to the user to print the user message
+        // your validation code send to "user number"
+        req.user.number = data.number;
+        next();
       }
     },
   );
