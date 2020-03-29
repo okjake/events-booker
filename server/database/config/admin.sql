@@ -3,7 +3,6 @@ BEGIN;
 INSERT INTO
     admin(name, email, password)
 VALUES
-    ('mariam','mariam@gmail.com','$2y$12$PrSt10v/N1cSo8ea5uVDoOtQFOqhYz7dsW5IdwC3cihnmaF2TQ5MG
-'),
-    ('moh','moh@gmail.com', '$2y$12$1edtV4qo8pzIjL1/o0Nhs.c/Tlrm5b2sFF/IyKpXa.vvFZi0Gte.y');
+    ('mariam','mariam@gmail.com','$2b$10$7gMjB14U1cWG9UWaZb4nV.UfRLqxIbSDkPXzceRvX0TldBq8uVOWm'),
+    ('moh','moh@gmail.com', '$2b$10$NFThDzVCJ9G1FPaJ.U7TU..DwMEiaPvkczZ6hWHePLsyrqMcicoWC');
 COMMIT;

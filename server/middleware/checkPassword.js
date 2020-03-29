@@ -4,9 +4,7 @@ const bcrypt = require('bcrypt');
 const checkPassword = (req, res, next) => {
   const hsashPass = req.adminPassword;
   const { password } = req.body;
-  console.log(hsashPass, password);
   bcrypt.compare(password, hsashPass, (error, result) => {
-    console.log(result);
     if (error) { next(error); } else if (result === false) {
       const err = new Error();
       err.msg = 'incorect password';
@@ -19,5 +17,9 @@ const checkPassword = (req, res, next) => {
     }
   });
 };
-
 module.exports = { checkPassword };
+// to make password to admin hash password(req.body)
+// bcrypt.hash(password, 10, (err, hash) => {
+//   if (err) { throw (err); }
+//   console.log(hash);
+// });
