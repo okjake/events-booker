@@ -1,4 +1,3 @@
-const { validateEvent } = require('./createEvent');
-const { createEvent } = require('./createEvent');
+const { validateEvent, createEvent } = require('./createEvent');
 
 module.exports = { validateEvent, createEvent };
