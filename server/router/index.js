@@ -1,18 +1,33 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 const {
   serverError,
   clientError,
-  cancelRegistration
-} = require("../controller");
-const { validationCancelReg } = require("../middleware");
-const { getEvents } = require("../controller");
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+  sendInvitation,
+  cancelRegistration,
+  getEvents,
+} = require('../controller');
 
-//Get All the events
-router.get("/getevents", getEvents);
+const { validationCancelReg } = require('../middleware');
 
-// cancel user registration
-router.post("/cancelUser", validationCancelReg, cancelRegistration);
+router.get('/getevents', getEvents);
+
+router.post(
+  '/checkUser',
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+  sendInvitation,
+);
+
+router.post('/cancelUser', validationCancelReg, cancelRegistration);
 
 router.use(clientError);
 router.use(serverError);
