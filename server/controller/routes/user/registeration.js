@@ -5,6 +5,10 @@ const newUser = require('../../../database/queries/users/newUser');
 
 // Validate the user data
 const registerValidation = (req, res, next) => {
+  console.log('req.body is :', req.body);
+  console.log('req.params is :', req.params);
+
+
   const schema = yup.object().shape({
     firstName: yup.string().required().max(10),
     lastName: yup.string().required().max(10),
@@ -41,10 +45,24 @@ const newUserExist = (req, res, next) => {
   }).catch(next);
 };
 
-// insert the valid user to the database
-const addUserToDB = (req, res, next) => {
-  newUser(req.body).then(() => res.json({ msg: 'Registerd successfuly' })).catch(next);
+const generatCode = (req, res, next) => {
+  const userCode = '123';
+  req.body.userCode = userCode;
+  next();
 };
 
+// insert the valid user to the database
+const addUserToDB = (req, res, next) => {
+  newUser(req.body).then(() => {
+    console.log('the data from the database query', req.body);
 
-module.exports = { registerValidation, newUserExist, addUserToDB };
+    res.send('good')
+  }).catch(next);
+};
+
+module.exports = {
+  registerValidation,
+  newUserExist,
+  addUserToDB,
+  generatCode,
+};

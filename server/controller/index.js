@@ -1,11 +1,14 @@
 const { serverError } = require('./error/server');
 const { clientError } = require('./error/client');
-const { registerValidation, newUserExist, addUserToDB } = require('./routes/user/registeration');
+const { registerValidation, newUserExist, generatCode, addUserToDB } = require('./routes/user/registeration');
+const { sendSms } = require('./routes/user/sendSmsMsg');
 
 module.exports = {
   serverError,
   clientError,
   registerValidation,
   newUserExist,
+  generatCode,
   addUserToDB,
+  sendSms,
 };
