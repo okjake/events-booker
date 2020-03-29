@@ -13,19 +13,20 @@ const nexmo = new Nexmo(
 const sendSms = (req, res, next) => {
   const { mobile } = req.body;
   const { userCode } = req.user;
-  const text = ` thanks for your registration, this your confirmation attendance code :  ${userCode}`;
+  const text = `This is the attendance code: ${userCode}`;
   nexmo.message.sendSms(
     'GSG',
     mobile,
     text,
     { type: 'unicode' },
-    (err) => {
+    (err, responseData) => {
       if (err) {
         const error = new Error();
         error.msg = 'Invalid Number!';
         error.status = 400;
         next(error);
       } else {
+        console.dir(responseData);
         next();
       }
     },

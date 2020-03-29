@@ -19,6 +19,9 @@ const {
   sendInvitation,
 } = require('./routes/user/registeration');
 
+const { validateEvent, createEvent } = require('./routes/admin');
+const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
+
 module.exports = {
   serverError,
   clientError,
@@ -29,10 +32,15 @@ module.exports = {
   sendSms,
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
   generateCode,
   userWillAttend,
+  checkAlreadBooked,
   sendInvitation,
   cancelRegistration,
   getEvents,
+  validateEvent,
+  createEvent,
+  validateAttendence,
+  checkUserBooking,
+  signAttendance,
 };
