@@ -19,21 +19,13 @@ const sendSms = (req, res, next) => {
     mobile,
     text,
     { type: 'unicode' },
-    (err, responseData) => {
+    (err) => {
       if (err) {
         const error = new Error();
         error.msg = 'Invalid Number!';
         error.status = 400;
         next(error);
       } else {
-        console.dir(responseData);
-        const data = {
-          id: responseData.messages[0]['message-id'],
-          number: responseData.messages[0].to,
-        };
-        // I've added the user number to the user to print the user message
-        // your validation code send to "user number"
-        req.user.number = data.number;
         next();
       }
     },
