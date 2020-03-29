@@ -1,3 +1,3 @@
-const getUsersEvent = require('./viewUsers');
+const { getUsersEvent } = require('./viewUsers');
 
 module.exports = { getUsersEvent };
