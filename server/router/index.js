@@ -10,9 +10,12 @@ const {
   userWillAttend,
   sendInvitation,
   cancelRegistration,
+  getEvents,
 } = require('../controller');
 
 const { validationCancelReg } = require('../middleware');
+
+router.get('/getevents', getEvents);
 
 router.post(
   '/checkUser',
