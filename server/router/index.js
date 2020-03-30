@@ -52,13 +52,13 @@ router.post(
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
-router.get('/users', getUsersData);
-router.get('/event/:eventcode/users', getUsersEvent);
 
-router.use(protectedRoute);
 // should be protected
+router.use(protectedRoute);
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
+router.get('/users', getUsersData);
+router.get('/event/:eventcode/users', getUsersEvent);
 
 router.use(clientError);
 router.use(serverError);
