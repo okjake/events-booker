@@ -53,7 +53,6 @@ router.post(
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
-router.get('/logout', logout);
 
 // should be protected
 router.use(protectedRoute);
@@ -61,6 +60,7 @@ router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
+router.get('/logout', logout);
 
 router.use(clientError);
 router.use(serverError);
