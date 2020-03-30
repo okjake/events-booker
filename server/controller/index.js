@@ -1,13 +1,29 @@
 const { serverError } = require('./error/server');
 const { clientError } = require('./error/client');
 const {
-  checkUser, checkEventExist, generateCode, userWillAttend, checkAlreadBooked, sendInvitation,
-} = require('./routes/user/registeration');
-const { cancelRegistration, getEvents } = require('./routes/user');
-const { validateEvent, createEvent } = require('./routes/admin');
-const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
+  cancelRegistration,
+  getEvents,
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+  sendInvitation,
+} = require('./routes/user');
 
-const { getUsersEvent, getUsersData, viewEventsOnDate } = require('./routes/admin');
+const {
+  validateEvent,
+  createEvent,
+  getUsersEvent,
+  getUsersData,
+  viewEventsOnDate,
+} = require('./routes/admin');
+
+const {
+  validateAttendence,
+  checkUserBooking,
+  signAttendance,
+} = require('./routes/portal');
 
 
 module.exports = {
