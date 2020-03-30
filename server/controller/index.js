@@ -7,7 +7,8 @@ const { cancelRegistration, getEvents } = require('./routes/user');
 const { validateEvent, createEvent } = require('./routes/admin');
 const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
 
-const { getUsersEvent } = require('./routes/admin');
+const { getUsersEvent, getUsersData } = require('./routes/admin');
+
 
 module.exports = {
   serverError,
@@ -21,6 +22,7 @@ module.exports = {
   cancelRegistration,
   getEvents,
   getUsersEvent,
+  getUsersData,
   validateEvent,
   createEvent,
   validateAttendence,
