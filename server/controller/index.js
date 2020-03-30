@@ -7,7 +7,7 @@ const { cancelRegistration, getEvents } = require('./routes/user');
 const { validateEvent, createEvent } = require('./routes/admin');
 const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
 
-const { getUsersEvent, getUsersData } = require('./routes/admin');
+const { getUsersEvent, getUsersData, viewEventsOnDate } = require('./routes/admin');
 
 
 module.exports = {
@@ -28,4 +28,5 @@ module.exports = {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  viewEventsOnDate,
 };

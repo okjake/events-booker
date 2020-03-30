@@ -18,6 +18,7 @@ const {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  viewEventsOnDate,
 } = require('../controller');
 
 const { validationCancelReg } = require('../middleware');
@@ -42,9 +43,7 @@ router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 // display event with specific  date
-router.get('/event/:date', (req, res) => {
-  res.json({ 'display event with date': req.params.date });
-});
+router.get('/event/:date', viewEventsOnDate);
 router.use(clientError);
 router.use(serverError);
 
