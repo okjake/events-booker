@@ -1,6 +1,7 @@
 # Events-Booker
 
-[You can visit our site from this link](https://eventsbooker.herokuapp.com/)
+## Live Demo :
+[Click here to visit our app](https://eventsbooker.herokuapp.com/)
 
 ## Team Members :
 
@@ -65,9 +66,11 @@ Create an Event booker app that allows the users to select which event they will
 
 - As an admin, I can track the user and view all events that he attended.
 
-- I can access the attendance approval screen to help users approve their attendance by entering the code they already received. (portal)
+- For Admin-portal:
+I can access the attendance approval screen to help users approve their attendance by entering the code they already received. (portal)
 
 ## The MVP (Demo GIF) :
+
 
 ## App Setup :
 
@@ -86,7 +89,19 @@ This is the schema of our database
 
 ## Technologies
 
-- Reactjs
-- Express
-- Postgresql
-- Antd-design
+### Front-end Techno:
+* Reactjs.
+
+* Antd-design.
+
+### Back-end Techno:
+* Express.
+
+* Postgresql.
+
+## Main Features of Our App:
+* Calender: 
+We use the nodemailer module to send invitation email for the users who registered for a particular events. 
+
+* Send Code to Confirm Registration:
+We use nexmo module to send a confirmation code for the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
