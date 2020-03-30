@@ -15,7 +15,9 @@ app.use(express.json());
 app.set('port', process.env.PORT || 8000);
 
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
-app.use(router);
+
+app.use('/api/v1', router);
+
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
 });

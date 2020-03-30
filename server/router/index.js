@@ -3,6 +3,10 @@ const router = require('express').Router();
 const {
   serverError,
   clientError,
+  registerValidation,
+  newUserExist,
+  addUserToDB,
+  sendSms,
   checkUser,
   checkEventExist,
   generateCode,
@@ -26,9 +30,15 @@ const {
 } = require('../middleware');
 
 router.get('/getevents', getEvents);
-router.get('/users', getUsersData);
-
-router.get('/event/:eventcode/users', getUsersEvent);
+router.post('/register',
+  registerValidation,
+  newUserExist,
+  addUserToDB,
+  checkEventExist,
+  generateCode,
+  userWillAttend,
+  sendSms,
+  sendInvitation);
 
 router.post(
   '/checkUser',
@@ -37,14 +47,18 @@ router.post(
   checkAlreadBooked,
   generateCode,
   userWillAttend,
+  sendSms,
   sendInvitation,
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
-router.use(protectedRoute);
+
 // should be protected
+router.use(protectedRoute);
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
+router.get('/users', getUsersData);
+router.get('/event/:eventcode/users', getUsersEvent);
 
 router.use(clientError);
 router.use(serverError);
