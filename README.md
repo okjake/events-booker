@@ -1,5 +1,6 @@
 # Events-Booker
 
+## Live Demo :
 [Click here to visit our app](https://eventsbooker.herokuapp.com/)
 
 ## Team Members :
@@ -70,7 +71,6 @@ I can access the attendance approval screen to help users approve their attendan
 
 ## The MVP (Demo GIF) :
 
-## Live Demo :
 
 ## App Setup :
 
