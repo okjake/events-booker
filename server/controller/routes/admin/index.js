@@ -1,3 +1,4 @@
 const { getUsersEvent } = require('./viewUsers');
+const { validateEvent, createEvent } = require('./createEvent');
 
-module.exports = { getUsersEvent };
+module.exports = { validateEvent, createEvent, getUsersEvent };
