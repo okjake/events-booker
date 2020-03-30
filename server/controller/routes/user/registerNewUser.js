@@ -36,22 +36,15 @@ const newUserExist = (req, res, next) => {
 
 // insert the valid user to the database
 const addUserToDB = (req, res, next) => {
-  newUser(req.body).then(() => {
-    next();
-  }).catch(next);
-};
-
-const getUserID = (req, res, next) => {
-  getUser(req.body.email).then(({ rows }) => {
+  newUser(req.body).then(({ rows }) => {
     const [user] = rows;
     req.user = user;
     next();
-  });
+  }).catch(next);
 };
 
 module.exports = {
   registerValidation,
   newUserExist,
   addUserToDB,
-  getUserID,
 };

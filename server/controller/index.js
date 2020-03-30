@@ -7,7 +7,6 @@ const {
   registerValidation,
   newUserExist,
   addUserToDB,
-  getUserID,
 } = require('./routes/user/registerNewUser');
 
 const {
@@ -28,7 +27,6 @@ module.exports = {
   registerValidation,
   newUserExist,
   addUserToDB,
-  getUserID,
   sendSms,
   checkUser,
   checkEventExist,
