@@ -1,4 +1,4 @@
-const { object, number } = require('yup');
+const { object, number, string } = require('yup');
 
 const validationCancelReg = (req, res, next) => {
   const schema = object().shape({
@@ -18,4 +18,18 @@ const validationCancelReg = (req, res, next) => {
     });
 };
 
-module.exports = { validationCancelReg };
+const loginValidation = (req, res, next) => {
+  const schema = object().shape({
+    email: string().email().required(),
+    password: string().min(8).required(),
+  });
+  schema.validate(req.body, { abortEarly: false })
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      res.status(400).json({ msg: err.message });
+    });
+};
+
+module.exports = { validationCancelReg, loginValidation };

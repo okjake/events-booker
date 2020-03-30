@@ -19,14 +19,13 @@ const sendSms = (req, res, next) => {
     mobile,
     text,
     { type: 'unicode' },
-    (err, responseData) => {
+    (err) => {
       if (err) {
         const error = new Error();
         error.msg = 'Invalid Number!';
         error.status = 400;
         next(error);
       } else {
-        console.dir(responseData);
         next();
       }
     },

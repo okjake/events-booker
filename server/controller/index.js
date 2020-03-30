@@ -18,8 +18,12 @@ const {
   sendInvitation,
 } = require('./routes/user/registeration');
 
+const { login } = require('./routes/admin');
 const { validateEvent, createEvent } = require('./routes/admin');
 const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
+
+const { getUsersEvent, getUsersData } = require('./routes/admin');
+
 
 module.exports = {
   serverError,
@@ -36,6 +40,9 @@ module.exports = {
   sendInvitation,
   cancelRegistration,
   getEvents,
+  login,
+  getUsersEvent,
+  getUsersData,
   validateEvent,
   createEvent,
   validateAttendence,
