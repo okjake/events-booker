@@ -11,6 +11,7 @@ const {
   sendInvitation,
   cancelRegistration,
   getEvents,
+  login,
   getUsersEvent,
   getUsersData,
   validateEvent,
@@ -20,7 +21,9 @@ const {
   signAttendance,
 } = require('../controller');
 
-const { validationCancelReg } = require('../middleware');
+const {
+  validationCancelReg, loginValidation, checkEmailIfExist, checkPassword, protectedRoute,
+} = require('../middleware');
 
 router.get('/getevents', getEvents);
 router.get('/users', getUsersData);
@@ -37,7 +40,8 @@ router.post(
   sendInvitation,
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
-
+router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
+router.use(protectedRoute);
 // should be protected
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
