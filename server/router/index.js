@@ -32,10 +32,7 @@ router.post(
 
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
-router.get('/admin/dashboard', protectedRoute, (req, res) => {
-  res.json('dashbord page');
-});
-
+router.use(protectedRoute);
 router.use(clientError);
 router.use(serverError);
 
