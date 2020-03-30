@@ -91,13 +91,15 @@ This is the schema of our database
 
 ### Front-end Techno:
 * Reactjs.
+
 * Antd-design.
 
 ### Back-end Techno:
 * Express.
+
 * Postgresql.
 
-### Main Features of Our App:
+## Main Features of Our App:
 * Calender: 
 We use the nodemailer module to send invitation email for the users who registered for a particular events. 
 
