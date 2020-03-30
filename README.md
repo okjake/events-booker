@@ -89,7 +89,6 @@ This is the schema of our database
 
 ## Technologies
 
-<<<<<<< HEAD
 ### Front-end Techno:
 * Reactjs.
 
@@ -106,16 +105,3 @@ We use the nodemailer module to send invitation email for the users who register
 
 * Send Code to Confirm Registration:
 We use nexmo module to send a confirmation code for the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
-
-
-||||||| merged common ancestors
-- reactjs
-- express
-- postgresql
-- antd-design
-=======
-- Reactjs
-- Express
-- Postgresql
-- Antd-design
->>>>>>> 9659f271eb108d73fd6988b05e9475f9da3ec03c
