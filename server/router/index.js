@@ -16,6 +16,7 @@ const {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  deleteEvent,
 } = require('../controller');
 
 const { validationCancelReg } = require('../middleware');
@@ -32,6 +33,7 @@ router.post(
   sendInvitation,
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
+router.patch('/deleteevent', deleteEvent);
 
 // should be protected
 router.post('/event', validateEvent, createEvent);
