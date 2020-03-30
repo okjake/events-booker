@@ -34,11 +34,11 @@ Create an Event booker app that allows the users to select which event they will
 
 - As a user, I can register at any available event or exit from the app.
 
-- As a user, I can enter only my mobile number if I am not a new user to approve my registration then, I will get a message or an email with a code.
+- As a user, I can enter only my mobile number if I am not a new user to approve my registration then, I will get a mobile message and an email with a code.
 
-- As a user, I can register my data once including my mobile number if I am a new user to approve my registration then, I will get a message or an email with a code.
+- As a user, I can register my data once including my mobile number if I am a new user to approve my registration then, I will get a mobile message and email with a code.
 
-- As a user, my event that I registered will be linked to my google calendar to remember me.
+- As a user, I will get a google calender invitation to remind me of the event's date. 
 
 - As a user, I can use the code that I have already received to approve my attendance when I attend the event .
 
@@ -52,10 +52,6 @@ Create an Event booker app that allows the users to select which event they will
 
 - As an admin, I can delete any event.
 
-- As an admin, I can delete any user.
-
-- As an admin, I can edit any user.
-
 - As an admin, I can view all users’ data.
 
 - As an admin, I can view all events details.
@@ -66,7 +62,7 @@ Create an Event booker app that allows the users to select which event they will
 
 - As an admin, I can track the user and view all events that he attended.
 
-- For Admin-portal:
+#### For Admin-portal:
 I can access the attendance approval screen to help users approve their attendance by entering the code they already received. (portal)
 
 ## The MVP (Demo GIF) :
