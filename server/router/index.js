@@ -16,6 +16,7 @@ const {
   cancelRegistration,
   getEvents,
   login,
+  logout,
   getUsersEvent,
   getUsersData,
   validateEvent,
@@ -52,6 +53,7 @@ router.post(
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
+router.get('/logout', logout);
 
 // should be protected
 router.use(protectedRoute);
