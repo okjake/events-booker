@@ -1,13 +1,13 @@
-const getAllEvents = require('../../../database/queries/getEvents');
+const getUsers = require('../../../database/queries/getUsers');
 
-const getEvents = (req, res, next) => {
-  getAllEvents()
+const getUsersData = (req, res, next) => {
+  getUsers()
     .then(({ rows }) => {
       if (rows.length) {
         res.json(rows);
       } else {
         const error = new Error();
-        error.msg = 'There is no fetch data';
+        error.msg = 'There is no users yet';
         error.status = 400;
         next(error);
       }
@@ -15,4 +15,4 @@ const getEvents = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = getEvents;
+module.exports = { getUsersData };
