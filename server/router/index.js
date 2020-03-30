@@ -36,7 +36,10 @@ router.post('/cancelUser', validationCancelReg, cancelRegistration);
 // should be protected
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
-
+// display event with specific  date
+router.get('/event/:date', (req, res) => {
+  res.json({ 'display event with date': req.params.date });
+});
 router.use(clientError);
 router.use(serverError);
 
