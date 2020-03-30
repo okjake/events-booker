@@ -18,7 +18,7 @@ const {
   sendInvitation,
 } = require('./routes/user/registeration');
 
-const { login } = require('./routes/admin');
+const { login, logout } = require('./routes/admin');
 const { validateEvent, createEvent } = require('./routes/admin');
 const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
 
@@ -41,6 +41,7 @@ module.exports = {
   cancelRegistration,
   getEvents,
   login,
+  logout,
   getUsersEvent,
   getUsersData,
   validateEvent,

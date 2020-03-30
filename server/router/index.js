@@ -16,6 +16,7 @@ const {
   cancelRegistration,
   getEvents,
   login,
+  logout,
   getUsersEvent,
   getUsersData,
   validateEvent,
@@ -59,6 +60,7 @@ router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
+router.get('/logout', logout);
 
 router.use(clientError);
 router.use(serverError);
