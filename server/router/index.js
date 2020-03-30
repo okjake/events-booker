@@ -11,6 +11,7 @@ const {
   sendInvitation,
   cancelRegistration,
   getEvents,
+  getUsersData,
   validateEvent,
   createEvent,
   validateAttendence,
@@ -21,6 +22,7 @@ const {
 const { validationCancelReg } = require('../middleware');
 
 router.get('/getevents', getEvents);
+router.get('/users', getUsersData);
 
 router.post(
   '/checkUser',
