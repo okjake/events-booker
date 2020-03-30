@@ -23,11 +23,7 @@ const loginValidation = (req, res, next) => {
     email: string().email().required(),
     password: string().min(8).required(),
   });
-  const { email, password } = req.body;
-  schema.validate({
-    email,
-    password,
-  }, { abortEarly: false })
+  schema.validate(req.body, { abortEarly: false })
     .then(() => {
       next();
     })
