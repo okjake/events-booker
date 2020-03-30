@@ -3,6 +3,10 @@ const router = require('express').Router();
 const {
   serverError,
   clientError,
+  registerValidation,
+  newUserExist,
+  addUserToDB,
+  sendSms,
   checkUser,
   checkEventExist,
   generateCode,
@@ -11,6 +15,7 @@ const {
   sendInvitation,
   cancelRegistration,
   getEvents,
+  login,
   getUsersEvent,
   getUsersData,
   validateEvent,
@@ -21,12 +26,20 @@ const {
   viewEventsOnDate,
 } = require('../controller');
 
-const { validationCancelReg } = require('../middleware');
+const {
+  validationCancelReg, loginValidation, checkEmailIfExist, checkPassword, protectedRoute,
+} = require('../middleware');
 
 router.get('/getevents', getEvents);
-router.get('/users', getUsersData);
-
-router.get('/event/:eventcode/users', getUsersEvent);
+router.post('/register',
+  registerValidation,
+  newUserExist,
+  addUserToDB,
+  checkEventExist,
+  generateCode,
+  userWillAttend,
+  sendSms,
+  sendInvitation);
 
 router.post(
   '/checkUser',
@@ -35,15 +48,21 @@ router.post(
   checkAlreadBooked,
   generateCode,
   userWillAttend,
+  sendSms,
   sendInvitation,
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
+router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 
 // should be protected
+router.use(protectedRoute);
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 // display event with specific  date
 router.get('/event/:date', viewEventsOnDate);
+router.get('/users', getUsersData);
+router.get('/event/:eventcode/users', getUsersEvent);
+
 router.use(clientError);
 router.use(serverError);
 

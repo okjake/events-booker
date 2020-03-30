@@ -1,5 +1,7 @@
 const { serverError } = require('./error/server');
 const { clientError } = require('./error/client');
+
+
 const {
   cancelRegistration,
   getEvents,
@@ -9,6 +11,7 @@ const {
   generateCode,
   userWillAttend,
   sendInvitation,
+  sendSms,
 } = require('./routes/user');
 
 const {
@@ -17,6 +20,7 @@ const {
   getUsersEvent,
   getUsersData,
   viewEventsOnDate,
+  login,
 } = require('./routes/admin');
 
 const {
@@ -29,6 +33,7 @@ const {
 module.exports = {
   serverError,
   clientError,
+  sendSms,
   checkUser,
   checkEventExist,
   generateCode,
@@ -37,6 +42,7 @@ module.exports = {
   sendInvitation,
   cancelRegistration,
   getEvents,
+  login,
   getUsersEvent,
   getUsersData,
   validateEvent,
