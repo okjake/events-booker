@@ -21,7 +21,7 @@ const {
 const { login } = require('./routes/admin');
 const { validateEvent, createEvent } = require('./routes/admin');
 const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
-const { deleteEvent } = require('./routes/user/eventPage');
+const { deleteEvent } = require('./routes/admin/deleteEvent');
 
 
 const { getUsersEvent, getUsersData } = require('./routes/admin');
