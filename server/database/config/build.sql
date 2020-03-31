@@ -28,8 +28,8 @@ CREATE TABLE events (
 
 CREATE TABLE user_event (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE,
-    event_id INTEGER REFERENCES events(id) ON UPDATE CASCADE,
+    user_id INTEGER REFERENCES users(id),
+    event_id INTEGER REFERENCES events(id),
     user_code INT NOT NULL,
     attendance BOOLEAN DEFAULT false
 );
