@@ -1,5 +1,5 @@
 const cancelPopUp = require('./cancelRegistratinQ');
-const checkUserExit = require('./checkUserExist');
+const checkUserExist = require('./checkUserExist');
 const getUser = require('./getUser');
 const getUsers = require('./getUsers');
 const getUsersCode = require('./getUsersCode');
@@ -11,7 +11,7 @@ const userHasBooked = require('./userHasBooked');
 
 module.exports = {
   cancelPopUp,
-  checkUserExit,
+  checkUserExist,
   getUser,
   getUsers,
   getUsersCode,

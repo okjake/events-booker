@@ -1,4 +1,4 @@
-const getUsers = require('../../../database/queries/users');
+const { getUsers } = require('../../../database/queries/users');
 
 const getUsersData = (req, res, next) => {
   getUsers()

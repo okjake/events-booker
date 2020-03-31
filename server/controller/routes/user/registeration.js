@@ -29,7 +29,7 @@ const checkUser = (req, res, next) => {
     return next(err);
   }
 
-  checkUserExist(req.body.mobileNum)
+  return checkUserExist(req.body.mobileNum)
     .then(({ rows }) => {
       if (rows.length === 0) {
         res.json({ msg: "user doesn't exist, please register" });
