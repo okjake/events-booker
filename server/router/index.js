@@ -59,7 +59,7 @@ router.use(protectedRoute);
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 // display event with specific  date
-router.get('/event/:date', viewEventsOnDate);
+router.get('/event/date', viewEventsOnDate);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 
