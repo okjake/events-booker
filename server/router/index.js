@@ -66,14 +66,13 @@ router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 
 router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode);
 // pin code protection for portal route
-router.use(protectedPortalRoute);
-router.post('/event', validateEvent, createEvent);
-router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
+router.patch('/attendance', protectedPortalRoute, validateAttendence, checkUserBooking, signAttendance);
+router.get('/event/date', protectedPortalRoute, viewEventsOnDate);
 
 // should be protected
 router.use(protectedRoute);
 // display event with specific  date
-router.get('/event/date', viewEventsOnDate);
+router.post('/event', validateEvent, createEvent);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.get('/logout', logout);
