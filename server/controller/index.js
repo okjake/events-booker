@@ -25,8 +25,7 @@ const {
   getUsersData,
   logout,
   viewEventsOnDate,
-  pinCodeValidation,
-  getHashedPinCode,
+
 } = require('./routes/admin');
 
 
@@ -34,6 +33,8 @@ const {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  pinCodeValidation,
+  getHashedPinCode,
 } = require('./routes/portal');
 
 
