@@ -21,6 +21,7 @@ const {
   getUsersData,
   viewEventsOnDate,
   login,
+  logout,
 } = require('./routes/admin');
 
 const {
@@ -43,6 +44,7 @@ module.exports = {
   cancelRegistration,
   getEvents,
   login,
+  logout,
   getUsersEvent,
   getUsersData,
   validateEvent,
