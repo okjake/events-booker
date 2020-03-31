@@ -1,7 +1,7 @@
 require('env2')('./config.env');
 
 const Nexmo = require('nexmo');
-// Init Nexmo
+
 const nexmo = new Nexmo(
   {
     apiKey: process.env.NEXMO_API_KEY,
