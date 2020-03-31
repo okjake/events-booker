@@ -19,20 +19,23 @@ const {
 } = require('./routes/user');
 
 const {
+  login,
   validateEvent,
   createEvent,
   getUsersEvent,
   getUsersData,
-  viewEventsOnDate,
-  login,
   logout,
+  viewEventsOnDate,
   deleteEvent,
 } = require('./routes/admin');
+
 
 const {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  pinCodeValidation,
+  getHashedPinCode,
 } = require('./routes/portal');
 
 
@@ -62,4 +65,6 @@ module.exports = {
   signAttendance,
   deleteEvent,
   viewEventsOnDate,
+  pinCodeValidation,
+  getHashedPinCode,
 };

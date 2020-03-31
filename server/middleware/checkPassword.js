@@ -18,8 +18,3 @@ const checkPassword = (req, res, next) => {
   }).catch(next);
 };
 module.exports = checkPassword;
-// to make password to admin hash password(req.body)
-// bcrypt.hash(password, 10, (err, hash) => {
-//   if (err) { throw (err); }
-//   console.log(hash);
-// });

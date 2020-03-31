@@ -2,8 +2,8 @@ const { getUsersOfEvent } = require('../../../database/queries/users');
 
 
 const getUsersEvent = (req, res, next) => {
-  const { eventCode } = req.params;
-  getUsersOfEvent(eventCode)
+  const { eventcode } = req.params;
+  getUsersOfEvent(eventcode)
     .then(({ rows }) => {
       if (rows.length) {
         res.json(rows);
