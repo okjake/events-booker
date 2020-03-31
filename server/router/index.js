@@ -23,10 +23,18 @@ const {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  pinCodeValidation,
+  getHashedPinCode,
 } = require('../controller');
 
 const {
-  validationCancelReg, loginValidation, checkEmailIfExist, checkPassword, protectedRoute,
+  validationCancelReg,
+  loginValidation,
+  checkEmailIfExist,
+  checkPassword,
+  protectedRoute,
+  protectedPortalRoute,
+  checkPinCode,
 } = require('../middleware');
 
 router.get('/getevents', getEvents);
@@ -53,12 +61,18 @@ router.post(
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 
-// should be protected
-router.use(protectedRoute);
+
+router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode);
+// pin code protection for portal route
+router.use(protectedPortalRoute);
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
+
+// should be protected
+router.use(protectedRoute);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
+
 
 router.use(clientError);
 router.use(serverError);

@@ -18,11 +18,17 @@ const {
   sendInvitation,
 } = require('./routes/user/registeration');
 
-const { login } = require('./routes/admin');
-const { validateEvent, createEvent } = require('./routes/admin');
-const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
+const {
+  login,
+  validateEvent,
+  createEvent,
+  getUsersEvent,
+  getUsersData,
+  pinCodeValidation,
+  getHashedPinCode,
+} = require('./routes/admin');
 
-const { getUsersEvent, getUsersData } = require('./routes/admin');
+const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
 
 
 module.exports = {
@@ -48,4 +54,6 @@ module.exports = {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  pinCodeValidation,
+  getHashedPinCode,
 };
