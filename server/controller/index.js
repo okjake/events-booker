@@ -1,38 +1,40 @@
 const { serverError } = require('./error/server');
 const { clientError } = require('./error/client');
-const { sendSms } = require('./routes/user/sendSmsMsg');
-const { cancelRegistration, getEvents } = require('./routes/user');
+
 
 const {
-  registerValidation,
-  newUserExist,
-  addUserToDB,
-} = require('./routes/user/registerNewUser');
-
-const {
+  cancelRegistration,
+  getEvents,
   checkUser,
   checkEventExist,
+  checkAlreadBooked,
   generateCode,
   userWillAttend,
-  checkAlreadBooked,
   sendInvitation,
-} = require('./routes/user/registeration');
+  sendSms,
+} = require('./routes/user');
 
-const { login } = require('./routes/admin');
-const { validateEvent, createEvent } = require('./routes/admin');
-const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
-const { deleteEvent } = require('./routes/admin');
+const {
+  validateEvent,
+  createEvent,
+  getUsersEvent,
+  getUsersData,
+  viewEventsOnDate,
+  login,
+  logout,
+  deleteEvent,
+} = require('./routes/admin');
 
-
-const { getUsersEvent, getUsersData } = require('./routes/admin');
+const {
+  validateAttendence,
+  checkUserBooking,
+  signAttendance,
+} = require('./routes/portal');
 
 
 module.exports = {
   serverError,
   clientError,
-  registerValidation,
-  newUserExist,
-  addUserToDB,
   sendSms,
   checkUser,
   checkEventExist,
@@ -43,6 +45,7 @@ module.exports = {
   cancelRegistration,
   getEvents,
   login,
+  logout,
   getUsersEvent,
   getUsersData,
   validateEvent,
@@ -51,4 +54,5 @@ module.exports = {
   checkUserBooking,
   signAttendance,
   deleteEvent,
+  viewEventsOnDate,
 };

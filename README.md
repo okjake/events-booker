@@ -44,6 +44,8 @@ Create an Event booker app that allows the users to select which event they will
 
 - As a user, I can register for the event when I attend it if I didn’t register before.
 
+- As a user, I can cancel my registration when I want. 
+
 ## User Stories :
 
 ### For Admin
