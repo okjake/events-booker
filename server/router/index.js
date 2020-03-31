@@ -24,6 +24,8 @@ const {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  deleteEvent,
+  viewEventsOnDate,
 } = require('../controller');
 
 const {
@@ -31,6 +33,7 @@ const {
 } = require('../middleware');
 
 router.get('/getevents', getEvents);
+
 router.post('/register',
   registerValidation,
   newUserExist,
@@ -54,12 +57,16 @@ router.post(
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 
+
 // should be protected
 router.use(protectedRoute);
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
+// display event with specific  date
+router.get('/event/date', viewEventsOnDate);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
+router.patch('/deleteevent', deleteEvent);
 router.get('/logout', logout);
 
 router.use(clientError);
