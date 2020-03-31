@@ -12,6 +12,10 @@ const {
   userWillAttend,
   sendInvitation,
   sendSms,
+  registerValidation,
+  newUserExist,
+  addUserToDB,
+
 } = require('./routes/user');
 
 const {
@@ -22,6 +26,7 @@ const {
   viewEventsOnDate,
   login,
   logout,
+  deleteEvent,
 } = require('./routes/admin');
 
 const {
@@ -34,6 +39,9 @@ const {
 module.exports = {
   serverError,
   clientError,
+  registerValidation,
+  newUserExist,
+  addUserToDB,
   sendSms,
   checkUser,
   checkEventExist,
@@ -52,5 +60,6 @@ module.exports = {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  deleteEvent,
   viewEventsOnDate,
 };
