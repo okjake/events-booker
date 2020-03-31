@@ -1,4 +1,4 @@
-const getAllEvents = require('../../../database/queries/events');
+const { getAllEvents } = require('../../../database/queries/events');
 
 const getEvents = (req, res, next) => {
   getAllEvents()

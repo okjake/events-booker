@@ -1,7 +1,7 @@
 const yup = require('yup');
 
-const getUser = require('../../../database/queries/users');
-const newUser = require('../../../database/queries/users');
+const { getUser } = require('../../../database/queries/users');
+const { newUser } = require('../../../database/queries/users');
 
 // Validate the user data
 const registerValidation = (req, res, next) => {

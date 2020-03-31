@@ -3,11 +3,11 @@ const nodemailer = require('nodemailer');
 const ical = require('ical-generator');
 const moment = require('moment');
 
-const checkUserExist = require('../../../database/queries/users');
-const getEventDetalis = require('../../../database/queries/events');
-const getUsersCode = require('../../../database/queries/users');
-const signUserAttend = require('../../../database/queries/users');
-const alreadyBooked = require('../../../database/queries/events');
+const { checkUserExist } = require('../../../database/queries/users');
+const { getEventDetails } = require('../../../database/queries/events');
+const { getUsersCode } = require('../../../database/queries/users');
+const { signUserAttend } = require('../../../database/queries/users');
+const { alreadyBooked } = require('../../../database/queries/events');
 
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
@@ -43,7 +43,7 @@ const checkUser = (req, res, next) => {
 };
 
 const checkEventExist = (req, res, next) => {
-  getEventDetalis(req.body.eventCode).then(({ rows }) => {
+  getEventDetails(req.body.eventCode).then(({ rows }) => {
     if (rows.length === 0) {
       const err = new Error();
       err.status = 400;
