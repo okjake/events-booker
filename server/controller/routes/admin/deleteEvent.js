@@ -1,4 +1,4 @@
-const deleteEventQuery = require('../../../database/queries/expierdEvent');
+const deleteEventQuery = require('../../../database/queries/events');
 
 const deleteEvent = (req, res, next) => {
   deleteEventQuery(req.body.id)

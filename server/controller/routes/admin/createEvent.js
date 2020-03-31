@@ -1,6 +1,6 @@
 const yup = require('yup');
-const getEventDetalis = require('../../../database/queries/events.js/getEventDetalis');
-const creatEventSql = require('../../../database/queries/creatEventSql');
+const getEventDetalis = require('../../../database/queries/events');
+const creatEventSql = require('../../../database/queries/events');
 
 
 const validateEvent = (req, res, next) => {

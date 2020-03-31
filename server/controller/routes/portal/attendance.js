@@ -1,7 +1,7 @@
 const yup = require('yup');
-const getEventDetalis = require('../../../database/queries/events.js/getEventDetalis');
-const userHasBooked = require('../../../database/queries/userHasBooked');
-const signAttendanceSql = require('../../../database/queries/signAttendanceSql');
+const getEventDetalis = require('../../../database/queries/events');
+const userHasBooked = require('../../../database/queries/users');
+const signAttendanceSql = require('../../../database/queries/admin');
 
 const validateAttendence = (req, res, next) => {
   const schema = yup.object().shape({

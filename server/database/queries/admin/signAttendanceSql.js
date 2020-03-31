@@ -1,4 +1,4 @@
-const connction = require('../config/connection');
+const connction = require('../../config/connection');
 
 const signAttendanceSql = (userCode, eventId) => {
   const sql = {
