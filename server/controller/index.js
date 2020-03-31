@@ -15,6 +15,7 @@ const {
   registerValidation,
   newUserExist,
   addUserToDB,
+
 } = require('./routes/user');
 
 const {
@@ -25,7 +26,7 @@ const {
   getUsersData,
   logout,
   viewEventsOnDate,
-
+  deleteEvent,
 } = require('./routes/admin');
 
 
@@ -62,6 +63,7 @@ module.exports = {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  deleteEvent,
   viewEventsOnDate,
   pinCodeValidation,
   getHashedPinCode,

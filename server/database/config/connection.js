@@ -17,7 +17,6 @@ const options = {
   ssl: {
     rejectUnauthorized: false,
   },
-
 };
 
 module.exports = new Pool(options);
