@@ -40,7 +40,7 @@ const {
   checkPinCode,
 } = require('../middleware');
 
-router.get('/getevents', getEvents);
+router.get('/event', getEvents);
 
 router.post('/register',
   registerValidation,
@@ -74,7 +74,7 @@ router.use(protectedRoute);
 router.post('/event', validateEvent, createEvent);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
-router.patch('/deleteevent', deleteEvent);
+router.patch('/event', deleteEvent);
 router.get('/logout', logout);
 
 
