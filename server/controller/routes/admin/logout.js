@@ -3,4 +3,4 @@ const logout = (req, res) => {
   res.json({ statusCode: 200, message: 'logged out successfully' });
 };
 
-module.exports = { logout };
+module.exports = logout;

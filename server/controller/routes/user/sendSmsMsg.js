@@ -32,4 +32,4 @@ const sendSms = (req, res, next) => {
   );
 };
 
-module.exports = { sendSms };
+module.exports = sendSms;

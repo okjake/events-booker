@@ -1,9 +1,9 @@
-const deleteEventQuery = require('../../../database/queries/expierdEvent');
+const { expiredEvent } = require('../../../database/queries/events');
 
 const deleteEvent = (req, res, next) => {
-  deleteEventQuery(req.body.id)
+  expiredEvent(req.body.id)
     .then(() => res.json({ msg: 'The event has delete successfully' }))
     .catch(next);
 };
 
-module.exports = { deleteEvent };
+module.exports = deleteEvent;
