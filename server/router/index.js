@@ -27,6 +27,7 @@ const {
   viewEventsOnDate,
 } = require('../controller');
 
+
 const {
   validationCancelReg, loginValidation, checkEmailIfExist, checkPassword, protectedRoute,
 } = require('../middleware');
