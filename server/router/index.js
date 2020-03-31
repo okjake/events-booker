@@ -36,14 +36,13 @@ router.get('/getevents', getEvents);
 
 router.post('/register',
   registerValidation,
-  // newUserExist,
-  // addUserToDB,
-  // checkEventExist,
-  // generateCode,
-  // userWillAttend,
-  // sendSms,
-  // sendInvitation
-);
+  newUserExist,
+  addUserToDB,
+  checkEventExist,
+  generateCode,
+  userWillAttend,
+  sendSms,
+  sendInvitation);
 
 router.post(
   '/checkUser',
