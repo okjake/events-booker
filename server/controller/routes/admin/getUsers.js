@@ -1,4 +1,4 @@
-const getUsers = require('../../../database/queries/getUsers');
+const { getUsers } = require('../../../database/queries/users');
 
 const getUsersData = (req, res, next) => {
   getUsers()
@@ -15,4 +15,4 @@ const getUsersData = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getUsersData };
+module.exports = getUsersData;

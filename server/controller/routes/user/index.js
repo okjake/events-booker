@@ -1,6 +1,6 @@
 const getEvents = require('./mainPage');
 const cancelRegistration = require('./cancelRegistration');
-const { sendSms } = require('./sendSmsMsg');
+const sendSms = require('./sendSmsMsg');
 const {
   registerValidation,
   newUserExist,

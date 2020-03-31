@@ -1,7 +1,7 @@
 const yup = require('yup');
-const getEventDetalis = require('../../../database/queries/getEventDetalis');
-const creatEventSql = require('../../../database/queries/creatEventSql');
 
+const { getEventDetails } = require('../../../database/queries/events');
+const { createEventSql } = require('../../../database/queries/events');
 
 const validateEvent = (req, res, next) => {
   const schema = yup.object().shape({
@@ -34,7 +34,7 @@ const validateEvent = (req, res, next) => {
     err.status = 400;
     return next(err);
   }
-  getEventDetalis(req.body.eventCode)
+  getEventDetails(req.body.eventCode)
     .then(({ rows }) => {
       if (rows.length) {
         res.json({
@@ -47,7 +47,7 @@ const validateEvent = (req, res, next) => {
 
 
 const createEvent = (req, res, next) => {
-  creatEventSql(req.body).then(() => res.json({ msg: `Event ${req.body.title} has been created successfully` })).catch(next);
+  createEventSql(req.body).then(() => res.json({ msg: `Event ${req.body.title} has been created successfully` })).catch(next);
 };
 
 

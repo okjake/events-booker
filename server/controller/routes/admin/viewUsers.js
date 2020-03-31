@@ -1,4 +1,4 @@
-const getUsersOfEvent = require('../../../database/queries/getUsersOfEvent');
+const { getUsersOfEvent } = require('../../../database/queries/users');
 
 
 const getUsersEvent = (req, res, next) => {
@@ -17,4 +17,4 @@ const getUsersEvent = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getUsersEvent };
+module.exports = getUsersEvent;

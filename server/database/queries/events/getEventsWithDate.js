@@ -1,5 +1,5 @@
-const connection = require('../config/connection');
+const connection = require('../../config/connection');
 
 const getEventsDate = () => connection.query('SELECT * FROM events WHERE expired=False');
 
-module.exports = { getEventsDate };
+module.exports = getEventsDate;

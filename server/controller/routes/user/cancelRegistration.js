@@ -1,4 +1,4 @@
-const { cancelPopUp } = require('../../../database/queries/cancelRegistratinQ');
+const { cancelPopUp } = require('../../../database/queries/users');
 
 const cancelRegistration = (req, res, next) => {
   const data = req.body;

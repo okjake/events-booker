@@ -3,11 +3,11 @@ const nodemailer = require('nodemailer');
 const ical = require('ical-generator');
 const moment = require('moment');
 
-const checkUserExist = require('../../../database/queries/checkUserExist');
-const getEventDetalis = require('../../../database/queries/getEventDetalis');
-const getUsersCode = require('../../../database/queries/getUsersCode');
-const signUserAttend = require('../../../database/queries/signUserAttend');
-const alreadyBooked = require('../../../database/queries/checkAlreadyBooked');
+const { checkUserExist } = require('../../../database/queries/users');
+const { getEventDetails } = require('../../../database/queries/events');
+const { getUsersCode } = require('../../../database/queries/users');
+const { signUserAttend } = require('../../../database/queries/users');
+const { alreadyBooked } = require('../../../database/queries/events');
 
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
@@ -29,7 +29,7 @@ const checkUser = (req, res, next) => {
     return next(err);
   }
 
-  checkUserExist(req.body.mobileNum)
+  return checkUserExist(req.body.mobileNum)
     .then(({ rows }) => {
       if (rows.length === 0) {
         res.json({ msg: "user doesn't exist, please register" });
@@ -43,7 +43,7 @@ const checkUser = (req, res, next) => {
 };
 
 const checkEventExist = (req, res, next) => {
-  getEventDetalis(req.body.eventCode).then(({ rows }) => {
+  getEventDetails(req.body.eventCode).then(({ rows }) => {
     if (rows.length === 0) {
       const err = new Error();
       err.status = 400;
