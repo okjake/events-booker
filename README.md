@@ -1,7 +1,7 @@
 # Events-Booker
 
 ## Live Demo :
-[Click here to visit our app](https://eventsbooker.herokuapp.com/)
+[Heroku link , Click here to visit our app](https://eventsbooker.herokuapp.com/)
 
 ## Team Members :
 
@@ -10,7 +10,7 @@
 - Mohammed Irheem.
 - Rawan Abudahrouj.
 
-## Why we build this App?
+## Why we build this App ?
 
 We've built this app to help GSG organization in organizing the registration for the events that they do. So When they announced for an event, it will be known who would like to attend and they can ensure if this person attended or not. By this way, the GSG can have information about the people who attended and they can use it in the future as they want.
 
@@ -34,6 +34,8 @@ Create an Event booker app that allows the users to select which event they will
 
 - As a user, I can register at any available event or exit from the app.
 
+- As a user, I can cancel my registration when I want. 
+
 - As a user, I can enter only my mobile number if I am not a new user to approve my registration then, I will get a mobile message and an email with a code.
 
 - As a user, I can register my data once including my mobile number if I am a new user to approve my registration then, I will get a mobile message and email with a code.
@@ -43,8 +45,6 @@ Create an Event booker app that allows the users to select which event they will
 - As a user, I can use the code that I have already received to approve my attendance when I attend the event .
 
 - As a user, I can register for the event when I attend it if I didn’t register before.
-
-- As a user, I can cancel my registration when I want. 
 
 ## User Stories :
 
@@ -98,8 +98,10 @@ This is the schema of our database
 * Postgresql.
 
 ## Main Features of Our App:
-* Calender: 
-We use the nodemailer module to send invitation email for the users who registered for a particular events. 
+* Send Google Calender Invitation: 
 
-* Send Code to Confirm Registration:
-We use nexmo module to send a confirmation code for the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
+   We use the `nodemailer module` to send invitation email for the users who registered for a particular events. 
+
+* Send Mobile Message (SMS):
+
+  We use `nexmo module` to send a confirmation code for the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
