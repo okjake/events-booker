@@ -7,4 +7,4 @@ const cancelPopUp = (data) => connection.query(`DELETE FROM user_event
      JOIN events ON events.id = user_event.event_id
      WHERE mobile=$1 AND event_code =$2) RETURNING *`, [data.mobile, data.eventCode]);
 
-module.exports = { cancelPopUp };
+module.exports = cancelPopUp;

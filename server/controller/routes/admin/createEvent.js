@@ -1,5 +1,5 @@
 const yup = require('yup');
-const getEventDetalis = require('../../../database/queries/getEventDetalis');
+const getEventDetalis = require('../../../database/queries/events.js/getEventDetalis');
 const creatEventSql = require('../../../database/queries/creatEventSql');
 
 

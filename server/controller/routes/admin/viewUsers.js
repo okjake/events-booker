@@ -17,4 +17,4 @@ const getUsersEvent = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getUsersEvent };
+module.exports = getUsersEvent;

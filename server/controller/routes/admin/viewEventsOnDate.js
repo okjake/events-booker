@@ -14,4 +14,4 @@ const viewEventsOnDate = (req, res, next) => {
   }).catch(next);
 };
 
-module.exports = { viewEventsOnDate };
+module.exports = viewEventsOnDate;

@@ -6,4 +6,4 @@ const deleteEvent = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { deleteEvent };
+module.exports = deleteEvent;

@@ -15,4 +15,4 @@ const getUsersData = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getUsersData };
+module.exports = getUsersData;

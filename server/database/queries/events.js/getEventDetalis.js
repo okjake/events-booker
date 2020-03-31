@@ -1,9 +1,11 @@
-const connction = require('../config/connection');
+const connction = require('../../config/connection');
 
-module.exports = (eventCode) => {
+const getEventDetails = (eventCode) => {
   const sql = {
     text: 'select * from events where event_code = $1',
     values: [eventCode],
   };
   return connction.query(sql);
 };
+
+module.exports = getEventDetails;

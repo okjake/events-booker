@@ -4,10 +4,10 @@ const ical = require('ical-generator');
 const moment = require('moment');
 
 const checkUserExist = require('../../../database/queries/checkUserExist');
-const getEventDetalis = require('../../../database/queries/getEventDetalis');
+const getEventDetalis = require('../../../database/queries/events.js/getEventDetalis');
 const getUsersCode = require('../../../database/queries/getUsersCode');
 const signUserAttend = require('../../../database/queries/signUserAttend');
-const alreadyBooked = require('../../../database/queries/checkAlreadyBooked');
+const alreadyBooked = require('../../../database/queries/events.js/checkAlreadyBooked');
 
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;

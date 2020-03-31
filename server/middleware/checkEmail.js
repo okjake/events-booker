@@ -16,4 +16,4 @@ const checkEmailIfExist = (req, res, next) => {
       }
     }).catch(next);
 };
-module.exports = { checkEmailIfExist };
+module.exports = checkEmailIfExist;

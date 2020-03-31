@@ -1,6 +1,6 @@
 const connction = require('../config/connection');
 
-module.exports = ({
+const createEventSql = ({
   title, eventCode, category, details, image, date, duration,
 }) => {
   const sql = {
@@ -9,3 +9,5 @@ module.exports = ({
   };
   return connction.query(sql);
 };
+
+module.exports = createEventSql;
