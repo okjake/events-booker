@@ -13,8 +13,7 @@ const checkPinCode = (req, res, next) => {
     } else {
       const token = jwt.sign({ id: req.admin.id }, process.env.SECRET_KEY_PORTAL);
       res.cookie('portalToken', token);
-      // next();
-      res.send('Hi');
+      res.json({ msg: 'You are authorized' });
     }
   }).catch(next);
 };
