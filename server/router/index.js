@@ -24,12 +24,20 @@ const {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  pinCodeValidation,
+  getHashedPinCode,
   deleteEvent,
   viewEventsOnDate,
 } = require('../controller');
 
 const {
-  validationCancelReg, loginValidation, checkEmailIfExist, checkPassword, protectedRoute,
+  validationCancelReg,
+  loginValidation,
+  checkEmailIfExist,
+  checkPassword,
+  protectedRoute,
+  protectedPortalRoute,
+  checkPinCode,
 } = require('../middleware');
 
 router.get('/getevents', getEvents);
@@ -58,16 +66,20 @@ router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 
 
+router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode);
+// pin code protection for portal route
+router.patch('/attendance', protectedPortalRoute, validateAttendence, checkUserBooking, signAttendance);
+router.get('/event/date', protectedPortalRoute, viewEventsOnDate);
+
 // should be protected
 router.use(protectedRoute);
-router.post('/event', validateEvent, createEvent);
-router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 // display event with specific  date
-router.get('/event/date', viewEventsOnDate);
+router.post('/event', validateEvent, createEvent);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.patch('/deleteevent', deleteEvent);
 router.get('/logout', logout);
+
 
 router.use(clientError);
 router.use(serverError);
