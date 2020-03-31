@@ -1,22 +1,21 @@
 const { serverError } = require('./error/server');
 const { clientError } = require('./error/client');
-const { sendSms } = require('./routes/user/sendSmsMsg');
-const { cancelRegistration, getEvents } = require('./routes/user');
+
 
 const {
+  cancelRegistration,
+  getEvents,
+  checkUser,
+  checkEventExist,
+  checkAlreadBooked,
+  generateCode,
+  userWillAttend,
+  sendInvitation,
+  sendSms,
   registerValidation,
   newUserExist,
   addUserToDB,
-} = require('./routes/user/registerNewUser');
-
-const {
-  checkUser,
-  checkEventExist,
-  generateCode,
-  userWillAttend,
-  checkAlreadBooked,
-  sendInvitation,
-} = require('./routes/user/registeration');
+} = require('./routes/user');
 
 const {
   login,
@@ -24,11 +23,18 @@ const {
   createEvent,
   getUsersEvent,
   getUsersData,
+  logout,
+  viewEventsOnDate,
   pinCodeValidation,
   getHashedPinCode,
 } = require('./routes/admin');
 
-const { validateAttendence, checkUserBooking, signAttendance } = require('./routes/portal');
+
+const {
+  validateAttendence,
+  checkUserBooking,
+  signAttendance,
+} = require('./routes/portal');
 
 
 module.exports = {
@@ -47,6 +53,7 @@ module.exports = {
   cancelRegistration,
   getEvents,
   login,
+  logout,
   getUsersEvent,
   getUsersData,
   validateEvent,
@@ -54,6 +61,7 @@ module.exports = {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  viewEventsOnDate,
   pinCodeValidation,
   getHashedPinCode,
 };

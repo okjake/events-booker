@@ -16,6 +16,7 @@ const {
   cancelRegistration,
   getEvents,
   login,
+  logout,
   getUsersEvent,
   getUsersData,
   validateEvent,
@@ -25,6 +26,7 @@ const {
   signAttendance,
   pinCodeValidation,
   getHashedPinCode,
+  viewEventsOnDate,
 } = require('../controller');
 
 const {
@@ -70,8 +72,11 @@ router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance
 
 // should be protected
 router.use(protectedRoute);
+// display event with specific  date
+router.get('/event/date', viewEventsOnDate);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
+router.get('/logout', logout);
 
 
 router.use(clientError);

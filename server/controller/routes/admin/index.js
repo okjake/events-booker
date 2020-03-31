@@ -1,9 +1,11 @@
 const { login } = require('./login');
+const { logout } = require('./logout');
 const { getUsersEvent } = require('./viewUsers');
 const { getUsersData } = require('./getUsers');
 const { validateEvent, createEvent } = require('./createEvent');
 const { pinCodeValidation, getHashedPinCode } = require('./portalLogainPage');
 
+const { viewEventsOnDate } = require('./viewEventsOnDate');
 
 module.exports = {
   validateEvent,
@@ -11,6 +13,8 @@ module.exports = {
   getUsersEvent,
   getUsersData,
   login,
+  logout,
   pinCodeValidation,
   getHashedPinCode,
+  viewEventsOnDate,
 };

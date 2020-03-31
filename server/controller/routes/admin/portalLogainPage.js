@@ -4,7 +4,7 @@ const getAdmin = require('../../../database/queries/getAdmin');
 
 const pinCodeValidation = (req, res, next) => {
   const schema = yup.object().shape({
-    piCode: yup.number().positive().integer().required(),
+    pinCode: yup.string().required(),
   });
   schema.validate(req.body, { abortEarly: false })
     .then(() => {
@@ -18,7 +18,7 @@ const pinCodeValidation = (req, res, next) => {
 const getHashedPinCode = (req, res, next) => {
   getAdmin().then(({ rows }) => {
     const [admin] = rows;
-    req.admin.pinCode = admin.pinCode;
+    req.pinCode = admin.pin_code;
     next();
   });
 };

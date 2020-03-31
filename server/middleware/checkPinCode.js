@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const checkPinCode = (req, res, next) => {
-  const hashPinCode = req.admin.pinCode;
+  const hashPinCode = req.pinCode;
   const { pinCode } = req.body;
   bcrypt.compare(pinCode, hashPinCode).then((valid) => {
     if (!valid) {
@@ -13,7 +13,8 @@ const checkPinCode = (req, res, next) => {
     } else {
       const token = jwt.sign({ id: req.admin.id }, process.env.SECRET_KEY_PORTAL);
       res.cookie('portalToken', token);
-      next();
+      // next();
+      res.send('Hi');
     }
   }).catch(next);
 };
