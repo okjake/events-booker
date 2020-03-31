@@ -24,6 +24,7 @@ const {
   validateAttendence,
   checkUserBooking,
   signAttendance,
+  viewEventsOnDate,
 } = require('../controller');
 
 const {
@@ -58,6 +59,8 @@ router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 router.use(protectedRoute);
 router.post('/event', validateEvent, createEvent);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
+// display event with specific  date
+router.get('/event/date', viewEventsOnDate);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.get('/logout', logout);
