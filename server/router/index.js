@@ -15,7 +15,6 @@ const {
   sendInvitation,
   cancelRegistration,
   getEvents,
-  login,
   logout,
   getUsersEvent,
   getUsersData,
@@ -64,7 +63,7 @@ router.post(
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 
-router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
+router.post('/login', loginValidation, checkEmailIfExist, checkPassword);
 router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode);
 router.get('/logout', logout);
 
