@@ -1,4 +1,3 @@
-const login = require('./login');
 const logout = require('./logout');
 const getUsersEvent = require('./viewUsers');
 const getUsersData = require('./getUsers');
@@ -11,7 +10,6 @@ module.exports = {
   createEvent,
   getUsersEvent,
   getUsersData,
-  login,
   logout,
   viewEventsOnDate,
   deleteEvent,
