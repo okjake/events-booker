@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-const { getEventsDate } = require('../../../database/queries/getEventsWithDate');
+const { getEventsDate } = require('../../../database/queries/events');
 
 const today = moment().format('YYYY-MM-DD');
 const viewEventsOnDate = (req, res, next) => {

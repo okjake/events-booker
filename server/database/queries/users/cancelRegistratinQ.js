@@ -1,4 +1,4 @@
-const connection = require('../config/connection');
+const connection = require('../../config/connection');
 
 const cancelPopUp = (data) => connection.query(`DELETE FROM user_event
  WHERE id IN (SELECT user_event.id

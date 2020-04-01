@@ -1,4 +1,4 @@
-const connction = require('../config/connection');
+const connection = require('../../config/connection');
 
 const createEventSql = ({
   title, eventCode, category, details, image, date, duration,
@@ -7,7 +7,7 @@ const createEventSql = ({
     text: 'insert into events(title, event_code, category, details, image, date, duration) values($1, $2, $3, $4, $5, $6, $7)',
     values: [title, eventCode, category, details, image, date, duration],
   };
-  return connction.query(sql);
+  return connection.query(sql);
 };
 
 module.exports = createEventSql;

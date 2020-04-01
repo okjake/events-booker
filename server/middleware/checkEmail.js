@@ -1,4 +1,4 @@
-const checkEmail = require('../database/queries/checkEmail');
+const { checkEmail } = require('../database/queries/admin');
 
 const checkEmailIfExist = (req, res, next) => {
   const { email } = req.body;
