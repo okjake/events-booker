@@ -1,18 +1,17 @@
 BEGIN;
 
 INSERT INTO
-    admin(name, email, password)
+    admin(name, email, password, pin_code)
 VALUES
     (
-        'moh',
-        'moh@gmail.com',
-        '$2b$10$NFThDzVCJ9G1FPaJ.U7TU..DwMEiaPvkczZ6hWHePLsyrqMcicoWC',
-        '$2b$10$oMMY8FbR7QH5vRWLa.a4TO18kGaDTj4hZt2pSdUPl2t.ByfZkoyO6'
+        'Event Booker Admin',
+        'events.booker.ca@gmail.com',
+        '$2b$10$Amg4gNahYFB9vd3ijSOqOudqH.u4XsCuN3bdcv3raEwo1IMKiXqfW',
+        '$2b$10$OTAOgKqnAZnxmk/gDuoMLuXE95tDo.Ne7mzpE4Um0t406Ed07QteG'
     );
 
-COMMIT;
-
 /*
- password = 12345678
- pincode = 12345678
+ password = admin123
+ pin_code = portal123
  */
+COMMIT;
