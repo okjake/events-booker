@@ -84,3 +84,5 @@ router.post('/event', validateEvent, createEvent);
 
 router.use(clientError);
 router.use(serverError);
+
+module.exports = router;
