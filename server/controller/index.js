@@ -19,7 +19,6 @@ const {
 } = require('./routes/user');
 
 const {
-  login,
   validateEvent,
   createEvent,
   getUsersEvent,
@@ -36,6 +35,8 @@ const {
   signAttendance,
   pinCodeValidation,
   getHashedPinCode,
+  createPortalToken,
+  portalLogout,
 } = require('./routes/portal');
 
 
@@ -54,7 +55,6 @@ module.exports = {
   sendInvitation,
   cancelRegistration,
   getEvents,
-  login,
   logout,
   getUsersEvent,
   getUsersData,
@@ -67,4 +67,6 @@ module.exports = {
   viewEventsOnDate,
   pinCodeValidation,
   getHashedPinCode,
+  createPortalToken,
+  portalLogout,
 };

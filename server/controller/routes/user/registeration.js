@@ -12,7 +12,7 @@ const { alreadyBooked } = require('../../../database/queries/events');
 const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
   const schema = yup.object().shape({
-    mobileNum: yup.string().matches(mobileRegExp),
+    mobile: yup.string().matches(mobileRegExp),
     eventCode: yup
       .number()
       .required()
@@ -29,7 +29,7 @@ const checkUser = (req, res, next) => {
     return next(err);
   }
 
-  return checkUserExist(req.body.mobileNum)
+  return checkUserExist(req.body.mobile)
     .then(({ rows }) => {
       if (rows.length === 0) {
         res.json({ msg: "user doesn't exist, please register" });

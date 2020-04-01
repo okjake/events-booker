@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const checkPinCode = (req, res, next) => {
@@ -11,9 +10,7 @@ const checkPinCode = (req, res, next) => {
       err.status = 401;
       next(err);
     } else {
-      const token = jwt.sign({ id: req.admin.id }, process.env.SECRET_KEY_PORTAL);
-      res.cookie('portalToken', token);
-      res.json({ msg: 'You are authorized' });
+      next();
     }
   }).catch(next);
 };

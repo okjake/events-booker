@@ -13,7 +13,7 @@ const checkPassword = (req, res, next) => {
     } else {
       const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY);
       res.cookie('token', token);
-      next();
+      res.json({ msg: 'logged in successfully' });
     }
   }).catch(next);
 };

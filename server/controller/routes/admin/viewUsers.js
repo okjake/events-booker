@@ -9,8 +9,8 @@ const getUsersEvent = (req, res, next) => {
         res.json(rows);
       } else {
         const error = new Error();
-        error.msg = 'There is no regestied users yet';
-        error.status = 400;
+        error.msg = `event with code ${eventcode} is not found`;
+        error.status = 404;
         next(error);
       }
     })
