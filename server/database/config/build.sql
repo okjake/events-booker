@@ -28,17 +28,18 @@ CREATE TABLE events (
 
 CREATE TABLE user_event (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id) ON UPDATE CASCADE,
-    event_id INTEGER REFERENCES events(id) ON UPDATE CASCADE,
+    user_id INTEGER REFERENCES users(id),
+    event_id INTEGER REFERENCES events(id),
     user_code INT NOT NULL,
     attendance BOOLEAN DEFAULT false
 );
 
 CREATE TABLE admin (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(100) NOT NULL
+    name VARCHAR(200) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    pin_code VARCHAR(200) NOT NULL
 );
 
 COMMIT;

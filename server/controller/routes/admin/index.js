@@ -11,8 +11,8 @@ module.exports = {
   createEvent,
   getUsersEvent,
   getUsersData,
-  viewEventsOnDate,
   login,
   logout,
+  viewEventsOnDate,
   deleteEvent,
 };
