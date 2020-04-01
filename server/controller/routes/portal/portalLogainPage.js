@@ -19,6 +19,7 @@ const getHashedPinCode = (req, res, next) => {
   getAdmin().then(({ rows }) => {
     const [admin] = rows;
     req.pinCode = admin.pin_code;
+    req.adminId = admin.id;
     next();
   });
 };
