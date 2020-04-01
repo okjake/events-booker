@@ -27,6 +27,8 @@ const {
   getHashedPinCode,
   deleteEvent,
   viewEventsOnDate,
+  createPortalToken,
+  portalLogout,
 } = require('../controller');
 
 const {
@@ -61,20 +63,18 @@ router.post(
   sendSms,
   sendInvitation,
 );
-router.post('/cancelUser', validationCancelReg, cancelRegistration);
 
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword);
-router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode);
 router.get('/logout', logout);
+
+router.post('/cancelUser', validationCancelReg, cancelRegistration);
+
+router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode, createPortalToken);
+router.post('/portal/logout', pinCodeValidation, getHashedPinCode, checkPinCode, portalLogout);
 
 router.use(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
-router.patch(
-  '/attendance',
-  validateAttendence,
-  checkUserBooking,
-  signAttendance,
-);
+router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 
 router.use(['/event', '/users', '/event/:eventcode/users'], protectedRoute);
 router.get('/users', getUsersData);
