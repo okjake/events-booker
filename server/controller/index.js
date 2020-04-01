@@ -36,6 +36,8 @@ const {
   signAttendance,
   pinCodeValidation,
   getHashedPinCode,
+  createPortalToken,
+  portalLogout,
 } = require('./routes/portal');
 
 
@@ -67,4 +69,6 @@ module.exports = {
   viewEventsOnDate,
   pinCodeValidation,
   getHashedPinCode,
+  createPortalToken,
+  portalLogout,
 };

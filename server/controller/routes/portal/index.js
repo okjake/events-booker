@@ -1,5 +1,6 @@
 const { validateAttendence, checkUserBooking, signAttendance } = require('./attendance');
-const { pinCodeValidation, getHashedPinCode } = require('./portalLogainPage');
+const { pinCodeValidation, getHashedPinCode, createPortalToken } = require('./portalLogainPage');
+const portalLogout = require('./portalLogout');
 
 
 module.exports = {
@@ -8,4 +9,6 @@ module.exports = {
   signAttendance,
   pinCodeValidation,
   getHashedPinCode,
+  createPortalToken,
+  portalLogout,
 };

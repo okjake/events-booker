@@ -28,6 +28,8 @@ const {
   getHashedPinCode,
   deleteEvent,
   viewEventsOnDate,
+  createPortalToken,
+  portalLogout,
 } = require('../controller');
 
 
@@ -67,9 +69,11 @@ router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 
 
-router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode);
+router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode, createPortalToken);
 router.patch('/attendance', protectedPortalRoute, validateAttendence, checkUserBooking, signAttendance);
 router.get('/event/date', protectedPortalRoute, viewEventsOnDate);
+router.post('/portal/logout', pinCodeValidation, getHashedPinCode, checkPinCode, portalLogout);
+
 
 router.use(protectedRoute);
 router.post('/event', validateEvent, createEvent);
