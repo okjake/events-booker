@@ -19,7 +19,6 @@ const {
 } = require('./routes/user');
 
 const {
-  login,
   validateEvent,
   createEvent,
   getUsersEvent,
@@ -54,7 +53,6 @@ module.exports = {
   sendInvitation,
   cancelRegistration,
   getEvents,
-  login,
   logout,
   getUsersEvent,
   getUsersData,

@@ -15,7 +15,6 @@ const {
   sendInvitation,
   cancelRegistration,
   getEvents,
-  login,
   logout,
   getUsersEvent,
   getUsersData,
@@ -30,7 +29,6 @@ const {
   viewEventsOnDate,
 } = require('../controller');
 
-
 const {
   validationCancelReg,
   loginValidation,
@@ -42,8 +40,8 @@ const {
 } = require('../middleware');
 
 router.get('/event', getEvents);
-
-router.post('/register',
+router.post(
+  '/register',
   registerValidation,
   newUserExist,
   addUserToDB,
@@ -51,8 +49,8 @@ router.post('/register',
   generateCode,
   userWillAttend,
   sendSms,
-  sendInvitation);
-
+  sendInvitation,
+);
 router.post(
   '/checkUser',
   checkUser,
@@ -64,20 +62,25 @@ router.post(
   sendInvitation,
 );
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
-router.post('/login', loginValidation, checkEmailIfExist, checkPassword, login);
 
-
+router.post('/login', loginValidation, checkEmailIfExist, checkPassword);
 router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode);
-router.patch('/attendance', protectedPortalRoute, validateAttendence, checkUserBooking, signAttendance);
-router.get('/event/date', protectedPortalRoute, viewEventsOnDate);
+router.get('/logout', logout);
 
-router.use(protectedRoute);
-router.post('/event', validateEvent, createEvent);
+router.use(['/event/date', '/attendance'], protectedPortalRoute);
+router.get('/event/date', viewEventsOnDate);
+router.patch(
+  '/attendance',
+  validateAttendence,
+  checkUserBooking,
+  signAttendance,
+);
+
+router.use(['/event', '/users', '/event/:eventcode/users'], protectedRoute);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.patch('/event', deleteEvent);
-router.get('/logout', logout);
-
+router.post('/event', validateEvent, createEvent);
 
 router.use(clientError);
 router.use(serverError);
