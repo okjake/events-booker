@@ -5,6 +5,7 @@ function App() {
   return (
     <div className="App">
       <h1>Events Booker</h1>
+      //make Registration Page
     </div>
   );
 }
