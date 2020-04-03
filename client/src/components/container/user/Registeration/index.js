@@ -26,7 +26,6 @@ import axios from 'axios';
     event.preventDefault();
   }
   regiserUser=()=>{
-      console.log('hello from func');
     const userInfo = {
         first_name: this.state.first_name,
         last_name:this.state.last_name,
@@ -34,10 +33,13 @@ import axios from 'axios';
         email:this.state.email,
         mobile:this.props.mobileNo,
       };
-    axios.post(`/register`, { userInfo })
+    axios.post(`/api/v1/register`, { userInfo })
       .then(res => {
         console.log(res);
-      })
+      }).catch(error => {
+        console.log("hhhhhhh",error)
+    });
+    
     }
 
   render() {
