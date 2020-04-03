@@ -48,7 +48,7 @@ export default class RegisterUser extends React.Component {
             <input type="text" name="lastName" onChange={this.lastNameChange} />
             <input type="text" name="email" onChange={this.emailChange} />
             <input type="text" name="location" onChange={this.locationChange} />
-          <button type="submit" onClick={this.state.regiserUser}>Add</button>
+          <button type="submit" onClick={this.regiserUser()}>Add</button>
         </form>
       </div>
     )
