@@ -1,7 +1,7 @@
-import React from 'react';
+import React ,{Component}from 'react';
 import axios from 'axios';
 
-export default class RegisterUser extends React.Component {
+ class RegisterUser extends Component {
   state = {
     first_name: '',
     last_name:'',
@@ -24,8 +24,9 @@ export default class RegisterUser extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
+  }
   regiserUser=()=>{
+      console.log('hello from func');
     const userInfo = {
         first_name: this.state.first_name,
         last_name:this.state.last_name,
@@ -38,19 +39,20 @@ export default class RegisterUser extends React.Component {
         console.log(res);
       })
     }
-  }
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-            <input type="text" name="firstName" onChange={this.firstNameChange} />
+            <input type="text" name="firstName" value={this.state.first_name} onChange={this.firstNameChange} />
             <input type="text" name="lastName" onChange={this.lastNameChange} />
             <input type="text" name="email" onChange={this.emailChange} />
             <input type="text" name="location" onChange={this.locationChange} />
-          <button type="submit" onClick={this.regiserUser()}>Add</button>
+          <button type="submit" onClick={this.regiserUser}>Add</button>
         </form>
       </div>
     )
   }
 }
+
+export default RegisterUser;
