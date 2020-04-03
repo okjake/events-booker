@@ -9,7 +9,9 @@
     "project-setup": "npm install && cd client && npm install",
     "kill": "fuser -k 8000/tcp",
     "kill-run": "npm run kill && NODE_ENV=development npm run dev",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "devs": "cd client && npm start",
+    "start-both" : "npm-run-all --parallel dev devs"
   },
   "repository": {
     "type": "git",
@@ -30,9 +32,10 @@
     "express": "^4.17.1",
     "ical-generator": "^1.9.4",
     "jsonwebtoken": "^8.5.1",
-    "nexmo": "^2.6.0",
     "moment": "^2.24.0",
+    "nexmo": "^2.6.0",
     "nodemailer": "^6.4.6",
+    "npm-run-all": "^4.1.5",
     "pg": "^7.18.2",
     "yup": "^0.28.3"
   },

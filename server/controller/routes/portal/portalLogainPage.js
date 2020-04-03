@@ -1,4 +1,6 @@
 const yup = require('yup');
+const jwt = require('jsonwebtoken');
+
 
 const getAdmin = require('../../../database/queries/getAdmin');
 
@@ -24,4 +26,9 @@ const getHashedPinCode = (req, res, next) => {
   });
 };
 
-module.exports = { pinCodeValidation, getHashedPinCode };
+const createPortalToken = (req, res, next) => {
+  const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY_PORTAL);
+  res.json({ msg: 'You are authorized' });
+};
+
+module.exports = { pinCodeValidation, getHashedPinCode, createPortalToken };
