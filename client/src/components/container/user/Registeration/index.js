@@ -5,7 +5,6 @@ export default class RegisterUser extends React.Component {
   state = {
     first_name: '',
     last_name:'',
-    mobile:'',
     location:'',
     email:''
   }
