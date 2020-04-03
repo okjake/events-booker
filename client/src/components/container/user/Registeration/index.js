@@ -22,9 +22,6 @@ export default class RegisterUser extends React.Component {
   locationChange = event => {
     this.setState({ location: event.target.value });
   }
-  setMobileValue=()=>{
-      this.setState({mobile:this.props.mobileNo})
-  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -33,9 +30,9 @@ export default class RegisterUser extends React.Component {
     const userInfo = {
         first_name: this.state.first_name,
         last_name:this.state.last_name,
-        mobile:this.state.mobile,
         location:this.state.location,
-        email:this.state.email
+        email:this.state.email,
+        mobile:this.props.mobileNo,
       };
     axios.post(`/register`, { userInfo })
       .then(res => {
