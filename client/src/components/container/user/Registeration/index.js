@@ -29,18 +29,19 @@ export default class RegisterUser extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
+  regiserUser=()=>{
     const userInfo = {
-      first_name: this.state.first_name,
-      last_name:this.state.last_name,
-      mobile:this.state.mobile,
-      location:this.state.location,
-      email:this.state.email
-    };
-
+        first_name: this.state.first_name,
+        last_name:this.state.last_name,
+        mobile:this.state.mobile,
+        location:this.state.location,
+        email:this.state.email
+      };
     axios.post(`/register`, { userInfo })
       .then(res => {
         console.log(res);
       })
+    }
   }
 
   render() {
@@ -51,7 +52,7 @@ export default class RegisterUser extends React.Component {
             <input type="text" name="lastName" onChange={this.lastNameChange} />
             <input type="text" name="email" onChange={this.emailChange} />
             <input type="text" name="location" onChange={this.locationChange} />
-          <button type="submit">Add</button>
+          <button type="submit" onClick={this.state.regiserUser}>Add</button>
         </form>
       </div>
     )
