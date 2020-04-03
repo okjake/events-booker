@@ -27,7 +27,7 @@ const getHashedPinCode = (req, res, next) => {
 };
 
 const createPortalToken = (req, res, next) => {
-  const token = jwt.sign({ id: req.admin.id }, process.env.SECRET_KEY_PORTAL);
+  const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY_PORTAL);
   res.cookie('portalToken', token);
   res.json({ msg: 'You are authorized' });
 };
