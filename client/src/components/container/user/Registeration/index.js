@@ -1,7 +1,6 @@
 import React ,{Component}from 'react';
 import axios from 'axios';
 
-
  class RegisterUser extends Component {
   state = {
     firstName: '',
@@ -11,7 +10,6 @@ import axios from 'axios';
     error:'',
     isLoaded:false,
   }
-
   firstNameChange = event => {
     this.setState({ firstName: event.target.value });
   }
@@ -27,12 +25,12 @@ import axios from 'axios';
   
   regiserUser=(event)=>{
     event.preventDefault();
-
+    const {firstName,lastName,location,email}=this.state;
     const userInfo = {
-        firstName: this.state.firstName,
-        lastName:this.state.lastName,
-        location:this.state.location,
-        email:this.state.email,
+        firstName,
+        lastName,
+        location,
+        email,
         mobile:this.props.mobileNo,
       };
     axios.post(`/api/v1/register`, { userInfo }).then(res => {
@@ -43,21 +41,22 @@ import axios from 'axios';
     });
     }
   render() {
-      if(this.state.error&&this.state.isLoaded){
-          return <div>error on register</div>
+    const {error,isLoaded}=this.state;
+    if(error&&isLoaded){
+      return <div>error on register</div>
       }
-      else{
-    return (
-      <div>
-        <form onSubmit={this.regiserUser}>
+    else{
+      return (
+        <div>
+          <form onSubmit={this.regiserUser}>
             <input type="text" name="firstName" onChange={this.firstNameChange} />
             <input type="text" name="lastName" onChange={this.lastNameChange} />
-            <input type="text" name="email" onChange={this.emailChange} />
+            <input type="email" name="email" onChange={this.emailChange} />
             <input type="text" name="location" onChange={this.locationChange} />
           <button>Add</button>
-        </form>
-      </div>
-    )
+          </form>
+        </div>
+      )
   }}
 }
 

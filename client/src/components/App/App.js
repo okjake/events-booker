@@ -7,10 +7,10 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Link to="/register">register</Link>
+      <Link to={{ pathname:"/register/:eventProg/:eventCode/:mobileNo"}}>register</Link>
       <Switch>
-      <Route path="/register">
-        <Register mobileNo="1234567899"></Register>
+      <Route path="/register/:eventProg/:eventCode/:mobileNo">
+        <Register></Register>
       </Route>
       </Switch>
       </Router>
