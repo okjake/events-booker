@@ -1,33 +1,20 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+import { BrowserRouter as Router,Route, Switch ,Link} from 'react-router-dom';
 import './App.css';
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
 import Register from '../container/user/Registeration'
+
 function App() {
   return (
     <div className="App">
-      <h1>Events Booker</h1>
-     <BrowserRouter>
-     <div>
-         <ul>
-           <li>
-             <Link to="/register">register</Link>
-           </li>
-        </ul>
-        <Switch>
-        <Route  path="/register">
-        <Register mobileNo='123456789'></Register>
-        </Route>
-        </Switch>
-        </div>
-      </BrowserRouter>
-     </div>
+      <Router>
+      <Link to="/register">register</Link>
+      <Switch>
+      <Route path="/register">
+        <Register mobileNo="1234567899"></Register>
+      </Route>
+      </Switch>
+      </Router>
+    </div>
   );
 }
 
