@@ -1,12 +1,16 @@
 import React ,{Component}from 'react';
 import axios from 'axios';
+import { Button,Form ,Input } from 'antd';
+
 
  class RegisterUser extends Component {
   state = {
     first_name: '',
     last_name:'',
     location:'',
-    email:''
+    email:'',
+    error:'',
+    isLoaded:false
   }
 
   firstNameChange = event => {
@@ -33,28 +37,33 @@ import axios from 'axios';
         email:this.state.email,
         mobile:this.props.mobileNo,
       };
-    axios.post(`/api/v1/register`, { userInfo })
+    axios.post(`/api/v1/register`, { userInfo },
+    {"Clear-Site-Data": "*"})
       .then(res => {
+        this.setState({isLoaded:true})
         console.log(res);
-      }).catch(error => {
-        console.log("hhhhhhh",error)
+      }).catch(e => {
+        this.setState({error:e,isLoaded:true})
     });
-    
     }
 
   render() {
+      if(this.state.error&&this.state.isLoaded){
+          return <div>error on register</div>
+      }
+      else{
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-            <input type="text" name="firstName" value={this.state.first_name} onChange={this.firstNameChange} />
-            <input type="text" name="lastName" onChange={this.lastNameChange} />
-            <input type="text" name="email" onChange={this.emailChange} />
-            <input type="text" name="location" onChange={this.locationChange} />
-          <button type="submit" onClick={this.regiserUser}>Add</button>
-        </form>
+        <Form onSubmit={this.handleSubmit}>
+            <Input width="200px" type="text" name="firstName" value={this.state.first_name} onChange={this.firstNameChange} />
+            <Input type="text" name="lastName" onChange={this.lastNameChange} />
+            <Input type="text" name="email" onChange={this.emailChange} />
+            <Input type="text" name="location" onChange={this.locationChange} />
+          <Button type="primary" onClick={this.regiserUser}>Add</Button>
+        </Form>
       </div>
     )
-  }
+  }}
 }
 
 export default RegisterUser;
