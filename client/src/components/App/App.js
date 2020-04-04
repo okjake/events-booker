@@ -7,8 +7,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Register from '../container/user/Registeration'
 
+import Register from '../container/user/Registeration'
 function App() {
   return (
     <div className="App">

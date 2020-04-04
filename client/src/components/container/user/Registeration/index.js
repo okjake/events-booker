@@ -1,6 +1,5 @@
 import React ,{Component}from 'react';
 import axios from 'axios';
-import { Button,Form ,Input } from 'antd';
 
 
  class RegisterUser extends Component {
@@ -10,7 +9,7 @@ import { Button,Form ,Input } from 'antd';
     location:'',
     email:'',
     error:'',
-    isLoaded:false
+    isLoaded:false,
   }
 
   firstNameChange = event => {
@@ -37,7 +36,7 @@ import { Button,Form ,Input } from 'antd';
         email:this.state.email,
         mobile:this.props.mobileNo,
       };
-    axios.post(`/api/v1/register`, { userInfo },
+    axios.post(`http://localhost:8000/api/v1/register`, { userInfo },
     {"Clear-Site-Data": "*"})
       .then(res => {
         this.setState({isLoaded:true})
@@ -46,6 +45,7 @@ import { Button,Form ,Input } from 'antd';
         this.setState({error:e,isLoaded:true})
     });
     }
+    
 
   render() {
       if(this.state.error&&this.state.isLoaded){
@@ -54,13 +54,13 @@ import { Button,Form ,Input } from 'antd';
       else{
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
-            <Input width="200px" type="text" name="firstName" value={this.state.first_name} onChange={this.firstNameChange} />
-            <Input type="text" name="lastName" onChange={this.lastNameChange} />
-            <Input type="text" name="email" onChange={this.emailChange} />
-            <Input type="text" name="location" onChange={this.locationChange} />
-          <Button type="primary" onClick={this.regiserUser}>Add</Button>
-        </Form>
+        <form onSubmit={this.handleSubmit}>
+            <input width="200px" type="text" name="firstName" value={this.state.first_name} onChange={this.firstNameChange} />
+            <input type="text" name="lastName" onChange={this.lastNameChange} />
+            <input type="text" name="email" onChange={this.emailChange} />
+            <input type="text" name="location" onChange={this.locationChange} />
+          <button type="primary" onClick={this.regiserUser}>Add</button>
+        </form>
       </div>
     )
   }}
