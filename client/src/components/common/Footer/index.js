@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer= () => {
   return (
-      <div>
+      <footer>
           <div>
             <h5 className="title">Footer Content</h5>
             <p>
@@ -34,14 +34,9 @@ const Footer= () => {
           <div>
             <p>&copy; {new Date().getFullYear()} Copyright: <a href="https://www.mdbootstrap.com"> MDBootstrap.com </a></p> 
           </div>
-      </div>
+      </footer>
   )
 }
 
 export default Footer;
 
-
-
-<div>
-&copy; {new Date().getFullYear()} Copyright: <a href="https://www.mdbootstrap.com"> MDBootstrap.com </a> 
-</div>
