@@ -42,21 +42,3 @@ export default Card;
 // This code to see the final result of the card 
 
 
-
-/*return(
-    <div class="container">
-    <div class="card">
-        <div class="card__image-container">
-        <img class="card__image"  src={image} alt=""/>
-        </div>
-        <div class="card__content">
-        <p class='card__p'><b>Event Title :</b> {title}</p>
-        <p class='card__p'><b>Event category :</b> {category}</p>
-        <p class='card__p'><b>Event Date :</b> {date}</p>
-        </div>
-        <div class='card__button'>
-            <Button type="primary">See More</Button>
-        </div>
-    </div>
-</div>
-);
