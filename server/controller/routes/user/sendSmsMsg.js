@@ -16,17 +16,19 @@ const sendSms = (req, res, next) => {
   const text = `This is the attendance code: ${userCode}`;
   nexmo.message.sendSms(
     'GSG',
-    mobile,
+    `97${mobile}`,
     text,
     { type: 'unicode' },
-    (err) => {
+    (err, responseData) => {
       if (err) {
         const error = new Error();
         error.msg = 'Invalid Number!';
         error.status = 400;
         next(error);
-      } else {
+      } else if (responseData.messages[0].status === '0') {
         next();
+      } else {
+        res.json({ message: `Message failed with error: ${responseData.messages[0]['error-text']}` });
       }
     },
   );
