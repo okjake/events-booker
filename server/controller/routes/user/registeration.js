@@ -134,8 +134,14 @@ const sendInvitation = (req, res, next) => {
     icalEvent: {
       filename: 'invitation.ics',
       method: 'request',
-      content: cal,
+      content: 'BEGIN:VCALENDAR\r\nPRODID:-//ACME/DesktopCalendar//EN\r\nMETHOD:REQUEST\r\nVERSION:2.0\r\n...',
     },
+    alternatives: [
+      {
+        contentType: 'text/calendar',
+        content: Buffer.from(cal.toString()),
+      },
+    ],
   };
 
   transporter
@@ -144,7 +150,7 @@ const sendInvitation = (req, res, next) => {
       .status(201)
       .json({
         msg:
-            'Event has been booked successfully, you will receive an email with the details',
+            'Event has been booked successfully, you will receive an email with the details and a sms with the code',
       }))
     .catch(next);
 };
