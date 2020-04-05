@@ -33,48 +33,39 @@ class Landing extends React.Component {
 
   filterByCategory = (cat) => {
     const { isLoaded, error, data } = this.state;
-    if (isLoaded && !error) {
-      const events = data.filter((event) => event.category === cat);
-      console.log(events);
-      this.setState({ events, title: cat });
-    }
-  };
-
-  handleUpcoming = () => {
-    const { isLoaded, error, data } = this.state;
-    if (isLoaded && !error) {
-      this.setState({ events: data, title: "Upcoming" });
-    }
+    if (!isLoaded && error) return;
+    if (cat === "Upcoming") return this.setState({ events: data, title: cat });
+    const events = data.filter((event) => event.category === cat);
+    this.setState({ events, title: cat });
   };
 
   render() {
     const { error, isLoaded, title, events } = this.state;
-    const { filterByCategory, handleUpcoming } = this;
+    const { filterByCategory } = this;
+    const categories = [
+      "Code Academy",
+      "Freelance",
+      "Startups",
+      "Public",
+      "Upcoming",
+    ];
     return (
       <div>
         <div>
-          <Button
-            shape="round"
-            onClick={() => filterByCategory("Code Academy")}
-          >
-            Code Academy
-          </Button>
-          <Button shape="round" onClick={() => filterByCategory("Freelance")}>
-            Freelance
-          </Button>
-          <Button shape="round" onClick={() => filterByCategory("Startups")}>
-            Startups
-          </Button>
-          <Button shape="round" onClick={() => filterByCategory("Public")}>
-            Public
-          </Button>
-          <Button shape="round" onClick={handleUpcoming} autoFocus>
-            Upcoming
-          </Button>
+          {categories.map((cat) => (
+            <Button
+              shape="round"
+              key={cat}
+              autoFocus
+              onClick={() => filterByCategory(cat)}
+            >
+              {cat}
+            </Button>
+          ))}
         </div>
         <div>
           {error ? (
-            <div>Error: {error.response.data.msg}</div>
+            <div>Error: Something went Wrong, please try again later</div>
           ) : !isLoaded ? (
             <div>Loading...</div>
           ) : (
