@@ -38,20 +38,21 @@
         padding: 15px;
         border-radius: 40px;
     }
-    .s1 button{
+    .ant-btn-primary{
+        background-color: #186AA5;
         margin: 10px;
         border-radius: 40px;
         width: 200px;
         height: 50px;
-    
-    }
-    .ant-btn-primary{
-        background-color: #186AA5;
     }
     .ant-btn-danger{
         background-color: white;
         color: red;
         border: 1px solid red;
+        margin: 10px;
+        border-radius: 40px;
+        width: 200px;
+        height: 50px;
     }
     .s2{
         width: 50%;
@@ -64,7 +65,7 @@
         display: block;
     
     }
-    @media  (max-width: 1200px) {
+@media  (max-width: 1200px) {
 
     .s2{
         display: none;
@@ -76,3 +77,48 @@
     }
 
 }
+@media  (max-width: 650px) {
+    .s1{
+        margin-top: 50px;
+    }
+    .s1 img{
+        width:100px;
+    }
+    .s1 h1{
+        font-size: 1.4rem;
+    }
+    .s1 h2{
+        width: 80%;
+        text-align: center;
+        margin-top: -10px;
+        line-height: 23px;
+        letter-spacing: 1px;
+        font-size: 1rem;
+        color: rgb(8, 67, 109);
+        margin-bottom: 30px;
+    
+    }
+    .s1 input{
+        width:300px;
+        margin-top: -10px;
+    }
+  
+    .ant-btn-primary{
+        background-color: #186AA5;
+        box-sizing: border-box;
+        margin: 0px;
+        width: 300px;
+
+    }
+    .ant-btn-danger{
+        background-color: white;
+        color: red;
+        border: 1px solid red;
+        box-sizing: border-box;
+        width: 300px;
+
+    }
+
+
+}
+
