@@ -1,5 +1,3 @@
-@import '~antd/dist/antd.css';
-
 .header{
     text-align: left;
 }
@@ -10,17 +8,4 @@
     width: 400px;
     text-align: center;
 }
-.regForm {
-    width: 30%;
-}
-.inputs{
-    border-radius: 40px;
-}
-.btn-g{
-    display:flex; 
-}
-.btn{
- margin: 20px;
- border-radius: 40px;
- width: 150px;
-}
+
