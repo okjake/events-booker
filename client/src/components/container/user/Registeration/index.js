@@ -3,10 +3,14 @@ import axios from 'axios';
 import './style.css'
 import { Button ,Form,Input} from 'antd';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+
 
 class RegisterUser extends Component {
   state = {
-    responseMsg:''
+    responseMsg:'',
+    redirect: false
+
   }
     onFinishFailed = ({ errorFields }) => {
       Form.scrollToField(errorFields[0].name);
@@ -19,6 +23,17 @@ class RegisterUser extends Component {
       {firstName,lastName,location,email,mobile:mobileNo,eventCode }).then(res => {
         this.setState({responseMsg:res.data.msg})
       })
+    }
+
+    setRedirect = () => {
+      this.setState({
+        redirect: true
+      })
+    }
+    renderRedirect = () => {
+      if (this.state.redirect) {
+        return <Redirect to='/events' />
+      }
     }
 
   render() {
@@ -50,7 +65,8 @@ class RegisterUser extends Component {
                 <Input name="location" placeholder="location" />
               </Form.Item>
               <Button htmlType="submit" type="primary"> Submit </Button>
-              <Button type="danger"> Exit </Button>
+              {this.renderRedirect()}
+              <Button type="danger" onClick={this.setRedirect}> Exit </Button>
             </Form>
           </div>
           <div className="s2">
