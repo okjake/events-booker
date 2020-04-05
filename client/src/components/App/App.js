@@ -9,8 +9,8 @@ function App() {
       <Router>
       <Link to={{ pathname:"/register/:eventProg/:eventCode/:mobileNo"}}>register</Link>
       <Switch>
-      <Route path="/register/:eventProg/:eventCode/:mobileNo">
-        <Register></Register>
+      <Route path="/register/:eventProg/:eventCode/:mobileNo" 
+      render={(props) => <Register {...props} />}>
       </Route>
       </Switch>
       </Router>
