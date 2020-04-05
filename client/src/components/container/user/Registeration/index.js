@@ -8,11 +8,6 @@ class RegisterUser extends Component {
   state = {
     responseMsg:''
   }
-  onChangeValue=e=>{
-    const value=e.target.value;
-    this.setState({ [e.target.name]:value });
-  }
-
     onFinishFailed = ({ errorFields }) => {
       Form.scrollToField(errorFields[0].name);
     };  
