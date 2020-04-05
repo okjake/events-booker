@@ -1,6 +1,7 @@
 import React ,{Component}from 'react';
 import axios from 'axios';
-import { Button } from 'antd';
+import './style.css'
+import { Button ,Form,Input,} from 'antd';
 
 
 class RegisterUser extends Component {
@@ -12,6 +13,14 @@ class RegisterUser extends Component {
     error:'',
     isLoaded:false,
   }
+  layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  }
+  taillayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  }
+
   onChangeValue=e=>{
     const value=e.target.value;
     this.setState({ [e.target.name]:value });
@@ -38,8 +47,10 @@ class RegisterUser extends Component {
       }).catch(error => {
         this.setState({error,isLoaded:true})
     });
-    }
+    }  
+    
   render() {
+    
     const {error,isLoaded}=this.state;
     if(error&&isLoaded){
       console.log(error);
@@ -48,16 +59,63 @@ class RegisterUser extends Component {
     else{
       return (
         <div>
-          <form onSubmit={this.regiserUser}>
-            <input type="text" name="firstName" onChange={this.onChangeValue} />
-            <input type="text" name="lastName" onChange={this.onChangeValue} />
-            <input type="email" name="email" onChange={this.onChangeValue} />
-            <input type="text" name="location" onChange={this.onChangeValue} />
-          <Button>Add</Button>
-          </form>
+          <div className="header">
+            <h1>welcome to GSG event app</h1>
+            <h2>register your data to show the available events and choose your favorite</h2>
+          </div>
+          <Form  {...this.layout}
+          name="basic"
+          onSubmit={this.regiserUser}
+          className="regForm"
+          >
+          <Form.Item
+            name="firstName"
+            rules={[{ required: true, message: 'Please input your firstName!' }]}
+            onChange={this.onChangeValue}
+        
+          >
+            <Input className="inputs" name="firstName" placeholder="enter your fisrt name"/>
+          </Form.Item>
+
+          <Form.Item
+            name="lastName"
+            rules={[{ required: true, message: 'Please input your lastName!' }]}
+            onChange={this.onChangeValue}
+          >
+            <Input className="inputs" name="lastName" placeholder="enter your last name" />
+          </Form.Item>
+
+          <Form.Item
+            name="email"
+            rules={[{ required: true, type: 'email' , message: 'Please input your email!' }]}
+            onChange={this.onChangeValue}
+          >
+            <Input className="inputs" name="email" placeholder="enter your email" />
+          </Form.Item>
+
+          <Form.Item
+            name="location"
+            rules={[{ required: true, message: 'Please input your location!' }]}
+            onChange={this.onChangeValue}
+          >
+            <Input className="inputs" name="location" placeholder="enter your location" />
+          </Form.Item>
+          <div className="btn-g">
+          <Form.Item {...this.taillayout}>
+            <Button className="btn" type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+          <Form.Item {...this.taillayout}>
+            <Button className="btn" htmlType="submit">
+              exit
+            </Button>
+          </Form.Item></div>
+          </Form>
         </div>
       )
   }}
 }
+
 
 export default RegisterUser;
