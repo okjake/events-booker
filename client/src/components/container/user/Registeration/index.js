@@ -1,7 +1,7 @@
 import React ,{Component}from 'react';
 import axios from 'axios';
 import './style.css'
-import { Button ,Form,Input,} from 'antd';
+import { Button ,Form,Input} from 'antd';
 
 class RegisterUser extends Component {
   state = {
@@ -35,6 +35,8 @@ class RegisterUser extends Component {
     onFinishFailed = ({ errorFields }) => {
       Form.scrollToField(errorFields[0].name);
     };  
+
+    
     
   render() {
       return (
@@ -68,7 +70,7 @@ class RegisterUser extends Component {
                 <Input placeholder="location" />
               </Form.Item>
               <Button type="primary"> Submit </Button>
-              <Button> Exit </Button>
+              <Button type="danger"> Exit </Button>
             </Form>
           </div>
           <div className="s2">
