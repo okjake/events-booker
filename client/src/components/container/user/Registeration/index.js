@@ -15,6 +15,7 @@ class RegisterUser extends Component {
     const value=e.target.value;
     this.setState({ [e.target.name]:value });
   }
+  
   regiserUser=event=>{
     event.preventDefault();
     const {firstName,lastName,location,email}=this.state;
@@ -30,64 +31,49 @@ class RegisterUser extends Component {
       eventCode }).then(res => {
         this.setState({responseMsg:res.data.msg})
       })
-    }  
+    }
+    onFinishFailed = ({ errorFields }) => {
+      Form.scrollToField(errorFields[0].name);
+    };  
     
   render() {
       return (
-        <div>
-          <div className="header">
-            <h1>welcome to GSG event app</h1>
-            <h2>register your data to show the available events and choose your favorite</h2>
+        <div className="main">
+          <div className="s1">
+            <img alt="logo" src="https://raw.githubusercontent.com/GSG-G8/ca-wiki/master/client/public/favicon.ico"/>
+            <h1><span className="blue">welcome to</span> GSG event app</h1>
+            <h2>Register your data to show the available events and choose your favorite</h2>
+            <Form onFinish={this.regiserUser} onFinishFailed={this.onFinishFailed}>
+              <Form.Item name="firstName" 
+              onFinish={this.onChangeValue}
+              rules={[{ required: true, message: 'Please input your firstName!'}]}>
+                <Input placeholder="fisrt name" />
+              </Form.Item>
+
+              <Form.Item name="lastName" 
+              onFinish={this.onChangeValue}
+              rules={[{ required: true, message: 'Please input your lastName!'}]}>
+                <Input placeholder="last name" />
+              </Form.Item>
+
+              <Form.Item name="email" 
+              onFinish={this.onChangeValue}
+              rules={[{ required: true, message: 'Please input your email!'}]}>
+                <Input placeholder="email" />
+              </Form.Item>
+
+              <Form.Item name="location" 
+              onFinish={this.onChangeValue}
+              rules={[{ required: true, message: 'Please input your location!'}]}>
+                <Input placeholder="location" />
+              </Form.Item>
+              <Button type="primary"> Submit </Button>
+              <Button> Exit </Button>
+            </Form>
           </div>
-          <Form  {...this.layout}
-          name="basic"
-          onSubmit={this.regiserUser}
-          className="regForm"
-          >
-          <Form.Item
-            name="firstName"
-            rules={[{ required: true, message: 'Please input your firstName!' }]}
-            onChange={this.onChangeValue}
-        
-          >
-            <Input name="firstName" placeholder="enter your fisrt name"/>
-          </Form.Item>
-
-          <Form.Item
-            name="lastName"
-            rules={[{ required: true, message: 'Please input your lastName!' }]}
-            onChange={this.onChangeValue}
-          >
-            <Input name="lastName" placeholder="enter your last name" />
-          </Form.Item>
-
-          <Form.Item
-            name="email"
-            rules={[{ required: true, type: 'email' , message: 'Please input your email!' }]}
-            onChange={this.onChangeValue}
-          >
-            <Input name="email" placeholder="enter your email" />
-          </Form.Item>
-
-          <Form.Item
-            name="location"
-            rules={[{ required: true, message: 'Please input your location!' }]}
-            onChange={this.onChangeValue}
-          >
-            <Input name="location" placeholder="enter your location" />
-          </Form.Item>
-          <div className="btn-g">
-          <Form.Item {...this.taillayout}>
-            <Button className="btn" type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-          <Form.Item {...this.taillayout}>
-            <Button className="btn" htmlType="submit">
-              exit
-            </Button>
-          </Form.Item></div>
-          </Form>
+          <div className="s2">
+            <img alt="img" src="https://www.thebalancesmb.com/thmb/E6hp3YFsPw8mCK_39bw94CxE4Vk=/3456x3456/smart/filters:no_upscale()/asian-businesswoman-leading-meeting-at-boardroom-table-504987926-5ad21419c5542e0036d7003e.jpg" />
+          </div>
         </div>
       )
   }
