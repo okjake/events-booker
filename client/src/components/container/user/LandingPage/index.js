@@ -15,11 +15,11 @@ class Landing extends React.Component {
   componentDidMount() {
     axios
       .get("/api/v1/event")
-      .then((res) => {
-        const data = res.data.sort((a, b) => new Date(a) - new Date(b));
+      .then(({data}) => {
+        const response = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
         this.setState({
           isLoaded: true,
-          data,
+          data : response,
           events: data,
         });
       })
