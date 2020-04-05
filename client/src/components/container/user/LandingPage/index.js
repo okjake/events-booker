@@ -33,7 +33,7 @@ class Landing extends React.Component {
 
   filterByCategory = (cat) => {
     const { isLoaded, error, data } = this.state;
-    if (!isLoaded && error) return;
+    if (!isLoaded || error) return;
     if (cat === "Upcoming") return this.setState({ events: data, title: cat });
     const events = data.filter((event) => event.category === cat);
     this.setState({ events, title: cat });
