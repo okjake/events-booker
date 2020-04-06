@@ -16,16 +16,15 @@
     }
     .s1 h1{
         font-weight: bold;
-        font-size: 2.5rem;
+        font-size: 2.3rem;
         color: #FB6C04;
     }
     .s1 h2{
         width: 590px;
         text-align: center;
         margin-top: -10px;
-        line-height: 30px;
-        letter-spacing: 1px;
-        font-size: 1.9rem;
+        line-height: 32px;
+        font-size: 1.7rem;
         color: rgb(8, 67, 109);
         margin-bottom: 50px;
     
@@ -91,8 +90,7 @@
         width: 80%;
         text-align: center;
         margin-top: -10px;
-        line-height: 23px;
-        letter-spacing: 1px;
+        line-height: 25px;
         font-size: 1rem;
         color: rgb(8, 67, 109);
         margin-bottom: 30px;
