@@ -8,9 +8,7 @@
 
   }
   
-  img {
-    max-width: 100%;
-  }
+ 
   
   .container {
     display: flex;
@@ -42,6 +40,7 @@
     .card__image{
       opacity: 0;
       animation: ImageFadeIn .8s 1.4s forwards;
+      max-width: 100%;
     }
   
     
@@ -70,7 +69,7 @@
     }
 
    
-    button .ant-btn .ant-btn-primary :hover {
+    .ant-btn .ant-btn-primary :hover {
       background-color: #3B5A6F;
       color: white;
     }
@@ -99,38 +98,4 @@
       width: 254px;
 
     }
-
   }
-
-  @media only screen and (max-width: 1024px) {
-    .card{
-      width: 436px;
-      height: 800px;
-    }
-
-    .card__content{
-      font-size: 20px;
-    }
-
-    .card__button .ant-btn-primary{
-      width: 307px;
-      font-size: 20px;
-    }
-  }
-
-  @media only screen and (max-width: 414px){
-    .card{
-      width: 300px;
-      height: 600px;
-    }
-
-    .card__content {
-      font-size: 14px;
-  }
-
-  .card__button .ant-btn-primary {
-    width: 223px;
-    font-size: 15px;
-    height: 51px;
-  }
-}
