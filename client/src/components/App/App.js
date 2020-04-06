@@ -7,10 +7,10 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Link to={{ pathname:"/register/:eventProg/:eventCode/:mobileNo"}}>register</Link>
+      <Link to="/register/:eventProg/:eventCode/:mobileNo">register</Link>
       <Switch>
       <Route path="/register/:eventProg/:eventCode/:mobileNo" 
-      render={(props) => <Register {...props} />}>
+      component={Register}>
       </Route>
       </Switch>
       </Router>

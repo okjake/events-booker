@@ -40,7 +40,7 @@
         border-radius: 40px;
     }
     .ant-btn-primary{
-        background-color: #186AA5;
+        background-color: #236abb;
         margin: 10px;
         border-radius: 40px;
         width: 200px;
@@ -62,7 +62,7 @@
     }
     .s2 img{
         width: 100%;
-        height: 100%;
+        height: 100vh;
         display: block;
     
     }
@@ -74,16 +74,13 @@
     .s1{
         width: 100%;
         height: 100%;
-        margin:100px auto;
+        margin:50px auto;
     }
 
 }
-@media  (max-width: 650px) {
+@media  (max-width: 600px) {
     .main{
         height: 100%;
-    }
-    .s1{
-        margin-top: 50px;
     }
     .s1 img{
         width:100px;
@@ -107,19 +104,11 @@
     }
   
     .ant-btn-primary{
-        background-color: #186AA5;
-        box-sizing: border-box;
         margin: 0px;
         width: 300px;
-
     }
     .ant-btn-danger{
-        background-color: white;
-        color: red;
-        border: 1px solid red;
-        box-sizing: border-box;
         width: 300px;
-
     }
 
 

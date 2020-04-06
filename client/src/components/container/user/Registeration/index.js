@@ -10,7 +10,6 @@ class RegisterUser extends Component {
   state = {
     responseMsg:'',
     redirect: false
-
   }
     onFinishFailed = ({ errorFields }) => {
       Form.scrollToField(errorFields[0].name);
@@ -18,6 +17,7 @@ class RegisterUser extends Component {
     onFinish=value=>{
       const {firstName,lastName,location,email}=value
       const { match: { params } } = this.props;
+      console.log(this.props);
       const {mobileNo,eventCode}=params
       axios.post(`/api/v1/register`,
       {firstName,lastName,location,email,mobile:mobileNo,eventCode }).then(res => {
