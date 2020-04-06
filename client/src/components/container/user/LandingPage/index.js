@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Button } from "antd";
+import { Button, Result, Spin } from "antd";
 import "antd/dist/antd.css";
 
 class Landing extends React.Component {
@@ -15,11 +15,13 @@ class Landing extends React.Component {
   componentDidMount() {
     axios
       .get("/api/v1/event")
-      .then(({data}) => {
-        const response = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+      .then(({ data }) => {
+        const response = [...data].sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
         this.setState({
           isLoaded: true,
-          data : response,
+          data: response,
           events: data,
         });
       })
@@ -65,9 +67,13 @@ class Landing extends React.Component {
         </div>
         <div>
           {error ? (
-            <div>Error: Something went Wrong, please try again later</div>
+            <Result
+              status="500"
+              title="500"
+              subTitle="Something went Wrong, please try again later"
+            />
           ) : !isLoaded ? (
-            <div>Loading...</div>
+            <Spin size="large" />
           ) : (
             <div>
               <h2>{title}</h2>
