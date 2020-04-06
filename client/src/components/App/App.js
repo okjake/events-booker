@@ -1,15 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router,Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import EventPage from '../container/user/EventPage/index'
+import LandingPage from '../container/user/LandingPage/index'
 
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Router>
-      <Switch>
-
-      </Switch>
+        <Switch>
+          <Route exact path='/' component={LandingPage} />
+          <Route exact path='/events/:eventProg/:eventCode' component={EventPage} />
+        </Switch>
       </Router>
     </div>
   );
