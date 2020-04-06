@@ -39,14 +39,14 @@
         padding: 15px;
         border-radius: 40px;
     }
-    .ant-btn-primary{
+    .s1 .ant-btn-primary{
         background-color: #236abb;
         margin: 10px;
         border-radius: 40px;
         width: 200px;
         height: 50px;
     }
-    .ant-btn-danger{
+    .s1 .ant-btn-danger{
         background-color: white;
         color: red;
         border: 1px solid red;
@@ -66,9 +66,10 @@
         display: block;
     
     }
-    .errorHandel{
-        color: red;
-        text-align: center;
+    .s1 .ant-alert-error{
+        width: 200px;
+        margin:10px auto;
+
     }
 @media  (max-width: 1200px) {
 
@@ -107,12 +108,16 @@
         margin-top: 10px;
     }
   
-    .ant-btn-primary{
+    .s1 .ant-btn-primary{
         margin:20px 0px 0px 0px;
         width: 300px;
     }
-    .ant-btn-danger{
+    .s1 .ant-btn-danger{
         width: 300px;
+    }
+    .s1 .ant-alert-error{
+        width: 300px;
+
     }
 
 

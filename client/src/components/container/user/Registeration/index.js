@@ -1,8 +1,10 @@
 import React ,{Component}from 'react';
 import axios from 'axios';
-import { Button ,Form,Input} from 'antd';
+import { Button ,Form,Input,Alert} from 'antd';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 import './style.css'
 
@@ -10,20 +12,21 @@ class RegisterUser extends Component {
   state = {
     success : false,
     redirect: false,
-    message:''
+    successMsg:'',
+    message:'',
+    isLoade:true
   }
-    
-    
+     
     onFinish=({ firstName, lastName, location, email })=>{
+      this.setState({isLoade:false})
       const {
         match: { params : {mobileNo, eventCode} },
       } = this.props;
       axios.post(`/api/v1/register`,
-      {firstName,lastName,location,email,mobile:mobileNo,eventCode }).then(res => {
-        this.setState({ redirect: true, success : true })
+      {firstName,lastName,location,email,mobile:mobileNo,eventCode }).then(({data}) => {
+        this.setState({ redirect: true, success : true,successMsg:data.msg,isLoade:true})
       }).catch(err=>{
-        console.log(err.Error);
-        this.setState({message:"error on registration"})
+        this.setState({message:"email exist !!",isLoade:true})
       })
     }
 
@@ -41,7 +44,10 @@ class RegisterUser extends Component {
   render() {
       const {
         match: { params : {eventCode} },} = this.props;
-        const { redirect , success,message } = this.state;
+        const { redirect , success,message ,successMsg ,isLoade} = this.state;
+
+        const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
       return (
         <div className="main">
           <div className="s1">
@@ -64,17 +70,26 @@ class RegisterUser extends Component {
               rules={[{ required: true, message: 'Please input your email!'}]}>
                 <Input name="email" placeholder="email" />
               </Form.Item>
+              {message&& <Alert message={message} type="error" />}
+
 
               <Form.Item name="location" 
               rules={[{ required: true, message: 'Please input your location!'}]}>
                 <Input name="location" placeholder="location" />
               </Form.Item>
-              {message&&<div className="errorHandel">{message}</div>}
-              <Button htmlType="submit" type="primary"> Submit </Button>
+
+              {successMsg  && (<Redirect to={{pathname: `/event/${eventCode}`
+              ,state: { success,successMsg }, }} />)}
+
+              <Button htmlType="submit" 
+              type="primary" 
+              >{!isLoade&& (<Spin indicator={antIcon} />)}
+               Submit </Button>
               
               {redirect && (<Redirect to={{pathname: `/event/${eventCode}`
-              ,state: { success }, }} />)}
-              <Button type="danger" onClick={() => this.setState({ redirect: true })}> Exit </Button>
+              ,state: { success,message }, }} />)}
+              <Button type="danger" 
+              onClick={() => this.setState({ redirect: true })}> Exit </Button>
             </Form>
           </div>
           <div className="s2">
