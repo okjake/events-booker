@@ -41,9 +41,9 @@ class EventPage extends Component {
             className='btns'
             title={`Cancel Registeration at ${title} event`}
             eventCode={eventCode}
-            purpose='Cancel Reqesteration' />
+            purpose='CANCEL REGISTERATION' />
 
-          <Button className='btns' shape="round" autoFocus onClick={goBack}> Back </Button>
+          <Button type="primary" shape="round" autoFocus onClick={goBack}> Back </Button>
 
         </div>
       </div>

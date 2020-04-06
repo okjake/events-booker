@@ -24,8 +24,8 @@ class PopupBtnEventcomp extends Component {
       .catch(err => console.error(err))
     this.setState({
       visible: false,
+      mobileNo: '',
     });
-    
   };
 
   handleCancel = e => {
@@ -47,25 +47,21 @@ class PopupBtnEventcomp extends Component {
           {this.props.purpose}
         </Button>
         <Modal
-          className='modal'
           title={this.props.title}
           visible={visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-          footer={[
-            <Button key="back" onClick={this.handleCancel}>
-              Cancel
-            </Button>,
-            <Button key="submit" type="primary" onClick={this.handleOk}>
-              Submit
-            </Button>,
-          ]}
+          footer={null}
         >
           <Input
             placeholder="Enter Your Mobile Number"
             value={mobileNo}
             onChange={this.handleChange}
+            style={{width:'380px'}}
           />
+          <Button shape="square" key="submit" type="primary" onClick={this.handleOk}>
+          Submit
+        </Button>,
         </Modal>
       </div>
     );

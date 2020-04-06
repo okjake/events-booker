@@ -10,6 +10,18 @@
   margin: 140px auto 10px 70px;
 }
 
-.btns{
+.container .contant .ant-btn-primary{
+  width: 220px;
+  border: 1px solid #3b5a6f;
+  border-radius: 38px;
+  background-color: white;
+  color: #3b5a6f;
+  margin-top: 10px;
+  font-size: 15px;
+  outline: none;
   display: inline-block;
+}
+.ant-btn .ant-btn-primary :hover {
+  background-color: #3B5A6F;
+  color: white;
 }
