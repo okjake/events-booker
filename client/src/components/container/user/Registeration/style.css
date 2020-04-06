@@ -1,9 +1,11 @@
     .main{
         display: flex;
         overflow: hidden;
+        height: 100vh;
+
     }
     .s1{
-        margin-top: 100px;
+        align-self: center;
         width: 50%;
         height: 100%;
         display: flex;
@@ -77,6 +79,9 @@
 
 }
 @media  (max-width: 650px) {
+    .main{
+        height: 100%;
+    }
     .s1{
         margin-top: 50px;
     }
