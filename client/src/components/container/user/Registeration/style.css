@@ -66,6 +66,10 @@
         display: block;
     
     }
+    .errorHandel{
+        color: red;
+        text-align: center;
+    }
 @media  (max-width: 1200px) {
 
     .s2{
@@ -95,16 +99,16 @@
         line-height: 25px;
         font-size: 1rem;
         color: rgb(8, 67, 109);
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     
     }
     .s1 input{
         width:300px;
-        margin-top: -10px;
+        margin-top: 10px;
     }
   
     .ant-btn-primary{
-        margin: 0px;
+        margin:20px 0px 0px 0px;
         width: 300px;
     }
     .ant-btn-danger{
