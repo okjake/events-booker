@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router,Route, Switch } from 'react-router-dom';
-import Footer from '../common/Footer'
 
 
 import './App.css';
@@ -15,7 +14,7 @@ function App() {
 
       </Switch>
       </Router>
-      <Footer />
+      
     </div>
   );
 }
