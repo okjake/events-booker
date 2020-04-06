@@ -15,7 +15,6 @@ function App() {
 
       </Switch>
       </Router>
-      <button>See More</button>
       <Footer />
     </div>
   );
