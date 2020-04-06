@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
     font-family: 'Poppins', sans-serif;
@@ -15,15 +14,18 @@
   }
 
   .img-logo{
-    height: 93px;
-    width: 200px;
+    height: 87px;
+    width: 183px;
     margin-left: 15px;
     margin-top: 4px;
     float: left;
-
   }
 
 
 .header-right {
-    float: right;
+  float: right;
+  margin-right: 30px;
+  margin-top: 31px;
+  font-size: 27px;
+  color: #3b5a6f;
   }
