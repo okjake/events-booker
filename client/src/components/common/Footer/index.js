@@ -19,14 +19,14 @@ const Footer= () => {
 					<p>UNWRA HQ Square, Almotaz 3 Building, Mezzanine level</p>
 				</div>
 
-				<div>
+				<div class="footer-phone">
 					<i class="fa fa-phone"></i>
 					<p>+972 8-282-6331</p>
 				</div>
 
-				<div>
+				<div class="footer-email">
 					<i class="fa fa-envelope"></i>
-					<p><a href="info@gazaskygeeks.com">Email: info@gazaskygeeks.com</a></p>
+					<p>Email: info@gazaskygeeks.com</p>
 				</div>
 
 			</div>
