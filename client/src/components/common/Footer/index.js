@@ -1,42 +1,60 @@
 import React from "react";
+import './style.css'
 
 
 const Footer= () => {
   return (
-      <footer>
-          <div>
-            <h5 className="title">Footer Content</h5>
-            <p>
-             Here you can use rows and columns here to organize your footer
-             content.
-            </p> 
-          </div>
-          
-          <div>
+      <div>
+         
+          <footer class="footer-distributed">
 
-            <h5 className="title">Links</h5>
-            <ul>
-                <li className="list-unstyled">
-                    <a href="#!">Link 1</a>
-                </li>
-                <li className="list-unstyled">
-                    <a href="#!">Link 2</a>
-                </li>
-                <li className="list-unstyled">
-                    <a href="#!">Link 3</a>
-                </li>
-                <li className="list-unstyled">
-                    <a href="#!">Link 4</a>
-                </li>
-            </ul>
-          </div>
+			<div class="footer-left">
+				<h3>EVENTS<span>BOOKER</span></h3>
+			</div>
 
-          <div>
-            <p>&copy; {new Date().getFullYear()} Copyright: <a href="https://www.mdbootstrap.com"> MDBootstrap.com </a></p> 
-          </div>
-      </footer>
+			<div class="footer-center">
+
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>444 S. Cedros Ave</span> Solana Beach, California</p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>+1.555.555.5555</p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@company.com">support@company.com</a></p>
+				</div>
+
+			</div>
+
+			<div class="footer-right">
+
+				<p class="footer-company-about">
+					<span>About the company</span>
+					Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+				</p>
+
+				<div class="footer-icons">
+
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-github"></i></a>
+
+				</div>
+
+			</div>
+
+		</footer>
+      </div>
   )
 }
 
 export default Footer;
+
+
 
