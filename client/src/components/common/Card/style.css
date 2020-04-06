@@ -25,12 +25,13 @@
     background: white;
     width: 400px;
     height: 75vh;
-    border-radius: 6px;
+    border-radius: 17px;
     padding: 2rem;
     color: rgb(24, 23, 23);
     box-shadow: 0 .25rem .25rem rgba(0,0,0,0.2),
       0 0 1rem rgba(0,0,0,0.2);
     overflow: hidden;
+    height: 740px;
   }
     
     .card__image-container {
@@ -58,13 +59,13 @@
 
 
     .card__button .ant-btn-primary{
-      width: 310px;
-      height: 58px;
+      width: 300px;
+      height: 54px;
       border: 1px solid #3b5a6f;
-      border-radius: 82px;
+      border-radius: 38px;
       background-color: white;
-      margin-top: 17px;
-      font-size: 17px;
+      margin-top: 30px;
+      font-size: 15px;
       outline: none;
     }
 
@@ -89,3 +90,47 @@
     100% { transform: translateY(0) scale(1.0); opacity: 1; filter: blur(0); }
   }
 
+  @media only screen and (max-width: 768px) {
+    .card{
+      width: 328px;
+      height: 658px;
+    }
+    .card__button .ant-btn-primary{
+      width: 254px;
+
+    }
+
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .card{
+      width: 436px;
+      height: 800px;
+    }
+
+    .card__content{
+      font-size: 20px;
+    }
+
+    .card__button .ant-btn-primary{
+      width: 307px;
+      font-size: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 414px){
+    .card{
+      width: 300px;
+      height: 600px;
+    }
+
+    .card__content {
+      font-size: 14px;
+  }
+
+  .card__button .ant-btn-primary {
+    width: 223px;
+    font-size: 15px;
+    height: 51px;
+  }
+}
