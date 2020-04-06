@@ -1,0 +1,28 @@
+.catagories {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  justify-content: center;
+}
+
+.catagories__btn {
+  margin: 5px;
+}
+
+.main__title {
+  text-align: left;
+  padding-left: 10%;
+}
+
+.main__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 16rem);
+  grid-template-rows: 24rem;
+  justify-content: center;
+  grid-gap: 1.5rem;
+}
+
+.link {
+  margin: 0 1rem;
+}

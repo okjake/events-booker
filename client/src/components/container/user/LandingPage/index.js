@@ -3,6 +3,24 @@ import axios from "axios";
 import { Button, Result, Spin } from "antd";
 import "antd/dist/antd.css";
 
+import Card from "../../../common/Card";
+import { Link } from "react-router-dom";
+import "./style.css";
+
+const EventBtn = ({ pathname, event }) => {
+  return (
+    <Link
+      to={{
+        pathname,
+        state: { event },
+      }}
+      className="ant-btn ant-btn-round link"
+    >
+      Take A Part
+    </Link>
+  );
+};
+
 class Landing extends React.Component {
   state = {
     error: null,
@@ -53,12 +71,13 @@ class Landing extends React.Component {
     ];
     return (
       <div>
-        <div>
+        <div className="catagories">
           {categories.map((cat) => (
             <Button
               shape="round"
               key={cat}
               autoFocus
+              className="catagories__btn"
               onClick={() => filterByCategory(cat)}
             >
               {cat}
@@ -75,18 +94,24 @@ class Landing extends React.Component {
           ) : !isLoaded ? (
             <Spin size="large" />
           ) : (
-            <div>
-              <h2>{title}</h2>
-              <ul>
+            <section className="main">
+              <h2 className="main__title">{title}</h2>
+              <ul className="main__grid">
                 {events.map((event) => (
-                  <li key={event.id}>
-                    {event.title}
-                    {event.date}
-                    {event.category}
-                  </li>
+                  <Card
+                    key={event.id}
+                    className="grid__item"
+                    info={event}
+                    element={
+                      <EventBtn
+                        pathname={`/${event.category}/${event.event_code}`}
+                        event={event}
+                      />
+                    }
+                  />
                 ))}
               </ul>
-            </div>
+            </section>
           )}
         </div>
       </div>

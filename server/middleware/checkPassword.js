@@ -17,4 +17,5 @@ const checkPassword = (req, res, next) => {
     }
   }).catch(next);
 };
+
 module.exports = checkPassword;

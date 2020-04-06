@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.card {
+  display: grid;
+  border-radius: 1rem;
+  color: rgb(24, 23, 23);
+  box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2), 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+.card__image {
+  width: 16rem;
+  height: 12rem;
+  animation: ContentFadeIn 0.8s 1.6s forwards;
+}
+.card__content {
+  grid-row: auto;
+  text-align: left;
+  overflow-wrap: break-word;
+  padding: 0 1rem;
+}
+
+.card__p {
+  text-align: left;
+  margin-top: 10px;
+  overflow-wrap: break-word;
+}
+
+.card__button .ant-btn-primary {
+  width: 300px;
+  height: 54px;
+  border: 1px solid #3b5a6f;
+  border-radius: 38px;
+  background-color: white;
+  margin-top: 30px;
+  font-size: 15px;
+  outline: none;
+}
+
+.ant-btn .ant-btn-primary :hover {
+  background-color: #3b5a6f;
+  color: white;
+}
