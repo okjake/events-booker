@@ -11,11 +11,21 @@ class EventPage extends Component {
 
   render() {
     console.log(this.props);
-    const { image, ...otherEventProps } = this.props.location.state[0];
-    const title = this.props.location.state[0].title;
-    const goBack = this.props.history.goBack;
-    const eventCode = this.props.match.params.eventCode;
+
+    // const { image, ...otherEventProps } = this.props.location.state[0];
+    const {location: {state:[{image, ...otherEventProps}]}} = this.props
+
+    // const title = this.props.location.state[0].title;
+    const { location: { state: [{ title }] } } = this.props;
+
+
+    // const goBack = this.props.history.goBack;
+    const { history: { goBack } } = this.props;
+
+    // const eventCode = this.props.match.params.eventCode;
+    const { match: { params: { eventCode } } } = this.props;
     console.log(eventCode)
+    
     return (
       <div className='container'>
         <img src={image} alt='event page background' className='image' />

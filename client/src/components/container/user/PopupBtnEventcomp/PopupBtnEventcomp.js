@@ -42,15 +42,24 @@ class PopupBtnEventcomp extends Component {
   render() {
     const { visible, mobileNo } = this.state
     return (
-      <div>
+      <div className='popup-modal'>
         <Button type="primary" onClick={this.showModal} shape="round" autoFocus>
           {this.props.purpose}
         </Button>
         <Modal
+          className='modal'
           title={this.props.title}
           visible={visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
+          footer={[
+            <Button key="back" onClick={this.handleCancel}>
+              Cancel
+            </Button>,
+            <Button key="submit" type="primary" onClick={this.handleOk}>
+              Submit
+            </Button>,
+          ]}
         >
           <Input
             placeholder="Enter Your Mobile Number"

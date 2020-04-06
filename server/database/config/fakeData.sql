@@ -46,7 +46,7 @@ VALUES
     (
         'ReactJS',
         302,
-        'Code Academy',
+        'CodeAcademy',
         'lorem ipsum',
         'https://i.imgur.com/VgTVTNA.jpg',
         '2038-01-09 03:14:07',
@@ -55,7 +55,7 @@ VALUES
     (
         'Express',
         303,
-        'Code Academy',
+        'CodeAcademy',
         'lorem ipsum',
         'https://i.imgur.com/VgTVTNA.jpg',
         '2020-05-09 15:00:00',
