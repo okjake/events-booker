@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 16rem;
+  grid-template-rows: 12rem 1fr 3rem;
+  border-radius: 1rem;
+  color: rgb(24, 23, 23);
+  box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2), 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+.card__image {
+  width: 16rem;
+  height: 12rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.card__content {
+  padding: 1rem;
+}
+
+.card__p {
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+.ant-btn-override {
+  margin: 0 1rem;
+}
+
+.ant-btn-override:active {
+  background: #186aa5;
+  color: #ebebeb;
+}
