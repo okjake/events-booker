@@ -29,9 +29,17 @@ const newUserExist = (req, res, next) => {
       const error = new Error();
       error.msg = 'Email Already Exists!';
       error.status = 400;
-      next(error);
+      throw error;
     }
-  }).catch(next);
+  }).catch((err) => {
+    const { status } = err;
+    switch (status) {
+      case 400:
+        res.status(400).json(err);
+        break;
+      default: next(err);
+    }
+  });
 };
 
 // insert the valid user to the database
