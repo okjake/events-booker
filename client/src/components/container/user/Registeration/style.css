@@ -35,13 +35,17 @@
         color: #186AA5;
     }
     .s1 input{
-        width:420px;
-        padding: 15px;
+        width:370px;
+        padding: 20px;
         border-radius: 40px;
+        margin-top: 20px;
+        border: 1px solid #aaa;
     }
     .s1 .ant-btn-primary{
         background-color: #236abb;
-        margin: 10px;
+        border:1px solid #236abb;
+        color: white;
+        margin: 30px 5px 0px 0px;
         border-radius: 40px;
         width: 200px;
         height: 50px;
@@ -50,7 +54,6 @@
         background-color: white;
         color: red;
         border: 1px solid red;
-        margin: 10px;
         border-radius: 40px;
         width: 200px;
         height: 50px;
@@ -66,11 +69,17 @@
         display: block;
     
     }
-    .s1 .ant-alert-error{
+     .ant-alert-error{
         width: 200px;
-        margin:10px auto;
+        margin:20px auto;
+        color: red;
 
     }
+   .ant-alert-with-description{
+    color: rgb(17, 129, 50);
+    background-color:rgb(216, 245, 226);
+    }
+    
 @media  (max-width: 1200px) {
 
     .s2{
@@ -104,19 +113,20 @@
     
     }
     .s1 input{
-        width:300px;
+        width:220px;
         margin-top: 10px;
     }
   
     .s1 .ant-btn-primary{
         margin:20px 0px 0px 0px;
-        width: 300px;
+        width: 270px;
     }
     .s1 .ant-btn-danger{
-        width: 300px;
+        width: 270px;
+        margin-top: 10px;
     }
-    .s1 .ant-alert-error{
-        width: 300px;
+    .ant-alert-error{
+        width: 220px;
 
     }
 
