@@ -9,6 +9,11 @@
   margin: 5px;
 }
 
+.catagories__btn:active {
+  background: #fb6c04;
+  color: #ebebeb;
+}
+
 .main__title {
   text-align: left;
   padding-left: 10%;
@@ -18,11 +23,22 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, 16rem);
-  grid-template-rows: 24rem;
-  justify-content: center;
+  grid-template-rows: auto;
+  justify-content: space-evenly;
   grid-gap: 1.5rem;
 }
 
-.link {
+.ant-btn-override {
   margin: 0 1rem;
+}
+
+.ant-btn-override:active {
+  background: #186aa5;
+  color: #ebebeb;
+}
+
+@media only screen and (min-width: 1024px) {
+  .main__grid {
+    margin-left: 5rem;
+  }
 }

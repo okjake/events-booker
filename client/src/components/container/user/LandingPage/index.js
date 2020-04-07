@@ -14,7 +14,7 @@ const EventBtn = ({ pathname, event }) => {
         pathname,
         state: { event },
       }}
-      className="ant-btn ant-btn-round link"
+      className="ant-btn ant-btn-round ant-btn-override"
     >
       Take A Part
     </Link>
