@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import { Modal, Button, Input } from "antd";
+import { Alert, Modal, Button, Input, message } from "antd";
 import axios from 'axios';
-// import {Redirect } from 'react-router-dom';
-
-import { Alert } from 'antd';
 
 import './PopupBtnEventcomp.css'
 
@@ -15,49 +12,70 @@ class PopupBtnEventcomp extends Component {
     eventProg: this.props.eventProg,
     message: '',
     error: false,
+    type: this.props.type
   };
-
+  
   showModal = () => {
     this.setState({
       visible: true,
     });
   };
 
+  handleCancel = e => {
+    this.setState({
+      visible: false,
+      error: false,
+    });
+  };
+
+  handleChange = e => {
+    this.setState({ mobile: e.target.value, error: false });
+  };
+
+  
   handleOk = e => {
-    const { mobile, eventCode, eventProg } = this.state;
-    axios.post('/api/v1/checkUser', { mobile, eventCode })
+    const { mobile, eventCode, eventProg, type } = this.state;
+    if(type === 'booking'){
+      axios.post('/api/v1/checkUser', { mobile, eventCode })
       .then(({ data }) => {
-        console.log(data);
         if (data.status === 301) {
-          // <Redirect to={`/register/${eventProg}/${eventCode}/${mobile}`}/>;
+          this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
         } else if (data.status === 400) {
           this.setState({
             error: true,
             message: data.msg,
             mobile: '',
           })
-        }
-        if (!mobile) {
-          setTimeout(() => {
-            this.setState({ error: false });
-          }, 2000);
+        } else {
+          this.setState({
+            visible: false,
+            mobile: '',
+          });
+          message.success('Registration Successfully Completed', 10);
         }
       })
       .catch()
-    this.setState({
-      // visible: false,
-      mobile: '',
-    });
-  };
+    }else if(type === 'cancel'){
+      axios.post('/api/v1/cancelUser', { mobile, eventCode })
+      .then(({ data }) => {
+        if (data.status === 400) {
+          this.setState({
+            error: true,
+            message: data.msg,
+            mobile: '',
+          })
+        } else {
+          this.setState({
+            visible: false,
+            mobile: '',
+          });
+          message.success('You registeration have been canceld', 10);
+        }
+      })
+      .catch()
 
-  handleCancel = e => {
-    this.setState({
-      visible: false,
-    });
-  };
+    }
 
-  handleChange = e => {
-    this.setState({ mobile: e.target.value });
   };
 
   render() {
@@ -90,12 +108,12 @@ class PopupBtnEventcomp extends Component {
         </Button>
           {
             error ?
-            <Alert
-            style={{ width: '380px', outline: 'none' }}
-            message={message}
-            type="error"
-            showIcon />
-            : null
+              <Alert
+                style={{ width: '380px' }}
+                message={message}
+                type="error"
+                showIcon />
+              : null
           }
         </Modal>
 
@@ -105,5 +123,3 @@ class PopupBtnEventcomp extends Component {
 }
 
 export default PopupBtnEventcomp;
-
-

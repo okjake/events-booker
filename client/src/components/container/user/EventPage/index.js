@@ -12,7 +12,7 @@ class EventPage extends Component {
   render() {
     const { location: { state: [{ image, ...otherEventProps }] } } = this.props
     const { location: { state: [{ title }] } } = this.props;
-    const { history: { goBack } } = this.props;
+    const { history: { goBack, push } } = this.props;
     const { match: { params: { eventCode, eventProg } } } = this.props;
 
     return (
@@ -25,13 +25,16 @@ class EventPage extends Component {
               title={`Register at ${title} event`}
               eventCode={eventCode}
               eventProg={eventProg}
-              purpose='BOOK NOW' />
+              push={push}
+              purpose='BOOK NOW'
+              type='booking'/>
 
             <PopupBtnEventcomp
               title={`Cancel Registeration at ${title} event`}
               eventCode={eventCode}
               eventProg={eventProg}
-              purpose='CANCEL REGISTERATION' />
+              purpose='CANCEL REGISTERATION' 
+              type='cancel'/>
 
             <Button type="primary" shape="round" autoFocus onClick={goBack}> BACK </Button>
 

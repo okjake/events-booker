@@ -9,10 +9,16 @@ const cancelRegistration = (req, res, next) => {
       const error = new Error();
       error.msg = 'mobile dosent register on this event';
       error.status = 400;
-      next(error);
+      throw error;
     }
   })
-    .catch(next);
+    .catch((error) => {
+      if (error.status === 400) {
+        res.json(error);
+      } else {
+        next(error);
+      }
+    });
 };
 
 module.exports = cancelRegistration;

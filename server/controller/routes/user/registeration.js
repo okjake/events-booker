@@ -26,7 +26,6 @@ const checkUser = (req, res, next) => {
     const err = new Error();
     err.msg = 'invalid inputs';
     err.status = 400;
-    // updated
     res.json(err);
     throw err;
   }
@@ -34,7 +33,7 @@ const checkUser = (req, res, next) => {
   return checkUserExist(req.body.mobile)
     .then(({ rows }) => {
       if (rows.length === 0) {
-        res.json({ msg: "user doesn't exist, please register" }).status(301);
+        res.json({ msg: "user doesn't exist, please register", status: 301 });
       } else {
         const [user] = rows;
         req.user = user;
