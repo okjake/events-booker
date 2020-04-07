@@ -72,11 +72,11 @@ router.post('/cancelUser', validationCancelReg, cancelRegistration);
 router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode, createPortalToken);
 router.post('/portal/logout', pinCodeValidation, getHashedPinCode, checkPinCode, portalLogout);
 
-router.use(['/event/date', '/attendance'], protectedPortalRoute);
+router.all(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 
-router.use(['/event', '/users', '/event/:eventcode/users'], protectedRoute);
+router.all(['/users', '/event/:eventcode/users'], protectedRoute);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.patch('/event', deleteEvent);
