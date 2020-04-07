@@ -1,0 +1,35 @@
+.catagories {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  justify-content: center;
+}
+
+.catagories__btn {
+  margin: 5px;
+}
+
+.catagories__btn:active {
+  background: #fb6c04;
+  color: #ebebeb;
+}
+
+.main__title {
+  text-align: left;
+  padding-left: 10%;
+}
+
+.main__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 16rem);
+  grid-template-rows: auto;
+  justify-content: space-evenly;
+  grid-gap: 1.5rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .main__grid {
+    margin-left: 5rem;
+  }
+}
