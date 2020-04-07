@@ -1,3 +1,19 @@
 .content-container {
-  line-height: 1.8em
+  line-height: 1.8em;
+}
+
+.content-container .title{
+  color: #186AA5;
+  font-weight: bolder;
+}
+
+.content-container .hosted span{
+ color: #FB6C04;
+}
+
+.content-container .details{
+  color: #959595
+}
+.content-container .icons{
+  margin-right: 5px;
 }

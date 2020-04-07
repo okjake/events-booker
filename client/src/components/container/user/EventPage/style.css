@@ -3,25 +3,32 @@
 }
 
 .image {
-  width: 47%;
+  width: 44%;
   height: 100vh;
 }
 .contant{
-  margin: 140px auto 10px 70px;
+  margin: 150px auto 10px 70px;
 }
 
-.container .contant .ant-btn-primary{
-  width: 220px;
-  border: 1px solid #3b5a6f;
+.btns{
+  display: flex;
+}
+
+.container .contant .ant-btn-primary
+{
+  width: 180px;
+  border: 1px solid #186AA5;
   border-radius: 38px;
   background-color: white;
-  color: #3b5a6f;
+  color: #186AA5;
   margin-top: 10px;
-  font-size: 15px;
+  font-size: 12px;
+  font-weight: bold;
   outline: none;
-  display: inline-block;
+  margin-right: 10px;
+  
 }
-.ant-btn .ant-btn-primary :hover {
-  background-color: #3B5A6F;
+.container .contant .ant-btn-primary:hover {
+  background-color: #186AA5;
   color: white;
 }

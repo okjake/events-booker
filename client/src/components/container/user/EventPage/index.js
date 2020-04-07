@@ -10,40 +10,32 @@ import './style.css'
 class EventPage extends Component {
 
   render() {
-    console.log(this.props);
-
-    // const { image, ...otherEventProps } = this.props.location.state[0];
-    const {location: {state:[{image, ...otherEventProps}]}} = this.props
-
-    // const title = this.props.location.state[0].title;
+    const { location: { state: [{ image, ...otherEventProps }] } } = this.props
     const { location: { state: [{ title }] } } = this.props;
-
-
-    // const goBack = this.props.history.goBack;
     const { history: { goBack } } = this.props;
+    const { match: { params: { eventCode, eventProg } } } = this.props;
 
-    // const eventCode = this.props.match.params.eventCode;
-    const { match: { params: { eventCode } } } = this.props;
-    console.log(eventCode)
-    
     return (
       <div className='container'>
         <img src={image} alt='event page background' className='image' />
         <div className='contant'>
           <EventPageContent {...otherEventProps} />
-          <PopupBtnEventcomp
-            className='btns'
-            title={`Register at ${title} event`}
-            eventCode={eventCode}
-            purpose='BOOK NOW' />
+          <div className='btns'>
+            <PopupBtnEventcomp
+              title={`Register at ${title} event`}
+              eventCode={eventCode}
+              eventProg={eventProg}
+              purpose='BOOK NOW' />
 
-          <PopupBtnEventcomp
-            className='btns'
-            title={`Cancel Registeration at ${title} event`}
-            eventCode={eventCode}
-            purpose='CANCEL REGISTERATION' />
+            <PopupBtnEventcomp
+              title={`Cancel Registeration at ${title} event`}
+              eventCode={eventCode}
+              eventProg={eventProg}
+              purpose='CANCEL REGISTERATION' />
 
-          <Button type="primary" shape="round" autoFocus onClick={goBack}> Back </Button>
+            <Button type="primary" shape="round" autoFocus onClick={goBack}> BACK </Button>
+
+          </div>
 
         </div>
       </div>

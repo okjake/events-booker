@@ -1,4 +1,4 @@
-.popup-modal .ant-modal-header {
+.popup-modal .ant-modal-root .ant-modal .ant-modal-content {
   border-bottom: none;
   background-color: red;
 }
