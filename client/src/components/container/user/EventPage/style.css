@@ -32,3 +32,17 @@
   background-color: #186AA5;
   color: white;
 }
+
+@media  (max-width: 580px) {
+  .image{
+    display: none;
+  }
+
+  .btns{
+    flex-direction: column;
+  }
+
+  .container .contant .ant-btn-primary{
+    width: 220px;
+  }
+}

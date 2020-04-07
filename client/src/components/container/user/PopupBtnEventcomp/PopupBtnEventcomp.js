@@ -96,7 +96,7 @@ class PopupBtnEventcomp extends Component {
             placeholder="Enter Your Mobile Number"
             value={mobile}
             onChange={this.handleChange}
-            style={{ width: '380px' }}
+            style={{ width: '80%' }}
           />
 
           <Button
@@ -109,7 +109,7 @@ class PopupBtnEventcomp extends Component {
           {
             error ?
               <Alert
-                style={{ width: '380px' }}
+                style={{ width: '80%' }}
                 message={message}
                 type="error"
                 showIcon />
