@@ -4,7 +4,7 @@
 }
 
 
-.footer-container {
+.footer {
     box-sizing: border-box;
     width: 100%;
     text-align: left;
@@ -16,7 +16,7 @@
 	display: flex;
 }
 
-.copyright-text{
+.footer_copyright{
 	color: #ffffff;
 	margin: auto
 ;}
