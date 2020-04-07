@@ -52,34 +52,37 @@ class RegisterUser extends Component {
             <Form onFinish={this.onFinish} >
 
               <Form.Item name="firstName" 
+              className="messageColor"
               rules={[{ required: true, message: 'Please input your firstName!'}]}>
                 <Input name="firstName"  placeholder="fisrt name" />
               </Form.Item>
 
               <Form.Item name="lastName" 
+              className="messageColor"
               rules={[{ required: true, message: 'Please input your lastName!'}]}>
                 <Input name="lastName" placeholder="last name" />
               </Form.Item>
 
-              <Form.Item name="email" 
+              <Form.Item name="email"
+              className="messageColor" 
               rules={[{ required: true, message: 'Please input your email!'}]}>
                 <Input name="email" placeholder="email" />
               </Form.Item>
 
               <Form.Item name="location" 
+              className="messageColor"
               rules={[{ required: true, message: 'Please input your location!'}]}>
                 <Input name="location" placeholder="location" />
               </Form.Item>
 
               <Button htmlType="submit" 
-              type="primary" 
-              >{isLoade&& (<Spin indicator={antIcon} />)}Submit </Button>
+              type="primary"> {isLoade&& (<Spin indicator={antIcon}/>)}Submit </Button>
 
-              <Button type="danger" 
-              onClick={this.goBack}> Exit </Button>
+              <Button type="danger" onClick={this.goBack}> Exit </Button>
 
               {emailMsg&& <Alert message={emailMsg} type="error" />}
               {serverError&& <Alert message={serverError} type="error" />}
+
             </Form>
             
           </div>
