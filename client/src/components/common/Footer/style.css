@@ -1,0 +1,22 @@
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.footer {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    padding: 1rem;
+    background-color: #3b5a6f;
+    text-align: center;
+	display: flex;
+}
+
+.footer_copyright{
+	color: #ffffff;
+	margin: auto
+;}
