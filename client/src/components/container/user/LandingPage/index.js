@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Button, Result, Spin } from "antd";
+import { Button, Result, Spin, Empty } from "antd";
 import "antd/dist/antd.css";
 
 import Card from "../../../common/Card";
@@ -26,8 +26,8 @@ class Landing extends React.Component {
     error: null,
     isLoaded: false,
     title: "Upcoming",
-    data: [],
-    events: [],
+    allEvents: [],
+    filteredEvents: [],
   };
 
   componentDidMount() {
@@ -39,8 +39,8 @@ class Landing extends React.Component {
         );
         this.setState({
           isLoaded: true,
-          data: response,
-          events: data,
+          allEvents: response,
+          filteredEvents: response,
         });
       })
       .catch((error) => {
@@ -52,15 +52,15 @@ class Landing extends React.Component {
   }
 
   filterByCategory = (cat) => {
-    const { isLoaded, error, data } = this.state;
-    if (!isLoaded || error) return;
-    if (cat === "Upcoming") return this.setState({ events: data, title: cat });
-    const events = data.filter((event) => event.category === cat);
-    this.setState({ events, title: cat });
+    const allEvents = JSON.parse(JSON.stringify(this.state.allEvents))
+    if (cat === "Upcoming")
+      return this.setState({ filteredEvents: allEvents, title: cat });
+    const events = allEvents.filter((event) => event.category === cat);
+    this.setState({ filteredEvents: events, title: cat });
   };
 
   render() {
-    const { error, isLoaded, title, events } = this.state;
+    const { error, isLoaded, title, filteredEvents } = this.state;
     const { filterByCategory } = this;
     const categories = [
       "Code Academy",
@@ -93,18 +93,26 @@ class Landing extends React.Component {
             />
           ) : !isLoaded ? (
             <Spin size="large" />
+          ) : !filteredEvents.length && title === "Upcoming" ? (
+            <Empty
+              description={<span>no upcoming events at the meantime</span>}
+            />
+          ) : !filteredEvents.length ? (
+            <Empty
+              description={<span>no events for {title} at the meantime</span>}
+            />
           ) : (
             <section className="main">
               <h2 className="main__title">{title}</h2>
               <ul className="main__grid">
-                {events.map((event) => (
+                {filteredEvents.map((event) => (
                   <Card
                     key={event.id}
                     className="grid__item"
                     info={event}
                     element={
                       <EventBtn
-                        pathname={`/${event.category}/${event.event_code}`}
+                        pathname={`/events/${event.category}/${event.event_code}`}
                         event={event}
                       />
                     }
