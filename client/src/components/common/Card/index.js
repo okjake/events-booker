@@ -1,9 +1,11 @@
 import React from "react";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 
-const Card = ({ info: { image, title, category, date }, element }) => {
+const Card = ({ info }) => {
+  const { image, title, category, date, event_code } = info;
   return (
     <li className="card">
       <img className="card__image" src={image} alt={title} />
@@ -18,7 +20,15 @@ const Card = ({ info: { image, title, category, date }, element }) => {
           <b>Date :</b> {moment(date).format("LLLL")}
         </p>
       </div>
-      {element}
+      <Link
+        to={{
+          pathname: `/events/${category}/${event_code}`,
+          state: { info },
+        }}
+        className="ant-btn ant-btn-round ant-btn-override"
+      >
+        Take A Part
+      </Link>
     </li>
   );
 };

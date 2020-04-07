@@ -28,15 +28,6 @@
   grid-gap: 1.5rem;
 }
 
-.ant-btn-override {
-  margin: 0 1rem;
-}
-
-.ant-btn-override:active {
-  background: #186aa5;
-  color: #ebebeb;
-}
-
 @media only screen and (min-width: 1024px) {
   .main__grid {
     margin-left: 5rem;

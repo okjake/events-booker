@@ -4,22 +4,7 @@ import { Button, Result, Spin, Empty } from "antd";
 import "antd/dist/antd.css";
 
 import Card from "../../../common/Card";
-import { Link } from "react-router-dom";
 import "./style.css";
-
-const EventBtn = ({ pathname, event }) => {
-  return (
-    <Link
-      to={{
-        pathname,
-        state: { event },
-      }}
-      className="ant-btn ant-btn-round ant-btn-override"
-    >
-      Take A Part
-    </Link>
-  );
-};
 
 class Landing extends React.Component {
   state = {
@@ -52,11 +37,15 @@ class Landing extends React.Component {
   }
 
   filterByCategory = (cat) => {
-    const allEvents = JSON.parse(JSON.stringify(this.state.allEvents))
+    const { allEvents } = this.state;
     if (cat === "Upcoming")
-      return this.setState({ filteredEvents: allEvents, title: cat });
-    const events = allEvents.filter((event) => event.category === cat);
-    this.setState({ filteredEvents: events, title: cat });
+      this.setState(({ allEvents }) => {
+        return { filteredEvents: allEvents };
+      });
+    else {
+      const events = allEvents.filter((event) => event.category === cat);
+      this.setState({ filteredEvents: events, title: cat });
+    }
   };
 
   render() {
@@ -93,30 +82,22 @@ class Landing extends React.Component {
             />
           ) : !isLoaded ? (
             <Spin size="large" />
-          ) : !filteredEvents.length && title === "Upcoming" ? (
-            <Empty
-              description={<span>no upcoming events at the meantime</span>}
-            />
           ) : !filteredEvents.length ? (
-            <Empty
-              description={<span>no events for {title} at the meantime</span>}
-            />
+            title === "Upcoming" ? (
+              <Empty
+                description={<span>no upcoming events at the meantime</span>}
+              />
+            ) : (
+              <Empty
+                description={<span>no events for {title} at the meantime</span>}
+              />
+            )
           ) : (
             <section className="main">
               <h2 className="main__title">{title}</h2>
               <ul className="main__grid">
                 {filteredEvents.map((event) => (
-                  <Card
-                    key={event.id}
-                    className="grid__item"
-                    info={event}
-                    element={
-                      <EventBtn
-                        pathname={`/events/${event.category}/${event.event_code}`}
-                        event={event}
-                      />
-                    }
-                  />
+                  <Card key={event.id} className="grid__item" info={event} />
                 ))}
               </ul>
             </section>

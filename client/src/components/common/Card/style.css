@@ -30,3 +30,12 @@
   text-align: left;
   overflow-wrap: break-word;
 }
+
+.ant-btn-override {
+  margin: 0 1rem;
+}
+
+.ant-btn-override:active {
+  background: #186aa5;
+  color: #ebebeb;
+}
