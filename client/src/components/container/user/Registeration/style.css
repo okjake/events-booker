@@ -77,13 +77,6 @@
 
     
     }
-    .s1 .ant-message{
-        position: relative;
-        top: 50px;
-        color: green;
-        background-color: white;
-        border: 1px solid green;
-    }
     .s1 .messageColor{
         color: rgb(196, 4, 4);
     }
