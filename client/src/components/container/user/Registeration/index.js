@@ -1,59 +1,46 @@
 import React ,{Component}from 'react';
 import axios from 'axios';
-import { Button ,Form,Input,Alert, } from 'antd';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-import { Spin } from 'antd';
+import { Button ,Form,Input,Alert,Spin ,message} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 import './style.css'
 
 class RegisterUser extends Component {
   state = {
-    success : false,
-    redirect: false,
-    successMsg:'',
     emailMsg:'',
     isLoade:false,
     serverError:''
   }
-     
     onFinish=({ firstName, lastName, location, email })=>{
       this.setState({isLoade:true})
       const {
-        match: { params : {mobileNo, eventCode} },
+        match: { params : {mobileNo, eventCode} },history:{push}
       } = this.props;
       axios.post(`/api/v1/register`,
-      {firstName,lastName,location,email,mobile:mobileNo,eventCode }).then(({data}) => {
-        console.log(data);
-        if(data.status===200){
-        this.setState({successMsg:data.message ,success : true,})
-      }
-        else{
-          this.setState({emailMsg:data.message})
+      {firstName,lastName,location,email,mobile:mobileNo,eventCode }).then(res => {
+        const {data}=res
+        if(res.status===200 && data.message){
+          message.success(data.message);
+          push('/landing')
         }
-        this.setState({ redirect: true,isLoade:false})
+        else{
+          this.setState({emailMsg:data.msg})
+        }
+        this.setState({isLoade:false})
       }).catch(err=>{
-        this.setState({emailMsg:"email exists !!",isLoade:false})
+        this.setState({serverError:"Internal server error !!",isLoade:false})
       })
     }
-
-    setRedirect = () => {
-      this.setState({
-        redirect: true
-      })
-    }
-    renderRedirect = () => {
-      if (this.state.redirect) {
-        return <Redirect to='/events' />
-      }
-    }
-
-  render() {
+    goBack=()=>{
+      message.warning('you exit registration without register');
       const {
-        match: { params : {eventCode} },} = this.props;
-        const { redirect , success,emailMsg ,successMsg ,isLoade} = this.state;
+      history:{goBack}} = this.props;
+      goBack()
 
+    }
+  render() {
+        const {emailMsg,serverError  ,isLoade} = this.state;
         const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
       return (
@@ -78,32 +65,27 @@ class RegisterUser extends Component {
               rules={[{ required: true, message: 'Please input your email!'}]}>
                 <Input name="email" placeholder="email" />
               </Form.Item>
-              {emailMsg&& <Alert message={emailMsg} type="error" />}
-
 
               <Form.Item name="location" 
               rules={[{ required: true, message: 'Please input your location!'}]}>
                 <Input name="location" placeholder="location" />
               </Form.Item>
-              {success && (<Alert message={successMsg} type="success" showIcon />)}
-
-              {successMsg  && (<Redirect to={{pathname: `/event/${eventCode}`
-              ,state: { success,successMsg }, }} />)}
 
               <Button htmlType="submit" 
               type="primary" 
-              >{isLoade&& (<Spin indicator={antIcon} />)}
-               Submit </Button>
-              
-              {redirect && (<Redirect to={{pathname: `/event/${eventCode}`
-              ,state: { success,successMsg }, }} />)}
+              >{isLoade&& (<Spin indicator={antIcon} />)}Submit </Button>
 
               <Button type="danger" 
-              onClick={() => this.setState({ redirect: true })}> Exit </Button>
+              onClick={this.goBack}> Exit </Button>
+
+              {emailMsg&& <Alert message={emailMsg} type="error" />}
+              {serverError&& <Alert message={serverError} type="error" />}
             </Form>
+            
           </div>
           <div className="s2">
             <img alt="img" src="https://www.thebalancesmb.com/thmb/E6hp3YFsPw8mCK_39bw94CxE4Vk=/3456x3456/smart/filters:no_upscale()/asian-businesswoman-leading-meeting-at-boardroom-table-504987926-5ad21419c5542e0036d7003e.jpg" />
+            
           </div>
         </div>
         

@@ -29,6 +29,7 @@
         font-size: 1.7rem;
         color: rgb(8, 67, 109);
         margin-bottom: 50px;
+        font-weight: normal;
     
     }
     .blue{
@@ -69,16 +70,20 @@
         display: block;
     
     }
-     .ant-alert-error{
+    .s1 .ant-alert-error{
         width: 200px;
         margin:20px auto;
         color: red;
 
     }
-   .ant-alert-with-description{
-    color: rgb(17, 129, 50);
-    background-color:rgb(216, 245, 226);
+    .s1 .ant-message{
+        position: relative;
+        top: 50px;
+        color: green;
+        background-color: white;
+        border: 1px solid green;
     }
+
     
 @media  (max-width: 1200px) {
 
@@ -100,14 +105,14 @@
         width:100px;
     }
     .s1 h1{
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
     .s1 h2{
         width: 80%;
         text-align: center;
         margin-top: -10px;
         line-height: 25px;
-        font-size: 1rem;
+        font-size: .9rem;
         color: rgb(8, 67, 109);
         margin-bottom: 10px;
     
@@ -125,7 +130,7 @@
         width: 270px;
         margin-top: 10px;
     }
-    .ant-alert-error{
+    .s1 .ant-alert-error{
         width: 220px;
 
     }
