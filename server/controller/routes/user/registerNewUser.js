@@ -35,7 +35,7 @@ const newUserExist = (req, res, next) => {
     const { status } = err;
     switch (status) {
       case 400:
-        res.status(400).json(err);
+        res.json(err);
         break;
       default: next(err);
     }
