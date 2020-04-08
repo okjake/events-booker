@@ -26,8 +26,8 @@ class PopupBtnEventcomp extends Component {
     });
   };
 
-  handleChange = e => {
-    this.setState({ mobile: e.target.value, error: false });
+  handleChange = ({target:{value}}) => {
+    this.setState({ mobile: value, error: false });
   };
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import EventPage from '../container/user/EventPage/index'
 
+import "antd/dist/antd.css";
 import './App.css';
 
 const App = () => {

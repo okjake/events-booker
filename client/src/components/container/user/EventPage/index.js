@@ -4,7 +4,6 @@ import { Button } from "antd";
 import EventPageContent from '../EventPageContent/EventPageContent'
 import PopupBtnEventcomp from '../PopupBtnEventcomp/PopupBtnEventcomp'
 
-import "antd/dist/antd.css";
 import './style.css'
 
 class EventPage extends Component {
