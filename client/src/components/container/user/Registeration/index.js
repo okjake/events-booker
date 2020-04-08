@@ -55,14 +55,14 @@ class RegisterUser extends Component {
               <Form.Item name="firstName" 
               className="messageColor"
               rules={[{ required: true, message: 'Please input your firstName!'}]}>
-                <Input name="firstName"  placeholder="fisrt name"     
+                <Input  placeholder="fisrt name"     
                 prefix={<UserOutlined className="site-form-item-icon" />}/>
               </Form.Item>
 
               <Form.Item name="lastName" 
               className="messageColor"
               rules={[{ required: true, message: 'Please input your lastName!'}]}>
-                <Input name="lastName" placeholder="last name"
+                <Input placeholder="last name"
                 prefix={<UserOutlined className="site-form-item-icon" />
               } />
               </Form.Item>
@@ -70,14 +70,14 @@ class RegisterUser extends Component {
               <Form.Item name="email"
               className="messageColor" 
               rules={[{ required: true, message: 'Please input your email!'}]}>
-                <Input name="email" placeholder="email" 
+                <Input placeholder="email" 
                 prefix={<MailOutlined />}/>
               </Form.Item>
 
               <Form.Item name="location" 
               className="messageColor"
               rules={[{ required: true, message: 'Please input your location!'}]}>
-                <Input  name="location" placeholder="location"
+                <Input placeholder="location"
                 prefix={<HomeOutlined />} />
               </Form.Item>
 
