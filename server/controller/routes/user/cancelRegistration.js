@@ -4,7 +4,7 @@ const cancelRegistration = (req, res, next) => {
   const data = req.body;
   cancelPopUp(data).then(({ rows }) => {
     if (rows.length) {
-      res.json('your registration is cancelled');
+      res.json({ msg: 'your registration has been cancelled' });
     } else {
       const error = new Error();
       error.msg = 'mobile dosent register on this event';

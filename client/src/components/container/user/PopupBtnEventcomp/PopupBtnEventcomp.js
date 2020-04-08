@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Alert, Modal, Button, Input, message } from "antd";
+import { Alert, Modal, Button, Input, message, Spin } from "antd";
+import { LoadingOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 import './PopupBtnEventcomp.css'
@@ -10,9 +11,7 @@ class PopupBtnEventcomp extends Component {
     message: '',
     visible: false,
     error: false,
-    type: this.props.type,
-    eventCode: this.props.eventCode,
-    eventProg: this.props.eventProg,
+    isLoade: false,
   };
 
   showModal = () => {
@@ -34,10 +33,14 @@ class PopupBtnEventcomp extends Component {
 
 
   handleOk = e => {
-    const { mobile, eventCode, eventProg, type } = this.state;
+    this.setState({ isLoade: true })
+    const { mobile } = this.state;
+    const { eventCode, eventProg, type } = this.props
     if (type === 'booking') {
       axios.post('/api/v1/checkUser', { mobile, eventCode })
         .then(({ data }) => {
+          console.log(data);
+
           if (data.status === 301) {
             this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
           } else if (data.status === 400) {
@@ -51,8 +54,9 @@ class PopupBtnEventcomp extends Component {
               visible: false,
               mobile: '',
             });
-            message.success('Registration Successfully Completed', 10);
+            message.success(data.msg, 10);
           }
+          this.setState({ isLoade: false })
         })
         .catch(() => {
           this.setState({ Error: "Internal server error !!" })
@@ -60,6 +64,7 @@ class PopupBtnEventcomp extends Component {
     } else if (type === 'cancel') {
       axios.post('/api/v1/cancelUser', { mobile, eventCode })
         .then(({ data }) => {
+          console.log(data);
           if (data.status === 400) {
             this.setState({
               error: true,
@@ -71,8 +76,9 @@ class PopupBtnEventcomp extends Component {
               visible: false,
               mobile: '',
             });
-            message.success('You registeration have been canceld', 10);
+            message.error(data.msg, 10);
           }
+          this.setState({ isLoade: false })
         })
         .catch(() => {
           this.setState({ Error: "Internal server error !!" })
@@ -83,7 +89,7 @@ class PopupBtnEventcomp extends Component {
   };
 
   render() {
-    const { visible, mobile, message, error } = this.state
+    const { visible, mobile, message, error, isLoade } = this.state
     return (
       <div className='popup-modal'>
         <Button type="primary" onClick={this.showModal} shape="round" autoFocus>
@@ -100,9 +106,9 @@ class PopupBtnEventcomp extends Component {
             placeholder="Enter Your Mobile Number"
             value={mobile}
             onChange={this.handleChange}
-            style={{ width: '80%' }}
+            style={{ width: '75%' }}
           />
-
+          {isLoade && (<Spin />)}
           <Button
             style={{ display: 'inline-block' }}
             key="submit"
@@ -113,7 +119,7 @@ class PopupBtnEventcomp extends Component {
           {
             error ?
               <Alert
-                style={{ width: '80%' }}
+                style={{ width: '75%' }}
                 message={message}
                 type="error"
                 showIcon />
