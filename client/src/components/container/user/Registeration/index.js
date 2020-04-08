@@ -23,7 +23,7 @@ class RegisterUser extends Component {
         const {data}=res
         if(res.status===200 && data.message){
           message.success(data.message);
-          push('/landing')
+          push('/')
         }
         else{
           this.setState({emailMsg:data.msg})
