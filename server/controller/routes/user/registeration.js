@@ -26,13 +26,14 @@ const checkUser = (req, res, next) => {
     const err = new Error();
     err.msg = 'invalid inputs';
     err.status = 400;
-    return next(err);
+    res.json(err);
+    throw err;
   }
 
   return checkUserExist(req.body.mobile)
     .then(({ rows }) => {
       if (rows.length === 0) {
-        res.json({ msg: "user doesn't exist, please register" });
+        res.json({ msg: "user doesn't exist, please register", status: 301 });
       } else {
         const [user] = rows;
         req.user = user;
@@ -65,10 +66,16 @@ const checkAlreadBooked = (req, res, next) => {
         const err = new Error();
         err.status = 400;
         err.msg = 'you have already booked this event';
-        next(err);
+        throw err;
       }
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.status === 400) {
+        res.json(err);
+      } else {
+        next(err);
+      }
+    });
 };
 
 const generateRandom = (prevCodes) => {
@@ -150,7 +157,7 @@ const sendInvitation = (req, res, next) => {
       .status(201)
       .json({
         msg:
-            'Event has been booked successfully, you will receive an email with the details and a sms with the code',
+          'Event has been booked successfully, you will receive an email with the details and a sms with the code',
       }))
     .catch(next);
 };
