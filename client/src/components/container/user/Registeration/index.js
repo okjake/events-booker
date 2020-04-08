@@ -2,11 +2,12 @@ import React ,{Component}from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Button ,Form,Input,Alert,Spin ,message} from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined,LoadingOutlined } from '@ant-design/icons';
+import {HomeOutlined,MailFilled} from '@ant-design/icons';
 
-import { LoadingOutlined } from '@ant-design/icons';
 
 import './style.css'
+import MailMessage from 'nodemailer/lib/mailer/mail-message';
 
 class RegisterUser extends Component {
   state = {
@@ -71,13 +72,15 @@ class RegisterUser extends Component {
               <Form.Item name="email"
               className="messageColor" 
               rules={[{ required: true, message: 'Please input your email!'}]}>
-                <Input name="email" placeholder="email" />
+                <Input name="email" placeholder="email" 
+                prefix={<MailFilled />}/>
               </Form.Item>
 
               <Form.Item name="location" 
               className="messageColor"
               rules={[{ required: true, message: 'Please input your location!'}]}>
-                <Input name="location" placeholder="location" />
+                <Input  name="location" placeholder="location"
+                prefix={<HomeOutlined />} />
               </Form.Item>
 
               <Button htmlType="submit" 
