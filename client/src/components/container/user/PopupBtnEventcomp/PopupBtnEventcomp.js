@@ -11,7 +11,7 @@ class PopupBtnEventcomp extends Component {
     visible: false,
     error: false,
     isLoade: false,
-    Error:null,
+    errorMessage:null,
   };
 
   showModal = () => {
@@ -59,7 +59,7 @@ class PopupBtnEventcomp extends Component {
           this.setState({ isLoade: false })
         })
         .catch(() => {
-          this.setState({ Error: "Internal server error !!" })
+          this.setState({ errorMessage: "Internal server error !!" })
         })
     } else if (type === 'cancel') {
       axios.post('/api/v1/cancelUser', { mobile, eventCode })
@@ -81,7 +81,7 @@ class PopupBtnEventcomp extends Component {
           this.setState({ isLoade: false })
         })
         .catch(() => {
-          this.setState({ Error: "Internal server error !!" })
+          this.setState({ errorMessage: "Internal server error !!" })
         })
 
     }
