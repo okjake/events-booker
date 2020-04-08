@@ -11,6 +11,7 @@ class PopupBtnEventcomp extends Component {
     visible: false,
     error: false,
     isLoade: false,
+    Error:null,
   };
 
   showModal = () => {
