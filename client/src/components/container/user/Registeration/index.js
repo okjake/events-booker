@@ -2,6 +2,8 @@ import React ,{Component}from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Button ,Form,Input,Alert,Spin ,message} from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+
 import { LoadingOutlined } from '@ant-design/icons';
 
 import './style.css'
@@ -54,13 +56,16 @@ class RegisterUser extends Component {
               <Form.Item name="firstName" 
               className="messageColor"
               rules={[{ required: true, message: 'Please input your firstName!'}]}>
-                <Input name="firstName"  placeholder="fisrt name" />
+                <Input name="firstName"  placeholder="fisrt name"     
+                prefix={<UserOutlined className="site-form-item-icon" />}/>
               </Form.Item>
 
               <Form.Item name="lastName" 
               className="messageColor"
               rules={[{ required: true, message: 'Please input your lastName!'}]}>
-                <Input name="lastName" placeholder="last name" />
+                <Input name="lastName" placeholder="last name"
+                prefix={<UserOutlined className="site-form-item-icon" />
+              } />
               </Form.Item>
 
               <Form.Item name="email"

@@ -67,6 +67,18 @@
     .s1 .ant-alert-error{
         margin-top: 10px;
     }
+    .s1 .ant-input-affix-wrapper {
+        width:370px ;
+        border-radius: 40px;
+        padding: 17px;
+        box-sizing: border-box;
+    }
+    .s1 .anticon svg{
+        margin:5px;
+    }
+    .s1 input.ant-input{
+        margin-top: -2px;
+    }
 @media  (max-width: 1200px) {
 
     .s2{
@@ -111,6 +123,12 @@
     .s1 .ant-btn-danger{
         width: 250px;
         margin-top: 10px;
+    }
+    .s1 .ant-input-affix-wrapper {
+        width:250px ;
+        border-radius: 40px;
+        padding: 12px;
+        box-sizing: border-box;
     }
 }
 
