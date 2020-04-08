@@ -26,6 +26,7 @@ const {
   logout,
   viewEventsOnDate,
   deleteEvent,
+  getAdmin,
 } = require('./routes/admin');
 
 
@@ -69,4 +70,5 @@ module.exports = {
   getHashedPinCode,
   createPortalToken,
   portalLogout,
+  getAdmin,
 };
