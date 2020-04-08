@@ -9,16 +9,16 @@
 
 .card {
   display: grid;
-  grid-template-columns: 16rem;
-  grid-template-rows: 12rem 1fr 3rem;
+  grid-template-columns: minmax(12rem, 1fr);
+  grid-template-rows: minmax(12rem, 1fr) 9rem 3.5rem;
   border-radius: 1rem;
   color: rgb(24, 23, 23);
   box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2), 0 0 1rem rgba(0, 0, 0, 0.2);
 }
 
 .card__image {
-  width: 16rem;
-  height: 12rem;
+  width: 100%;
+  height: 100%;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }
@@ -33,6 +33,8 @@
 
 .ant-btn-override {
   margin: 0 1rem;
+  font-size: medium;
+  font-weight: bold;
 }
 
 .ant-btn-override:active {
