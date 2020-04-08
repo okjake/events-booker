@@ -1,3 +1,6 @@
+.sub-header{
+  color: #3b5a6f;
+}
 .catagories {
   display: flex;
   flex-wrap: wrap;

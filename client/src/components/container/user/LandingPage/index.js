@@ -60,20 +60,23 @@ class Landing extends React.Component {
     ];
     return (
       <div>
-        <Header />
-        <div className="catagories">
-          {categories.map((cat) => (
-            <Button
-              shape="round"
-              key={cat}
-              autoFocus
-              className="catagories__btn"
-              onClick={() => filterByCategory(cat)}
-            >
-              {cat}
-            </Button>
-          ))}
-        </div>
+        <header>
+          <Header />
+          <h4 className="sub-header">See the available events at GSG and back your favorite</h4>
+          <div className="catagories">
+            {categories.map((cat) => (
+              <Button
+                shape="round"
+                key={cat}
+                autoFocus
+                className="catagories__btn"
+                onClick={() => filterByCategory(cat)}
+              >
+                {cat}
+              </Button>
+            ))}
+          </div>
+        </header>
         <div>
           {error ? (
             <Result
