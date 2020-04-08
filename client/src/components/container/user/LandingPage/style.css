@@ -9,6 +9,8 @@
   margin: 5px;
 }
 
+
+
 .catagories__btn:active {
   background: #fb6c04;
   color: #ebebeb;
@@ -17,6 +19,7 @@
 .main__title {
   text-align: left;
   padding-left: 10%;
+  padding-bottom: 2%;
 }
 
 .main__grid {
@@ -28,8 +31,8 @@
   grid-gap: 1.5rem;
 }
 
-@media only screen and (min-width: 1024px) {
+/* @media only screen and (min-width: 1024px) {
   .main__grid {
     margin-left: 5rem;
   }
-}
+} */
