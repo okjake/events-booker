@@ -9,8 +9,8 @@ import './style.css'
 class EventPage extends Component {
 
   render() {
-    const { location: { state: [{ image, ...otherEventProps }] } } = this.props
-    const { location: { state: [{ title }] } } = this.props;
+    const { location: { state: {info : { image, ...otherEventProps }} } } = this.props;
+    const { location: { state: {info:{title}} } } = this.props;
     const { history: { goBack, push } } = this.props;
     const { match: { params: { eventCode, eventProg } } } = this.props;
 
