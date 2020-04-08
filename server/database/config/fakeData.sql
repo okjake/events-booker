@@ -62,13 +62,40 @@ VALUES
         90
     ),
     (
-        'How to Start freelance',
-        502,
-        'Freelance',
+        'NodeJs',
+        304,
+        'Code Academy',
+        'lorem ipsum',
+        'https://i.imgur.com/DWiWJE7.jpg',
+        '2022-05-09 15:00:00',
+        100
+    ),
+    (
+        'Database whatever',
+        305,
+        'Code Academy',
         'lorem ipsum',
         'https://i.imgur.com/VgTVTNA.jpg',
+        '2020-05-09 15:00:00',
+        90
+    ),
+    (
+        'How to Start freelance',
+        306,
+        'Freelance',
+        'lorem ipsum',
+        'https://i.imgur.com/DWiWJE7.jpg',
         '2020-06-12 14:30:00',
         180
+    ),
+     (
+        'How to work as freelancer',
+        307,
+        'Freelance',
+        'lorem ipsum',
+        'https://i.imgur.com/DWiWJE7.jpg',
+        '2020-06-12 14:30:00',
+        20
     );
 
 INSERT INTO
