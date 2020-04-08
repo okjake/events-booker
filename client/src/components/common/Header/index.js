@@ -4,18 +4,23 @@ import "./style.css";
 const Header = () => {
   return (
     <div className="header">
-      <div>
+      <div className="header_logo">
         <img
-          className="header_logo"
-          src="https://2.bp.blogspot.com/-Prc3AXiGhIk/W6DKt3VuGVI/AAAAAAAAeGI/A-aOvZb3isIwSY5zk-JIWahjQUVsBgx5gCLcBGAs/s320/1-logo-GSG.png"
+          className="header_logo-img"
+          src="https://svgshare.com/i/Jru.svg"
           alt="GSG Logo"
         />
+        <div className="header_logo-title">
+          Events <span className="header_logo-subtitle">Booker</span>
+        </div>
       </div>
-
       <div>
         <h3 className="header_title">
-          Events <span className="header_subTitle">Booker</span>
+          Welcome to <span className="header_subTitle">GSG event app</span>
         </h3>
+        <h4 className="sub-header">
+          See the available events at GSG and back your favorite
+        </h4>
       </div>
     </div>
   );

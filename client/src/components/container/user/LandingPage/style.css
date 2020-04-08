@@ -1,6 +1,14 @@
-.sub-header{
-  color: #3b5a6f;
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
 }
+
+.wrapper{
+  margin: 0 1rem;
+}
+
 .catagories {
   display: flex;
   flex-wrap: wrap;
@@ -22,9 +30,10 @@
 .main__grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
   grid-template-rows: auto;
   justify-content: center;
   grid-gap: 1.5rem;
   padding: 1rem;
+  margin: 0;
 }

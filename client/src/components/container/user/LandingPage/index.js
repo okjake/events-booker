@@ -59,10 +59,9 @@ class Landing extends React.Component {
       "Upcoming",
     ];
     return (
-      <div>
+      <div className="wrapper">
         <header>
           <Header />
-          <h4 className="sub-header">See the available events at GSG and back your favorite</h4>
           <div className="catagories">
             {categories.map((cat) => (
               <Button
