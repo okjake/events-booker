@@ -1,11 +1,11 @@
 import React from 'react'
 import moment from 'moment'
-import { FaRegClock } from "react-icons/fa";
-import { FaRegCalendarAlt } from "react-icons/fa";
+
+import { FaRegClock, FaRegCalendarAlt } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 
-
 import './EventPageContent.css'
+
 const EventPageContent = ({ title, details, date, count }) => {
   return (
     <div className='content-container'>

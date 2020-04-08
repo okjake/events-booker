@@ -6,22 +6,22 @@ import './PopupBtnEventcomp.css'
 
 class PopupBtnEventcomp extends Component {
   state = {
-    visible: false,
     mobile: '',
+    message: '',
+    visible: false,
+    error: false,
+    type: this.props.type,
     eventCode: this.props.eventCode,
     eventProg: this.props.eventProg,
-    message: '',
-    error: false,
-    type: this.props.type
   };
-  
+
   showModal = () => {
     this.setState({
       visible: true,
     });
   };
 
-  handleCancel = e => {
+  handleCancel = () => {
     this.setState({
       visible: false,
       error: false,
@@ -32,47 +32,51 @@ class PopupBtnEventcomp extends Component {
     this.setState({ mobile: e.target.value, error: false });
   };
 
-  
+
   handleOk = e => {
     const { mobile, eventCode, eventProg, type } = this.state;
-    if(type === 'booking'){
+    if (type === 'booking') {
       axios.post('/api/v1/checkUser', { mobile, eventCode })
-      .then(({ data }) => {
-        if (data.status === 301) {
-          this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
-        } else if (data.status === 400) {
-          this.setState({
-            error: true,
-            message: data.msg,
-            mobile: '',
-          })
-        } else {
-          this.setState({
-            visible: false,
-            mobile: '',
-          });
-          message.success('Registration Successfully Completed', 10);
-        }
-      })
-      .catch()
-    }else if(type === 'cancel'){
+        .then(({ data }) => {
+          if (data.status === 301) {
+            this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
+          } else if (data.status === 400) {
+            this.setState({
+              error: true,
+              message: data.msg,
+              mobile: '',
+            })
+          } else {
+            this.setState({
+              visible: false,
+              mobile: '',
+            });
+            message.success('Registration Successfully Completed', 10);
+          }
+        })
+        .catch(() => {
+          this.setState({ Error: "Internal server error !!" })
+        })
+    } else if (type === 'cancel') {
       axios.post('/api/v1/cancelUser', { mobile, eventCode })
-      .then(({ data }) => {
-        if (data.status === 400) {
-          this.setState({
-            error: true,
-            message: data.msg,
-            mobile: '',
-          })
-        } else {
-          this.setState({
-            visible: false,
-            mobile: '',
-          });
-          message.success('You registeration have been canceld', 10);
-        }
-      })
-      .catch()
+        .then(({ data }) => {
+          if (data.status === 400) {
+            this.setState({
+              error: true,
+              message: data.msg,
+              mobile: '',
+            })
+          } else {
+            this.setState({
+              visible: false,
+              mobile: '',
+            });
+            message.success('You registeration have been canceld', 10);
+          }
+        })
+        .catch(() => {
+          this.setState({ Error: "Internal server error !!" })
+        })
 
     }
 
