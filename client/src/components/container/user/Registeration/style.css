@@ -42,7 +42,7 @@
     }
     .s1 .ant-btn-primary{
         background-color: #236abb;
-        margin: 30px 5px 0px 0px;
+        margin: 10px 5px 0px 0px;
         border-radius: 40px;
         width: 180px;
         height: 50px;
@@ -78,6 +78,7 @@
     }
     .s1 input.ant-input{
         margin-top: -2px;
+        text-align: left;
     }
 @media  (max-width: 1200px) {
 
@@ -116,7 +117,7 @@
         padding: 15px;
     }
     .s1 .ant-btn-primary{
-        margin:20px 0px 0px 0px;
+        margin:10px 0px 0px 0px;
         width: 250px;
         display: block;
     }

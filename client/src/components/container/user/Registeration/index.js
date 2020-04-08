@@ -16,10 +16,10 @@ class RegisterUser extends Component {
     onFinish=({ firstName, lastName, location, email })=>{
       this.setState({isLoade:true})
       const {
-        match: { params : {mobileNo, eventCode} },history:{push}
+        match: { params : {mobile, eventCode} },history:{push}
       } = this.props;
       axios.post(`/api/v1/register`,
-      {firstName,lastName,location,email,mobile:mobileNo,eventCode }).then(res => {
+      {firstName,lastName,location,email,mobile,eventCode }).then(res => {
         const {data}=res
         if(res.status===200 && data.message){
           message.success(data.message);
@@ -34,7 +34,7 @@ class RegisterUser extends Component {
       })
     }
     goBack=()=>{
-      message.warning('you exit registration without register');
+      message.warning('you has not registered yet !!');
       const {
       history:{goBack}} = this.props;
       goBack()
