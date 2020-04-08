@@ -34,6 +34,9 @@
 }
 
 @media  (max-width: 580px) {
+  .contant{
+    margin: 60px auto 10px 50px;
+  }
   .image{
     display: none;
   }
