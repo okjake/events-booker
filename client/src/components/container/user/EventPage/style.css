@@ -46,3 +46,13 @@
     width: 220px;
   }
 }
+
+@media  (max-width: 800px) {
+  .btns{
+    flex-direction: column;
+  }
+
+  .container .contant .ant-btn-primary{
+    width: 220px;
+  }
+}
