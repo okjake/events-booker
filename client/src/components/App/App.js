@@ -14,7 +14,7 @@ const App = () => {
         <Switch>
           <Route exact path='/events/:eventProg/:eventCode' component={EventPage} />
           <Route exact path="/" component={Landing} />
-          <Route path="/register/:eventProg/:eventCode/:mobile" 
+          <Route exact path="/register/:eventProg/:eventCode/:mobile" 
           component={Register}>
       </Route>
         </Switch>
