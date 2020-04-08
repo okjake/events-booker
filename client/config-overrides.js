@@ -10,6 +10,6 @@ module.exports = override(
 
       addLessLoader({
         javascriptEnabled: true,
-        modifyVars: { '@primary-color': '#1DA57A', '@ant-prefix' : 'ant;', '@btn-primary-color': 'black', '@btn-border-radius-base': '20px', '@btn-border-width': '100px' },
+        modifyVars: { '@primary-color': '#1DA57A', '@ant-prefix' : 'ant;', '@btn-primary-color': 'black', '@btn-border-radius-base': '20px', '@btn-border-width': '100px', "@modal-header-bg": "black" },
         }),
      );
