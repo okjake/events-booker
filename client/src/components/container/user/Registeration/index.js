@@ -3,11 +3,9 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Button ,Form,Input,Alert,Spin ,message} from 'antd';
 import { UserOutlined,LoadingOutlined } from '@ant-design/icons';
-import {HomeOutlined,MailFilled} from '@ant-design/icons';
-
+import {HomeOutlined,MailOutlined} from '@ant-design/icons';
 
 import './style.css'
-import MailMessage from 'nodemailer/lib/mailer/mail-message';
 
 class RegisterUser extends Component {
   state = {
@@ -49,7 +47,7 @@ class RegisterUser extends Component {
       return (
         <div className="main">
           <div className="s1">
-            <img alt="logo" src="https://raw.githubusercontent.com/GSG-G8/ca-wiki/master/client/public/favicon.ico"/>
+            <img alt="logo" src="https://www.wegrowwithc3.com/soon/wp-content/uploads/2015/08/hhfsyd25_400x400.png"/>
             <h1><span className="blue">welcome to</span> GSG event app</h1>
             <h2>Register your data to show the available events and choose your favorite</h2>
             <Form onFinish={this.onFinish} >
@@ -73,7 +71,7 @@ class RegisterUser extends Component {
               className="messageColor" 
               rules={[{ required: true, message: 'Please input your email!'}]}>
                 <Input name="email" placeholder="email" 
-                prefix={<MailFilled />}/>
+                prefix={<MailOutlined />}/>
               </Form.Item>
 
               <Form.Item name="location" 
