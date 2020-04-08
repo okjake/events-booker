@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper{
+  margin: 0 1rem;
+}
+
+.catagories {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3px 5px;
+  justify-content: center;
+}
+
+.catagories__btn {
+  margin: 5px;
+}
+
+.catagories__btn:active {
+  background: #fb6c04;
+  color: #ebebeb;
+}
+.main__grid {
+  margin-top: 5px;
+}
+.main__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  grid-template-rows: auto;
+  justify-content: center;
+  grid-gap: 1.5rem;
+  padding: 1rem;
+  margin: 0;
+}

@@ -1,100 +1,36 @@
+.card {
+  display: grid;
+  grid-template-rows: minmax(12rem, 1fr) 9rem 3.5rem;
+  border-radius: 3px;
+  color: rgb(24, 23, 23);
+  box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2), 0 0 1rem rgba(0, 0, 0, 0.2);
+}
 
-* {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-    line-height: 1.5;
+.card__image {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.card__content {
+  padding: 1rem;
+}
 
-  }
-  
- 
-  
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: rgb(255, 255, 255);
-  }
-  
-  .card {
-    position: relative;
-    background: white;
-    width: 400px;
-    height: 75vh;
-    border-radius: 17px;
-    padding: 2rem;
-    color: rgb(24, 23, 23);
-    box-shadow: 0 .25rem .25rem rgba(0,0,0,0.2),
-      0 0 1rem rgba(0,0,0,0.2);
-    overflow: hidden;
-    height: 740px;
-  }
-    
-    .card__image-container {
-      margin: -2rem -2rem 1rem -2rem;
-    }
-    
-  
-    .card__image{
-      opacity: 0;
-      animation: ImageFadeIn .8s 1.4s forwards;
-      max-width: 100%;
-    }
-  
-    
-    .card__content {
-      margin-top: 3rem;
-      opacity: 0;
-      animation: ContentFadeIn .8s 1.6s forwards;
-    }
+.card__p {
+  text-align: left;
+  overflow-wrap: break-word;
+}
 
-    .card__p {
-        text-align: left;
-        margin-top: 10px;
-    }
+.ant-btn-override {
+  align-self: center;
+  margin: 0 1rem;
+  font-size: medium;
+  font-weight: bold;
+  color: #3b5a6f;
+  border: 1px solid #3b5a6f;
+}
 
-
-
-    .card__button .ant-btn-primary{
-      width: 300px;
-      height: 54px;
-      border: 1px solid #3b5a6f;
-      border-radius: 38px;
-      background-color: white;
-      margin-top: 30px;
-      font-size: 15px;
-      outline: none;
-    }
-
-   
-    .ant-btn .ant-btn-primary :hover {
-      background-color: #3B5A6F;
-      color: white;
-    }
-    
-
-  
-  
-  
-  @keyframes ContentFadeIn {
-    0% { transform: translateY(-1rem); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-  }
-  
-  @keyframes ImageFadeIn {
-    0% { transform: translate(-.5rem, -.5rem) scale(1.05); opacity: 0; filter: blur(2px); }
-    50% { opacity: 1; filter: blur(2px); }
-    100% { transform: translateY(0) scale(1.0); opacity: 1; filter: blur(0); }
-  }
-
-  @media only screen and (max-width: 768px) {
-    .card{
-      width: 328px;
-      height: 658px;
-    }
-    .card__button .ant-btn-primary{
-      width: 254px;
-
-    }
-  }
+.ant-btn-override:active {
+  background: #186aa5;
+  color: #ebebeb;
+}
