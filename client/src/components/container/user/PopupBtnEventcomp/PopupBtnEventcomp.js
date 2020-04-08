@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Alert, Modal, Button, Input, message, Spin } from "antd";
-import { LoadingOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 import './PopupBtnEventcomp.css'
