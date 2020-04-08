@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "antd/dist/antd.css";
 
 import Landing from "../container/user/LandingPage";
 import "./App.css";
