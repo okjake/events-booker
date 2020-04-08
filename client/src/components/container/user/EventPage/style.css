@@ -51,6 +51,9 @@
 }
 
 @media  (max-width: 800px) {
+  .contant{
+    margin: 90px auto 10px 80px;
+  }
   .btns{
     flex-direction: column;
   }
