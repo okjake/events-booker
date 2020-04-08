@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { Button, Result, Spin, Empty } from "antd";
-import "antd/dist/antd.css";
 
 import Card from "../../../common/Card";
 import Header from "../../../common/Header";
@@ -96,7 +95,6 @@ class Landing extends React.Component {
             )
           ) : (
             <main className="main">
-    
               <ul className="main__grid">
                 {filteredEvents.map((event) => (
                   <Card key={event.id} className="grid__item" info={event} />
