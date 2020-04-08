@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+}
+
+.image {
+  width: 44%;
+  height: 100vh;
+}
+.contant{
+  margin: 150px auto 10px 70px;
+}
+
+.btns{
+  display: flex;
+}
+
+.container .contant .ant-btn-primary
+{
+  width: 180px;
+  border: 1px solid #186AA5;
+  border-radius: 38px;
+  background-color: white;
+  color: #186AA5;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  outline: none;
+  margin-right: 10px;
+  
+}
+.container .contant .ant-btn-primary:hover {
+  background-color: #186AA5;
+  color: white;
+}
+
+@media  (max-width: 580px) {
+  .contant{
+    margin: 60px auto 10px 50px;
+  }
+  .image{
+    display: none;
+  }
+
+  .btns{
+    flex-direction: column;
+  }
+
+  .container .contant .ant-btn-primary{
+    width: 220px;
+  }
+}
+
+@media  (max-width: 800px) {
+  .contant{
+    margin: 90px auto 10px 80px;
+  }
+  .btns{
+    flex-direction: column;
+  }
+
+  .container .contant .ant-btn-primary{
+    width: 220px;
+  }
+}

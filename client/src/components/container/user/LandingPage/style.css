@@ -1,7 +1,19 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper{
+  margin: 0 1rem;
+}
+
 .catagories {
   display: flex;
-  flex-wrap: wrap;
-  padding: 5px;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  padding: 3px 5px;
   justify-content: center;
 }
 
@@ -13,23 +25,16 @@
   background: #fb6c04;
   color: #ebebeb;
 }
-
-.main__title {
-  text-align: left;
-  padding-left: 10%;
+.main__grid {
+  margin-top: 5px;
 }
-
 .main__grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 16rem);
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
   grid-template-rows: auto;
-  justify-content: space-evenly;
+  justify-content: center;
   grid-gap: 1.5rem;
-}
-
-@media only screen and (min-width: 1024px) {
-  .main__grid {
-    margin-left: 5rem;
-  }
+  padding: 1rem;
+  margin: 0;
 }

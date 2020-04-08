@@ -46,7 +46,7 @@ VALUES
     (
         'ReactJS',
         302,
-        'Code Academy',
+        'CodeAcademy',
         'lorem ipsum',
         'https://i.imgur.com/VgTVTNA.jpg',
         '2038-01-09 03:14:07',
@@ -55,7 +55,7 @@ VALUES
     (
         'Express',
         303,
-        'Code Academy',
+        'CodeAcademy',
         'lorem ipsum',
         'https://i.imgur.com/VgTVTNA.jpg',
         '2020-05-09 15:00:00',
@@ -72,7 +72,7 @@ VALUES
     ),
     (
         'Database whatever',
-        313,
+        305,
         'Code Academy',
         'lorem ipsum',
         'https://i.imgur.com/VgTVTNA.jpg',
@@ -81,12 +81,21 @@ VALUES
     ),
     (
         'How to Start freelance',
-        502,
+        306,
         'Freelance',
         'lorem ipsum',
         'https://i.imgur.com/DWiWJE7.jpg',
         '2020-06-12 14:30:00',
         180
+    ),
+     (
+        'How to work as freelancer',
+        307,
+        'Freelance',
+        'lorem ipsum',
+        'https://i.imgur.com/DWiWJE7.jpg',
+        '2020-06-12 14:30:00',
+        20
     );
 
 INSERT INTO

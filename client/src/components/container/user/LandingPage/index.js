@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { Button, Result, Spin, Empty } from "antd";
-import "antd/dist/antd.css";
 
 import Card from "../../../common/Card";
+import Header from "../../../common/Header";
 import "./style.css";
 
 class Landing extends React.Component {
@@ -59,20 +59,23 @@ class Landing extends React.Component {
       "Upcoming",
     ];
     return (
-      <div>
-        <div className="catagories">
-          {categories.map((cat) => (
-            <Button
-              shape="round"
-              key={cat}
-              autoFocus
-              className="catagories__btn"
-              onClick={() => filterByCategory(cat)}
-            >
-              {cat}
-            </Button>
-          ))}
-        </div>
+      <div className="wrapper">
+        <header>
+          <Header />
+          <div className="catagories">
+            {categories.map((cat) => (
+              <Button
+                shape="round"
+                key={cat}
+                autoFocus
+                className="catagories__btn"
+                onClick={() => filterByCategory(cat)}
+              >
+                {cat}
+              </Button>
+            ))}
+          </div>
+        </header>
         <div>
           {error ? (
             <Result
@@ -93,14 +96,13 @@ class Landing extends React.Component {
               />
             )
           ) : (
-            <section className="main">
-              <h2 className="main__title">{title}</h2>
+            <main className="main">
               <ul className="main__grid">
                 {filteredEvents.map((event) => (
                   <Card key={event.id} className="grid__item" info={event} />
                 ))}
               </ul>
-            </section>
+            </main>
           )}
         </div>
       </div>
