@@ -19,7 +19,7 @@ const Header = () => {
           Welcome to <span className="header_subTitle">GSG event app</span>
         </h3>
         <h4 className="sub-header">
-          See the available events at GSG and back your favorite
+          See the available events at GSG and book your favorite
         </h4>
       </div>
     </div>
