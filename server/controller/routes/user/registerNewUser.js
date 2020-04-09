@@ -17,7 +17,7 @@ const registerValidation = (req, res, next) => {
   schema.validate(req.body, { abortEarly: false }).then(() => {
     next();
   }).catch((err) => {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ msg: err.message });
   });
 };
 
