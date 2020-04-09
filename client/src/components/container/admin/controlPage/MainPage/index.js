@@ -9,10 +9,8 @@ class Dashboard extends Component {
     state={
         name:"",
         img:"",
-        addEvent:true,
-        users:false,
-        events:false,
-        error:""
+        error:"",
+        renderView:"add"
     }
     componentDidMount(){
         Axios.get('/api/v1/admin').then(({data})=>{
@@ -29,18 +27,13 @@ class Dashboard extends Component {
             this.setState({error:err.msg})
         })
     }
-    handleClickbtn1=()=> {
-        this.setState({addEvent: true,events:false,users: false} )
-        }
-    handleClickbtn2=()=> {
-        this.setState({users:true,addEvent:false,events:false})
-        }
-    handleClickbtn3=()=> {
-        this.setState({events:true,addEvent:false,users:false})
-        }
 
+    clickBtn = e => {
+        this.setState({renderView: e.target.value});
+    }
+        
     render(){
-        const {name,img,error,addEvent,events,users}=this.state
+        const {name,img,error,renderView}=this.state
         if(error){
             return (<div>error</div>)
         }
@@ -57,19 +50,18 @@ class Dashboard extends Component {
                             <h3>{name}</h3>
                         </div>
                         <div className="btn-g">
-                            <Button  className="add-btn"onClick={this.handleClickbtn1}>add event 
+                            <Button value="add" className="add-btn"onClick={this.clickBtn}>add event 
                             <PlusSquareFilled /></Button>
-                            <Button  onClick={this.handleClickbtn2}>users</Button>
-                            <Button  onClick={this.handleClickbtn3}>events</Button>
+                            <Button value="users" onClick={this.clickBtn}>users</Button>
+                            <Button value="events"  onClick={this.clickBtn}>events</Button>
                         </div>
                     </aside>
                     <div className="block-el">
-                            {addEvent && <div>componant add event</div>}
-                            {users && <div>componant show users</div>}
-                            {events && <div>componant show events</div>}
+                            {renderView==="add" && <div>componant add event</div>}
+                            {renderView ==="users" && <div>componant show users</div>}
+                            {renderView ==="events" && <div>componant show events</div>}
                     </div>
                 </div>
-
             </div>
         )
     }
