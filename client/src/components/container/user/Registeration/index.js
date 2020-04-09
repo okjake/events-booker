@@ -19,10 +19,9 @@ class RegisterUser extends Component {
         match: { params : {mobile, eventCode} },history:{push}
       } = this.props;
       axios.post(`/api/v1/register`,
-      {firstName,lastName,location,email,mobile,eventCode }).then(res => {
-        const {data}=res
-        if(res.status===200 && data.message){
-          message.success(data.message);
+      {firstName,lastName,location,email,mobile,eventCode }).then(({data}) => {
+        if(data.status === 201){
+          message.success(data.msg);
           push('/')
         }
         else{
@@ -34,11 +33,10 @@ class RegisterUser extends Component {
       })
     }
     goBack=()=>{
-      message.warning('you has not registered yet !!');
       const {
       history:{goBack}} = this.props;
+      message.warning('you has not registered yet !!');
       goBack()
-
     }
   render() {
         const {emailMsg,serverError  ,isLoade} = this.state;

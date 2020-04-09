@@ -39,7 +39,6 @@ class PopupBtnEventcomp extends Component {
     if (type === 'booking') {
       axios.post('/api/v1/checkUser', { mobile, eventCode })
         .then(({ data }) => {
-          console.log(data);
 
           if (data.status === 301) {
             this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
@@ -64,7 +63,6 @@ class PopupBtnEventcomp extends Component {
     } else if (type === 'cancel') {
       axios.post('/api/v1/cancelUser', { mobile, eventCode })
         .then(({ data }) => {
-          console.log(data);
           if (data.status === 400) {
             this.setState({
               error: true,
