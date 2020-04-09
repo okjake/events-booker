@@ -12,7 +12,6 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Link to="/admin/dashboard"> dashboard page</Link>
         <Switch>
           <Route exact path='/events/:eventProg/:eventCode' component={EventPage} />
           <Route exact path="/" component={Landing} />

@@ -16,7 +16,6 @@ class Dashboard extends Component {
     }
     componentDidMount(){
         Axios.get('/api/v1/admin').then(({data})=>{
-            console.log(data[0]);
             const {name,img}=data[0]
             this.setState({name,img})
         }).catch(err=>{
@@ -58,7 +57,7 @@ class Dashboard extends Component {
                             <h3>{name}</h3>
                         </div>
                         <div className="btn-g">
-                            <Button className="add-btn"onClick={this.handleClickbtn1}>add event 
+                            <Button  className="add-btn"onClick={this.handleClickbtn1}>add event 
                             <PlusSquareFilled /></Button>
                             <Button  onClick={this.handleClickbtn2}>users</Button>
                             <Button  onClick={this.handleClickbtn3}>events</Button>
