@@ -1,5 +1,6 @@
 .dashboard{
     width:100%;
+
 }
 .dashboard .header{
     width: 100%;
@@ -7,11 +8,12 @@
     display:inline-block;
 }
 .dashboard .header .logo{
-    width: 50px;
     height: 50px;
     position: absolute;
-    left:100px;
-    margin: 20px;
+    left:25px;
+    margin:30px 20px;
+    font-weight: bold;
+    color: #3B5A6F;
 }
 .dashboard .header button{
     width:120px;
@@ -21,12 +23,12 @@
     margin-top: 30px;
     border-radius: 5px;
     background-color: white;
-    color: #B30000;
-    border: 1px solid #B30000;
+    color: #FB6C04;
+    border: 1px solid #FB6C04;
 }
 .dashboard .header button:hover{
     color: white;
-    background-color: #B30000;
+    background-color: #FB6C04;
 
 
 }
@@ -46,13 +48,14 @@
 .dashboard .menue img{
     width: 120px;
     height: 90px;
-    margin: 20px auto;
+    margin: 20px 20px;
     border-radius: 20px;
     box-sizing: border-box;
 }
 .dashboard .menue h3{
     text-align: center;
     margin-top: -10px;
+    color: #3B5A6F;
 }
 .dashboard .menue .btn-g{
     margin-top: 30px;
@@ -62,11 +65,11 @@
 .dashboard .menue .btn-g button{
     text-align: center;
     width: 240px;
-    margin-top: 10px;
     border:1px solid white;
     outline: none;
     font-size: 1rem;
-    height: 50px;
+    height: 40px;
+    border-bottom: none;
 }
 .dashboard .menue .btn-g button:hover{
     background-color:#F3F6F9 ;
@@ -82,6 +85,70 @@
 .block-el{
     align-self: start;
     width: 90%;
+    box-sizing: border-box;
     background-color:#F3F6F9;
     height: 900px;
+}
+
+@media (max-width:750px){
+    .main-el{
+        flex-direction: column;
+        width: 100%;
+    }
+    .dashboard .header{
+        height: 70px;
+        background-color: #3B5A6F;
+
+    }
+    .dashboard .header .logo{
+        left:20px;
+        color: white;
+        margin: 25px;
+        font-size: 1rem;
+    }
+    .dashboard .menue{
+        width:100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: start;
+    }
+    .dashboard .menue img{
+        margin: 20px 50px;
+    }
+    .dashboard .menue .btn-g{
+        margin-top: 10px;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+    .dashboard .menue .btn-g button{
+        width: 90px;
+        margin-top: 10px;
+        margin-left: 5px;
+        border:1px solid rgb(12, 78, 126);
+        border-radius: 20px;
+        font-size: .7rem;
+        box-sizing: border-box;
+        height: 30px;
+    }
+    .dashboard .ant-btn > .anticon + span, .ant-btn > span + .anticon{
+        display: none;
+    }
+    .block-el{
+        align-self: center;
+        width: 95%;
+        margin: auto;
+        background-color:#F3F6F9;
+        height: 900px;
+    }
+    .dashboard .header button{
+        width:90px;
+        position: absolute;
+        right: 20px;
+        margin: 20px;
+        margin-top: 20px;
+        color: #FB6C04;
+        background-color: white;
+        border: 1px solid #FB6C04;
+    }
 }

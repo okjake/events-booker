@@ -8,36 +8,38 @@ import "./style.css"
 class Dashboard extends Component {
     state={
         name:"",
+        img:"",
         error:""
     }
     componentDidMount(){
         Axios.get('/api/v1/admin').then(({data})=>{
             console.log(data[0]);
-            this.setState({name:data[0].name})
+            const {name,img}=data[0]
+            this.setState({name,img})
         }).catch(err=>{
             this.setState({error:err.msg})
         })
     }
     logout=()=>{
         Axios.get('/api/v1/logout').then((res)=>{
-            this.props.history.push('/');
+            this.props.history.push('/login');
         }).catch(err=>{
             this.setState({error:err.msg})
         })
     }
 
     render(){
-        const {name}=this.state
+        const {name,img}=this.state
         return(
             <div className="dashboard">
                 <div className="header">
-                    <img className="logo" src="https://www.wegrowwithc3.com/soon/wp-content/uploads/2015/08/hhfsyd25_400x400.png" alt="logo"/>
+                    <h1 className="logo">Dashboard </h1>
                     <Button type="danger" onClick={this.logout} >log out</Button>
                 </div>
                 <div className="main-el">
                 <aside className="menue">
                     <div className="adminInfo">
-                        <img alt="admin img" src="https://geographical.co.uk/media/k2/items/cache/eb8c0a46c2085216dea7d19f92a60fd7_XL.jpg"/>
+                        <img alt="admin img" src={img}/>
                         <h3>{name}</h3>
                     </div>
                     <div className="btn-g">
