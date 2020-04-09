@@ -9,6 +9,9 @@ class Dashboard extends Component {
     state={
         name:"",
         img:"",
+        addEvent:true,
+        users:false,
+        events:false,
         error:""
     }
     componentDidMount(){
@@ -17,7 +20,7 @@ class Dashboard extends Component {
             const {name,img}=data[0]
             this.setState({name,img})
         }).catch(err=>{
-            this.setState({error:err.msg})
+            this.setState({error:err})
         })
     }
     logout=()=>{
@@ -27,9 +30,21 @@ class Dashboard extends Component {
             this.setState({error:err.msg})
         })
     }
+    handleClickbtn1=()=> {
+        this.setState({addEvent: true,events:false,users: false} )
+        }
+    handleClickbtn2=()=> {
+        this.setState({users:true,addEvent:false,events:false})
+        }
+    handleClickbtn3=()=> {
+        this.setState({events:true,addEvent:false,users:false})
+        }
 
     render(){
-        const {name,img}=this.state
+        const {name,img,error,addEvent,events,users}=this.state
+        if(error){
+            return (<div>error</div>)
+        }
         return(
             <div className="dashboard">
                 <div className="header">
@@ -37,20 +52,24 @@ class Dashboard extends Component {
                     <Button type="danger" onClick={this.logout} >log out</Button>
                 </div>
                 <div className="main-el">
-                <aside className="menue">
-                    <div className="adminInfo">
-                        <img alt="admin img" src={img}/>
-                        <h3>{name}</h3>
+                    <aside className="menue">
+                        <div className="adminInfo">
+                            <img alt="admin img" src={img}/>
+                            <h3>{name}</h3>
+                        </div>
+                        <div className="btn-g">
+                            <Button className="add-btn"onClick={this.handleClickbtn1}>add event 
+                            <PlusSquareFilled /></Button>
+                            <Button  onClick={this.handleClickbtn2}>users</Button>
+                            <Button  onClick={this.handleClickbtn3}>events</Button>
+                        </div>
+                    </aside>
+                    <div className="block-el">
+                            {addEvent && <div>componant add event</div>}
+                            {users && <div>componant show users</div>}
+                            {events && <div>componant show events</div>}
                     </div>
-                    <div className="btn-g">
-                        <Button className="add-btn">add event <PlusSquareFilled /></Button>
-                        <Button>users</Button>
-                        <Button>events</Button>
-                    </div>
-                </aside>
-                <div className="block-el">
-
-                </div></div>
+                </div>
 
             </div>
         )
