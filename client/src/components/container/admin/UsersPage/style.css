@@ -1,7 +1,94 @@
-div{
-    color: gray;
+.tableSection{
+    width: 100%;
 }
-.download-table-xls-button{
-    background-color:#333;
+.headerUsers {
+    width: 100%;
+    padding: 8px;
+    background-color:rgb(219, 231, 240) ;
+}
+.tableSection .headerUsers img{
+    width: 130px;
+    margin-left: 50px;
+}
+.tableSection h2{
+    margin-top: 30px;
+    color: #3B5A6F;
+    text-align: center;
+}
+.headerUsers .ant-btn-danger{
+    position: absolute;
+    top: 23px;
+    right: 120px;
+    background-color: #FB6C04;
+    border-radius: 7px;
+    border: #FB6C04;
+    border:1px solid #FB6C04;
+}
+.headerUsers .ant-btn-danger:hover{
+    background-color: white;
+    color: #FB6C04;
+}
+.content-t{
+    width: 90%;
+    margin: auto;
+    box-sizing: border-box;
+}
+.tableSection .download-table-xls-button{
+    background-color: white;
+    border: 1px solid #FB6C04;
+    padding: 7px;
+    color: #FB6C04;
+    border-radius: 7px;
+    margin:10px 20px;
+
+}
+.tableSection .download-table-xls-button:hover {
+    background-color: #FB6C04; /* Green */
     color: white;
+}
+.tableSection .table-user {
+    border-collapse: collapse;
+    width: 98%;
+    margin: auto;
+}
+.tableSection .table-user td, .table-user th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.tableSection .table-user tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+.tableSection .table-user tr:hover{
+    background-color: #ddd;
+} 
+.tableSection .table-user th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:#3B5A6F;
+    color: white;
+}
+@media (max-width:650px){
+    .content-t{
+        width: 95%;
+        font-size: .4rem;
+        box-sizing: border-box;
+    }
+    .tableSection h2{
+        margin-top: 30px;
+        color: #3B5A6F;
+        text-align: center;
+        font-size: .8rem;
+    }
+    .headerUsers .ant-btn-danger{
+        right: 40px;
+        top: 19px;
+        font-size: .8rem;
+    }
+    .tableSection .headerUsers img{
+        width: 100px;
+        margin-left: 30px;
+    }
+
+
 }

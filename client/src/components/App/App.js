@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Link to="/dashboard/:eventcode/users">users</Link>
+        {/* <Link to="/dashboard/:eventcode/users">users</Link> */}
         <Switch>
           <Route exact path='/events/:eventProg/:eventCode' component={EventPage} />
           <Route exact path="/" component={Landing} />

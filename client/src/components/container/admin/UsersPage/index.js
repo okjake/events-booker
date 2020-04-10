@@ -1,9 +1,9 @@
 import React,{Component} from "react";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-
 import Axios from "axios";
 
 import "./style.css"
+import { Button } from "antd";
 
 class UsersPage extends Component {
     state={
@@ -29,34 +29,45 @@ class UsersPage extends Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <div>
-                <ReactHTMLTableToExcel
-                    id="test-table-xls-button"
-                    className="download-table-xls-button"
-                    table="table-to-xls"
-                    filename="eventusers"
-                    sheet="tablexls"
-                    buttonText="export users to xls"/>
-                <table id="table-to-xls">
-                <thead>
-                <tr>
-                    <th>user name</th>
-                    <th>mobile</th>
-                    <th>email</th>
-                    <th>location</th>
-                </tr>
-                </thead>
-                <tbody>
-                {users.map(({first_name,last_name,location,email,mobile}) => (
-                    <tr key={first_name}>
-                    <td>{first_name+" "+ last_name} </td>
-                    <td>{mobile}</td>
-                    <td>{email}</td>
-                    <td>{location}</td>
+                <div className="tableSection">
+                <header className="headerUsers">
+                <div className="content-t">
+                <img alt="logo" src="https://cdn.discordapp.com/attachments/690170174116331638/697432051929972767/GSG_Logo_svg.svg"/>
+                <Button type="danger" onClick={()=>{
+                    this.props.history.goBack();
+                }}>Exit</Button>
+                </div>
+                </header>
+                <h2>All Users On this Event</h2>
+                <div className="content-t">
+                    <ReactHTMLTableToExcel
+                        id="test-table-xls-button"
+                        className="download-table-xls-button"
+                        table="table-to-xls"
+                        filename="eventusers"
+                        sheet="tablexls"
+                        buttonText="export users to xls"/>
+                    <table id="table-to-xls" className="table-user">
+                    <thead>
+                    <tr>
+                        <th>user name</th>
+                        <th>mobile</th>
+                        <th>email</th>
+                        <th>location</th>
                     </tr>
-                ))}
-                </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                    {users.map(({first_name,last_name,location,email,mobile}) => (
+                        <tr key={first_name}>
+                        <td>{first_name+" "+ last_name} </td>
+                        <td>{mobile}</td>
+                        <td>{email}</td>
+                        <td>{location}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                    </table>
+                </div>
 
             </div>
             );
