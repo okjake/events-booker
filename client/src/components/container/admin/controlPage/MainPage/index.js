@@ -28,12 +28,21 @@ class Dashboard extends Component {
         })
     }
 
-    clickBtn = e => {
-        this.setState({renderView: e.target.value});
+    clickBtn = ({target:{value}}) => {
+        this.setState({renderView:value});
     }
         
     render(){
         const {name,img,error,renderView}=this.state
+        const arr=["add","users","events"]
+        const buttons=arr.map(el=>{
+            if(el==="add"){
+                return(<Button value={el} className="add-btn"
+                onClick={this.clickBtn}>add event 
+                <PlusSquareFilled /></Button>) 
+            }
+            return <Button value={el} onClick={this.clickBtn}>{el}</Button>
+        })
         if(error){
             return (<div>error</div>)
         }
@@ -50,10 +59,7 @@ class Dashboard extends Component {
                             <h3>{name}</h3>
                         </div>
                         <div className="btn-g">
-                            <Button value="add" className="add-btn"onClick={this.clickBtn}>add event 
-                            <PlusSquareFilled /></Button>
-                            <Button value="users" onClick={this.clickBtn}>users</Button>
-                            <Button value="events"  onClick={this.clickBtn}>events</Button>
+                            {buttons}
                         </div>
                     </aside>
                     <div className="block-el">
