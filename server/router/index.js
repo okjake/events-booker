@@ -52,8 +52,8 @@ router.post(
   checkEventExist,
   generateCode,
   userWillAttend,
-  sendSms,
   sendInvitation,
+  sendSms,
 );
 router.post(
   '/checkUser',
@@ -62,8 +62,8 @@ router.post(
   checkAlreadBooked,
   generateCode,
   userWillAttend,
-  sendSms,
   sendInvitation,
+  sendSms,
 );
 
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword);
