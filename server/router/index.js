@@ -75,10 +75,10 @@ router.post('/portal/logout', pinCodeValidation, getHashedPinCode, checkPinCode,
 router.all(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
-
-router.all(['/users', '/event/:eventcode/users'], protectedRoute);
-router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
+
+router.all(['/users'], protectedRoute);
+router.get('/users', getUsersData);
 router.patch('/event', deleteEvent);
 router.post('/event', validateEvent, createEvent);
 
