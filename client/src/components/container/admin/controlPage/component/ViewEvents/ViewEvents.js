@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
-import TableComponent from '../TableComponent/TableComponent'
+import { Link } from "react-router-dom";
+import { Table, message, Spin } from 'antd';
 import axios from 'axios';
 
 import './ViewEvents.css'
@@ -9,39 +9,78 @@ class ViewEvents extends Component {
   state = {
     error: null,
     isLoaded: false,
-    events: []
+    events: [],
+    errorMessage:null,
   }
   componentDidMount() {
+    this.setState({ isLoaded: true })
     axios.get('/api/v1/event').
       then(({ data }) => {
-        console.log(data)
         this.setState({
-          isLoaded: true,
+          isLoaded: false,
           events: data,
         });
-
-      }).catch()
+      }).catch(() => {
+        this.setState({ errorMessage: "Internal server error !!" })
+      })
   }
-  render() {
 
-    const { events } = this.state
-    const tableDetails = {
-      col1_title: 'Title',
-      col2_title: 'Event Code',
-      col3_title: 'Program',
-      col4_title: 'Count',
-      col1_dataIndex: 'title',
-      col2_dataIndex: 'event_code',
-      col3_dataIndex: 'category',
-      col4_dataIndex: 'count',
-      type:'events'
-    }
+  handleAction = currentEvent => {
+    axios.patch("/event", { id : currentEvent })
+      .then(({data}) => {
+        console.log("done");
+        message.error(data.msg, 10);
+      })
+      .catch(() => {
+        console.error("error");
+      });
+  };
+
+  handelEventButtons = (record) => (
+    <div>
+      <Link to={`/dashboard/${record.event_code}/users`}>Show </Link>
+      <Link type="primary" onClick={() => this.handleAction(record.id)}>
+        Delete
+        </Link>
+    </div>
+  )
+
+  columns = [
+    {
+      title: 'Title',
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: 'Event Code',
+      dataIndex: 'event_code',
+      key: 'event_code',
+    },
+    {
+      title: 'Program',
+      dataIndex: 'category',
+      key: 'category',
+    },
+    {
+      title: 'Count',
+      dataIndex: 'count',
+      key: 'count',
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        this.handelEventButtons(record)
+      )
+    },
+  ];
+
+  render() {
+    const { events, isLoaded } = this.state
     return (
-      <div className='table-content'>
-        <TableComponent
-          data={events}
-          tableDetails={tableDetails}
-        />
+      <div className='table-event'>
+        <Table columns={this.columns} dataSource={events} />
+        {isLoaded && (<Spin />)}
       </div>
     )
   }

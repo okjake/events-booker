@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import { Table,Spin} from 'antd';
 
-import TableComponent from '../TableComponent/TableComponent'
 import axios from 'axios';
 
 import './ViewUsers.css'
@@ -9,42 +9,56 @@ class ViewEvents extends Component {
   state = {
     error: null,
     isLoaded: false,
-    users: []
+    users: [],
+    errorMessage:null,
   }
   componentDidMount() {
+    this.setState({ isLoaded: true })
     axios.get('/api/v1/users').
       then(({ data }) => {
-        console.log(data)
         this.setState({
-          isLoaded: true,
+          isLoaded: false,
           users: data,
         });
-
-      }).catch()
+      }).catch(() => {
+        this.setState({ errorMessage: "Internal server error !!" })
+      })
   }
-  render() {
 
-    const { users } = this.state
-    const tableDetails = {
-      col1_title: 'First Name',
-      col2_title: 'Last Name',
-      col3_title: 'Mobile',
-      col4_title: 'Email',
-      col5_title: 'Location',
-      col1_dataIndex: 'first_name',
-      col2_dataIndex: 'last_name',
-      col3_dataIndex: 'mobile',
-      col4_dataIndex: 'email',
-      col5_dataIndex: 'location',
-      type:'user',
-    }
-    console.log(tableDetails)
-    return (
-      <div className='table-content'>
-        <TableComponent
-          data={users}
-          tableDetails = {tableDetails}
-        />
+  columns = [
+    {
+      title: 'First Name',
+      dataIndex: 'first_name',
+      key: 'first_name',
+    },
+    {
+      title: 'Last Name',
+      dataIndex: 'last_name',
+      key: 'last_name',
+    },
+    {
+      title: 'Mobile',
+      dataIndex: 'mobile',
+      key: 'mobile',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Location',
+      dataIndex: 'location',
+      key: 'location',
+    },
+  ];
+
+  render() {
+    const { users, isLoaded } = this.state
+        return (
+      <div className='table-users'>
+        <Table columns={this.columns} dataSource={users} />
+        {isLoaded && (<Spin />)}
       </div>
     )
   }
