@@ -22,7 +22,8 @@ class Dashboard extends Component {
     }
     logout=()=>{
         Axios.get('/api/v1/logout').then((res)=>{
-            this.props.history.push('/login');
+            const {history:{push}}=this.props
+            push('/login');
         }).catch(err=>{
             this.setState({error:err.msg})
         })
@@ -38,10 +39,12 @@ class Dashboard extends Component {
         const buttons=arr.map(el=>{
             if(el==="add"){
                 return(<Button value={el} className="add-btn"
+                key={el}
                 onClick={this.clickBtn}>add event 
                 <PlusSquareFilled /></Button>) 
             }
-            return <Button value={el} onClick={this.clickBtn}>{el}</Button>
+            return <Button value={el} key={el}
+                    onClick={this.clickBtn}>{el}</Button>
         })
         if(error){
             return (<div>error</div>)
