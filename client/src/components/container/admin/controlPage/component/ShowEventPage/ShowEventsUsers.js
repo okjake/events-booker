@@ -13,7 +13,7 @@ class ShowEventPage extends Component {
     users:false,
   }
   render() {
-    const {events, users} = this.state
+    const {events} = this.state
     return (
       <div className='container'>
         <div className='btns'>

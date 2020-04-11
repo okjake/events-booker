@@ -8,14 +8,13 @@ import './ViewUsers.css'
 class ViewEvents extends Component {
   state = {
     error: null,
-    isLoaded: false,
+    isLoaded: true,
     users: [],
     errorMessage:null,
   }
   componentDidMount() {
-    this.setState({ isLoaded: true })
-    axios.get('/api/v1/users').
-      then(({ data }) => {
+    axios.get('/api/v1/users')
+      .then(({ data }) => {
         this.setState({
           isLoaded: false,
           users: data,
@@ -57,8 +56,7 @@ class ViewEvents extends Component {
     const { users, isLoaded } = this.state
         return (
       <div className='table-users'>
-        <Table columns={this.columns} dataSource={users} />
-        {isLoaded && (<Spin />)}
+        {isLoaded ? (<Spin size='large' className='loading'/>) : <Table columns={this.columns} dataSource={users} />}
       </div>
     )
   }

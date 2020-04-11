@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import { Table, message, Spin } from 'antd';
+import { Table, message, Spin, Button } from 'antd';
 import axios from 'axios';
 
 import './ViewEvents.css'
@@ -8,40 +8,38 @@ import './ViewEvents.css'
 class ViewEvents extends Component {
   state = {
     error: null,
-    isLoaded: false,
+    isLoaded: true,
     events: [],
-    errorMessage:null,
+    serverError: null,
   }
   componentDidMount() {
-    this.setState({ isLoaded: true })
-    axios.get('/api/v1/event').
-      then(({ data }) => {
+    axios.get('/api/v1/event')
+      .then(({ data }) => {
         this.setState({
           isLoaded: false,
           events: data,
         });
       }).catch(() => {
-        this.setState({ errorMessage: "Internal server error !!" })
+        this.setState({ serverError: "Internal server error !!" })
       })
   }
 
   handleAction = currentEvent => {
-    axios.patch("/event", { id : currentEvent })
-      .then(({data}) => {
-        console.log("done");
-        message.error(data.msg, 10);
+    axios.patch("/api/v1/event", { id: currentEvent })
+      .then(({ data }) => {
+        message.success(data.msg, 10);
       })
       .catch(() => {
-        console.error("error");
-      });
+        this.setState({ serverError: "Internal server error !!" })
+      })
   };
 
   handelEventButtons = (record) => (
-    <div>
-      <Link to={`/dashboard/${record.event_code}/users`}>Show </Link>
-      <Link type="primary" onClick={() => this.handleAction(record.id)}>
+    <div className='action-btns'>
+      <Link className='show' to={`/dashboard/${record.event_code}/users`}>Show </Link>
+      <Button className='delete'  type="primary" onClick={() => this.handleAction(record.id)}>
         Delete
-        </Link>
+        </Button>
     </div>
   )
 
@@ -79,8 +77,7 @@ class ViewEvents extends Component {
     const { events, isLoaded } = this.state
     return (
       <div className='table-event'>
-        <Table columns={this.columns} dataSource={events} />
-        {isLoaded && (<Spin />)}
+        {isLoaded ? (<Spin size='large' className='loading' />) : <Table columns={this.columns} dataSource={events} />}
       </div>
     )
   }
