@@ -1,9 +1,10 @@
 import React,{Component} from "react";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Axios from "axios";
+import { Button } from "antd";
+import {LoadingOutlined} from "@ant-design/icons"
 
 import "./style.css"
-import { Button } from "antd";
 
 class UsersPage extends Component {
     state={
@@ -26,7 +27,7 @@ class UsersPage extends Component {
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return <div><LoadingOutlined /> Loading</div>;
         } else {
             return (
                 <div className="tableSection">
