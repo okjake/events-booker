@@ -12,26 +12,27 @@ class ViewEvents extends Component {
     events: [],
     serverError: null,
   }
-  
+
   componentDidMount() {
     axios.get('/api/v1/event')
-    .then(({ data }) => {
-      this.setState({
-        isLoaded: false,
-        events: data,
-      });
-    }).catch(() => {
-      this.setState({ serverError: "Internal server error !!", isLoaded: false })
-    })  }
+      .then(({ data }) => {
+        this.setState({
+          isLoaded: false,
+          events: data,
+        });
+      }).catch(() => {
+        this.setState({ serverError: "Internal server error !!", isLoaded: false })
+      })
+  }
 
   handleAction = currentEvent => {
     axios.patch("/api/v1/event", { id: currentEvent })
       .then(({ data }) => {
-        const {data : { rows }, msg } = data
+        const { data: { rows }, msg } = data
         message.success(msg, 10);
-        const {events} = this.state;
+        const { events } = this.state;
         const remainingEvents = events.filter(event => event.id !== rows[0].id)
-        this.setState({events: remainingEvents})
+        this.setState({ events: remainingEvents })
       })
       .catch(() => {
         this.setState({ serverError: "Internal server error !!" })
@@ -40,7 +41,13 @@ class ViewEvents extends Component {
 
   handelEventButtons = (record) => (
     <div className='action-btns'>
-      <Link className='show' to={`/dashboard/${record.event_code}/users`}>Show </Link>
+      <Link className='show'
+        to={
+          {
+            pathname : `/dashboard/${record.event_code}/users`,
+            state : { title : record.title }
+          }
+        }>Show </Link>
       <Button className='delete' type="primary" onClick={() => this.handleAction(record.id)}>
         Delete
         </Button>
