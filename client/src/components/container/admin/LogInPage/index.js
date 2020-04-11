@@ -4,7 +4,7 @@ import { Button ,Form,Input, Alert,message} from 'antd';
 import {MailOutlined, LockOutlined} from '@ant-design/icons';
 
 import './style.css'
-import logo from './images/logo.svg';
+import  Logo from './images/logo.svg';
 import adminLoginImg from './images/adminlogin.png';
 
 class AdminLogin extends Component {
@@ -19,12 +19,11 @@ class AdminLogin extends Component {
 
     axios.post(`/api/v1/login`, {email,password}).then(({data})=>{
         if(data.status === 400){
+            this.setState({isLoaded:false})
            this.setState({error:data.msg})
-            return data.msg
         }
          else if (data.status === 401){
             this.setState({error:data.msg})
-            return data.msg;
         } else{
             const {history:{push}} = this.props;
             push('/admin/dashboard')
@@ -44,7 +43,7 @@ class AdminLogin extends Component {
     return(
         <div class="container">
             <div class="main-section">
-                <img class="logo" src= {logo} alt="logo" />
+                <img class="logo" src= {Logo} alt="logo" />
                 <h1 class="main-header"><b><span className="span">welcome to</span> GSG event app</b></h1>
                 <h2 class="sub-header"><b>ADMIN LOGIN</b></h2>
 
