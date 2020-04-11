@@ -15,6 +15,7 @@ class Dashboard extends Component {
     }
     componentDidMount(){
         Axios.get('/api/v1/admin').then(({data})=>{
+            console.log(data);
             const {name,img}=data[0]
             this.setState({name,img})
         }).catch(err=>{
