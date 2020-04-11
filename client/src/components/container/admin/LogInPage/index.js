@@ -1,46 +1,52 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Button ,Form,Input,Alert,Spin ,message} from 'antd';
+import { Button ,Form,Input, Alert,message} from 'antd';
 import {MailOutlined, LockOutlined} from '@ant-design/icons';
 
 import './style.css'
-import './images'
+import logo from './images/logo.svg';
+import adminLoginImg from './images/adminlogin.png';
 
-class adminLogin extends component {
+class AdminLogin extends Component {
     state ={
         error:'',
-        isLoaded: false
+        isLoaded: false,
+    }
+
+    onFinish=({email, password})=>{
+        this.setState({isLoaded:true})
+
+
+    axios.post(`/api/v1/login`, {email,password}).then(({data})=>{
+        if(data.status === 400){
+           this.setState({error:data.msg})
+            return data.msg
+        }
+         else if (data.status === 401){
+            this.setState({error:data.msg})
+            return data.msg;
+        } else{
+            const {history:{push}} = this.props;
+            push('/admin/dashboard')
+        }
+    }).catch((err)=>{
+        this.setState({error:"Internal server error !!",isLoaded:false})
+        })
+
     }
 
 
-    onFinish=({ email, password })=>{
-        this.setState({isLoaded:true})
+ render(){
 
-    /*  const
-      { match: { params : {email, password} },history:{push}
-    } = this.props;*/
+    const {error} = this.state;
 
-    axios.post(`/api/v1/login`, {email, password}).then(({data})=>{
-        if(data.status === 200){
-            message.success('You logged in successfully');
-            push('/dashboard')
-        }
-        else {
-        this.setState({isLoaded:false})
-        }
-    }).catch(err=>{
-        this.setState({error:'You password or email is wrong', isLoaded:false})
-    })
-}
-
-render(){
-    const {error,isLoaded} = this.state;
 
     return(
-        <div class="main-section">
-            <div class="container">
-                <img src="" alt="logo" />
-                <h1><span className="span">welcome to</span> GSG event app</h1>
+        <div class="container">
+            <div class="main-section">
+                <img class="logo" src= {logo} alt="logo" />
+                <h1 class="main-header"><b><span className="span">welcome to</span> GSG event app</b></h1>
+                <h2 class="sub-header"><b>ADMIN LOGIN</b></h2>
 
                 <Form onFinish={this.onFinish} >
 
@@ -52,32 +58,26 @@ render(){
                     </Form.Item>
 
                     <Form.Item
-                        label="Password"
-                        name="password"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
                         <Input.Password placeholder="password" 
                         prefix={<LockOutlined/>}/>
                     </Form.Item>
 
-                    <Form.Item {...tailLayout}>
+                 
                         <Button type="primary" htmlType="submit">
                         Login
                         </Button>
-                    </Form.Item>
-                    
-                                    
 
+                    {error&& <Alert message={error} type="error" />}
 
-                    {emailMsg&& <Alert message={emailMsg} type="error" />}
-                    {serverError&& <Alert message={serverError} type="error" />}
-
+                  
                 </Form>
 
             </div>
 
             <div class="img-container">
-                <img src='' alt='grass image' />
+                <img class="main-img" src={adminLoginImg} alt='grass' />
             </div>
         </div>
     )
@@ -85,4 +85,5 @@ render(){
 }
 
 
-export default adminLogin;
+export default AdminLogin;
+

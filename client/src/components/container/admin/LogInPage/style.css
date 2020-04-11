@@ -1,0 +1,105 @@
+.container{
+    display: flex;
+    overflow: hidden;
+}
+
+
+.main-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+}
+
+.logo{
+    width:230px;
+}
+
+.main-header{
+    color:#FB6C04;
+    font-size: 45px;
+}
+
+.sub-header{
+    color: #186AA5;
+    margin-bottom: 20px;
+}
+
+.span{
+    color: #186AA5;
+}
+
+.img-container{
+    width: 50%;
+    overflow: hidden;
+}
+
+.main-img{
+    width: 100%;
+    height: 100vh;
+    display: block;
+}
+
+
+.ant-input-affix-wrapper{
+    height: 47px;
+    border: 2px solid #186AA5;
+    border-radius: 32px;
+    outline: none;
+}
+
+
+.ant-alert-no-icon{
+    margin-top: 22px;
+}
+
+
+
+ .ant-btn-primary{
+    width: 354px;
+    height: 49px;
+    border-radius: 76px;
+}
+
+@media  (max-width: 1200px) {
+
+    .main-section{
+        width: 100%;
+        height: 100%;
+        margin:50px auto;
+    }
+
+    .logo{
+        margin-top:66px;
+    }
+    
+    .main-header{
+        margin-top: 30px;
+    }
+
+    .img-container{
+        display: none;
+    } 
+}
+
+@media  (max-width: 580px) {
+    .container{
+        height: 100%;
+    }
+
+    .logo{
+        width:150px;
+    }
+
+    .main-header{
+        font-size: 22px;
+
+    }
+
+    .main-section .ant-form .ant-form-horizontal{
+        margin-top: 20px;
+    }
+}
