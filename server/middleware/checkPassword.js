@@ -9,13 +9,21 @@ const checkPassword = (req, res, next) => {
       const err = new Error();
       err.msg = 'incorect password';
       err.status = 401;
-      next(err);
+      throw err;
     } else {
       const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY);
       res.cookie('token', token);
       res.json({ msg: 'logged in successfully' });
     }
-  }).catch(next);
+  }).catch((err) => {
+    const { status } = err;
+    switch (status) {
+      case 401:
+        res.json(err);
+        break;
+      default: next(err);
+    }
+  });
 };
 
 module.exports = checkPassword;

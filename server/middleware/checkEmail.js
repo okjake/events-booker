@@ -12,8 +12,16 @@ const checkEmailIfExist = (req, res, next) => {
         const error = new Error();
         error.msg = 'email dosent exist';
         error.status = 400;
-        next(error);
+        throw error;
       }
-    }).catch(next);
+    }).catch((err) => {
+      const { status } = err;
+      switch (status) {
+        case 400:
+          res.json(err);
+          break;
+        default: next(err);
+      }
+    });
 };
 module.exports = checkEmailIfExist;
