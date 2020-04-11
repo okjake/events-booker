@@ -56,7 +56,7 @@ class ViewEvents extends Component {
     const { users, isLoaded } = this.state
         return (
       <div className='table-users'>
-        {isLoaded ? (<Spin size='large' className='loading'/>) : <Table columns={this.columns} dataSource={users} />}
+        {isLoaded ? (<Spin size='large' className='loading'/>) : <Table rowKey='mobile' columns={this.columns} dataSource={users} />}
       </div>
     )
   }

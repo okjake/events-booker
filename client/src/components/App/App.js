@@ -7,16 +7,11 @@ import Register from '../container/user/Registeration'
 import "antd/dist/antd.css";
 import './App.css';
 
-//Test 
-import ShowEventPage from '../container/admin/controlPage/component/ShowEventPage/ShowEventsUsers'
-
 const App = () => {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/showevents" component={ShowEventPage} />
-
           <Route exact path='/events/:eventProg/:eventCode' component={EventPage} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/register/:eventProg/:eventCode/:mobile"

@@ -27,9 +27,10 @@ class ViewEvents extends Component {
   handleAction = currentEvent => {
     axios.patch("/api/v1/event", { id: currentEvent })
       .then(({ data }) => {
-        const {data : { rows } } = data
-        message.success(data.msg, 10);
-        const remainingEvents = this.state.events.filter(event => event.id !== rows[0].id)
+        const {data : { rows }, msg } = data
+        message.success(msg, 10);
+        const {events} = this.state;
+        const remainingEvents = events.filter(event => event.id !== rows[0].id)
         this.setState({events: remainingEvents})
       })
       .catch(() => {
