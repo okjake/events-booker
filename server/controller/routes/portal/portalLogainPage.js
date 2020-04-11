@@ -13,7 +13,7 @@ const pinCodeValidation = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      res.status(400).json({ msg: err.message });
+      res.json({ msg: err.message });
     });
 };
 
@@ -28,7 +28,8 @@ const getHashedPinCode = (req, res, next) => {
 
 const createPortalToken = (req, res, next) => {
   const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY_PORTAL);
-  res.json({ msg: 'You are authorized' });
+  res.cookie('portalToken', token);
+  res.json({ msg: 'Portal, logged in successfully' });
 };
 
 module.exports = { pinCodeValidation, getHashedPinCode, createPortalToken };
