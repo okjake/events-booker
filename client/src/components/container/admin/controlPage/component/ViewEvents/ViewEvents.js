@@ -32,6 +32,7 @@ class ViewEvents extends Component {
         message.success(msg, 10);
         const { events } = this.state;
         const remainingEvents = events.filter(event => event.id !== rows[0].id)
+        console.log(remainingEvents);
         this.setState({ events: remainingEvents })
       })
       .catch(() => {
@@ -39,24 +40,28 @@ class ViewEvents extends Component {
       })
   };
 
-  handelEventButtons = (record) => (
+  handelEventButtons = (record) => {
+    const eventcode = record.event_code;
+    return(
     <div className='action-btns'>
       <Link className='show'
         to={
           {
-            pathname : `/dashboard/${record.event_code}/users`,
+            pathname : `/dashboard/${eventcode}/users`,
             state : { title : record.title }
           }
         }>Show </Link>
       <Button className='delete' type="primary" onClick={() => this.handleAction(record.id)}>
         Delete
         </Button>
-    </div>
-  )
+    </div> 
+    )
+  }
+  
 
   columns = [
     {
-      title: 'Title',
+      title: 'Event Name',
       dataIndex: 'title',
       key: 'title',
     },
@@ -71,7 +76,7 @@ class ViewEvents extends Component {
       key: 'category',
     },
     {
-      title: 'Count',
+      title: 'Number of users',
       dataIndex: 'count',
       key: 'count',
     },
