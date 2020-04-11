@@ -65,7 +65,7 @@ Create an Event booker app that allows the users to select which event they will
 - As an admin, I can track the user and view all events that he attended.
 
 #### For Admin-portal:
-I can access the attendance approval screen to help users approve their attendance by entering the code they already received. (portal)
+I can access the attendance approval screen to help users approve their attendance by entering the code they already received.
 
 ## The MVP (Demo GIF) :
 
