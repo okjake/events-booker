@@ -107,4 +107,4 @@ This is the schema of our database
 
   We use `nexmo module` to send a confirmation code for the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
 
-* **Export data to excel file.**
+* **Export data to Excel File.**
