@@ -14,12 +14,12 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path='/events/:eventProg/:eventCode' component={EventPage} />
+          <Route exact path="/" component={Landing} />
           <Route exact path="/register/:eventProg/:eventCode/:mobile" 
           component={Register}>
             <Route exact path='/login' component={AdminLogin}/>
       </Route>
         </Switch>
-        <AdminLogin />
       </Router>
     </div>
   );
