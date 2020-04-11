@@ -20,7 +20,7 @@ class ViewEvents extends Component {
           users: data,
         });
       }).catch(() => {
-        this.setState({ errorMessage: "Internal server error !!" })
+        this.setState({ errorMessage: "Internal server error !!", isLoaded: false })
       })
   }
 

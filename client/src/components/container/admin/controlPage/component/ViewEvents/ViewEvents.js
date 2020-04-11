@@ -12,22 +12,25 @@ class ViewEvents extends Component {
     events: [],
     serverError: null,
   }
+  
   componentDidMount() {
     axios.get('/api/v1/event')
-      .then(({ data }) => {
-        this.setState({
-          isLoaded: false,
-          events: data,
-        });
-      }).catch(() => {
-        this.setState({ serverError: "Internal server error !!" })
-      })
-  }
+    .then(({ data }) => {
+      this.setState({
+        isLoaded: false,
+        events: data,
+      });
+    }).catch(() => {
+      this.setState({ serverError: "Internal server error !!", isLoaded: false })
+    })  }
 
   handleAction = currentEvent => {
     axios.patch("/api/v1/event", { id: currentEvent })
       .then(({ data }) => {
+        const {data : { rows } } = data
         message.success(data.msg, 10);
+        const remainingEvents = this.state.events.filter(event => event.id !== rows[0].id)
+        this.setState({events: remainingEvents})
       })
       .catch(() => {
         this.setState({ serverError: "Internal server error !!" })
@@ -37,7 +40,7 @@ class ViewEvents extends Component {
   handelEventButtons = (record) => (
     <div className='action-btns'>
       <Link className='show' to={`/dashboard/${record.event_code}/users`}>Show </Link>
-      <Button className='delete'  type="primary" onClick={() => this.handleAction(record.id)}>
+      <Button className='delete' type="primary" onClick={() => this.handleAction(record.id)}>
         Delete
         </Button>
     </div>
@@ -77,7 +80,7 @@ class ViewEvents extends Component {
     const { events, isLoaded } = this.state
     return (
       <div className='table-event'>
-        {isLoaded ? (<Spin size='large' className='loading' />) : <Table columns={this.columns} dataSource={events} />}
+        {isLoaded ? (<Spin size='large' className='loading' />) : <Table rowKey='id' columns={this.columns} dataSource={events} />}
       </div>
     )
   }
