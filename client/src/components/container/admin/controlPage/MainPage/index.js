@@ -2,6 +2,7 @@ import React ,{Component} from "react";
 import {Button} from "antd"
 import Axios from 'axios'
 import { PlusSquareFilled } from '@ant-design/icons';
+import AddEvent from '../component/AddEvent'
 
 import "./style.css"
 
@@ -66,7 +67,7 @@ class Dashboard extends Component {
                         </div>
                     </aside>
                     <div className="block-el">
-                            {renderView==="add" && <div>componant add event</div>}
+                            {renderView==="add" &&<div className="form-div"><AddEvent className="addEvC"></AddEvent></div>}
                             {renderView ==="users" && <div>componant show users</div>}
                             {renderView ==="events" && <div>componant show events</div>}
                     </div>

@@ -87,9 +87,14 @@
     box-sizing: border-box;
     background-color:#F3F6F9;
     margin: auto;
-    height: 900px;
 }
+.dashboard .form-div{
+    margin: 20px;
 
+}
+.dashboard .ant-form{
+     width: 60%;
+ }
 @media (max-width:750px){
     .main-el{
         flex-direction: column;

@@ -78,7 +78,7 @@ router.all(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 
-router.all(['/users', '/event/:eventcode/users'], protectedRoute);
+router.all(['/users', '/event/:eventcode/users', '/event'], protectedRoute);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.patch('/event', deleteEvent);
