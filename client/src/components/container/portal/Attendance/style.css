@@ -1,22 +1,19 @@
-.attendance_header{
-    margin-top: 2rem;
+.attendance_header {
+  margin-top: 2rem;
 }
-.attendance-form{
-    display: flex;
-    justify-content: center;
+.attendance-form {
+  display: flex;
+  justify-content: center;
 }
-.attendance-form > div > div > .ant-form-item-explain{
-    display: none;
+.attendance-form > div > div > .ant-form-item-explain {
+  display: none;
 }
-.attendance-form__hidden-input{
-    display: none;
-}
-.attendance-form__code{
-    width: 8rem;
+.attendance-form__code {
+  width: 8rem;
 }
 .ant-input-number-input {
-    text-align: center;
+  text-align: center;
 }
-.attendance-form__btn{
-    width: 8rem;
+.attendance-form__btn {
+  width: 8rem;
 }

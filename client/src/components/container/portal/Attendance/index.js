@@ -28,7 +28,7 @@ class Attendance extends React.Component {
       });
   }
 
-  onFinish = ({ userCode, eventCode }) => {
+  onFinish = ({ userCode }, eventCode, resetFields) => {
     const { success, error } = this;
     axios
       .patch("/api/v1/attendance", {
@@ -37,7 +37,7 @@ class Attendance extends React.Component {
       })
       .then(({ data: { msg } }) => {
         success(msg);
-        this.setState({ loading: false });
+        resetFields();
       })
       .catch(
         ({
@@ -49,7 +49,6 @@ class Attendance extends React.Component {
           status === 400
             ? error(msg)
             : error("Something went wrong, please try again later");
-          this.setState({ loading: false });
         }
       );
   };
@@ -76,6 +75,7 @@ class Attendance extends React.Component {
   render() {
     const { error, isLoaded, events } = this.state;
     const { onFinish, onFinishFailed } = this;
+    const refs = events.map(() => React.createRef());
     return (
       <div className="wrapper">
         <header>
@@ -92,7 +92,7 @@ class Attendance extends React.Component {
             </div>
             <div className="attendance_header">
               <h3 className="header_title">
-                Welcome to 
+                Welcome to
                 <span className="header_subTitle"> GSG</span>
               </h3>
               <h2 className="sub-header">
@@ -115,7 +115,7 @@ class Attendance extends React.Component {
           ) : (
             <main>
               <ul className="main__grid">
-                {events.map(({ id, image, title, category, event_code }) => (
+                {events.map(({ id, image, title, category, event_code }, i) => (
                   <li className="card grid_item" key={id}>
                     <img className="card__image" src={image} alt={title} />
                     <div className="card__content">
@@ -131,19 +131,15 @@ class Attendance extends React.Component {
                         layout="inline"
                         hideRequiredMark={true}
                         size="middle"
+                        ref={refs[i]}
                         onFinishFailed={onFinishFailed}
-                        onFinish={onFinish}
+                        onFinish={(values) =>{
+                          const {current : {resetFields}} = refs[i]
+                          onFinish(values, event_code, resetFields)
+                        }
+                        }
                         className="attendance-form"
-                        initialValues={{
-                          eventCode: event_code,
-                        }}
                       >
-                        <Form.Item
-                          name="eventCode"
-                          className="attendance-form__hidden-input"
-                        >
-                          <InputNumber />
-                        </Form.Item>
                         <Form.Item
                           name="userCode"
                           validateTrigger={onFinish}
