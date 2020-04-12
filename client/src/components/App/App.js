@@ -18,7 +18,6 @@ const App = () => {
           <Route exact path="/register/:eventProg/:eventCode/:mobile" 
           component={Register} />
             <Route exact path='/admin' component={AdminLogin}/>
-      </Route>
         </Switch>
       </Router>
     </div>
