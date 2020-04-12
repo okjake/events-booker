@@ -67,8 +67,6 @@ Create an Event booker app that allows the users to select which event they will
 #### For Admin-portal:
 I can access the attendance approval screen to help users approve their attendance by entering the code they already received.
 
-## The MVP (Demo GIF) :
-
 
 ## App Setup :
 
@@ -101,10 +99,12 @@ This is the schema of our database
 ## Main Features of Our App:
 * **Send Google Calender Invitation:** 
 
-   We use the `nodemailer module` to send invitation email for the users who registered for a particular events. 
+   We used `nodemailer module` to send invitation email to the users who registered for a particular events. 
 
 * **Send Mobile Message (SMS):**
 
-  We use `nexmo module` to send a confirmation code for the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
+  We used `nexmo module` to send a confirmation code to the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
 
 * **Export data to Excel File.**
+
+   we used `react-html-table-to-excel` module to export users data to excel file.
