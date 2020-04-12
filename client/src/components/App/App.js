@@ -4,7 +4,6 @@ import EventPage from '../container/user/EventPage/index';
 import Landing from "../container/user/LandingPage";
 import Register from '../container/user/Registeration'
 import AdminLogin from '../container/admin/LogInPage'
-
 import "antd/dist/antd.css";
 import './App.css';
 

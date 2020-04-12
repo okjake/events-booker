@@ -28,7 +28,7 @@ class AdminLogin extends Component {
             message.success(data.msg)
             push('/admin/dashboard')
         }
-
+        
         this.setState({isLoaded:false})
 
     }).catch((err)=>{
@@ -68,8 +68,9 @@ class AdminLogin extends Component {
                         },
                         ]}
                     >
-                        <Input.password
+                        <Input
                         prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
                         placeholder="Password"
                         />
                     </Form.Item>
