@@ -96,7 +96,7 @@ class Landing extends React.Component {
               />
             )
           ) : (
-            <main className="main">
+            <main>
               <ul className="main__grid">
                 {filteredEvents.map((event) => (
                   <Card key={event.id} className="grid__item" info={event} />

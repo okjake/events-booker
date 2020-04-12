@@ -17,7 +17,7 @@ const validationCancelReg = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      res.status(400).json({ msg: err.message });
+      res.json({ msg: err.message });
     });
 };
 
@@ -36,7 +36,7 @@ const loginValidation = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      res.status(400).json({ msg: err.message });
+      res.json({ msg: err.message });
     });
 };
 
