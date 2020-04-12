@@ -2,17 +2,18 @@ import React from "react";
 import axios from "axios";
 import { Button, Result, Spin, Empty, Form, InputNumber, message } from "antd";
 
+import "./style.css";
+
 class Attendance extends React.Component {
   state = {
     error: null,
     isLoaded: false,
-    submiting: false,
     events: [],
   };
 
   componentDidMount() {
     axios
-      .get("/api/v1/event")
+      .get("/api/v1/event/date")
       .then(({ data }) => {
         this.setState({
           isLoaded: true,
@@ -27,27 +28,15 @@ class Attendance extends React.Component {
       });
   }
 
-  formRef = React.createRef();
-
-  onFinish = ({userCode}, event_code) => {
-    const {
-      error,
-      success,
-      formRef: {
-        current: { resetFields },
-      },
-    } = this;
-    console.log(event_code, 'here');
-    const requestBody = {
-      userCode,
-      eventCode : event_code,
-    };
-    this.setState({ loading: true });
+  onFinish = ({ userCode, eventCode }) => {
+    const { success, error } = this;
     axios
-      .patch("/api/v1/attendance", requestBody)
+      .patch("/api/v1/attendance", {
+        userCode,
+        eventCode,
+      })
       .then(({ data: { msg } }) => {
         success(msg);
-        resetFields();
         this.setState({ loading: false });
       })
       .catch(
@@ -57,13 +46,23 @@ class Attendance extends React.Component {
             data: { msg },
           },
         }) => {
-          console.log(status, msg);
-          status === 400 || status === 401
+          status === 400
             ? error(msg)
             : error("Something went wrong, please try again later");
           this.setState({ loading: false });
         }
       );
+  };
+
+  onFinishFailed = ({
+    errorFields: [
+      {
+        errors: [err],
+      },
+    ],
+  }) => {
+    const { error } = this;
+    error(err);
   };
 
   success = (msg) => {
@@ -75,12 +74,32 @@ class Attendance extends React.Component {
   };
 
   render() {
-    const { error, isLoaded, submiting, events } = this.state;
-    const { formRef, onFinish } = this;
+    const { error, isLoaded, events } = this.state;
+    const { onFinish, onFinishFailed } = this;
     return (
       <div className="wrapper">
         <header>
-          <h1>GSG</h1>
+          <div className="header">
+            <div className="header_logo">
+              <img
+                className="header_logo-img"
+                src="https://svgshare.com/i/Jru.svg"
+                alt="GSG Logo"
+              />
+              <div className="header_logo-title">
+                Events <span className="header_logo-subtitle">Booker</span>
+              </div>
+            </div>
+            <div className="attendance_header">
+              <h3 className="header_title">
+                Welcome to 
+                <span className="header_subTitle"> GSG</span>
+              </h3>
+              <h2 className="sub-header">
+                Please enter your code to approve your attendance
+              </h2>
+            </div>
+          </div>
         </header>
         <div>
           {error ? (
@@ -109,17 +128,25 @@ class Attendance extends React.Component {
                     </div>
                     <div>
                       <Form
-                        layout="horizontal"
+                        layout="inline"
                         hideRequiredMark={true}
-                        scrollToFirstError={true}
                         size="middle"
-                        onFinish={(values, user_code) =>
-                          onFinish(values, user_code)
-                        }
-                        ref={formRef}
+                        onFinishFailed={onFinishFailed}
+                        onFinish={onFinish}
+                        className="attendance-form"
+                        initialValues={{
+                          eventCode: event_code,
+                        }}
                       >
                         <Form.Item
+                          name="eventCode"
+                          className="attendance-form__hidden-input"
+                        >
+                          <InputNumber />
+                        </Form.Item>
+                        <Form.Item
                           name="userCode"
+                          validateTrigger={onFinish}
                           rules={[
                             {
                               required: true,
@@ -131,13 +158,16 @@ class Attendance extends React.Component {
                             },
                           ]}
                         >
-                          <InputNumber />
+                          <InputNumber
+                            className="attendance-form__code"
+                            placeholder="userCode"
+                          />
                         </Form.Item>
                         <Form.Item>
                           <Button
                             type="primary"
+                            className="attendance-form__btn"
                             htmlType="submit"
-                            loading={submiting}
                           >
                             Submit
                           </Button>
