@@ -7,11 +7,21 @@ import Landing from "../container/user/LandingPage";
 import Register from "../container/user/Registeration";
 import "./App.css";
 
+// Test 
+import PortalPage from '../container/portal/LogInPage'
+
 const App = () => {
   return (
     <div className="App">
       <Router>
         <Switch>
+          {/* Test */}
+          <Route
+            exact
+            path="/portal"
+            component={PortalPage}
+          />
+
           <Route
             exact
             path="/events/:eventProg/:eventCode"

@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 
 const checkPinCode = (req, res, next) => {
   const hashPinCode = req.pinCode;
-  const { pinCode } = req.body;
+  const { pinCode: { pinCode } } = req.body;
   bcrypt.compare(pinCode, hashPinCode).then((valid) => {
     if (!valid) {
       const err = new Error();
