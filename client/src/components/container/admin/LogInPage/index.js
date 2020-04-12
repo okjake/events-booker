@@ -19,15 +19,18 @@ class AdminLogin extends Component {
 
     axios.post(`/api/v1/login`, {email,password}).then(({data})=>{
         if(data.status === 400){
-            this.setState({isLoaded:false})
            this.setState({error:data.msg})
         }
          else if (data.status === 401){
             this.setState({error:data.msg})
         } else{
             const {history:{push}} = this.props;
+            message.success(data.msg)
             push('/admin/dashboard')
         }
+        
+        this.setState({isLoaded:false})
+
     }).catch((err)=>{
         this.setState({error:"Internal server error !!",isLoaded:false})
         })
@@ -57,10 +60,19 @@ class AdminLogin extends Component {
                     </Form.Item>
 
                     <Form.Item
-                        rules={[{ required: true, message: 'Please input your password!' }]}
+                        name="password"
+                        rules={[
+                        {
+                            required: true,
+                            message: 'Please input your Password!',
+                        },
+                        ]}
                     >
-                        <Input.Password placeholder="password" 
-                        prefix={<LockOutlined/>}/>
+                        <Input
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Password"
+                        />
                     </Form.Item>
 
                  
