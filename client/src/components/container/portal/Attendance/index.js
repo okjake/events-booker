@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { Button, Result, Spin, Empty, Form, InputNumber, message } from "antd";
 
 import "./style.css";
@@ -98,6 +99,10 @@ class Attendance extends React.Component {
               <h2 className="sub-header">
                 Please enter your code to approve your attendance
               </h2>
+              <h3 className="sub-header">
+                You haven't booked any event yet ?
+                <Link to={`/`} target="_blank"> Click here please</Link>
+              </h3>
             </div>
           </div>
         </header>
@@ -133,11 +138,12 @@ class Attendance extends React.Component {
                         size="middle"
                         ref={refs[i]}
                         onFinishFailed={onFinishFailed}
-                        onFinish={(values) =>{
-                          const {current : {resetFields}} = refs[i]
-                          onFinish(values, event_code, resetFields)
-                        }
-                        }
+                        onFinish={(values) => {
+                          const {
+                            current: { resetFields },
+                          } = refs[i];
+                          onFinish(values, event_code, resetFields);
+                        }}
                         className="attendance-form"
                       >
                         <Form.Item
