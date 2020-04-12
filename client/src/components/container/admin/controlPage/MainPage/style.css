@@ -81,21 +81,30 @@
     margin-left: 90px;
     font-size: 1.3rem;
 }
-.block-el{
+.dashboard .block-el{
     align-self: start;
     width: 90%;
     box-sizing: border-box;
     background-color:#F3F6F9;
     margin: auto;
-    height: 800px;
+    height: auto;
+}
+.dashboard .block-el h1{
+    color: #FB6C04;
+}
+.dashboard .block-el button,input{
+    border-radius: 4px;
 }
 .dashboard .form-div{
     margin: 20px;
 
 }
-.dashboard .ant-form{
-     width: 60%;
- }
+.dashboard .event-div{
+    margin: 20px;
+}
+.dashboard .user-div{
+    margin: 20px;
+}
 @media (max-width:750px){
     .main-el{
         flex-direction: column;
@@ -156,5 +165,16 @@
         color: #FB6C04;
         background-color: white;
         border: 1px solid #FB6C04;
+    }
+    .dashboard .form-div{
+        font-size: .7rem;
+    
+    }
+    .dashboard .event-div{
+        font-size: .7rem;
+    }
+    .dashboard .user-div{
+        font-size: .7rem;
+
     }
 }

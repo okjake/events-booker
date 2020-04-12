@@ -1,8 +1,6 @@
-.table-event{
-  width: 80%;
-}
 
 .table-event .loading{
+  width: 60%;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -20,7 +18,7 @@
   height: 32px;
   padding: 4px 15px;
   font-size: 14px;
-  border-radius: 2px;
+  border-radius: 4px;
   color: #fff;
   background-color: #1890ff;
   border-color: #1890ff;
@@ -43,16 +41,14 @@
   background-color: #40a9ff;
   border-color: #40a9ff;
 }
-
-.ant-table-thead > tr > th{
-  /* put here whatever background-color: to the head row in the table; */
-}
-
 @media  (max-width: 800px) {
   .ant-table-thead > tr > th,
   .ant-table-tbody > tr > td,
   .ant-table tfoot > tr > th,
   .ant-table tfoot > tr > td{
-    font-size: 20px;
+    font-size: .5rem;
+  }
+  .table-event{
+    font-size: .5rem;
   }
 }

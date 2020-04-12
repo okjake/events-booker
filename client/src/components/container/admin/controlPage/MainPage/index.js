@@ -3,6 +3,9 @@ import {Button} from "antd"
 import Axios from 'axios'
 import { PlusSquareFilled } from '@ant-design/icons';
 import AddEvent from '../component/AddEvent'
+import ViewEvents from '../component/ViewEvents/ViewEvents'
+import ViewUsers from '../component/ViewUsers/ViewUsers'
+
 
 import "./style.css"
 
@@ -68,9 +71,21 @@ class Dashboard extends Component {
                         </div>
                     </aside>
                     <div className="block-el">
-                            {renderView==="add" &&<div className="form-div"><AddEvent className="addEvC"></AddEvent></div>}
-                            {renderView ==="users" && <div>componant show users</div>}
-                            {renderView ==="events" && <div>componant show events</div>}
+                            {renderView==="add" &&
+                            <div className="form-div">
+                                <h1>Add Event</h1>
+                                <AddEvent className="addEvC"></AddEvent>
+                            </div>}
+                            {renderView ==="users" && 
+                            <div className="user-div">
+                                <h1>Users</h1>
+                                <ViewUsers></ViewUsers>
+                            </div>}
+                            {renderView ==="events" &&
+                            <div className="event-div">
+                                <h1>events</h1>
+                                <ViewEvents></ViewEvents>
+                            </div>}
                     </div>
                 </div>
             </div>

@@ -51,9 +51,11 @@ class ViewEvents extends Component {
             state : { title : record.title }
           }
         }>Show </Link>
-      <Button className='delete' type="primary" onClick={() => this.handleAction(record.id)}>
+      <Button className='delete'
+        type="danger"
+        onClick={() => this.handleAction(record.id)}>
         Delete
-        </Button>
+      </Button>
     </div> 
     )
   }
