@@ -1,28 +1,16 @@
 import React, { Component } from 'react'
 import { Form, Input, Button, Spin } from 'antd';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom'
 
 import './style.css'
 export class PortalLogin extends Component {
-  _isMounted = false;
   state = {
     isLoade: false,
     picCode: '',
     serverError:'',
     message:'',
-    redirect: false,
   }
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to='/target' />
-    }
-  }
+
   onFinish = value => {
     console.log(this.props)
     this.setState({ isLoade: true, pinCode:value })
