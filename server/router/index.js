@@ -29,6 +29,7 @@ const {
   viewEventsOnDate,
   createPortalToken,
   portalLogout,
+  getAdmin,
 } = require('../controller');
 
 const {
@@ -41,6 +42,7 @@ const {
   checkPinCode,
 } = require('../middleware');
 
+router.get('/admin', getAdmin);
 router.get('/event', getEvents);
 router.post(
   '/register',
