@@ -43,7 +43,7 @@ class RegisterUser extends Component {
         const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
       return (
-        <div className="main">
+        <div className="main-register">
           <div className="s1">
             <img alt="logo" src="https://www.wegrowwithc3.com/soon/wp-content/uploads/2015/08/hhfsyd25_400x400.png"/>
             <h1><span className="blue">welcome to</span> GSG event app</h1>

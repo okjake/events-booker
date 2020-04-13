@@ -37,6 +37,7 @@ CREATE TABLE user_event (
 CREATE TABLE admin (
     id SERIAL PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
+    img VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
     pin_code VARCHAR(200) NOT NULL

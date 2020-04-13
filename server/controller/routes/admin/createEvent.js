@@ -37,7 +37,7 @@ const validateEvent = (req, res, next) => {
   getEventDetails(req.body.eventCode)
     .then(({ rows }) => {
       if (rows.length) {
-        res.json({
+        res.status(400).json({
           msg: `an event with code ${req.body.eventCode} already exist, try another code`,
         });
       } else next();

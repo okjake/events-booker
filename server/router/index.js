@@ -29,6 +29,7 @@ const {
   viewEventsOnDate,
   createPortalToken,
   portalLogout,
+  getAdmin,
 } = require('../controller');
 
 const {
@@ -41,6 +42,7 @@ const {
   checkPinCode,
 } = require('../middleware');
 
+router.get('/admin', getAdmin);
 router.get('/event', getEvents);
 router.post(
   '/register',
@@ -76,7 +78,7 @@ router.all(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
 router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
 
-router.all(['/users', '/event/:eventcode/users'], protectedRoute);
+router.all(['/users', '/event/:eventcode/users', '/event'], protectedRoute);
 router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.patch('/event', deleteEvent);
