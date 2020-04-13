@@ -52,18 +52,7 @@ class Attendance extends React.Component {
         success(msg);
         resetFields();
       })
-      .catch(
-        ({
-          response: {
-            status,
-            data: { msg },
-          },
-        }) => {
-          status === 400
-            ? error(msg)
-            : error("Something went wrong, please try again later");
-        }
-      );
+      .catch(({ response: { data: { msg } } }) => error(msg));
   };
 
   onFinishFailed = ({
