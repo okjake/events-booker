@@ -14,6 +14,8 @@ class EventPage extends Component {
     const { history: { goBack, push } } = this.props;
     const { match: { params: { eventCode, eventProg } } } = this.props;
 
+    //get event data if state undefined
+
     return (
       <div className='container'>
         <img src={image} alt='event page background' className='image' />
