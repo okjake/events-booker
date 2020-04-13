@@ -44,25 +44,46 @@
 }
 
 
-.ant-input-affix-wrapper{
-    height: 47px;
-    border: 2px solid #186AA5;
-    border-radius: 32px;
-    outline: none;
+.main-section .ant-input-affix-wrapper{
+    height: 47px !important;
+    border: 1px solid rgb(192, 191, 191) !important;
+    border-radius: 32px !important;
+    outline: none !important;
+}
+
+.main-section .ant-btn-primary{
+    height: 45px !important;
+    border: 1px solid !important;
+    background-color: #186AA5 !important;
+    border-radius: 23px !important;
+
+}
+
+.main-section .anticon-mail{
+    margin-top: 12px !important;
+}
+
+.main-section .site-form-item-icon{
+    margin-top: 12px !important;
+
 }
 
 
-.ant-alert-no-icon{
-    margin-top: 22px;
+.main-section .ant-alert-no-icon{
+    margin-top: 15px;
+    border-radius: 20px;
+
 }
 
 
 
- .ant-btn-primary{
+ .main-section .ant-btn-primary{
     width: 354px;
     height: 49px;
     border-radius: 76px;
 }
+
+
 
 @media  (max-width: 1200px) {
 
@@ -84,6 +105,8 @@
         display: none;
     } 
 }
+
+
 
 @media  (max-width: 580px) {
     .container{
