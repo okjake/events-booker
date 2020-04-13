@@ -1,7 +1,6 @@
 const yup = require('yup');
 const jwt = require('jsonwebtoken');
 
-
 const getAdmin = require('../../../database/queries/getAdmin');
 
 const pinCodeValidation = (req, res, next) => {
@@ -13,7 +12,7 @@ const pinCodeValidation = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      res.json({ msg: err.message });
+      res.json({ msg: 'Invalid Inputs!', status: 400 });
     });
 };
 
@@ -29,7 +28,7 @@ const getHashedPinCode = (req, res, next) => {
 const createPortalToken = (req, res, next) => {
   const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY_PORTAL);
   res.cookie('portalToken', token);
-  res.json({ msg: 'Portal, logged in successfully' });
+  res.json({ msg: 'Portal, logged in successfully', status: 301 });
 };
 
 module.exports = { pinCodeValidation, getHashedPinCode, createPortalToken };

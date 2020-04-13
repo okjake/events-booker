@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Button, Spin } from 'antd';
+import { Form, Input, Button, Spin, Alert } from 'antd';
 import axios from 'axios';
 
 import './style.css'
@@ -7,32 +7,36 @@ export class PortalLogin extends Component {
   state = {
     isLoade: false,
     picCode: '',
-    serverError:'',
-    message:'',
+    serverError: '',
+    msg: '',
+    error: false
   }
-
-  onFinish = value => {
-    console.log(this.props)
-    this.setState({ isLoade: true, pinCode:value })
-    axios.post('/api/v1/portal/login', { pinCode: value}).then((res) => {
-      console.log(res.status)
-      if(res.status === 200){
+  onFinish = ({ pinCode }) => {
+    this.setState({ isLoade: true, })
+    axios.post('/api/v1/portal/login', { pinCode }).then(({ data }) => {
+      if (data.status === 301) {
         this.props.history.push('/portal/front');
-      }else{
+      } else if (data.status === 400) {
         this.setState({
           error: true,
-          message: res.msg,
+          msg: data.msg,
+          pinCode: '',
+        })
+    } else if (data.status === 401){
+        this.setState({
+          error: true,
+          msg: data.msg,
           pinCode: '',
         })
       }
       this.setState({ isLoade: false })
-    }).catch(() => {
+  }).catch(() => {
       this.setState({ serverError: "Internal server error !!", isLoade: false })
     })
   };
-  
+
   render() {
-    const { isLoade } = this.state;
+    const { isLoade, error, msg } = this.state;
     return (
       <div className='portal-contant'>
         <h1>Welcome to GSG Events portal page</h1>
@@ -44,15 +48,23 @@ export class PortalLogin extends Component {
             name="pinCode"
             rules={[{ message: 'Please input your pin-code!' }]}
           >
-            <Input.Password placeholder='Enter your pin code' required/>
+            <Input.Password placeholder='Enter your pin code' />
           </Form.Item>
-
+          {isLoade && (<Spin />)}
           <Form.Item >
             <Button type="primary" htmlType="submit">
-              {isLoade && (<Spin />)}
               Login
             </Button>
           </Form.Item>
+          {
+            error ?
+              <Alert
+                style={{ width: '75%' }}
+                message={msg}
+                type="error"
+                showIcon />
+              : null
+          }
         </Form>
       </div>
     );
