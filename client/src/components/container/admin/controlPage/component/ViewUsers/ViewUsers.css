@@ -1,0 +1,19 @@
+.table-users{
+  width: 80%;
+}
+
+.table-users .loading{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media  (max-width: 800px) {
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td,
+  .ant-table tfoot > tr > th,
+  .ant-table tfoot > tr > td{
+    font-size: 20px;
+  }
+}

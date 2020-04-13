@@ -10,7 +10,7 @@
 - Mohammed Irheem.
 - Rawan Abudahrouj.
 
-## Why we build this App ?
+## Summary :
 
 We've built this app to help GSG organization in organizing the registration for the events that they do. So When they announced for an event, it will be known who would like to attend and they can ensure if this person attended or not. By this way, the GSG can have information about the people who attended and they can use it in the future as they want.
 
@@ -65,17 +65,16 @@ Create an Event booker app that allows the users to select which event they will
 - As an admin, I can track the user and view all events that he attended.
 
 #### For Admin-portal:
-I can access the attendance approval screen to help users approve their attendance by entering the code they already received. (portal)
-
-## The MVP (Demo GIF) :
+I can access the attendance approval screen to help users approve their attendance by entering the code they already received.
 
 
 ## App Setup :
 
 To setup the app successfully on your device follow these steps :
 
-- Git clone this repo.
-- Then run this command : npm run project-setup.
+- Git clone this repo : `git clone `
+- Then run this command : `npm run project-setup`.
+- run this command : `npm run start-both`
 
 Now the app is in your device and it's working.
 
@@ -98,10 +97,14 @@ This is the schema of our database
 * Postgresql.
 
 ## Main Features of Our App:
-* Send Google Calender Invitation: 
+* **Send Google Calender Invitation:** 
 
-   We use the `nodemailer module` to send invitation email for the users who registered for a particular events. 
+   We used `nodemailer module` to send invitation email to the users who registered for a particular events. 
 
-* Send Mobile Message (SMS):
+* **Send Mobile Message (SMS):**
 
-  We use `nexmo module` to send a confirmation code for the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
+  We used `nexmo module` to send a confirmation code to the users, so when he/she attend the events he/she can confirm his/her attendance by this code.
+
+* **Export data to Excel File.**
+
+   we used `react-html-table-to-excel` module to export users data to excel file.

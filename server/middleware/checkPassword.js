@@ -9,7 +9,13 @@ const checkPassword = (req, res, next) => {
       const err = new Error();
       err.msg = 'incorrect password';
       err.status = 401;
+<<<<<<< HEAD
       throw (err);
+||||||| merged common ancestors
+      next(err);
+=======
+      throw err;
+>>>>>>> 730399c57d09eb4fa87883a9c873ff143e5774d5
     } else {
       const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY);
       res.cookie('token', token);
