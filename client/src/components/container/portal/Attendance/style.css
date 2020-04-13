@@ -17,3 +17,8 @@
 .attendance-form__btn {
   width: 8rem;
 }
+.attendance__logout {
+  position: absolute;
+  right: 0.25rem;
+  top: 0.25rem;
+}

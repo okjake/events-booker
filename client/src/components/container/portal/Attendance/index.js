@@ -1,7 +1,17 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Button, Result, Spin, Empty, Form, InputNumber, message } from "antd";
+import {
+  Button,
+  Result,
+  Spin,
+  Empty,
+  Form,
+  InputNumber,
+  message,
+  Modal,
+  Input,
+} from "antd";
 
 import "./style.css";
 
@@ -10,6 +20,7 @@ class Attendance extends React.Component {
     error: null,
     isLoaded: false,
     events: [],
+    modalDisplay: false,
   };
 
   componentDidMount() {
@@ -73,9 +84,53 @@ class Attendance extends React.Component {
     message.error(msg);
   };
 
+  showModal = () => {
+    this.setState({
+      modalDisplay: true,
+    });
+  };
+
+  hideModal = () => {
+    this.setState({
+      modalDisplay: false,
+    });
+  };
+
+  handleModalSubmit = ({
+    target: {
+      parentNode: {
+        firstChild: { value },
+      },
+    },
+  }) => {
+    const { success, error } = this;
+    axios
+      .post("/api/v1/portal/logout", { pinCode: value })
+      .then(({ data: { msg } }) => {
+        success(msg);
+        this.props.history.push('/');
+      })
+      .catch(
+        ({
+          response: {
+            status,
+            data: { msg },
+          },
+        }) => {
+            error(msg)
+        }
+      );
+  };
+
   render() {
-    const { error, isLoaded, events } = this.state;
-    const { onFinish, onFinishFailed } = this;
+    const { error, isLoaded, events, modalDisplay } = this.state;
+    const {
+      onFinish,
+      onFinishFailed,
+      showModal,
+      hideModal,
+      handleModalSubmit,
+    } = this;
     const refs = events.map(() => React.createRef());
     return (
       <div className="wrapper">
@@ -101,9 +156,36 @@ class Attendance extends React.Component {
               </h2>
               <h3 className="sub-header">
                 You haven't booked any event yet ?
-                <Link to={`/`} target="_blank"> Click here please</Link>
+                <Link to={`/`} target="_blank">
+                  Click here please
+                </Link>
               </h3>
             </div>
+            <div className="attendance__logout">
+              <Button onClick={showModal}>Log out</Button>
+            </div>
+          </div>
+          <div className="popup-modal">
+            <Modal
+              title="Do you really want to Log out ?"
+              visible={modalDisplay}
+              onCancel={hideModal}
+              footer={[]}
+            >
+              <Input
+                type="password"
+                placeholder="Enter Pin Code Please"
+                style={{ width: "75%", margin: "0.25rem" }}
+              />
+              <Button
+                style={{ display: "inline-block", margin: "0.25rem" }}
+                key="submit"
+                type="primary"
+                onClick={handleModalSubmit}
+              >
+                Submit
+              </Button>
+            </Modal>
           </div>
         </header>
         <div>
