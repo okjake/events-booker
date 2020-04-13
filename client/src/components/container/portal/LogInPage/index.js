@@ -6,7 +6,7 @@ import './style.css'
 export class PortalLogin extends Component {
   state = {
     isLoade: false,
-    picCode: '',
+    pinCode: '',
     serverError: '',
     msg: '',
     error: false,
