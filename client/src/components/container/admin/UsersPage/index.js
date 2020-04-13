@@ -24,6 +24,8 @@ class UsersPage extends Component {
     }
     render(){
         const { error, isLoaded, users } = this.state;
+        const {location : {state} } = this.props;
+        const eventName = "code"
         return(
             <div className="tableSection">
                 <header className="headerUsers">
@@ -34,9 +36,7 @@ class UsersPage extends Component {
                 }}>Exit</Button>
                 </div>
                 </header>
-                <h2>All Users On this Event</h2>
-                    {(error) && (<div>Error: {error.message}</div>)}
-                    {(!isLoaded)?<div><LoadingOutlined /> Loading</div>:(
+            <h2>All Users On Event :{eventName}</h2>
                         <div className="content-t">
                         <ReactHTMLTableToExcel
                             id="test-table-xls-button"
@@ -45,6 +45,8 @@ class UsersPage extends Component {
                             filename="eventusers"
                             sheet="tablexls"
                             buttonText="export users to xls"/>
+                        { error ?  <div>Error: {error.message}</div> :
+                        (!isLoaded) ? <div><LoadingOutlined /> Loading</div> :  ( 
                         <table id="table-to-xls" className="table-user">
                         <thead>
                         <tr>
@@ -65,9 +67,8 @@ class UsersPage extends Component {
                         ))}
                         </tbody>
                         </table>
-                        </div>
                         )}
-                
+                        </div>
             </div>
         )
     }   
