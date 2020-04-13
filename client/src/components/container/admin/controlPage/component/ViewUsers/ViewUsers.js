@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table,Spin} from 'antd';
+import { Table,Spin, Result} from 'antd';
 
 import axios from 'axios';
 
@@ -7,10 +7,9 @@ import './ViewUsers.css'
 
 class ViewEvents extends Component {
   state = {
-    error: null,
     isLoaded: true,
     users: [],
-    errorMessage:null,
+    serverError:null,
   }
   componentDidMount() {
     axios.get('/api/v1/users')
@@ -19,8 +18,8 @@ class ViewEvents extends Component {
           isLoaded: false,
           users: data,
         });
-      }).catch(() => {
-        this.setState({ errorMessage: "Internal server error !!", isLoaded: false })
+      }).catch((error) => {
+        this.setState({ serverError: error, isLoaded: false })
       })
   }
 
@@ -53,10 +52,10 @@ class ViewEvents extends Component {
   ];
 
   render() {
-    const { users, isLoaded } = this.state
+    const { users, isLoaded, serverError } = this.state
         return (
       <div className='table-users'>
-        {isLoaded ? (<Spin size='large' className='loading'/>) : <Table rowKey='mobile' columns={this.columns} dataSource={users} />}
+        {serverError ? <Result status="500" title="500" subTitle="Something went Wrong, please try again later"/>  : isLoaded ? (<Spin size='large' className='loading'/>) : <Table rowKey='mobile' columns={this.columns} dataSource={users} />}
       </div>
     )
   }
