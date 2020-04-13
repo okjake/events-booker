@@ -24,15 +24,16 @@ class UsersPage extends Component {
     }
     render(){
         const { error, isLoaded, users } = this.state;
-        const {location : {state} } = this.props;
-        const eventName = "code"
+        const {location : {state:{title}} } = this.props;
+        const eventName = title
         return(
             <div className="tableSection">
                 <header className="headerUsers">
                 <div className="content-t">
                 <img alt="logo" src="https://cdn.discordapp.com/attachments/690170174116331638/697432051929972767/GSG_Logo_svg.svg"/>
                 <Button type="danger" onClick={()=>{
-                    this.props.history.goBack();
+                    const {history:{goBack}}=this.props
+                    goBack();
                 }}>Exit</Button>
                 </div>
                 </header>

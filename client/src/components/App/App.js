@@ -13,7 +13,10 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        {/* <Link to="/dashboard/:eventcode/users">users</Link> */}
+        {/* <Link to={{
+            pathname :"/dashboard/:eventcode/users",
+            state : { title : "free lancing" }
+          }}>users</Link> */}
         <Switch>
           <Route exact path='/events/:eventProg/:eventCode' component={EventPage} />
           <Route exact path="/" component={Landing} />
