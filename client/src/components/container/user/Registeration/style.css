@@ -1,4 +1,4 @@
-    .main{
+    .main-register{
         display: flex;
         overflow: hidden;
         height: 100vh;
@@ -90,7 +90,7 @@
 
 }
 @media  (max-width: 580px) {
-    .main{
+    .main-register{
         height: 100%;
     }
     .s1 img{

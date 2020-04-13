@@ -1,58 +1,40 @@
-.table-event{
-  width: 80%;
-}
-
-.table-event .loading{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
 
 .action-btns .show{
-  line-height: 1.5715;
-  position: relative;
-  font-weight: 400;
-  white-space: nowrap;
-  text-align: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   height: 32px;
-  padding: 4px 15px;
+  padding:6px 21px;
   font-size: 14px;
-  border-radius: 2px;
+  border-radius: 4px;
   color: #fff;
   background-color: #1890ff;
   border-color: #1890ff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
-  outline: 0;
-  display: inline-block;
-  border: 1px solid transparent;
   margin-right: 10px;
-  width: 80px;
-  margin-top: 3px;
 }
 
 .action-btns .delete{
   width: 80px;
-  margin-top: 3px;
+  margin-top: 10px;
+  text-align: center;
 }
 .action-btns .show:hover{
   color: #fff;
   background-color: #40a9ff;
   border-color: #40a9ff;
 }
-
-.ant-table-thead > tr > th{
-  /* put here whatever background-color: to the head row in the table; */
+.ant-table-content{
+  width: 100%;
 }
-
 @media  (max-width: 800px) {
-  .ant-table-thead > tr > th,
-  .ant-table-tbody > tr > td,
-  .ant-table tfoot > tr > th,
-  .ant-table tfoot > tr > td{
-    font-size: 20px;
+  .table-event{
+    font-size: .5rem;
+  }
+  .action-btns .delete{
+    margin-top: 10px;
+    font-size: .6rem;
+    width: 68px;
+    height: 25px;
+  }
+  .action-btns .show{
+    font-size: .6rem;
   }
 }
