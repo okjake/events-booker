@@ -24,4 +24,6 @@ const checkEmailIfExist = (req, res, next) => {
       }
     });
 };
+
+
 module.exports = checkEmailIfExist;

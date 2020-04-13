@@ -7,7 +7,7 @@ const checkPassword = (req, res, next) => {
   bcrypt.compare(password, hsashPass).then((result) => {
     if (result === false) {
       const err = new Error();
-      err.msg = 'incorect password';
+      err.msg = 'incorrect password';
       err.status = 401;
       throw err;
     } else {
