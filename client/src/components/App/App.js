@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Landing from "../container/user/LandingPage";
-import Dashboard from "../container/admin/controlPage/MainPage"
+import EventPage from '../container/user/EventPage';
+import Landing from '../container/user/LandingPage';
 import Register from '../container/user/Registeration'
-import EventPage from "../container/user/EventPage";
+import UsersPage from '../container/admin/UsersPage'
+import Dashboard from "../container/admin/controlPage/MainPage"
 import AdminLogin from '../container/admin/LogInPage'
 
 import "antd/dist/antd.css";
@@ -23,9 +24,9 @@ const App = () => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/admin/dashboard" component={Dashboard} />
           <Route exact path="/register/:eventProg/:eventCode/:mobile" 
-          component={Register}/>     
-           <Route exact path='/admin' component={AdminLogin}/>
-
+          component={Register}/>
+          <Route exact path="/dashboard/:eventcode/users" component={UsersPage}/>
+          <Route exact path='/admin' component={AdminLogin}/>
         </Switch>
       </Router>
     </div>
