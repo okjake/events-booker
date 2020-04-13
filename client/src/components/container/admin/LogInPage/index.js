@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Button ,Form,Input, Alert,message} from 'antd';
+import { Button ,Form,Input, Alert,message, Spin} from 'antd';
 import {MailOutlined, LockOutlined} from '@ant-design/icons';
 
 import './style.css'
@@ -18,16 +18,15 @@ class AdminLogin extends Component {
 
 
     axios.post(`/api/v1/login`, {email,password}).then(({data})=>{
-        if(data.status === 400){
-           this.setState({error:data.msg})
-        }
-         else if (data.status === 401){
-            this.setState({error:data.msg})
-        } else{
+        console.log(data);
+        if(data.status === 201){
             const {history:{push}} = this.props;
             message.success(data.msg)
             push('/admin/dashboard')
         }
+         else {
+            this.setState({error:data.msg})
+        } 
         
         this.setState({isLoaded:false})
 
@@ -40,9 +39,7 @@ class AdminLogin extends Component {
 
  render(){
 
-    const {error} = this.state;
-
-
+    const {error, isLoaded} = this.state;
     return(
         <div class="container">
             <div class="main-section">
@@ -77,7 +74,7 @@ class AdminLogin extends Component {
 
                  
                         <Button type="primary" htmlType="submit">
-                        Login
+                    {isLoaded ? <Spin /> : "Login"}
                         </Button>
 
                     {error&& <Alert message={error} type="error" />}
