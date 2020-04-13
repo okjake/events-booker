@@ -1,20 +1,42 @@
 import React, { Component } from 'react'
 import { Form, Input, Button, Spin } from 'antd';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 import './style.css'
-export class PrtalLogin extends Component {
+export class PortalLogin extends Component {
+  _isMounted = false;
   state = {
     isLoade: false,
     picCode: '',
     serverError:'',
+    message:'',
+    redirect: false,
+  }
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/target' />
+    }
   }
   onFinish = value => {
-    this.setState({ isLoade: true })
-    
-    console.log('Success:', value);
-    axios.post('/api/v1/portal/login', { pinCode: value}).then(data => {
-      console.log(data)
+    console.log(this.props)
+    this.setState({ isLoade: true, pinCode:value })
+    axios.post('/api/v1/portal/login', { pinCode: value}).then((res) => {
+      console.log(res.status)
+      if(res.status === 200){
+        this.props.history.push('/portal/front');
+      }else{
+        this.setState({
+          error: true,
+          message: res.msg,
+          pinCode: '',
+        })
+      }
       this.setState({ isLoade: false })
     }).catch(() => {
       this.setState({ serverError: "Internal server error !!", isLoade: false })
@@ -49,4 +71,4 @@ export class PrtalLogin extends Component {
   }
 }
 
-export default PrtalLogin
+export default PortalLogin
