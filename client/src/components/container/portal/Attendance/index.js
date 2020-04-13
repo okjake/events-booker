@@ -12,6 +12,7 @@ import {
   Modal,
   Input,
 } from "antd";
+import moment from "moment";
 
 import "./style.css";
 
@@ -76,6 +77,31 @@ class Attendance extends React.Component {
     error(err);
   };
 
+  handleModalSubmit = ({
+    target: {
+      parentNode: {
+        firstChild: { value },
+      },
+    },
+  }) => {
+    const { success, error } = this;
+    axios
+      .post("/api/v1/portal/logout", { pinCode: value })
+      .then(({ data: { msg } }) => {
+        success(msg);
+        this.props.history.push("/portal");
+      })
+      .catch(
+        ({
+          response: {
+            data: { msg },
+          },
+        }) => {
+          error(msg);
+        }
+      );
+  };
+
   success = (msg) => {
     message.success(msg);
   };
@@ -94,32 +120,6 @@ class Attendance extends React.Component {
     this.setState({
       modalDisplay: false,
     });
-  };
-
-  handleModalSubmit = ({
-    target: {
-      parentNode: {
-        firstChild: { value },
-      },
-    },
-  }) => {
-    const { success, error } = this;
-    axios
-      .post("/api/v1/portal/logout", { pinCode: value })
-      .then(({ data: { msg } }) => {
-        success(msg);
-        this.props.history.push('/');
-      })
-      .catch(
-        ({
-          response: {
-            status,
-            data: { msg },
-          },
-        }) => {
-            error(msg)
-        }
-      );
   };
 
   render() {
@@ -155,10 +155,12 @@ class Attendance extends React.Component {
                 Please enter your code to approve your attendance
               </h2>
               <h3 className="sub-header">
-                You haven't booked any event yet ?
-                <Link to={`/`} target="_blank">
-                  Click here please
-                </Link>
+                You haven't booked any event yet ?{" "}
+                <span>
+                  <Link to={`/`} target="_blank">
+                    Click here please
+                  </Link>
+                </span>
               </h3>
             </div>
             <div className="attendance__logout">
@@ -179,11 +181,10 @@ class Attendance extends React.Component {
               />
               <Button
                 style={{ display: "inline-block", margin: "0.25rem" }}
-                key="submit"
                 type="primary"
                 onClick={handleModalSubmit}
               >
-                Submit
+                Log out
               </Button>
             </Modal>
           </div>
@@ -202,64 +203,69 @@ class Attendance extends React.Component {
           ) : (
             <main>
               <ul className="main__grid">
-                {events.map(({ id, image, title, category, event_code }, i) => (
-                  <li className="card grid_item" key={id}>
-                    <img className="card__image" src={image} alt={title} />
-                    <div className="card__content">
-                      <h3 className="card__p">
-                        <b>{title}</b>
-                      </h3>
-                      <p className="card__p">
-                        <b>By :</b> {category}
-                      </p>
-                    </div>
-                    <div>
-                      <Form
-                        layout="inline"
-                        hideRequiredMark={true}
-                        size="middle"
-                        ref={refs[i]}
-                        onFinishFailed={onFinishFailed}
-                        onFinish={(values) => {
-                          const {
-                            current: { resetFields },
-                          } = refs[i];
-                          onFinish(values, event_code, resetFields);
-                        }}
-                        className="attendance-form"
-                      >
-                        <Form.Item
-                          name="userCode"
-                          validateTrigger={onFinish}
-                          rules={[
-                            {
-                              required: true,
-                              type: "integer",
-                              min: 100,
-                              max: 999,
-                              message:
-                                "Event's code must be a number of 3 digits",
-                            },
-                          ]}
+                {events.map(
+                  ({ id, image, title, category, event_code, date }, i) => (
+                    <li className="card grid_item" key={id}>
+                      <img className="card__image" src={image} alt={title} />
+                      <div className="card__content">
+                        <h3 className="card__p">
+                          <b>{title}</b>
+                        </h3>
+                        <p className="card__p">
+                          <b>By :</b> {category}
+                        </p>
+                        <p className="card__p">
+                          <b>Time :</b> {moment(date).format("hh:mm a")}
+                        </p>
+                      </div>
+                      <div>
+                        <Form
+                          layout="inline"
+                          hideRequiredMark={true}
+                          size="middle"
+                          ref={refs[i]}
+                          onFinishFailed={onFinishFailed}
+                          onFinish={(values) => {
+                            const {
+                              current: { resetFields },
+                            } = refs[i];
+                            onFinish(values, event_code, resetFields);
+                          }}
+                          className="attendance-form"
                         >
-                          <InputNumber
-                            className="attendance-form__code"
-                            placeholder="userCode"
-                          />
-                        </Form.Item>
-                        <Form.Item>
-                          <Button
-                            type="primary"
-                            className="attendance-form__btn"
-                            htmlType="submit"
+                          <Form.Item
+                            name="userCode"
+                            validateTrigger={onFinish}
+                            rules={[
+                              {
+                                required: true,
+                                type: "integer",
+                                min: 100,
+                                max: 999,
+                                message:
+                                  "Event's code must be a number of 3 digits",
+                              },
+                            ]}
                           >
-                            Submit
-                          </Button>
-                        </Form.Item>
-                      </Form>
-                    </div>
-                  </li>
-                ))}
+                            <InputNumber
+                              className="attendance-form__code"
+                              placeholder="userCode"
+                            />
+                          </Form.Item>
+                          <Form.Item>
+                            <Button
+                              type="primary"
+                              className="attendance-form__btn"
+                              htmlType="submit"
+                            >
+                              Submit
+                            </Button>
+                          </Form.Item>
+                        </Form>
+                      </div>
+                    </li>
+                  )
+                )}
               </ul>
             </main>
           )}
