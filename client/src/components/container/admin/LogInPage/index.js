@@ -15,10 +15,7 @@ class AdminLogin extends Component {
 
     onFinish=({email, password})=>{
         this.setState({isLoaded:true})
-
-
-    axios.post(`/api/v1/login`, {email,password}).then(({data})=>{
-        console.log(data);
+        axios.post(`/api/v1/login`, {email,password}).then(({data})=>{
         if(data.status === 201){
             const {history:{push}} = this.props;
             message.success(data.msg)

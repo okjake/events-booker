@@ -27,9 +27,9 @@ class Dashboard extends Component {
     logout=()=>{
         Axios.get('/api/v1/logout').then((res)=>{
             const {history:{push}}=this.props
-            push('/login');
+            push('/admin');
         }).catch(err=>{
-            message.error('failed on logout process');
+            message.error('error with logout process');
         })
     }
 
