@@ -1,11 +1,54 @@
 .portal-contant{
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
   width: 400px;
-  height: 300px; */
+}
+
+.portal-contant .title{
+  text-align: center;
+  color: #186AA5;
+  font-weight: bolder;
+}
+.portal-contant .title span {
+  color: #fb6c04 ;
+}
+
+.main-form{
+  display: flex;
+  margin :0px
+}
+
+.ant-input-affix-wrapper {
+  height: 40px;
+  border-radius: 6px;
+  margin-bottom: 0px;
+  outline: #fb6c04;
+}
+.ant-btn-primary{
+  height: 40px;
+  background-color: #186AA5;
+  font-size: larger;
+}
+
+.ant-form-item{
+  margin-bottom: 0px;
+}
+.alert{
+  margin-top: 5px;
+  width: 97%;
+}
+.portal-contant .ant-btn-primary:hover {
+  background-color: rgb(49, 125, 179);
+  color: white;
+}
+@media  (max-width: 580px) {
+  .portal-contant {
+    font-weight: bold;
+    width: 300px;
+  }
+  .alert{
+    width: 300px;
+  }
 }
