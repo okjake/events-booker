@@ -15,6 +15,7 @@ const {
   registerValidation,
   newUserExist,
   addUserToDB,
+  getEventDetails,
 
 } = require('./routes/user');
 
@@ -69,4 +70,5 @@ module.exports = {
   getHashedPinCode,
   createPortalToken,
   portalLogout,
+  getEventDetails,
 };

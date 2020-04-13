@@ -29,6 +29,7 @@ const {
   viewEventsOnDate,
   createPortalToken,
   portalLogout,
+  getEventDetails,
 } = require('../controller');
 
 const {
@@ -42,6 +43,8 @@ const {
 } = require('../middleware');
 
 router.get('/event', getEvents);
+router.get('/event/:eventcode', getEventDetails);
+
 router.post(
   '/register',
   registerValidation,

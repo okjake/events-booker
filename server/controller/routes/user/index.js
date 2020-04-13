@@ -1,4 +1,5 @@
 const getEvents = require('./mainPage');
+const getEventDetails = require('./getEvent');
 const cancelRegistration = require('./cancelRegistration');
 const sendSms = require('./sendSmsMsg');
 const {
@@ -28,4 +29,5 @@ module.exports = {
   registerValidation,
   newUserExist,
   addUserToDB,
+  getEventDetails,
 };
