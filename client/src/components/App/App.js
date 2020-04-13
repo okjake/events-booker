@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Link to="/admin/dashboard">dashbard</Link>
+        {/* <Link to="/admin/dashboard">dashbard</Link> */}
         <Switch>
           <Route
             exact
@@ -22,8 +22,7 @@ const App = () => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/admin/dashboard" component={Dashboard} />
           <Route exact path="/register/:eventProg/:eventCode/:mobile" 
-          component={Register}>
-      </Route>
+          component={Register}/>
         </Switch>
       </Router>
     </div>
