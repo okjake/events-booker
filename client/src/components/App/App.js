@@ -5,22 +5,15 @@ import "antd/dist/antd.css";
 import EventPage from "../container/user/EventPage";
 import Landing from "../container/user/LandingPage";
 import Register from "../container/user/Registeration";
-import "./App.css";
-
-// Test 
 import PortalPage from '../container/portal/LogInPage'
+
+import "./App.css";
 
 const App = () => {
   return (
     <div className="App">
       <Router>
         <Switch>
-          {/* Test */}
-          <Route
-            exact
-            path="/portal"
-            component={PortalPage}
-          />
 
           <Route
             exact
@@ -33,6 +26,7 @@ const App = () => {
             path="/register/:eventProg/:eventCode/:mobile"
             component={Register}
           />
+           <Route exact path="/portal" component={PortalPage} />
         </Switch>
       </Router>
     </div>

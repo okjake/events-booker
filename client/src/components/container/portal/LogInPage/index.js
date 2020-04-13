@@ -17,9 +17,10 @@ export class PortalLogin extends Component {
   };
 
   onFinish = ({ pinCode }) => {
+    this.setState({ isLoade: true })
     axios.post('/api/v1/portal/login', { pinCode}).then(({ data }) => {
       if (data.status === 301) {
-        this.props.history.push('/portal/front');
+        this.props.history.push('/portal/attendance');
         message.success(data.msg, 10);
       } else if (data.status === 400) {
         this.setState({
@@ -58,10 +59,9 @@ export class PortalLogin extends Component {
           </Form.Item>
           <Form.Item >
             <Button type="primary" htmlType="submit">
-              Login
+            {isLoade ? (<Spin />) : " Login "}
             </Button>
           </Form.Item>
-          {isLoade && (<Spin />)}
         </Form>
         {
           error ?
