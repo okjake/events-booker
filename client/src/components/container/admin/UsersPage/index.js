@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Axios from "axios";
-import { Button } from "antd";
+import { Button, Empty } from "antd";
 import {LoadingOutlined} from "@ant-design/icons"
 
 import "./style.css"
@@ -47,7 +47,8 @@ class UsersPage extends Component {
                             sheet="tablexls"
                             buttonText="export users to xls"/>
                         { error ?  <div>Error: {error.message}</div> :
-                        (!isLoaded) ? <div><LoadingOutlined /> Loading</div> :  ( 
+                        (!isLoaded) ? <div><LoadingOutlined /> Loading</div> : (!users.length) ?  <Empty  description={<span>No users for this event</span>}
+                      /> :  ( 
                         <table id="table-to-xls" className="table-user">
                         <thead>
                         <tr>
