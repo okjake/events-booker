@@ -11,6 +11,7 @@ class PopupBtnEventcomp extends Component {
     visible: false,
     error: false,
     isLoade: false,
+    errorMessage: null,
   };
 
   showModal = () => {
@@ -38,35 +39,36 @@ class PopupBtnEventcomp extends Component {
     if (type === 'booking') {
       axios.post('/api/v1/checkUser', { mobile, eventCode })
         .then(({ data }) => {
-          if (data.status === 301) {
-            this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
-          } else {
-            this.setState({
-              visible: false,
-              mobile: '',
-            });
-            message.success(data.msg, 10);
-          }
-          this.setState({ isLoade: false })
-        })
-        .catch(({response: {data:{msg}}}) => {
-          this.setState({
-            error: true,
-            message: msg,
-            mobile: '',
-            isLoade: false,
-          })
-        })
-    } else if (type === 'cancel') {
-      axios.post('/api/v1/cancelUser', { mobile, eventCode })
-        .then(({ data: {msg} }) => {
           this.setState({
             visible: false,
             mobile: '',
+            isLoade: false,
           });
-          message.warning(msg, 10);
+          message.success(data.msg, 5);
         })
-        .catch(({ response: { data: {msg} } }) => {
+        .catch(({ response: { data: { msg }, status } }) => {
+          if (status == 301) {
+            this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
+          } else {
+            this.setState({
+              error: true,
+              message: msg,
+              mobile: '',
+              isLoade: false,
+            })
+          }
+        })
+    } else if (type === 'cancel') {
+      axios.post('/api/v1/cancelUser', { mobile, eventCode })
+        .then(({ data: { msg } }) => {
+          this.setState({
+            visible: false,
+            mobile: '',
+            isLoade: false
+          });
+          message.warning(msg, 5);
+        })
+        .catch(({ response: { data: { msg } } }) => {
           this.setState({
             error: true,
             message: msg,
