@@ -32,13 +32,7 @@ const newUserExist = (req, res, next) => {
       throw error;
     }
   }).catch((err) => {
-    const { status } = err;
-    switch (status) {
-      case 400:
-        res.status(400).json(err);
-        break;
-      default: next(err);
-    }
+    next(err);
   });
 };
 
