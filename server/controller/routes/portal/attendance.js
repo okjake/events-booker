@@ -35,7 +35,7 @@ const validateAttendence = (req, res, next) => {
         req.eventId = rows[0].id;
         next();
       } else {
-        res.json({
+        res.status(400).json({
           msg: `event with code ${req.body.eventCode} doesn't exist`,
         });
       }
@@ -48,7 +48,7 @@ const checkUserBooking = (req, res, next) => {
     .then(({ rows }) => {
       if (rows.length) next();
       else {
-        res.json({
+        res.status(400).json({
           msg:
             "user hasn't booked this event yet, please book the event then try again",
         });
