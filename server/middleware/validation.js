@@ -36,7 +36,7 @@ const loginValidation = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      res.json({ msg: err.message });
+      res.status(400).json({ msg: 'Invalid Inputs!' });
     });
 };
 

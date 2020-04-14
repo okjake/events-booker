@@ -13,13 +13,13 @@ const checkPassword = (req, res, next) => {
     } else {
       const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY);
       res.cookie('token', token);
-      res.json({ msg: 'logged in successfully', status: 201 });
+      res.json({ msg: 'logged in successfully' });
     }
   }).catch((err) => {
     const { status } = err;
     switch (status) {
       case 401:
-        res.json(err);
+        res.status(401).json(err);
         break;
       default: next(err);
     }

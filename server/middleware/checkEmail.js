@@ -18,7 +18,7 @@ const checkEmailIfExist = (req, res, next) => {
       const { status } = err;
       switch (status) {
         case 400:
-          res.json(err);
+          res.status(400).json(err);
           break;
         default: next(err);
       }
