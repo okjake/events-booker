@@ -38,7 +38,7 @@ class EventPage extends Component {
     const {image,title,otherEventProps,error}=this.state
     return (
       <div className='container'>
-        {(error)&&(<Alert type="error">cont find event</Alert>)}
+        {(error)&&(<Alert type="error">cant find event</Alert>)}
         <img src={(image)?image:this.state.image} alt='event page background' className='image' />
         <div className='contant'>
           <EventPageContent {...otherEventProps} />
