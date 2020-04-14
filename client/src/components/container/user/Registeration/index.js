@@ -9,9 +9,8 @@ import './style.css'
 
 class RegisterUser extends Component {
   state = {
-    emailMsg: '',
+    errorMsg: '',
     isLoade: false,
-    serverError: ''
   }
   onFinish = ({ firstName, lastName, location, email }) => {
     this.setState({ isLoade: true })
@@ -20,10 +19,11 @@ class RegisterUser extends Component {
     } = this.props;
     axios.post(`/api/v1/register`,
       { firstName, lastName, location, email, mobile, eventCode }).then(({ data }) => {
+        this.setState({ isLoade: true })
         message.success(data.msg);
         push('/')
       }).catch(({ response: { data: { msg } } }) => {
-        this.setState({ emailMsg: msg, isLoade: false })
+        this.setState({ errorMsg: msg, isLoade: false })
       })
   }
   goBack = () => {
@@ -33,7 +33,7 @@ class RegisterUser extends Component {
     goBack()
   }
   render() {
-    const { emailMsg, serverError, isLoade } = this.state;
+    const { errorMsg, isLoade } = this.state;
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
     return (
@@ -74,12 +74,11 @@ class RegisterUser extends Component {
             </Form.Item>
 
             <Button htmlType="submit"
-              type="primary"> {isLoade && (<Spin indicator={antIcon} />)}Submit </Button>
+              type="primary"> {isLoade ? (<Spin indicator={antIcon} />) : "Submit"} </Button>
 
             <Button type="danger" onClick={this.goBack}> Exit </Button>
 
-            {emailMsg && <Alert message={emailMsg} type="error" />}
-            {serverError && <Alert message={serverError} type="error" />}
+            {errorMsg && <Alert message={errorMsg} type="error" />}
 
           </Form>
 
