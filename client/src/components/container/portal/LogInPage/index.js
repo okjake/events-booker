@@ -27,7 +27,7 @@ export class PortalLogin extends Component {
           error: true,
           msg: data.msg,
           pinCode: '',
-        })
+        })}
       this.setState({ isLoade: false })
     }).catch(() => {
       this.setState({ serverError: "Internal server error !!", isLoade: false })
