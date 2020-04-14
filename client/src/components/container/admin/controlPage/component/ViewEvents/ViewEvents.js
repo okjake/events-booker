@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import { Table, message, Spin, Button } from 'antd';
+import { Table, message, Spin, Button, Result } from 'antd';
 import axios from 'axios';
 
 import './ViewEvents.css'
 
 class ViewEvents extends Component {
   state = {
-    error: null,
+    deleteError: null,
     isLoaded: true,
     events: [],
     serverError: null,
@@ -20,8 +20,8 @@ class ViewEvents extends Component {
           isLoaded: false,
           events: data,
         });
-      }).catch(() => {
-        this.setState({ serverError: "Internal server error !!", isLoaded: false })
+      }).catch((error) => {
+        this.setState({ serverError: error, isLoaded: false })
       })
   }
 
@@ -32,11 +32,12 @@ class ViewEvents extends Component {
         message.success(msg, 10);
         const { events } = this.state;
         const remainingEvents = events.filter(event => event.id !== rows[0].id)
-        console.log(remainingEvents);
         this.setState({ events: remainingEvents })
       })
       .catch(() => {
-        this.setState({ serverError: "Internal server error !!" })
+        const error = "Internal server error, the event hasn't deleted yet!!";
+        this.setState({ deleteError: error })
+        message.error(error)
       })
   };
 
@@ -51,9 +52,11 @@ class ViewEvents extends Component {
             state : { title : record.title }
           }
         }>Show </Link>
-      <Button className='delete' type="primary" onClick={() => this.handleAction(record.id)}>
+      <Button className='delete'
+        type="danger"
+        onClick={() => this.handleAction(record.id)}>
         Delete
-        </Button>
+      </Button>
     </div> 
     )
   }
@@ -90,10 +93,10 @@ class ViewEvents extends Component {
   ];
 
   render() {
-    const { events, isLoaded } = this.state
+    const { events, isLoaded, serverError } = this.state
     return (
       <div className='table-event'>
-        {isLoaded ? (<Spin size='large' className='loading' />) : <Table rowKey='id' columns={this.columns} dataSource={events} />}
+        { serverError ? <Result status="500" title="500" subTitle="Something went Wrong, please try again later"/> : isLoaded ? (<Spin size='large' className='loading' />) : <Table rowKey='id' columns={this.columns} dataSource={events} />}
       </div>
     )
   }
