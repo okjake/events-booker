@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from "antd";
+import { Button ,Alert} from "antd";
 
 import EventPageContent from '../EventPageContent/EventPageContent'
 import PopupBtnEventcomp from '../PopupBtnEventcomp/PopupBtnEventcomp'
@@ -11,36 +11,34 @@ class EventPage extends Component {
   state={
     image:"",
     title:"",
-    otherEventState:[],
+    otherEventProps:[],
     error:""
   }
-  getEventData(eventCode){
-    Axios.get(`/api/v1/event/${eventCode}`)
-    .then(({data})=>{
-      const {image,title,...otherEventState}=data
-      this.setState({image,title,otherEventState})
-    })
-    .catch(error=>{
-      this.setState({error})
-    })
-  }
-
-  render() {
+  componentDidMount(){
     const { location: { state: {info : { image, ...otherEventProps }} } } = this.props;
     const { location: { state: {info:{title}} } } = this.props;
+    const { match: { params: { eventCode } } } = this.props;
+    if(this.props.location.state.info){
+      this.setState({image,title,otherEventProps})
+    }else{
+      Axios.get(`/api/v1/event/${eventCode}`)
+      .then(({data})=>{
+        const {image,title,...otherEventProps}=data
+        this.setState({image,title,otherEventProps})
+      })
+      .catch(error=>{
+        this.setState({error})
+      })
+  }
+}
+
+  render() {
     const { history: { goBack, push } } = this.props;
     const { match: { params: { eventCode, eventProg } } } = this.props;
-    const {otherEventState,error}=this.state
-
-    if(!otherEventProps){
-      this.getEventData(eventCode)
-    }
-    if(error){
-      return(<div>error</div>)
-    }
-    else{
+    const {image,title,otherEventProps,error}=this.state
     return (
       <div className='container'>
+        {(error)&&(<Alert type="error">cont find event</Alert>)}
         <img src={(image)?image:this.state.image} alt='event page background' className='image' />
         <div className='contant'>
           <EventPageContent {...otherEventProps} />
@@ -69,8 +67,5 @@ class EventPage extends Component {
     )
   }
 }
-
-}
-
 export default EventPage
 
