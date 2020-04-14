@@ -104,15 +104,15 @@ class PopupBtnEventcomp extends Component {
             placeholder="Enter Your Mobile Number"
             value={mobile}
             onChange={this.handleChange}
-            style={{ width: '75%' }}
+            style={{ width: '75%', height: '40px' }}
           />
-          {isLoade && (<Spin />)}
+          
           <Button
-            style={{ display: 'inline-block' }}
+            style={{ display: 'inline-block', height:'40px' }}
             key="submit"
             type="primary"
             onClick={this.handleOk}>
-            Submit
+            {isLoade ? (<Spin />) : " Submit "}
         </Button>
           {
             error ?
