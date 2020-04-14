@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button ,Alert} from "antd";
+import { Button ,Result} from "antd";
 
 import EventPageContent from '../EventPageContent/EventPageContent'
 import PopupBtnEventcomp from '../PopupBtnEventcomp/PopupBtnEventcomp'
@@ -11,15 +11,16 @@ class EventPage extends Component {
   state={
     image:"",
     title:"",
-    otherEventProps:[],
+    otherEventProps:null,
     error:""
   }
   componentDidMount(){
-    const { location: { state: {info : { image, ...otherEventProps }} } } = this.props;
-    const { location: { state: {info:{title}} } } = this.props;
     const { match: { params: { eventCode } } } = this.props;
-    if(this.props.location.state.info){
-      this.setState({image,title,otherEventProps})
+    const {location:{state} } = this.props;
+    if(state){
+        const {info : { image, ...otherEventProps } }  = state;
+        const {info:{title} } = state;
+        this.setState({image,title,otherEventProps})
     }else{
       Axios.get(`/api/v1/event/${eventCode}`)
       .then(({data})=>{
@@ -38,13 +39,17 @@ class EventPage extends Component {
     const {image,title,otherEventProps,error}=this.state
     return (
       <div className='container'>
-        {(error)&&(<Alert type="error">cant find event</Alert>)}
-        <img src={(image)?image:this.state.image} alt='event page background' className='image' />
+        {(error)&&( <Result
+              status="500"
+              title="500"
+              subTitle="Something went Wrong, please try again later"
+            />)}
+        <img src={image} alt='event page background' className='image' />
         <div className='contant'>
           <EventPageContent {...otherEventProps} />
           <div className='btns'>
             <PopupBtnEventcomp
-              title={`Register at ${(title)?title:this.state.title} event`}
+              title={`Register at ${title} event`}
               eventCode={eventCode}
               eventProg={eventProg}
               push={push}
