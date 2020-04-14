@@ -22,19 +22,12 @@ export class PortalLogin extends Component {
       if (data.status === 301) {
         this.props.history.push('/portal/attendance');
         message.success(data.msg, 10);
-      } else if (data.status === 400) {
+      } else {
         this.setState({
           error: true,
           msg: data.msg,
           pinCode: '',
         })
-      } else if (data.status === 401) {
-        this.setState({
-          error: true,
-          msg: data.msg,
-          pinCode: '',
-        })
-      }
       this.setState({ isLoade: false })
     }).catch(() => {
       this.setState({ serverError: "Internal server error !!", isLoade: false })
