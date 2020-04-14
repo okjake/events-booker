@@ -12,26 +12,29 @@ export class PortalLogin extends Component {
     error: false,
   }
 
-  handleChange = ({target:{value}}) => {
+  handleChange = ({ target: { value } }) => {
     this.setState({ pinCode: value, error: false });
   };
 
   onFinish = ({ pinCode }) => {
     this.setState({ isLoade: true })
-    axios.post('/api/v1/portal/login', { pinCode}).then(({ data }) => {
-      if (data.status === 301) {
+    axios.post('/api/v1/portal/login', { pinCode })
+      .then(({ data }) => {
         this.props.history.push('/portal/attendance');
         message.success(data.msg, 10);
-      } else {
+      }).catch(({
+        response: {
+          data: { msg },
+        },
+      }) => {
         this.setState({
           error: true,
-          msg: data.msg,
-          pinCode: '',
-        })}
-      this.setState({ isLoade: false })
-    }).catch(() => {
-      this.setState({ serverError: "Internal server error !!", isLoade: false })
-    })
+          msg,
+          pinCode: "",
+          isLoade: false,
+        });
+      }
+      )
   };
 
   render() {
@@ -48,18 +51,18 @@ export class PortalLogin extends Component {
             name="pinCode"
             rules={[{ message: 'Please input your pin-code!' }]}
           >
-            <Input.Password placeholder='Enter your pin code' onChange={this.handleChange}/>
+            <Input.Password placeholder='Enter your pin code' onChange={this.handleChange} />
           </Form.Item>
           <Form.Item >
             <Button type="primary" htmlType="submit">
-            {isLoade ? (<Spin />) : " Login "}
+              {isLoade ? (<Spin />) : " Login "}
             </Button>
           </Form.Item>
         </Form>
         {
           error ?
             <Alert
-              
+
               className='alert'
               message={msg}
               type="error"

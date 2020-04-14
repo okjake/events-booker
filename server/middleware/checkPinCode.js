@@ -14,7 +14,7 @@ const checkPinCode = (req, res, next) => {
     }
   }).catch((err) => {
     if (err.status === 401) {
-      res.json(err);
+      res.status(401).json(err);
     } else {
       next(err);
     }
