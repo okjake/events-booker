@@ -37,12 +37,15 @@ const validateEvent = (req, res, next) => {
   getEventDetails(req.body.eventCode)
     .then(({ rows }) => {
       if (rows.length) {
-        res.status(400).json({
-          msg: `an event with code ${req.body.eventCode} already exist, try another code`,
-        });
+        const err = new Error();
+        err.msg = `an event with code ${req.body.eventCode} already exist, try another code`;
+        err.status = 400;
+        throw err;
       } else next();
     })
-    .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 

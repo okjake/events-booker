@@ -7,17 +7,13 @@ const checkPinCode = (req, res, next) => {
     if (!valid) {
       const err = new Error();
       err.msg = 'incorect pin code';
-      err.status = 401;
+      err.status = 403;
       throw err;
     } else {
       next();
     }
   }).catch((err) => {
-    if (err.status === 401) {
-      res.status(401).json(err);
-    } else {
-      next(err);
-    }
+    next(err);
   });
 };
 

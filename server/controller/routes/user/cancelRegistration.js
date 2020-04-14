@@ -13,11 +13,7 @@ const cancelRegistration = (req, res, next) => {
     }
   })
     .catch((error) => {
-      if (error.status === 400) {
-        res.json(error);
-      } else {
-        next(error);
-      }
+      next(error);
     });
 };
 

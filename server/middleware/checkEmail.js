@@ -11,17 +11,11 @@ const checkEmailIfExist = (req, res, next) => {
       } else {
         const error = new Error();
         error.msg = 'email dosent exist';
-        error.status = 400;
+        error.status = 403;
         throw error;
       }
     }).catch((err) => {
-      const { status } = err;
-      switch (status) {
-        case 400:
-          res.json(err);
-          break;
-        default: next(err);
-      }
+      next(err);
     });
 };
 
