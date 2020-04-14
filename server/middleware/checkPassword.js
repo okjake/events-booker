@@ -7,13 +7,13 @@ const checkPassword = (req, res, next) => {
   bcrypt.compare(password, hsashPass).then((result) => {
     if (result === false) {
       const err = new Error();
-      err.msg = 'incorect password';
+      err.msg = 'incorrect password';
       err.status = 401;
       throw err;
     } else {
       const token = jwt.sign({ id: req.adminId }, process.env.SECRET_KEY);
       res.cookie('token', token);
-      res.json({ msg: 'logged in successfully' });
+      res.json({ msg: 'logged in successfully', status: 201 });
     }
   }).catch((err) => {
     const { status } = err;

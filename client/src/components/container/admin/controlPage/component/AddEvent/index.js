@@ -12,6 +12,8 @@ import {
 import moment from "moment";
 import axios from "axios";
 
+import "./style.css";
+
 class AddEvent extends React.Component {
   state = {
     loading: false,
@@ -90,17 +92,14 @@ class AddEvent extends React.Component {
     return (
       <div>
         <Form
-          layout="horizontal"
           hideRequiredMark={true}
-          labelAlign="left"
           scrollToFirstError={true}
-          size="middle"
-          colon={false}
           onFinish={onFinish}
           ref={formRef}
+          layout="horizontal"
+          className="event-form"
         >
           <Form.Item
-            label="Event Title"
             name="title"
             rules={[
               {
@@ -109,10 +108,9 @@ class AddEvent extends React.Component {
               },
             ]}
           >
-            <Input />
+            <Input className="ant-input-override" placeholder="Event Title" />
           </Form.Item>
           <Form.Item
-            label="Event Image"
             name="image"
             rules={[
               {
@@ -125,10 +123,9 @@ class AddEvent extends React.Component {
               },
             ]}
           >
-            <Input />
+            <Input className="ant-input-override" placeholder="Event Image" />
           </Form.Item>
           <Form.Item
-            label="Event Category"
             name="category"
             rules={[
               {
@@ -137,7 +134,7 @@ class AddEvent extends React.Component {
               },
             ]}
           >
-            <Select>
+            <Select className="ant-input-override" placeholder="Event Category">
               <Select.Option value="Public">Public</Select.Option>
               <Select.Option value="Code Academy">Code Academy</Select.Option>
               <Select.Option value="Freelance">Freelance</Select.Option>
@@ -145,7 +142,6 @@ class AddEvent extends React.Component {
             </Select>
           </Form.Item>
           <Form.Item
-            label="Event Description"
             name="details"
             rules={[
               {
@@ -154,10 +150,12 @@ class AddEvent extends React.Component {
               },
             ]}
           >
-            <Input.TextArea />
+            <Input.TextArea
+              className="ant-input-override"
+              placeholder="Event Description"
+            />
           </Form.Item>
           <Form.Item
-            label="Event Date"
             name="dayMonthYear"
             rules={[
               {
@@ -166,10 +164,12 @@ class AddEvent extends React.Component {
               },
             ]}
           >
-            <DatePicker />
+            <DatePicker
+              className="ant-input-override"
+              placeholder="Event Date"
+            />
           </Form.Item>
           <Form.Item
-            label="Event Time"
             name="hourMinuteSecond"
             rules={[
               {
@@ -178,10 +178,12 @@ class AddEvent extends React.Component {
               },
             ]}
           >
-            <TimePicker />
+            <TimePicker
+              className="ant-input-override"
+              placeholder="Event Time"
+            />
           </Form.Item>
           <Form.Item
-            label="Event Code"
             name="eventCode"
             rules={[
               {
@@ -193,10 +195,12 @@ class AddEvent extends React.Component {
               },
             ]}
           >
-            <InputNumber />
+            <InputNumber
+              className="ant-input-override"
+              placeholder="Event Code"
+            />
           </Form.Item>
           <Form.Item
-            label="Event Duration"
             name="duration"
             rules={[
               {
@@ -206,13 +210,27 @@ class AddEvent extends React.Component {
               },
             ]}
           >
-            <InputNumber />
+            <InputNumber
+              className="ant-input-override"
+              placeholder="Event Duration"
+            />
           </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading}>
+          <Form.Item className="event-form__btns">
+            <Button
+              className="event-form__btn"
+              type="primary"
+              htmlType="submit"
+              loading={loading}
+              size="large"
+            >
               Submit
             </Button>
-            <Button htmlType="button" onClick={onReset}>
+            <Button
+              className="event-form__btn"
+              htmlType="button"
+              onClick={onReset}
+              size="large"
+            >
               Reset
             </Button>
           </Form.Item>
