@@ -70,11 +70,7 @@ const checkAlreadBooked = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.status === 400) {
-        res.status(400).json(err);
-      } else {
-        next(err);
-      }
+      next(err);
     });
 };
 
