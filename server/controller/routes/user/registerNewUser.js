@@ -3,7 +3,6 @@ const yup = require('yup');
 const { getUser } = require('../../../database/queries/users');
 const { newUser } = require('../../../database/queries/users');
 
-// Validate the user data
 const registerValidation = (req, res, next) => {
   const schema = yup.object().shape({
     firstName: yup.string().required().max(10),
@@ -21,7 +20,6 @@ const registerValidation = (req, res, next) => {
   });
 };
 
-// Check if the user use exist email
 const newUserExist = (req, res, next) => {
   getUser(req.body.email).then(({ rows }) => {
     if (rows.length === 0) next();
@@ -36,7 +34,6 @@ const newUserExist = (req, res, next) => {
   });
 };
 
-// insert the valid user to the database
 const addUserToDB = (req, res, next) => {
   newUser(req.body).then(({ rows }) => {
     const [user] = rows;

@@ -9,7 +9,7 @@ const viewEventsOnDate = (req, res, next) => {
       const events = rows.filter((el) => moment(el.date).format('YYYY-MM-DD') === today);
       res.json(events);
     } else {
-      res.json({ events: 'no events on this day' });
+      res.json({ events: 'no events avilable at GSG' });
     }
   }).catch(next);
 };
