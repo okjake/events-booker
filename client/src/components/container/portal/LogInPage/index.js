@@ -53,7 +53,7 @@ export class PortalLogin extends Component {
           >
             <Input.Password placeholder='Enter your pin code' onChange={this.handleChange} />
           </Form.Item>
-          <Form.Item >
+          <Form.Item  className='btn'>
             <Button type="primary" htmlType="submit">
               {isLoade ? (<Spin />) : " Login "}
             </Button>
