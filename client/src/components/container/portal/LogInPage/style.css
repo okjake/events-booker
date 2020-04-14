@@ -20,19 +20,19 @@
   margin :0px
 }
 
-.ant-input-affix-wrapper {
+.input-field .ant-input-affix-wrapper {
   height: 40px;
   border-radius: 6px;
   margin-bottom: 0px;
   outline: #fb6c04;
 }
-.ant-btn-primary{
+.btn .ant-btn-primary{
   height: 40px;
   background-color: #186AA5;
   font-size: larger;
 }
 
-.ant-form-item{
+.main-form .ant-form-item{
   margin-bottom: 0px;
 }
 .alert{
