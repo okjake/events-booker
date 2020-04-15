@@ -47,7 +47,7 @@ class PopupBtnEventcomp extends Component {
           message.success(data.msg, 5);
         })
         .catch(({ response: { data: { msg }, status } }) => {
-          if (status == 301) {
+          if (status === 301) {
             this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
           } else {
             this.setState({

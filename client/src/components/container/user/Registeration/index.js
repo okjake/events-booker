@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Button, Form, Input, Alert, Spin, message } from 'antd';
-import { UserOutlined, LoadingOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { HomeOutlined, MailOutlined } from '@ant-design/icons';
 
 import './style.css'
@@ -34,8 +34,6 @@ class RegisterUser extends Component {
   }
   render() {
     const { errorMsg, isLoade } = this.state;
-    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-
     return (
       <div className="main-register">
         <div className="s1">
