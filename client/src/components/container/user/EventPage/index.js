@@ -54,17 +54,17 @@ class EventPage extends Component {
               eventCode={eventCode}
               eventProg={eventProg}
               push={push}
-              purpose='BOOK NOW'
+              purpose='Book Now'
               type='booking' />
 
             <PopupBtnEventcomp
               title={`Cancel Registeration at ${title} event`}
               eventCode={eventCode}
               eventProg={eventProg}
-              purpose='CANCEL REGISTERATION'
+              purpose='Cancel Registeration'
               type='cancel' />
 
-            <Button type="primary" shape="round" autoFocus onClick={goBack}> BACK </Button>
+            <Button type="primary" shape="round" autoFocus onClick={goBack}> Back </Button>
 
           </div>
 
