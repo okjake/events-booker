@@ -29,11 +29,11 @@ class AdminLogin extends Component {
 
         const { error, isLoaded } = this.state;
         return (
-            <div class="container">
-                <div class="main-section">
-                    <img class="logo" src={Logo} alt="logo" />
-                    <h1 class="main-header"><b><span className="span">welcome to</span> GSG event app</b></h1>
-                    <h2 class="sub-header"><b>ADMIN LOGIN</b></h2>
+            <div className="container">
+                <div className="main-section">
+                    <img className="logo" src={Logo} alt="logo" />
+                    <h1 className="main-header"><b><span className="span">welcome to</span> GSG event app</b></h1>
+                    <h2 className="sub-header"><b>ADMIN LOGIN</b></h2>
 
                     <Form onFinish={this.onFinish} >
 
@@ -72,8 +72,8 @@ class AdminLogin extends Component {
 
                 </div>
 
-                <div class="img-container">
-                    <img class="main-img" src={adminLoginImg} alt='grass' />
+                <div className="img-container">
+                    <img className="main-img" src={adminLoginImg} alt='grass' />
                 </div>
             </div>
         )
