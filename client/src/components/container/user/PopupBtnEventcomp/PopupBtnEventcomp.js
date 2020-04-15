@@ -97,7 +97,7 @@ class PopupBtnEventcomp extends Component {
             placeholder="Enter Your Mobile Number"
             value={mobile}
             onChange={this.handleChange}
-            style={{ width: '75%', height: '40px' }}
+            style={{ width: '72%', padding:'9px'}}
           />
 
           <Button
