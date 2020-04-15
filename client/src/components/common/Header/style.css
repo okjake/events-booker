@@ -7,6 +7,7 @@
   height: 2.5rem;
   width: 6rem;
   margin-left: 1rem;
+  margin-bottom: 60px;
   text-align: center;
 }
 
@@ -20,7 +21,7 @@
 }
 
 .header_title {
-  font-size: 1.25rem;
+  font-size: 1.7rem;
   color: #3b5a6f;
   margin: 0;
   margin-top: 0.6rem;
@@ -36,15 +37,23 @@
   margin: 0;
   padding: 0 1rem;
   text-align: center;
+  font-size: 1.1rem;
 }
 
 @media only screen and (max-width: 600px) {
   .header_logo {
     align-self: center;
     margin: 0.25rem 0;
+    margin-bottom: 30px;
   }
   .header_logo-img {
     height: 2.5rem;
     width: 3rem;
+  }
+  .header_title{
+    font-size: 1.3rem;
+  }
+  .sub-header{
+    font-size: 1.1rem !important;
   }
 }
