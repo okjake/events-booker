@@ -6,14 +6,15 @@ const checkPinCode = (req, res, next) => {
   bcrypt.compare(pinCode, hashPinCode).then((valid) => {
     if (!valid) {
       const err = new Error();
-      err.msg = 'incorect pinCode';
-      err.status = 401;
-      next(err);
+      err.msg = 'incorect pin code';
+      err.status = 403;
+      throw err;
     } else {
       next();
     }
-  }).catch(next);
+  }).catch((err) => {
+    next(err);
+  });
 };
-
 
 module.exports = checkPinCode;

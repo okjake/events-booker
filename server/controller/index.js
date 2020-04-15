@@ -27,6 +27,7 @@ const {
   logout,
   viewEventsOnDate,
   deleteEvent,
+  getAdmin,
 } = require('./routes/admin');
 
 
@@ -71,4 +72,5 @@ module.exports = {
   createPortalToken,
   portalLogout,
   getEventDetails,
+  getAdmin,
 };

@@ -3,7 +3,6 @@ const yup = require('yup');
 const { getUser } = require('../../../database/queries/users');
 const { newUser } = require('../../../database/queries/users');
 
-// Validate the user data
 const registerValidation = (req, res, next) => {
   const schema = yup.object().shape({
     firstName: yup.string().required().max(10),
@@ -17,11 +16,10 @@ const registerValidation = (req, res, next) => {
   schema.validate(req.body, { abortEarly: false }).then(() => {
     next();
   }).catch((err) => {
-    res.status(400).json({ msg: err.message });
+    res.status(400).json({ msg: 'Invalid Inputs!' });
   });
 };
 
-// Check if the user use exist email
 const newUserExist = (req, res, next) => {
   getUser(req.body.email).then(({ rows }) => {
     if (rows.length === 0) next();
@@ -32,17 +30,10 @@ const newUserExist = (req, res, next) => {
       throw error;
     }
   }).catch((err) => {
-    const { status } = err;
-    switch (status) {
-      case 400:
-        res.json(err);
-        break;
-      default: next(err);
-    }
+    next(err);
   });
 };
 
-// insert the valid user to the database
 const addUserToDB = (req, res, next) => {
   newUser(req.body).then(({ rows }) => {
     const [user] = rows;

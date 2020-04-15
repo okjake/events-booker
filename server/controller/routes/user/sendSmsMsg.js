@@ -24,16 +24,15 @@ const sendSms = (req, res, next) => {
         const error = new Error();
         error.msg = 'Invalid Number!';
         error.status = 400;
-        res.json(error);
+        next(error);
       } else if (responseData.messages[0].status === '0') {
         res
           .json({
             msg:
           'Event has been booked successfully, you will receive an email with the details and a sms with the code',
-            status: 201,
           });
       } else {
-        res.json({ msg: `Registered successfully but the: ${responseData.messages[0]['error-text']}`, status: 201 });
+        res.json({ msg: `Registered successfully but the: ${responseData.messages[0]['error-text']}` });
       }
     },
   );

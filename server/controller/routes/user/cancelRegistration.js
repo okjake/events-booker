@@ -7,17 +7,13 @@ const cancelRegistration = (req, res, next) => {
       res.json({ msg: 'your registration has been cancelled' });
     } else {
       const error = new Error();
-      error.msg = 'mobile dosent register on this event';
+      error.msg = 'This mobile did not register at this event';
       error.status = 400;
       throw error;
     }
   })
     .catch((error) => {
-      if (error.status === 400) {
-        res.json(error);
-      } else {
-        next(error);
-      }
+      next(error);
     });
 };
 

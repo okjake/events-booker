@@ -30,6 +30,7 @@ const {
   createPortalToken,
   portalLogout,
   getEventDetails,
+  getAdmin,
 } = require('../controller');
 
 const {
@@ -42,6 +43,7 @@ const {
   checkPinCode,
 } = require('../middleware');
 
+router.get('/admin', getAdmin);
 router.get('/event', getEvents);
 router.get('/event/:eventcode', getEventDetails);
 

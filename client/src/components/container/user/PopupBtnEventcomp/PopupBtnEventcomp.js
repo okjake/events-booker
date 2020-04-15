@@ -11,7 +11,7 @@ class PopupBtnEventcomp extends Component {
     visible: false,
     error: false,
     isLoade: false,
-    errorMessage:null,
+    errorMessage: null,
   };
 
   showModal = () => {
@@ -27,7 +27,7 @@ class PopupBtnEventcomp extends Component {
     });
   };
 
-  handleChange = ({target:{value}}) => {
+  handleChange = ({ target: { value } }) => {
     this.setState({ mobile: value, error: false });
   };
 
@@ -39,51 +39,44 @@ class PopupBtnEventcomp extends Component {
     if (type === 'booking') {
       axios.post('/api/v1/checkUser', { mobile, eventCode })
         .then(({ data }) => {
-
-          if (data.status === 301) {
+          this.setState({
+            visible: false,
+            mobile: '',
+            isLoade: false,
+          });
+          message.success(data.msg, 5);
+        })
+        .catch(({ response: { data: { msg }, status } }) => {
+          if (status == 301) {
             this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
-          } else if (data.status === 400) {
-            this.setState({
-              error: true,
-              message: data.msg,
-              mobile: '',
-            })
           } else {
             this.setState({
-              visible: false,
+              error: true,
+              message: msg,
               mobile: '',
-            });
-            message.success(data.msg, 10);
+              isLoade: false,
+            })
           }
-          this.setState({ isLoade: false })
-        })
-        .catch(() => {
-          this.setState({ errorMessage: "Internal server error !!" })
         })
     } else if (type === 'cancel') {
       axios.post('/api/v1/cancelUser', { mobile, eventCode })
-        .then(({ data }) => {
-          if (data.status === 400) {
-            this.setState({
-              error: true,
-              message: data.msg,
-              mobile: '',
-            })
-          } else {
-            this.setState({
-              visible: false,
-              mobile: '',
-            });
-            message.error(data.msg, 10);
-          }
-          this.setState({ isLoade: false })
+        .then(({ data: { msg } }) => {
+          this.setState({
+            visible: false,
+            mobile: '',
+            isLoade: false
+          });
+          message.warning(msg, 5);
         })
-        .catch(() => {
-          this.setState({ errorMessage: "Internal server error !!" })
+        .catch(({ response: { data: { msg } } }) => {
+          this.setState({
+            error: true,
+            message: msg,
+            mobile: '',
+            isLoade: false
+          })
         })
-
     }
-
   };
 
   render() {
@@ -104,16 +97,16 @@ class PopupBtnEventcomp extends Component {
             placeholder="Enter Your Mobile Number"
             value={mobile}
             onChange={this.handleChange}
-            style={{ width: '75%' }}
+            style={{ width: '75%', height: '40px' }}
           />
-          {isLoade && (<Spin />)}
+
           <Button
-            style={{ display: 'inline-block' }}
+            style={{ display: 'inline-block', height: '40px' }}
             key="submit"
             type="primary"
             onClick={this.handleOk}>
-            Submit
-        </Button>
+            {isLoade ? (<Spin />) : " Submit "}
+          </Button>
           {
             error ?
               <Alert

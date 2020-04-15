@@ -16,7 +16,7 @@
 
 .container .contant .ant-btn-primary
 {
-  width: 180px;
+  width: 220px;
   border: 1px solid #186AA5;
   border-radius: 38px;
   background-color: white;
@@ -33,9 +33,37 @@
   color: white;
 }
 
+@media  (max-width: 1024px) {
+  .contant{
+    margin: 90px auto 10px 40px;
+  }
+  .image{
+    width: 40%;
+  }
+  .container .contant .ant-btn-primary{
+    width:180px;
+  }
+}
+
+@media  (max-width: 800px) {
+  .contant{
+    margin: 90px auto 10px 40px;
+  }
+  .image{
+    width: 55%;
+  }
+  .btns{
+    flex-direction: column;
+  }
+
+  .container .contant .ant-btn-primary{
+    width: 220px;
+  }
+}
+
 @media  (max-width: 580px) {
   .contant{
-    margin: 60px auto 10px 50px;
+    margin: 90px auto 10px 80px;
   }
   .image{
     display: none;
@@ -50,10 +78,14 @@
   }
 }
 
-@media  (max-width: 800px) {
+@media  (max-width: 375px) {
   .contant{
-    margin: 90px auto 10px 80px;
+    margin: 90px auto 10px 50px;
   }
+  .image{
+    display: none;
+  }
+
   .btns{
     flex-direction: column;
   }
