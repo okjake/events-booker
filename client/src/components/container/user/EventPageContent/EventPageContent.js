@@ -14,7 +14,7 @@ const EventPageContent = ({ title, details, date, count }) => {
       <p className='details'>{details}</p>
       <p><span className='icons'><FaRegClock /> </span>{moment(date).format('LT')}</p>
       <p><span className='icons'><FaRegCalendarAlt /> </span>{moment(date).format('dddd , ll')}</p>
-      <p><span className='icons'><IoIosPeople /> </span>{count} Guests</p>
+      <p><span className='icons'><IoIosPeople size='18' /> </span>{count} Guests</p>
     </div>
   )
 }
