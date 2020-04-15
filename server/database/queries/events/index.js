@@ -5,7 +5,6 @@ const expiredEvent = require('./expierdEvent');
 const createEventSql = require('./creatEventSql');
 const alreadyBooked = require('./checkAlreadyBooked');
 
-
 module.exports = {
   getEventsDate,
   getAllEvents,

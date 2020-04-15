@@ -19,8 +19,7 @@ const App = () => {
           <Route
             exact
             path="/events/:eventProg/:eventCode"
-            component={EventPage}
-          />
+            component={EventPage}/>
           <Route exact path="/" component={Landing} />
           <Route
             exact

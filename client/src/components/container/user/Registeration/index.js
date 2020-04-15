@@ -74,7 +74,7 @@ class RegisterUser extends Component {
             </Form.Item>
 
             <Button htmlType="submit"
-              type="primary"> {isLoade ? (<Spin indicator={antIcon} />) : "Submit"} </Button>
+              type="primary"> {isLoade ? (<Spin size="small" />) : "Submit"} </Button>
 
             <Button type="danger" onClick={this.goBack}> Exit </Button>
 
