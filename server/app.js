@@ -4,6 +4,7 @@ const express = require('express');
 const compression = require('compression');
 
 const router = require('./router');
+const { checkToken } = require('./middleware');
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.set('port', process.env.PORT || 8000);
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
 
 app.use('/api/v1', router);
+
+app.get(['/checkToken/admin', '/checkToken/portal'], checkToken);
 
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));

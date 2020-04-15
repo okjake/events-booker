@@ -7,6 +7,8 @@ const protectedRoute = require('./protectedRoute');
 const protectedPortalRoute = require('./protectedPortalRoute');
 const checkPinCode = require('./checkPinCode');
 
+const checkToken = require('./checkToken');
+
 module.exports = {
   validationCancelReg,
   loginValidation,
@@ -15,4 +17,5 @@ module.exports = {
   protectedRoute,
   protectedPortalRoute,
   checkPinCode,
+  checkToken,
 };
