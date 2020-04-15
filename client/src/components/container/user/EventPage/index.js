@@ -31,7 +31,7 @@ class EventPage extends Component {
         this.setState({error})
       })
   }
-}
+  }
 
   render() {
     const { history: { goBack, push } } = this.props;
