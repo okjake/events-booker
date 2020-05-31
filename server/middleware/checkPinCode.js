@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 
+// refactor promise to await async
 const checkPinCode = (req, res, next) => {
   const hashPinCode = req.pinCode;
   const { pinCode } = req.body;
