@@ -1,6 +1,6 @@
-import React from "react";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+import React from 'react';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 function CheckLogged(ComponentToCheck, admin) {
   return class extends React.Component {
@@ -22,7 +22,7 @@ function CheckLogged(ComponentToCheck, admin) {
       }
       if (redirect) {
         const url =
-          admin === "admin" ? "/admin/dashboard" : "/portal/attendance";
+          admin === 'admin' ? '/admin/dashboard' : '/portal/attendance';
         return <Redirect to={`${url}`} />;
       }
       return <ComponentToCheck {...this.props} />;

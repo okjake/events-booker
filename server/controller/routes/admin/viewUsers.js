@@ -1,6 +1,5 @@
 const { getUsersOfEvent } = require('../../../database/queries/users');
 
-
 const getUsersEvent = (req, res, next) => {
   const { eventcode } = req.params;
   getUsersOfEvent(eventcode)

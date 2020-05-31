@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Form,
   Input,
@@ -8,11 +8,11 @@ import {
   InputNumber,
   TimePicker,
   message,
-} from "antd";
-import moment from "moment";
-import axios from "axios";
+} from 'antd';
+import moment from 'moment';
+import axios from 'axios';
 
-import "./style.css";
+import './style.css';
 
 class AddEvent extends React.Component {
   state = {
@@ -32,10 +32,9 @@ class AddEvent extends React.Component {
     duration,
   }) => {
     const { error, success } = this;
-    const date =
-      moment(dayMonthYear._d).format("YYYY-MM-DD") +
-      " " +
-      moment(hourMinuteSecond._d).format("hh:mm:ss");
+    const date = `${moment(dayMonthYear._d).format('YYYY-MM-DD')} ${moment(
+      hourMinuteSecond._d
+    ).format('hh:mm:ss')}`;
     const requestBody = {
       title,
       image,
@@ -47,7 +46,7 @@ class AddEvent extends React.Component {
     };
     this.setState({ loading: true });
     axios
-      .post("/api/v1/event", requestBody)
+      .post('/api/v1/event', requestBody)
       .then(({ data: { msg } }) => {
         success(msg);
         this.setState({ loading: false });
@@ -60,10 +59,10 @@ class AddEvent extends React.Component {
           },
         }) => {
           status === 400
-            ? msg === "invalid inputs"
-              ? error("image must be a valid url")
+            ? msg === 'invalid inputs'
+              ? error('image must be a valid url')
               : error(msg)
-            : error("Something went wrong, please try again later");
+            : error('Something went wrong, please try again later');
           this.setState({ loading: false });
         }
       );
@@ -92,8 +91,8 @@ class AddEvent extends React.Component {
     return (
       <div>
         <Form
-          hideRequiredMark={true}
-          scrollToFirstError={true}
+          hideRequiredMark
+          scrollToFirstError
           onFinish={onFinish}
           ref={formRef}
           layout="horizontal"
@@ -104,7 +103,7 @@ class AddEvent extends React.Component {
             rules={[
               {
                 required: true,
-                message: "Please input event title!",
+                message: 'Please input event title!',
               },
             ]}
           >
@@ -115,11 +114,11 @@ class AddEvent extends React.Component {
             rules={[
               {
                 required: true,
-                message: "Please input event image!",
+                message: 'Please input event image!',
               },
               {
-                type: "url",
-                message: "event image should be a url",
+                type: 'url',
+                message: 'event image should be a url',
               },
             ]}
           >
@@ -130,7 +129,7 @@ class AddEvent extends React.Component {
             rules={[
               {
                 required: true,
-                message: "Please select a category",
+                message: 'Please select a category',
               },
             ]}
           >
@@ -146,7 +145,7 @@ class AddEvent extends React.Component {
             rules={[
               {
                 required: true,
-                message: "Please write a description for the event",
+                message: 'Please write a description for the event',
               },
             ]}
           >
@@ -188,7 +187,7 @@ class AddEvent extends React.Component {
             rules={[
               {
                 required: true,
-                type: "integer",
+                type: 'integer',
                 min: 100,
                 max: 999,
                 message: "Event's code must be a number of 3 digits",
@@ -205,7 +204,7 @@ class AddEvent extends React.Component {
             rules={[
               {
                 required: true,
-                type: "integer",
+                type: 'integer',
                 message: "Event's duration should be in minutes",
               },
             ]}

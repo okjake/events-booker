@@ -4,14 +4,18 @@ const { getEventsDate } = require('../../../database/queries/events');
 
 const today = moment().format('YYYY-MM-DD');
 const viewEventsOnDate = (req, res, next) => {
-  getEventsDate().then(({ rows }) => {
-    if (rows.length !== 0) {
-      const events = rows.filter((el) => moment(el.date).format('YYYY-MM-DD') === today);
-      res.json(events);
-    } else {
-      res.json({ events: 'no events avilable at GSG' });
-    }
-  }).catch(next);
+  getEventsDate()
+    .then(({ rows }) => {
+      if (rows.length !== 0) {
+        const events = rows.filter(
+          (el) => moment(el.date).format('YYYY-MM-DD') === today
+        );
+        res.json(events);
+      } else {
+        res.json({ events: 'no events avilable at GSG' });
+      }
+    })
+    .catch(next);
 };
 
 module.exports = viewEventsOnDate;

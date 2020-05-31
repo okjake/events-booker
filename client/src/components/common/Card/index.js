@@ -1,8 +1,8 @@
-import React from "react";
-import moment from "moment";
-import { Link } from "react-router-dom";
+import React from 'react';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-import "./style.css";
+import './style.css';
 
 const Card = ({ info }) => {
   const { image, title, category, date, event_code } = info;
@@ -17,7 +17,7 @@ const Card = ({ info }) => {
           <b>By :</b> {category}
         </p>
         <p className="card__p">
-          <b>Date :</b> {moment(date).format("LLLL")}
+          <b>Date :</b> {moment(date).format('LLLL')}
         </p>
       </div>
       <Link

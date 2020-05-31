@@ -55,7 +55,7 @@ router.post(
   generateCode,
   userWillAttend,
   sendInvitation,
-  sendSms,
+  sendSms
 );
 router.post(
   '/checkUser',
@@ -65,7 +65,7 @@ router.post(
   generateCode,
   userWillAttend,
   sendInvitation,
-  sendSms,
+  sendSms
 );
 
 router.post('/login', loginValidation, checkEmailIfExist, checkPassword);
@@ -73,12 +73,29 @@ router.get('/logout', logout);
 
 router.post('/cancelUser', validationCancelReg, cancelRegistration);
 
-router.post('/portal/login', pinCodeValidation, getHashedPinCode, checkPinCode, createPortalToken);
-router.post('/portal/logout', pinCodeValidation, getHashedPinCode, checkPinCode, portalLogout);
+router.post(
+  '/portal/login',
+  pinCodeValidation,
+  getHashedPinCode,
+  checkPinCode,
+  createPortalToken
+);
+router.post(
+  '/portal/logout',
+  pinCodeValidation,
+  getHashedPinCode,
+  checkPinCode,
+  portalLogout
+);
 
 router.all(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
-router.patch('/attendance', validateAttendence, checkUserBooking, signAttendance);
+router.patch(
+  '/attendance',
+  validateAttendence,
+  checkUserBooking,
+  signAttendance
+);
 
 router.all(['/users', '/event/:eventcode/users', '/event'], protectedRoute);
 router.get('/users', getUsersData);

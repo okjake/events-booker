@@ -6,20 +6,8 @@ const { signAttendanceSql } = require('../../../database/queries/admin');
 
 const validateAttendence = (req, res, next) => {
   const schema = yup.object().shape({
-    userCode: yup
-      .number()
-      .required()
-      .positive()
-      .integer()
-      .min(100)
-      .max(999),
-    eventCode: yup
-      .number()
-      .required()
-      .positive()
-      .integer()
-      .min(100)
-      .max(999),
+    userCode: yup.number().required().positive().integer().min(100).max(999),
+    eventCode: yup.number().required().positive().integer().min(100).max(999),
   });
 
   const result = schema.isValidSync(req.body);

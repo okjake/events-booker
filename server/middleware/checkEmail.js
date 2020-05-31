@@ -14,10 +14,10 @@ const checkEmailIfExist = (req, res, next) => {
         error.status = 403;
         throw error;
       }
-    }).catch((err) => {
+    })
+    .catch((err) => {
       next(err);
     });
 };
-
 
 module.exports = checkEmailIfExist;
