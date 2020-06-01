@@ -78,15 +78,16 @@ const generateRandom = (prevCodes) => {
   return generateRandom(prevCodes);
 };
 
-const generateCode = (req, res, next) => {
-  getUsersCode(req.event.id)
-    .then(({ rows }) => {
-      const codes = rows.map((event) => event.user_code);
-      const randomCode = generateRandom(codes);
-      req.user.userCode = randomCode;
-      next();
-    })
-    .catch(next);
+const generateCode = async (req, res, next) => {
+  try{
+    const {rows} = await getUsersCode(req.event.id)
+    const codes = rows.map((event) => event.user_code);
+    const randomCode = generateRandom(codes);
+    req.user.userCode = randomCode;
+    next();
+  }catch(error){
+    next(error)
+  }
 };
 
 const userWillAttend = (req, res, next) => {
