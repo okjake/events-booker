@@ -56,20 +56,20 @@ const checkEventExist = async (req, res, next) => {
   }
 };
 
-const checkAlreadyBooked = (req, res, next) => {
-  alreadyBooked(req.user.id, req.event.id)
-    .then(({ rows }) => {
-      if (rows.length === 0) next();
-      else {
-        const err = new Error();
-        err.status = 400;
-        err.msg = 'you have already booked this event';
-        throw err;
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
+const checkAlreadyBooked = async (req, res, next) => {
+  try{
+    const { rows } = await alreadyBooked(req.user.id, req.event.id)
+    if (rows.length === 0) next();
+    else {
+      const err = new Error();
+      err.status = 400;
+      err.msg = 'you have already booked this event';
+      throw err;
+    }
+  }catch(error){
+    next(error);
+  }   
+
 };
 
 const generateRandom = (prevCodes) => {
