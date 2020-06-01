@@ -1,27 +1,16 @@
-import React, { Component } from 'react'
-import { Table,Spin, Result} from 'antd';
+import React, { Component } from 'react';
+import { Table, Spin, Result } from 'antd';
 
 import axios from 'axios';
 
-import './ViewUsers.css'
+import './ViewUsers.css';
 
 class ViewEvents extends Component {
   state = {
     isLoaded: true,
     users: [],
-    serverError:null,
-  }
-  componentDidMount() {
-    axios.get('/api/v1/users')
-      .then(({ data }) => {
-        this.setState({
-          isLoaded: false,
-          users: data,
-        });
-      }).catch((error) => {
-        this.setState({ serverError: error, isLoaded: false })
-      })
-  }
+    serverError: null,
+  };
 
   columns = [
     {
@@ -51,14 +40,38 @@ class ViewEvents extends Component {
     },
   ];
 
+  componentDidMount() {
+    axios
+      .get('/api/v1/users')
+      .then(({ data }) => {
+        this.setState({
+          isLoaded: false,
+          users: data,
+        });
+      })
+      .catch((error) => {
+        this.setState({ serverError: error, isLoaded: false });
+      });
+  }
+
   render() {
-    const { users, isLoaded, serverError } = this.state
-        return (
-      <div className='table-users'>
-        {serverError ? <Result status="500" title="500" subTitle="Something went Wrong, please try again later"/>  : isLoaded ? (<Spin size='large' className='loading'/>) : <Table rowKey='mobile' columns={this.columns} dataSource={users} />}
+    const { users, isLoaded, serverError } = this.state;
+    return (
+      <div className="table-users">
+        {serverError ? (
+          <Result
+            status="500"
+            title="500"
+            subTitle="Something went Wrong, please try again later"
+          />
+        ) : isLoaded ? (
+          <Spin size="large" className="loading" />
+        ) : (
+          <Table rowKey="mobile" columns={this.columns} dataSource={users} />
+        )}
       </div>
-    )
+    );
   }
 }
 
-export default ViewEvents
+export default ViewEvents;

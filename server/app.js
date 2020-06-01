@@ -9,6 +9,7 @@ const { checkToken } = require('./middleware');
 const app = express();
 
 app.disabled('x-powered-by');
+
 app.use(compression());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

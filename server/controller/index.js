@@ -1,7 +1,6 @@
 const { serverError } = require('./error/server');
 const { clientError } = require('./error/client');
 
-
 const {
   cancelRegistration,
   getEvents,
@@ -16,7 +15,6 @@ const {
   newUserExist,
   addUserToDB,
   getEventDetails,
-
 } = require('./routes/user');
 
 const {
@@ -30,7 +28,6 @@ const {
   getAdmin,
 } = require('./routes/admin');
 
-
 const {
   validateAttendence,
   checkUserBooking,
@@ -40,7 +37,6 @@ const {
   createPortalToken,
   portalLogout,
 } = require('./routes/portal');
-
 
 module.exports = {
   serverError,
