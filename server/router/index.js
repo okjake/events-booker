@@ -99,7 +99,7 @@ router.patch(
 
 router.all(['/users', '/event/:eventcode/users', '/event'], protectedRoute);
 router.get('/users', getUsersData);
-router.get('/event/:eventcode/users', getUsersEvent);
+router.get('/event/:eventCode/users', getUsersEvent);
 router.patch('/event', deleteEvent);
 router.post('/event', validateEvent, createEvent);
 
