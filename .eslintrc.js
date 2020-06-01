@@ -4,8 +4,9 @@ module.exports = {
     commonjs: true,
     es6: true,
     node: true,
+    "jest/globals": true,
   },
-  extends: ["airbnb-base", "prettier"],
+  extends: ["airbnb-base", "prettier", "plugin:jest/all"],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
@@ -23,6 +24,12 @@ module.exports = {
         singleQuote: true,
       },
     ],
+    "jest/no-hooks": [
+      "error",
+      {
+        allow: ["beforeAll", "afterAll"],
+      },
+    ],
   },
-  plugins: ["prettier"],
+  plugins: ["prettier", "jest"],
 };
