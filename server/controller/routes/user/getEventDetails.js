@@ -1,10 +1,15 @@
 const { getEventDetails } = require('../../../database/queries/events/index');
 
-const getEventByCode = (req, res, next) => {
-  const { eventcode } = req.params;
-  getEventDetails(eventcode)
-    .then(({ rows }) => res.json(rows[0]))
-    .catch(next);
+const getEventByCode = async (req, res, next) => {
+  try {
+    const { code } = req.params;
+    const {
+      rows: [event],
+    } = await getEventDetails(code);
+    res.json(event);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = getEventByCode;
