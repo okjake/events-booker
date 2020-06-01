@@ -19,7 +19,7 @@ class UsersPage extends Component {
         params: { eventcode },
       },
     } = this.props;
-    Axios.get(`/api/v1/event/${eventcode}/users`)
+    Axios.get(`/api/v1/events/${eventcode}/users`)
       .then(({ data }) => {
         this.setState({ users: data, isLoaded: true });
       })
