@@ -16,31 +16,31 @@ const checkUser = async (req, res, next) => {
     eventCode: yup.number().required().positive().integer().min(100).max(999),
   });
 
-  try{
+  try {
     const result = await schema.isValid(req.body);
     if (!result) {
       const err = new Error();
-      err.msg = 'invalid inputs'; 
+      err.msg = 'invalid inputs';
       err.status = 400;
       throw err;
     }
-    const {rows} = await checkUserExist(req.body.mobile);
-    if(rows.length === 0){
-      return res.status(301).json({ msg: "user doesn't exist, please register" });
-    } else {
-      const [user] = rows;
-      req.user = user;
-      next();
+    const { rows } = await checkUserExist(req.body.mobile);
+    if (rows.length === 0) {
+      return res
+        .status(301)
+        .json({ msg: "user doesn't exist, please register" });
     }
-
-  }catch(error){
-    next(error)
+    const [user] = rows;
+    req.user = user;
+    next();
+  } catch (error) {
+    next(error);
   }
 };
 
 const checkEventExist = async (req, res, next) => {
-  try{
-    const { rows } = await getEventDetails(req.body.eventCode)
+  try {
+    const { rows } = await getEventDetails(req.body.eventCode);
     if (rows.length === 0) {
       const err = new Error();
       err.status = 400;
@@ -51,14 +51,14 @@ const checkEventExist = async (req, res, next) => {
       req.event = event;
       next();
     }
-  }catch(error){
+  } catch (error) {
     next(error);
   }
 };
 
 const checkAlreadyBooked = async (req, res, next) => {
-  try{
-    const { rows } = await alreadyBooked(req.user.id, req.event.id)
+  try {
+    const { rows } = await alreadyBooked(req.user.id, req.event.id);
     if (rows.length === 0) next();
     else {
       const err = new Error();
@@ -66,10 +66,9 @@ const checkAlreadyBooked = async (req, res, next) => {
       err.msg = 'you have already booked this event';
       throw err;
     }
-  }catch(error){
+  } catch (error) {
     next(error);
-  }   
-
+  }
 };
 
 const generateRandom = (prevCodes) => {
@@ -79,14 +78,14 @@ const generateRandom = (prevCodes) => {
 };
 
 const generateCode = async (req, res, next) => {
-  try{
-    const {rows} = await getUsersCode(req.event.id)
+  try {
+    const { rows } = await getUsersCode(req.event.id);
     const codes = rows.map((event) => event.user_code);
     const randomCode = generateRandom(codes);
     req.user.userCode = randomCode;
     next();
-  }catch(error){
-    next(error)
+  } catch (error) {
+    next(error);
   }
 };
 
