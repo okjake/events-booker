@@ -56,7 +56,7 @@ const checkEventExist = async (req, res, next) => {
   }
 };
 
-const checkAlreadBooked = (req, res, next) => {
+const checkAlreadyBooked = (req, res, next) => {
   alreadyBooked(req.user.id, req.event.id)
     .then(({ rows }) => {
       if (rows.length === 0) next();
@@ -155,7 +155,7 @@ const sendInvitation = (req, res, next) => {
 module.exports = {
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
+  checkAlreadyBooked,
   generateCode,
   userWillAttend,
   sendInvitation,
