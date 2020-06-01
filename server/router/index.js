@@ -97,7 +97,7 @@ router.patch(
   signAttendance
 );
 
-router.all(['/users', '/event/:eventcode/users', '/event'], protectedRoute);
+router.all(['/users', '/event/:eventCode/users', '/event'], protectedRoute);
 router.get('/users', getUsersData);
 router.get('/events/:eventCode/users', getEventUsers);
 router.patch('/event', deleteEvent);
