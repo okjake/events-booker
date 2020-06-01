@@ -17,15 +17,20 @@ class Dashboard extends Component {
     renderView: 'add',
   };
 
-  componentDidMount() {
-    Axios.get('/api/v1/admin')
-      .then(({ data }) => {
-        const { name, img } = data[0];
-        this.setState({ name, img });
-      })
-      .catch((err) => {
-        this.setState({ adminError: 'failed to get admin data' });
-      });
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('/api/v1/admin');
+      const { name, img } = data[0];
+      this.setState({ name, img });
+    } catch (err) {
+      let adminError;
+      if (err.response) {
+        adminError = err.response.data.msg;
+      } else {
+        adminError = 'Failed to get admin data!';
+      }
+      this.setState({ adminError: 'failed to get admin data' });
+    }
   }
 
   logout = () => {
