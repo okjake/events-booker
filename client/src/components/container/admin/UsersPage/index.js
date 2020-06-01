@@ -3,6 +3,7 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import axios from 'axios';
 import { Button, Empty } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 import './style.css';
 
@@ -105,5 +106,11 @@ class UsersPage extends Component {
     );
   }
 }
+
+UsersPage.propTypes = {
+  history: ReactRouterPropTypes.history.isRequired,
+  location: ReactRouterPropTypes.location.isRequired,
+  match: ReactRouterPropTypes.match.isRequired,
+};
 
 export default UsersPage;
