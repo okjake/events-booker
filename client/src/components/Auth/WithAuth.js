@@ -1,6 +1,6 @@
-import React from "react";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+import React from 'react';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 function WithAuth(ComponentToProtect, admin) {
   return class extends React.Component {

@@ -7,7 +7,7 @@ const nexmo = new Nexmo(
     apiKey: process.env.NEXMO_API_KEY,
     apiSecret: process.env.NEXMO_API_SECRET,
   },
-  { debug: true },
+  { debug: true }
 );
 
 const sendSms = (req, res, next) => {
@@ -26,15 +26,16 @@ const sendSms = (req, res, next) => {
         error.status = 400;
         next(error);
       } else if (responseData.messages[0].status === '0') {
-        res
-          .json({
-            msg:
-          'Event has been booked successfully, you will receive an email with the details and a sms with the code',
-          });
+        res.json({
+          msg:
+            'Event has been booked successfully, you will receive an email with the details and a sms with the code',
+        });
       } else {
-        res.json({ msg: `Registered successfully but the: ${responseData.messages[0]['error-text']}` });
+        res.json({
+          msg: `Registered successfully but the: ${responseData.messages[0]['error-text']}`,
+        });
       }
-    },
+    }
   );
 };
 

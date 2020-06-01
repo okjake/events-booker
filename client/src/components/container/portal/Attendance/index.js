@@ -1,6 +1,6 @@
-import React from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Result,
@@ -11,10 +11,10 @@ import {
   message,
   Modal,
   Input,
-} from "antd";
-import moment from "moment";
+} from 'antd';
+import moment from 'moment';
 
-import "./style.css";
+import './style.css';
 
 class Attendance extends React.Component {
   state = {
@@ -26,7 +26,7 @@ class Attendance extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/api/v1/event/date")
+      .get('/api/v1/event/date')
       .then(({ data }) => {
         this.setState({
           isLoaded: true,
@@ -44,7 +44,7 @@ class Attendance extends React.Component {
   onFinish = ({ userCode }, eventCode, resetFields) => {
     const { success, error } = this;
     axios
-      .patch("/api/v1/attendance", {
+      .patch('/api/v1/attendance', {
         userCode,
         eventCode,
       })
@@ -75,10 +75,10 @@ class Attendance extends React.Component {
   }) => {
     const { success, error } = this;
     axios
-      .post("/api/v1/portal/logout", { pinCode: value })
+      .post('/api/v1/portal/logout', { pinCode: value })
       .then(({ data: { msg } }) => {
         success(msg);
-        this.props.history.push("/portal");
+        this.props.history.push('/portal');
       })
       .catch(
         ({
@@ -144,9 +144,9 @@ class Attendance extends React.Component {
                 Please enter your code to approve your attendance
               </h2>
               <h3 className="sub-header">
-                You haven't booked any event yet ?{" "}
+                You haven&apos;t booked any event yet ?{' '}
                 <span>
-                  <Link to={`/`} target="_blank">
+                  <Link to="/" target="_blank">
                     Click here please
                   </Link>
                 </span>
@@ -166,10 +166,10 @@ class Attendance extends React.Component {
               <Input
                 type="password"
                 placeholder="Enter Pin Code Please"
-                style={{ width: "75%", margin: "0.25rem" }}
+                style={{ width: '75%', margin: '0.25rem' }}
               />
               <Button
-                style={{ display: "inline-block", margin: "0.25rem" }}
+                style={{ display: 'inline-block', margin: '0.25rem' }}
                 type="primary"
                 onClick={handleModalSubmit}
               >
@@ -204,13 +204,13 @@ class Attendance extends React.Component {
                           <b>By :</b> {category}
                         </p>
                         <p className="card__p">
-                          <b>Time :</b> {moment(date).format("hh:mm a")}
+                          <b>Time :</b> {moment(date).format('hh:mm a')}
                         </p>
                       </div>
                       <div>
                         <Form
                           layout="inline"
-                          hideRequiredMark={true}
+                          hideRequiredMark
                           size="middle"
                           ref={refs[i]}
                           onFinishFailed={onFinishFailed}
@@ -228,7 +228,7 @@ class Attendance extends React.Component {
                             rules={[
                               {
                                 required: true,
-                                type: "integer",
+                                type: 'integer',
                                 min: 100,
                                 max: 999,
                                 message:
