@@ -16,7 +16,6 @@ switch (process.env.NODE_ENV) {
     throw new Error('No Database URL!!!');
 }
 
-
 const options = {
   connectionString: dbUrl,
   ssl: {
