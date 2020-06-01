@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import reactRouterPropTypes from 'react-router-prop-types';
 import { Button, Form, Input, Alert, Spin, message } from 'antd';
 import { UserOutlined, HomeOutlined, MailOutlined } from '@ant-design/icons';
 
@@ -137,9 +137,10 @@ class RegisterUser extends Component {
     );
   }
 }
+
 RegisterUser.propTypes = {
-  mobileNo: PropTypes.string,
-  eventCode: PropTypes.number,
+  history: reactRouterPropTypes.history.isRequired,
+  match: reactRouterPropTypes.match.isRequired,
 };
 
 export default RegisterUser;
