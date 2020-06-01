@@ -10,36 +10,42 @@ const registerValidation = (req, res, next) => {
     email: yup.string().email(),
     mobile: yup.number().positive().integer().required(),
     location: yup.string().required(),
-
   });
 
-  schema.validate(req.body, { abortEarly: false }).then(() => {
-    next();
-  }).catch((err) => {
-    res.status(400).json({ msg: 'Invalid Inputs!' });
-  });
+  schema
+    .validate(req.body, { abortEarly: false })
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      res.status(400).json({ msg: 'Invalid Inputs!' });
+    });
 };
 
 const newUserExist = (req, res, next) => {
-  getUser(req.body.email).then(({ rows }) => {
-    if (rows.length === 0) next();
-    else {
-      const error = new Error();
-      error.msg = 'Email Already Exists!';
-      error.status = 400;
-      throw error;
-    }
-  }).catch((err) => {
-    next(err);
-  });
+  getUser(req.body.email)
+    .then(({ rows }) => {
+      if (rows.length === 0) next();
+      else {
+        const error = new Error();
+        error.msg = 'Email Already Exists!';
+        error.status = 400;
+        throw error;
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
 };
 
 const addUserToDB = (req, res, next) => {
-  newUser(req.body).then(({ rows }) => {
-    const [user] = rows;
-    req.user = user;
-    next();
-  }).catch(next);
+  newUser(req.body)
+    .then(({ rows }) => {
+      const [user] = rows;
+      req.user = user;
+      next();
+    })
+    .catch(next);
 };
 
 module.exports = {

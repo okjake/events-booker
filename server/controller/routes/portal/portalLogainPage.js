@@ -7,7 +7,8 @@ const pinCodeValidation = (req, res, next) => {
   const schema = yup.object().shape({
     pinCode: yup.string().required(),
   });
-  schema.validate(req.body, { abortEarly: false })
+  schema
+    .validate(req.body, { abortEarly: false })
     .then(() => {
       next();
     })

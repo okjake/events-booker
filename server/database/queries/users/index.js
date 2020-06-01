@@ -8,7 +8,6 @@ const newUser = require('./newUser');
 const signUserAttend = require('./signUserAttend');
 const userHasBooked = require('./userHasBooked');
 
-
 module.exports = {
   cancelPopUp,
   checkUserExist,

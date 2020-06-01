@@ -6,25 +6,12 @@ const { createEventSql } = require('../../../database/queries/events');
 const validateEvent = (req, res, next) => {
   const schema = yup.object().shape({
     title: yup.string().required(),
-    eventCode: yup
-      .number()
-      .required()
-      .positive()
-      .integer()
-      .min(100)
-      .max(999),
+    eventCode: yup.number().required().positive().integer().min(100).max(999),
     category: yup.string().required(),
     details: yup.string().required(),
-    image: yup
-      .string()
-      .url()
-      .required(),
+    image: yup.string().url().required(),
     date: yup.date().required(),
-    duration: yup
-      .number()
-      .required()
-      .positive()
-      .integer(),
+    duration: yup.number().required().positive().integer(),
   });
 
   const result = schema.isValidSync(req.body);
@@ -34,7 +21,7 @@ const validateEvent = (req, res, next) => {
     err.status = 400;
     return next(err);
   }
-  getEventDetails(req.body.eventCode)
+  return getEventDetails(req.body.eventCode)
     .then(({ rows }) => {
       if (rows.length) {
         const err = new Error();
@@ -48,11 +35,13 @@ const validateEvent = (req, res, next) => {
     });
 };
 
-
 const createEvent = (req, res, next) => {
-  createEventSql(req.body).then(() => res.json({ msg: `Event ${req.body.title} has been created successfully` })).catch(next);
+  createEventSql(req.body)
+    .then(() =>
+      res.json({ msg: `Event ${req.body.title} has been created successfully` })
+    )
+    .catch(next);
 };
-
 
 module.exports = {
   validateEvent,

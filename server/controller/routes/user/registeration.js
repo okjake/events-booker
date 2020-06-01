@@ -13,13 +13,7 @@ const checkUser = (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
   const schema = yup.object().shape({
     mobile: yup.string().matches(mobileRegExp),
-    eventCode: yup
-      .number()
-      .required()
-      .positive()
-      .integer()
-      .min(100)
-      .max(999),
+    eventCode: yup.number().required().positive().integer().min(100).max(999),
   });
   const result = schema.isValidSync(req.body);
   if (!result) {
@@ -137,7 +131,8 @@ const sendInvitation = (req, res, next) => {
     icalEvent: {
       filename: 'invitation.ics',
       method: 'request',
-      content: 'BEGIN:VCALENDAR\r\nPRODID:-//ACME/DesktopCalendar//EN\r\nMETHOD:REQUEST\r\nVERSION:2.0\r\n...',
+      content:
+        'BEGIN:VCALENDAR\r\nPRODID:-//ACME/DesktopCalendar//EN\r\nMETHOD:REQUEST\r\nVERSION:2.0\r\n...',
     },
     alternatives: [
       {

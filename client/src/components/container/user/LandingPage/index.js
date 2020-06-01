@@ -1,23 +1,23 @@
-import React from "react";
-import axios from "axios";
-import { Button, Result, Spin, Empty } from "antd";
+import React from 'react';
+import axios from 'axios';
+import { Button, Result, Spin, Empty } from 'antd';
 
-import Card from "../../../common/Card";
-import Header from "../../../common/Header";
-import "./style.css";
+import Card from '../../../common/Card';
+import Header from '../../../common/Header';
+import './style.css';
 
 class Landing extends React.Component {
   state = {
     error: null,
     isLoaded: false,
-    title: "Upcoming",
+    title: 'Upcoming',
     allEvents: [],
     filteredEvents: [],
   };
 
   componentDidMount() {
     axios
-      .get("/api/v1/event")
+      .get('/api/v1/event')
       .then(({ data }) => {
         const response = [...data].sort(
           (a, b) => new Date(a.date) - new Date(b.date)
@@ -38,10 +38,8 @@ class Landing extends React.Component {
 
   filterByCategory = (cat) => {
     const { allEvents } = this.state;
-    if (cat === "Upcoming")
-      this.setState(({ allEvents }) => {
-        return { filteredEvents: allEvents };
-      });
+    if (cat === 'Upcoming')
+      this.setState(({ allEvents }) => ({ filteredEvents: allEvents }));
     else {
       const events = allEvents.filter((event) => event.category === cat);
       this.setState({ filteredEvents: events, title: cat });
@@ -52,11 +50,11 @@ class Landing extends React.Component {
     const { error, isLoaded, title, filteredEvents } = this.state;
     const { filterByCategory } = this;
     const categories = [
-      "Code Academy",
-      "Freelance",
-      "Startups",
-      "Public",
-      "Upcoming",
+      'Code Academy',
+      'Freelance',
+      'Startups',
+      'Public',
+      'Upcoming',
     ];
     return (
       <div className="wrapper">
@@ -86,7 +84,7 @@ class Landing extends React.Component {
           ) : !isLoaded ? (
             <Spin size="large" />
           ) : !filteredEvents.length ? (
-            title === "Upcoming" ? (
+            title === 'Upcoming' ? (
               <Empty
                 description={<span>no upcoming events at the meantime</span>}
               />

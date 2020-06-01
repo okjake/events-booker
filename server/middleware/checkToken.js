@@ -10,17 +10,13 @@ const checkToken = (req, res) => {
     token = req.cookies.portalToken;
     key = process.env.SECRET_KEY_PORTAL;
   }
-  jwt.verify(
-    token,
-    key,
-    (error) => {
-      if (error) {
-        res.status(401).json({ error: 'unauthenticated' });
-      } else {
-        res.sendStatus(200);
-      }
-    },
-  );
+  jwt.verify(token, key, (error) => {
+    if (error) {
+      res.status(401).json({ error: 'unauthenticated' });
+    } else {
+      res.sendStatus(200);
+    }
+  });
 };
 
 module.exports = checkToken;
