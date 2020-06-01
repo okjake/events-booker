@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import Axios from 'axios';
+import axios from 'axios';
 import { Button, Empty } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -19,7 +19,8 @@ class UsersPage extends Component {
         params: { eventcode },
       },
     } = this.props;
-    Axios.get(`/api/v1/events/${eventcode}/users`)
+    axios
+      .get(`/api/v1/events/${eventcode}/users`)
       .then(({ data }) => {
         this.setState({ users: data, isLoaded: true });
       })
