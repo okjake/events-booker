@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import './style.css';
 
-export class PortalLogin extends Component {
+class PortalLogin extends Component {
   state = {
     isLoade: false,
     pinCode: '',
@@ -17,29 +17,41 @@ export class PortalLogin extends Component {
     this.setState({ pinCode: value, error: false });
   };
 
-  onFinish = ({ pinCode }) => {
+  onFinish = async ({ pinCode }) => {
     this.setState({ isLoade: true });
-    axios
-      .post('/api/v1/portal/login', { pinCode })
-      .then(({ data }) => {
-        this.props.history.push('/portal/attendance');
-        message.success(data.msg, 10);
-      })
-      .catch(
-        ({
-          response: {
-            data: { msg },
-          },
-        }) => {
-          this.setState({
-            error: true,
-            msg,
-            pinCode: '',
-            isLoade: false,
-          });
-        }
-      );
+    try {
+      const { data } = await axios.post('/api/v1/portal/login', { pinCode });
+      this.props.history.push('/portal/attendance');
+      message.success(data.msg, 10);
+    } catch (err) {
+      this.setState({
+        error: true,
+        msg: `incorrect pin code`,
+        isLoade: false,
+      });
+    }
   };
+  //   axios
+  //     .post('/api/v1/portal/login', { pinCode })
+  //     .then(({ data }) => {
+  //       this.props.history.push('/portal/attendance');
+  //       message.success(data.msg, 10);
+  //     })
+  //     .catch(
+  //       ({
+  //         response: {
+  //           data: { msg },
+  //         },
+  //       }) => {
+  //         this.setState({
+  //           error: true,
+  //           msg,
+  //           pinCode: '',
+  //           isLoade: false,
+  //         });
+  //       }
+  //     );
+  // };
 
   render() {
     const { isLoade, error, msg } = this.state;
