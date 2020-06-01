@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Result } from 'antd';
 import axios from 'axios';
+import reactRouterPropTypes from 'react-router-prop-types';
 
 import EventPageContent from '../EventPageContent';
 import PopupBtnEvent from '../PopupBtnEvent';
@@ -95,4 +96,11 @@ class EventPage extends Component {
     );
   }
 }
+
+EventPage.propTypes = {
+  history: reactRouterPropTypes.history.isRequired,
+  location: reactRouterPropTypes.location.isRequired,
+  match: reactRouterPropTypes.match.isRequired,
+};
+
 export default EventPage;
