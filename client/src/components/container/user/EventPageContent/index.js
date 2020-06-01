@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-
+import propTypes from 'prop-types';
 import { FaRegClock, FaRegCalendarAlt } from 'react-icons/fa';
 import { IoIosPeople } from 'react-icons/io';
 
@@ -33,5 +33,12 @@ const EventPageContent = ({ title, details, date, count }) => (
     </p>
   </div>
 );
+
+EventPageContent.propTypes = {
+  title: propTypes.string.isRequired,
+  details: propTypes.string.isRequired,
+  date: propTypes.string.isRequired,
+  count: propTypes.string.isRequired,
+};
 
 export default EventPageContent;
