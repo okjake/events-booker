@@ -3,9 +3,7 @@ const router = require('express').Router();
 const {
   serverError,
   clientError,
-  registerValidation,
-  newUserExist,
-  addUserToDB,
+  signUpUser,
   sendSms,
   checkUser,
   checkEventExist,
@@ -46,17 +44,7 @@ const {
 router.get('/admin', getAdmin);
 router.get('/event', getEvents);
 
-router.post(
-  '/register',
-  registerValidation,
-  newUserExist,
-  addUserToDB,
-  checkEventExist,
-  generateCode,
-  userWillAttend,
-  sendInvitation,
-  sendSms
-);
+router.post('/register', signUpUser);
 router.post(
   '/checkUser',
   checkUser,

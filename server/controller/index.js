@@ -11,9 +11,7 @@ const {
   userWillAttend,
   sendInvitation,
   sendSms,
-  registerValidation,
-  newUserExist,
-  addUserToDB,
+  signUpUser,
   getEventDetails,
 } = require('./routes/user');
 
@@ -41,9 +39,7 @@ const {
 module.exports = {
   serverError,
   clientError,
-  registerValidation,
-  newUserExist,
-  addUserToDB,
+  signUpUser,
   sendSms,
   checkUser,
   checkEventExist,
