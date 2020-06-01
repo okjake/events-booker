@@ -10,6 +10,7 @@ const app = express();
 
 app.disabled('x-powered-by');
 app.use(compression());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.json());
 
