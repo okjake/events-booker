@@ -1,14 +1,13 @@
 const { getUsersOfEvent } = require('../../../database/queries/users');
 
-const getEventUsers = (req, res, next) => {
-  const { eventCode } = req.params;
-  getUsersOfEvent(eventCode)
-    .then(({ rows }) => {
-      if (rows) {
-        res.json(rows);
-      }
-    })
-    .catch(next);
+const getEventUsers = async (req, res, next) => {
+  try {
+    const { eventCode } = req.params;
+    const { rows } = await getUsersOfEvent(eventCode);
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = getEventUsers;
