@@ -33,7 +33,7 @@ class EventPage extends Component {
       } = state;
       this.setState({ image, title, otherEventProps });
     } else {
-      Axios.get(`/api/v1/event/${eventCode}`)
+      Axios.get(`/api/v1/events/${eventCode}`)
         .then(({ data }) => {
           const { image, ...otherEventProps } = data;
           const { title } = data;

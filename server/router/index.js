@@ -45,6 +45,7 @@ const {
 
 router.get('/admin', getAdmin);
 router.get('/event', getEvents);
+router.get('/events/:code', getEventDetails);
 
 router.post(
   '/register',
@@ -102,8 +103,6 @@ router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.patch('/event', deleteEvent);
 router.post('/event', validateEvent, createEvent);
-
-router.get('/event/:eventcode', getEventDetails);
 
 router.use(clientError);
 router.use(serverError);
