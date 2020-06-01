@@ -8,12 +8,12 @@ import './style.css';
 
 class RegisterUser extends Component {
   state = {
-    errorMsg: '',
-    isLoade: false,
+    error: null,
+    loading: false,
   };
 
   onFinish = ({ firstName, lastName, location, email }) => {
-    this.setState({ isLoade: true });
+    this.setState({ loading: true });
     const {
       match: {
         params: { mobile, eventCode },
@@ -30,7 +30,7 @@ class RegisterUser extends Component {
         eventCode,
       })
       .then(({ data }) => {
-        this.setState({ isLoade: true });
+        this.setState({ loading: false });
         message.success(data.msg);
         push('/');
       })
@@ -40,7 +40,7 @@ class RegisterUser extends Component {
             data: { msg },
           },
         }) => {
-          this.setState({ errorMsg: msg, isLoade: false });
+          this.setState({ error: msg, loading: false });
         }
       );
   };
@@ -54,7 +54,7 @@ class RegisterUser extends Component {
   };
 
   render() {
-    const { errorMsg, isLoade } = this.state;
+    const { error, loading } = this.state;
     return (
       <div className="main-register">
         <div className="s1">
@@ -116,7 +116,7 @@ class RegisterUser extends Component {
 
             <Button htmlType="submit" type="primary">
               {' '}
-              {isLoade ? <Spin size="small" /> : 'Submit'}{' '}
+              {loading ? <Spin size="small" /> : 'Submit'}{' '}
             </Button>
 
             <Button type="danger" onClick={this.goBack}>
@@ -124,7 +124,7 @@ class RegisterUser extends Component {
               Exit{' '}
             </Button>
 
-            {errorMsg && <Alert message={errorMsg} type="error" />}
+            {error && <Alert message={error} type="error" />}
           </Form>
         </div>
         <div className="s2">
