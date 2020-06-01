@@ -7,7 +7,6 @@ services:
 before_script:
   - psql -c "CREATE DATABASE events;" -U postgres
   - psql -c "CREATE USER eventsadmin WITH PASSWORD '123456';" -U postgres  
-  - "npm run build:db" 
 env: 
   global: 
   - PGPORT=5432
