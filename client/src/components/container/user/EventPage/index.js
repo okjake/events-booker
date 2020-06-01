@@ -16,34 +16,34 @@ class EventPage extends Component {
     loading: true,
   };
 
-  componentDidMount() {
-    const {
-      match: {
-        params: { eventCode },
-      },
-    } = this.props;
-    const {
-      location: { state },
-    } = this.props;
-    if (state) {
+  async componentDidMount() {
+    try {
       const {
-        info: { image, ...otherEventProps },
-      } = state;
-      const {
-        info: { title },
-      } = state;
-      this.setState({ image, title, otherEventProps, loading: false });
-    } else {
-      axios
-        .get(`/api/v1/events/${eventCode}`)
-        .then(({ data }) => {
-          const { image, ...otherEventProps } = data;
-          const { title } = data;
-          this.setState({ image, title, otherEventProps, loading: false });
-        })
-        .catch((error) => {
-          this.setState({ error, loading: false });
-        });
+        match: {
+          params: { eventCode },
+        },
+        location: { state },
+      } = this.props;
+
+      if (state) {
+        const {
+          info: { image, title, ...otherEventProps },
+        } = state;
+        this.setState({ image, title, otherEventProps, loading: false });
+      } else {
+        const { data } = await axios.get(`/api/v1/events/${eventCode}`);
+        const { title, image, ...otherEventProps } = data;
+        this.setState({ image, title, otherEventProps, loading: false });
+      }
+    } catch (err) {
+      let error;
+
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ error, loading: false });
     }
   }
 
