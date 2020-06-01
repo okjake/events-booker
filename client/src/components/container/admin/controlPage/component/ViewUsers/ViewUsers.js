@@ -40,18 +40,22 @@ class ViewEvents extends Component {
     },
   ];
 
-  componentDidMount() {
-    axios
-      .get('/api/v1/users')
-      .then(({ data }) => {
-        this.setState({
-          isLoaded: false,
-          users: data,
-        });
-      })
-      .catch((error) => {
-        this.setState({ serverError: error, isLoaded: false });
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('api/v1/users');
+      this.setState({
+        isLoaded: false,
+        users: data,
       });
+    } catch (error) {
+      let serverError;
+      if (error.response) {
+        serverError = error.response.data.msg;
+      } else {
+        serverError = 'Something went wrong, please try again later';
+      }
+      this.setState({ serverError, isLoaded: false });
+    }
   }
 
   render() {
