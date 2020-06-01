@@ -18,13 +18,16 @@ const pinCodeValidation = async (req, res, next) => {
   }
 };
 
-const getHashedPinCode = (req, res, next) => {
-  getAdmin().then(({ rows }) => {
+const getHashedPinCode = async (req, res, next) => {
+  try {
+    const { rows } = await getAdmin();
     const [admin] = rows;
     req.pinCode = admin.pin_code;
     req.adminId = admin.id;
     next();
-  });
+  } catch (err) {
+    next(err);
+  }
 };
 
 const createPortalToken = (req, res, next) => {
