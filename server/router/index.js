@@ -16,7 +16,7 @@ const {
   cancelRegistration,
   getEvents,
   logout,
-  getUsersEvent,
+  getEventUsers,
   getUsersData,
   validateEvent,
   createEvent,
@@ -99,7 +99,7 @@ router.patch(
 
 router.all(['/users', '/event/:eventcode/users', '/event'], protectedRoute);
 router.get('/users', getUsersData);
-router.get('/events/:eventCode/users', getUsersEvent);
+router.get('/events/:eventCode/users', getEventUsers);
 router.patch('/event', deleteEvent);
 router.post('/event', validateEvent, createEvent);
 

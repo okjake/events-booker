@@ -20,7 +20,7 @@ const {
 const {
   validateEvent,
   createEvent,
-  getUsersEvent,
+  getEventUsers,
   getUsersData,
   logout,
   viewEventsOnDate,
@@ -54,7 +54,7 @@ module.exports = {
   cancelRegistration,
   getEvents,
   logout,
-  getUsersEvent,
+  getEventUsers,
   getUsersData,
   validateEvent,
   createEvent,

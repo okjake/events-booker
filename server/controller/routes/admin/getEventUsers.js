@@ -1,6 +1,6 @@
 const { getUsersOfEvent } = require('../../../database/queries/users');
 
-const getUsersEvent = (req, res, next) => {
+const getEventUsers = (req, res, next) => {
   const { eventCode } = req.params;
   getUsersOfEvent(eventCode)
     .then(({ rows }) => {
@@ -11,4 +11,4 @@ const getUsersEvent = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = getUsersEvent;
+module.exports = getEventUsers;
