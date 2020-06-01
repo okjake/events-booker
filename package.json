@@ -6,13 +6,14 @@
   "scripts": {
     "start": "NODE_ENV=production node server/index.js",
     "dev": "NODE_ENV=development nodemon server/index.js",
+    "test": "NODE_ENV=test jest --runInBand",
     "project-setup": "npm install && cd client && npm install",
     "kill": "fuser -k 8000/tcp",
     "kill-run": "npm run kill && NODE_ENV=development npm run dev",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "devs": "cd client && npm start",
     "start-both": "npm-run-all --parallel dev devs",
-    "build:db" : "NODE_ENV=production node server/database/config/build.js"
+    "build:db": "NODE_ENV=production node server/database/config/build.js"
   },
   "repository": {
     "type": "git",
@@ -26,12 +27,14 @@
   },
   "homepage": "https://github.com/GSG-G8/events-booker#readme",
   "dependencies": {
+    "babel-jest": "^24.9.0",
     "bcrypt": "^4.0.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "env2": "^2.2.2",
     "express": "^4.17.1",
     "ical-generator": "^1.9.4",
+    "jest": "^24.9.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "nexmo": "^2.6.0",
