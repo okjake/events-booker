@@ -12,7 +12,7 @@ const pinCodeValidation = async (req, res, next) => {
     return next();
   } catch (err) {
     if (err.name === 'ValidationError') {
-      res.status(400).json({ msg: err.message });
+      return res.status(400).json({ msg: err.message });
     }
     return next(err);
   }
