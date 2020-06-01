@@ -14,20 +14,24 @@ class UsersPage extends Component {
     error: null,
   };
 
-  componentDidMount() {
-    const {
-      match: {
-        params: { eventCode },
-      },
-    } = this.props;
-    axios
-      .get(`/api/v1/events/${eventCode}/users`)
-      .then(({ data }) => {
-        this.setState({ users: data, isLoaded: true });
-      })
-      .catch((error) => {
-        this.setState({ error, isLoaded: true });
-      });
+  async componentDidMount() {
+    try {
+      const {
+        match: {
+          params: { eventCode },
+        },
+      } = this.props;
+      const { data } = await axios.get(`/api/v1/events/${eventCode}/users`);
+      this.setState({ users: data, isLoaded: true });
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ error, isLoaded: true });
+    }
   }
 
   render() {
@@ -70,7 +74,7 @@ class UsersPage extends Component {
             buttonText="Export to Excel"
           />
           {error ? (
-            <div>Error: {error.message}</div>
+            <div>{error}</div>
           ) : !isLoaded ? (
             <div>
               <LoadingOutlined /> Loading
