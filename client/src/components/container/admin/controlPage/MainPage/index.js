@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Alert, message } from 'antd';
-import Axios from 'axios';
+import axios from 'axios';
 import { PlusSquareFilled } from '@ant-design/icons';
 
 import AddEvent from '../component/AddEvent';
@@ -34,7 +34,8 @@ class Dashboard extends Component {
   }
 
   logout = () => {
-    Axios.get('/api/v1/logout')
+    axios
+      .get('/api/v1/logout')
       .then((res) => {
         const {
           history: { push },
