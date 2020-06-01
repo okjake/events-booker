@@ -4,55 +4,62 @@ const { getEventDetails } = require('../../../database/queries/events');
 const { userHasBooked } = require('../../../database/queries/users');
 const { signAttendanceSql } = require('../../../database/queries/admin');
 
-const validateAttendence = (req, res, next) => {
+const validateAttendance = async (req, res, next) => {
   const schema = yup.object().shape({
     userCode: yup.number().required().positive().integer().min(100).max(999),
     eventCode: yup.number().required().positive().integer().min(100).max(999),
   });
 
-  const result = schema.isValidSync(req.body);
-  if (!result) {
-    const err = new Error();
-    err.msg = 'invalid inputs';
-    err.status = 400;
-    return next(err);
-  }
-  return getEventDetails(req.body.eventCode)
-    .then(({ rows }) => {
+  try{
+    await schema.validate(req.body);
+    const {rows}= await getEventDetails(req.body.eventCode)
       if (rows.length) {
         req.eventId = rows[0].id;
-        next();
-      } else {
-        res.status(400).json({
-          msg: `event with code ${req.body.eventCode} doesn't exist`,
-        });
-      }
-    })
-    .catch(next);
+        return next();
+      }else{
+      return res.status(400).json({msg: `event with code ${req.body.eventCode} doesn't exist`})
+  }}
+  catch(err){
+    if(err.name==='ValidationError'){
+      const e = new Error();
+      e.msg=err.message;
+      e.status=400;
+      return next(e)
+    }
+    return next(err)
+  }
+
 };
 
-const checkUserBooking = (req, res, next) => {
-  userHasBooked(req.body.userCode, req.eventId)
-    .then(({ rows }) => {
-      if (rows.length) next();
+const checkUserBooking = async(req, res, next) => {
+  try{
+    const {rows} =await userHasBooked(req.body.userCode, req.eventId)
+      if (rows.length){
+        return next();
+      } 
       else {
-        res.status(400).json({
-          msg:
-            "user hasn't booked this event yet, please book the event then try again",
-        });
+        return res.status(400)
+        .json({msg:'user hasn\'t booked this event yet, please book the event then try again'});
       }
-    })
-    .catch(next);
+  }
+  catch(err){
+    console.log(err);
+    return next(err)
+  };
 };
 
-const signAttendance = (req, res, next) => {
-  signAttendanceSql(req.body.userCode, req.eventId)
-    .then(() => res.json({ msg: 'thanks for attending' }))
-    .catch(next);
+const signAttendance = async (req, res, next) => {
+  try{
+    await signAttendanceSql(req.body.userCode, req.eventId)
+    return res.json({ msg: 'thanks for attending' })
+  }
+  catch(err){
+    return next(err)
+  }
 };
 
 module.exports = {
-  validateAttendence,
+  validateAttendance: validateAttendance,
   checkUserBooking,
   signAttendance,
 };

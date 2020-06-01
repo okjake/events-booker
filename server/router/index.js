@@ -20,7 +20,7 @@ const {
   getUsersData,
   validateEvent,
   createEvent,
-  validateAttendence,
+  validateAttendance,
   checkUserBooking,
   signAttendance,
   pinCodeValidation,
@@ -92,7 +92,7 @@ router.all(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
 router.patch(
   '/attendance',
-  validateAttendence,
+  validateAttendance,
   checkUserBooking,
   signAttendance
 );
@@ -102,7 +102,6 @@ router.get('/users', getUsersData);
 router.get('/event/:eventcode/users', getUsersEvent);
 router.patch('/event', deleteEvent);
 router.post('/event', validateEvent, createEvent);
-
 router.get('/event/:eventcode', getEventDetails);
 
 router.use(clientError);
