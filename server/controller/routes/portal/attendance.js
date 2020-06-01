@@ -9,7 +9,6 @@ const validateAttendance = async (req, res, next) => {
     userCode: yup.number().required().positive().integer().min(100).max(999),
     eventCode: yup.number().required().positive().integer().min(100).max(999),
   });
-
   try{
     await schema.validate(req.body);
     const {rows}= await getEventDetails(req.body.eventCode)
@@ -32,8 +31,9 @@ const validateAttendance = async (req, res, next) => {
 };
 
 const checkUserBooking = async(req, res, next) => {
+  const {body:{userCode,eventId}}=req
   try{
-    const {rows} =await userHasBooked(req.body.userCode, req.eventId)
+    const {rows} =await userHasBooked(userCode,eventId)
       if (rows.length){
         return next();
       } 
@@ -43,14 +43,14 @@ const checkUserBooking = async(req, res, next) => {
       }
   }
   catch(err){
-    console.log(err);
     return next(err)
   };
 };
 
 const signAttendance = async (req, res, next) => {
+  const {body:{userCode,eventId}}=req
   try{
-    await signAttendanceSql(req.body.userCode, req.eventId)
+    await signAttendanceSql(userCode,eventId)
     return res.json({ msg: 'thanks for attending' })
   }
   catch(err){
@@ -59,7 +59,7 @@ const signAttendance = async (req, res, next) => {
 };
 
 module.exports = {
-  validateAttendance: validateAttendance,
+  validateAttendance,
   checkUserBooking,
   signAttendance,
 };
