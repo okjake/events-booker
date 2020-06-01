@@ -9,32 +9,33 @@ const { getUsersCode } = require('../../../database/queries/users');
 const { signUserAttend } = require('../../../database/queries/users');
 const { alreadyBooked } = require('../../../database/queries/events');
 
-const checkUser = (req, res, next) => {
+const checkUser = async (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
   const schema = yup.object().shape({
     mobile: yup.string().matches(mobileRegExp),
     eventCode: yup.number().required().positive().integer().min(100).max(999),
   });
-  const result = schema.isValidSync(req.body);
-  if (!result) {
-    const err = new Error();
-    err.msg = 'invalid inputs';
-    err.status = 400;
-    res.status(400).json(err);
-    throw err;
-  }
 
-  return checkUserExist(req.body.mobile)
-    .then(({ rows }) => {
-      if (rows.length === 0) {
-        res.status(301).json({ msg: "user doesn't exist, please register" });
-      } else {
-        const [user] = rows;
-        req.user = user;
-        next();
-      }
-    })
-    .catch(next);
+  try{
+    const result = await schema.isValid(req.body);
+    if (!result) {
+      const err = new Error();
+      err.msg = 'invalid inputs'; 
+      err.status = 400;
+      throw err;
+    }
+    const {rows} = await checkUserExist(req.body.mobile);
+    if(rows.length === 0){
+      return res.status(301).json({ msg: "user doesn't exist, please register" });
+    } else {
+      const [user] = rows;
+      req.user = user;
+      next();
+    }
+
+  }catch(error){
+    next(error)
+  }
 };
 
 const checkEventExist = (req, res, next) => {
