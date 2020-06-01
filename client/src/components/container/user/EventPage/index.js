@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Result } from 'antd';
+import axios from 'axios';
 
-import Axios from 'axios';
-import EventPageContent from '../EventPageContent/EventPageContent';
-import PopupBtnEventcomp from '../PopupBtnEventcomp/PopupBtnEventcomp';
-
+import EventPageContent from '../EventPageContent';
+import PopupBtnEvent from '../PopupBtnEvent';
 import './style.css';
 
 class EventPage extends Component {
@@ -33,7 +32,8 @@ class EventPage extends Component {
       } = state;
       this.setState({ image, title, otherEventProps });
     } else {
-      Axios.get(`/api/v1/events/${eventCode}`)
+      axios
+        .get(`/api/v1/events/${eventCode}`)
         .then(({ data }) => {
           const { image, ...otherEventProps } = data;
           const { title } = data;
@@ -68,7 +68,7 @@ class EventPage extends Component {
         <div className="contant">
           <EventPageContent {...otherEventProps} />
           <div className="btns">
-            <PopupBtnEventcomp
+            <PopupBtnEvent
               title={`Register at ${title} event`}
               eventCode={eventCode}
               eventProg={eventProg}
@@ -77,11 +77,11 @@ class EventPage extends Component {
               type="booking"
             />
 
-            <PopupBtnEventcomp
-              title={`Cancel Registeration at ${title} event`}
+            <PopupBtnEvent
+              title={`Cancel Registration at ${title} event`}
               eventCode={eventCode}
               eventProg={eventProg}
-              purpose="Cancel Registeration"
+              purpose="Cancel Registration"
               type="cancel"
             />
 
