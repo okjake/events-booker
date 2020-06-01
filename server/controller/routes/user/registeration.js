@@ -38,8 +38,9 @@ const checkUser = async (req, res, next) => {
   }
 };
 
-const checkEventExist = (req, res, next) => {
-  getEventDetails(req.body.eventCode).then(({ rows }) => {
+const checkEventExist = async (req, res, next) => {
+  try{
+    const { rows } = await getEventDetails(req.body.eventCode)
     if (rows.length === 0) {
       const err = new Error();
       err.status = 400;
@@ -50,7 +51,9 @@ const checkEventExist = (req, res, next) => {
       req.event = event;
       next();
     }
-  });
+  }catch(error){
+    next(error);
+  }
 };
 
 const checkAlreadBooked = (req, res, next) => {
