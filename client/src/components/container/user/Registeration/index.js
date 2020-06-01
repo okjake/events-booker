@@ -12,44 +12,45 @@ class RegisterUser extends Component {
     loading: false,
   };
 
-  onFinish = ({ firstName, lastName, location, email }) => {
-    this.setState({ loading: true });
-    const {
-      match: {
-        params: { mobile, eventCode },
-      },
-      history: { push },
-    } = this.props;
-    axios
-      .post(`/api/v1/register`, {
+  onFinish = async ({ firstName, lastName, location, email }) => {
+    try {
+      const {
+        match: {
+          params: { mobile, eventCode },
+        },
+        history,
+      } = this.props;
+      this.setState({ loading: true });
+      await axios.post(`/api/v1/register`, {
         firstName,
         lastName,
         location,
         email,
         mobile,
         eventCode,
-      })
-      .then(({ data }) => {
-        this.setState({ loading: false });
-        message.success(data.msg);
-        push('/');
-      })
-      .catch(
-        ({
-          response: {
-            data: { msg },
-          },
-        }) => {
-          this.setState({ error: msg, loading: false });
-        }
-      );
+      });
+      const { data } = await axios.post('/api/v1/checkUser', {
+        mobile,
+        eventCode,
+      });
+      message.success(data.msg, 5);
+      this.setState({ loading: false }, () => history.push('/'));
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ error, loading: false });
+    }
   };
 
   goBack = () => {
     const {
       history: { goBack },
     } = this.props;
-    message.warning('you has not registered yet !!');
+    message.warning("you haven't not registered yet!");
     goBack();
   };
 
@@ -78,7 +79,7 @@ class RegisterUser extends Component {
               ]}
             >
               <Input
-                placeholder="fisrt name"
+                placeholder="first name"
                 prefix={<UserOutlined className="site-form-item-icon" />}
               />
             </Form.Item>
