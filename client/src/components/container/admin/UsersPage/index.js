@@ -3,7 +3,7 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import axios from 'axios';
 import { Button, Empty } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import ReactRouterPropTypes from 'react-router-prop-types';
+import reactRouterPropTypes from 'react-router-prop-types';
 
 import './style.css';
 
@@ -17,11 +17,11 @@ class UsersPage extends Component {
   componentDidMount() {
     const {
       match: {
-        params: { eventcode },
+        params: { eventCode },
       },
     } = this.props;
     axios
-      .get(`/api/v1/events/${eventcode}/users`)
+      .get(`/api/v1/events/${eventCode}/users`)
       .then(({ data }) => {
         this.setState({ users: data, isLoaded: true });
       })
@@ -37,7 +37,7 @@ class UsersPage extends Component {
         state: { title },
       },
     } = this.props;
-    const eventName = title;
+
     return (
       <div className="tableSection">
         <header className="headerUsers">
@@ -59,15 +59,15 @@ class UsersPage extends Component {
             </Button>
           </div>
         </header>
-        <h2>All Users On Event :{eventName}</h2>
+        <h2>Users for {title} event</h2>
         <div className="content-t">
           <ReactHTMLTableToExcel
             id="test-table-xls-button"
             className="download-table-xls-button"
             table="table-to-xls"
-            filename="eventusers"
+            filename={title}
             sheet="tablexls"
-            buttonText="export users to xls"
+            buttonText="Export to Excel"
           />
           {error ? (
             <div>Error: {error.message}</div>
@@ -108,9 +108,9 @@ class UsersPage extends Component {
 }
 
 UsersPage.propTypes = {
-  history: ReactRouterPropTypes.history.isRequired,
-  location: ReactRouterPropTypes.location.isRequired,
-  match: ReactRouterPropTypes.match.isRequired,
+  history: reactRouterPropTypes.history.isRequired,
+  location: reactRouterPropTypes.location.isRequired,
+  match: reactRouterPropTypes.match.isRequired,
 };
 
 export default UsersPage;
