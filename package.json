@@ -11,7 +11,8 @@
     "kill-run": "npm run kill && NODE_ENV=development npm run dev",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "devs": "cd client && npm start",
-    "start-both": "npm-run-all --parallel dev devs"
+    "start-both": "npm-run-all --parallel dev devs",
+    "build:db" : "NODE_ENV=production node server/database/config/build.js"
   },
   "repository": {
     "type": "git",
