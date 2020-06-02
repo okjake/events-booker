@@ -50,7 +50,7 @@ class RegisterUser extends Component {
     const {
       history: { goBack },
     } = this.props;
-    message.warning("you haven't not registered yet!");
+    message.warning("you haven't registered yet!");
     goBack();
   };
 
