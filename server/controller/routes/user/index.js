@@ -2,15 +2,11 @@ const getEvents = require('./mainPage');
 const getEventDetails = require('./getEventDetails');
 const cancelRegistration = require('./cancelRegistration');
 const sendSms = require('./sendSmsMsg');
-const {
-  registerValidation,
-  newUserExist,
-  addUserToDB,
-} = require('./registerNewUser');
+const signUpUser = require('./registerNewUser');
 const {
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
+  checkAlreadyBooked,
   generateCode,
   userWillAttend,
   sendInvitation,
@@ -21,13 +17,11 @@ module.exports = {
   getEvents,
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
+  checkAlreadyBooked,
   generateCode,
   userWillAttend,
   sendInvitation,
   sendSms,
-  registerValidation,
-  newUserExist,
-  addUserToDB,
+  signUpUser,
   getEventDetails,
 };

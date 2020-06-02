@@ -4,14 +4,13 @@ import axios from 'axios';
 
 import './style.css';
 
-class PopupBtnEventcomp extends Component {
+class PopupBtnEvent extends Component {
   state = {
     mobile: '',
     message: '',
     visible: false,
     error: false,
-    isLoade: false,
-    errorMessage: null,
+    isLoad: false,
   };
 
   showModal = () => {
@@ -31,77 +30,72 @@ class PopupBtnEventcomp extends Component {
     this.setState({ mobile: value, error: false });
   };
 
-  handleOk = (e) => {
-    this.setState({ isLoade: true });
+  handleOk = async () => {
+    this.setState({ isLoad: true });
     const { mobile } = this.state;
-    const { eventCode, eventProg, type } = this.props;
+    const { eventCode, eventProg, type, push } = this.props;
     if (type === 'booking') {
-      axios
-        .post('/api/v1/checkUser', { mobile, eventCode })
-        .then(({ data }) => {
+      try {
+        const { data } = await axios.post('/api/v1/checkUser', {
+          mobile,
+          eventCode,
+        });
+        this.setState({
+          visible: false,
+          mobile: '',
+          isLoad: false,
+        });
+        message.success(data.msg, 5);
+      } catch (error) {
+        const { response } = error;
+        const { msg } = response.data;
+        if (response.status === 301) {
+          push(`/register/${eventProg}/${eventCode}/${mobile}`);
+        } else {
           this.setState({
-            visible: false,
+            error: true,
+            message: msg,
             mobile: '',
-            isLoade: false,
+            isLoad: false,
           });
-          message.success(data.msg, 5);
-        })
-        .catch(
-          ({
-            response: {
-              data: { msg },
-              status,
-            },
-          }) => {
-            if (status === 301) {
-              this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
-            } else {
-              this.setState({
-                error: true,
-                message: msg,
-                mobile: '',
-                isLoade: false,
-              });
-            }
-          }
-        );
+        }
+      }
     } else if (type === 'cancel') {
-      axios
-        .post('/api/v1/cancelUser', { mobile, eventCode })
-        .then(({ data: { msg } }) => {
-          this.setState({
-            visible: false,
-            mobile: '',
-            isLoade: false,
-          });
-          message.warning(msg, 5);
-        })
-        .catch(
-          ({
-            response: {
-              data: { msg },
-            },
-          }) => {
-            this.setState({
-              error: true,
-              message: msg,
-              mobile: '',
-              isLoade: false,
-            });
-          }
-        );
+      try {
+        const { data } = await axios.post('/api/v1/cancelUser', {
+          mobile,
+          eventCode,
+        });
+        const { msg } = data;
+        this.setState({
+          visible: false,
+          mobile: '',
+          isLoad: false,
+        });
+        message.warning(msg, 5);
+      } catch (error) {
+        const { response } = error;
+        const { msg } = response.data;
+        this.setState({
+          error: true,
+          message: msg,
+          mobile: '',
+          isLoad: false,
+        });
+      }
     }
   };
 
   render() {
-    const { visible, mobile, message, error, isLoade } = this.state;
+    const { visible, mobile, message, error, isLoad } = this.state;
+    const { purpose, title } = this.props;
     return (
       <div className="popup-modal">
         <Button type="primary" onClick={this.showModal} shape="round" autoFocus>
-          {this.props.purpose}
+          {purpose}
         </Button>
         <Modal
-          title={this.props.title}
+          title={title}
           visible={visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
@@ -120,7 +114,7 @@ class PopupBtnEventcomp extends Component {
             type="primary"
             onClick={this.handleOk}
           >
-            {isLoade ? <Spin /> : ' Submit '}
+            {isLoad ? <Spin /> : ' Submit '}
           </Button>
           {error ? (
             <Alert
@@ -136,4 +130,4 @@ class PopupBtnEventcomp extends Component {
   }
 }
 
-export default PopupBtnEventcomp;
+export default PopupBtnEvent;
