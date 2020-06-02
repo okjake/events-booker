@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Spin, Alert, message } from 'antd';
 import axios from 'axios';
+import propTypes from 'prop-types';
 import './style.css';
 
-class PortalLogin extends Component {
+export default class PortalLogin extends Component {
   state = {
     isLoade: false,
     isFinish: false,
@@ -79,5 +80,9 @@ class PortalLogin extends Component {
     );
   }
 }
-
-export default PortalLogin;
+propTypes.shape({
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
+});
