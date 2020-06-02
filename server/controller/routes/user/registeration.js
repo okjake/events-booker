@@ -45,7 +45,7 @@ const checkEventExist = async (req, res, next) => {
       const err = new Error();
       err.status = 400;
       err.msg = 'the event you are trying to book does not exist';
-      next(err);
+      throw err;
     } else {
       const [event] = rows;
       req.event = event;
