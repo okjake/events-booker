@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Alert, Modal, Button, Input, message, Spin } from 'antd';
 import axios from 'axios';
 
-import './PopupBtnEventcomp.css';
+import './PopupBtnEvent.css';
 
-class PopupBtnEventcomp extends Component {
+class PopupBtnEvent extends Component {
   state = {
     mobile: '',
     message: '',
@@ -132,4 +132,4 @@ class PopupBtnEventcomp extends Component {
   }
 }
 
-export default PopupBtnEventcomp;
+export default PopupBtnEvent;
