@@ -188,7 +188,7 @@ describe('post request to /register', () => {
         });
     }));
 
-  it('return bad request with status 400 if mobile number  is invalid', () =>
+  it('return bad request with status 400 if mobile number is invalid', () =>
     new Promise((done) => {
       expect.assertions(0);
       const reqBody = {
