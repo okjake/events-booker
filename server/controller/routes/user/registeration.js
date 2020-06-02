@@ -9,63 +9,66 @@ const { getUsersCode } = require('../../../database/queries/users');
 const { signUserAttend } = require('../../../database/queries/users');
 const { alreadyBooked } = require('../../../database/queries/events');
 
-const checkUser = (req, res, next) => {
+const checkUser = async (req, res, next) => {
   const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
   const schema = yup.object().shape({
     mobile: yup.string().matches(mobileRegExp),
     eventCode: yup.number().required().positive().integer().min(100).max(999),
   });
-  const result = schema.isValidSync(req.body);
-  if (!result) {
-    const err = new Error();
-    err.msg = 'invalid inputs';
-    err.status = 400;
-    res.status(400).json(err);
-    throw err;
-  }
 
-  return checkUserExist(req.body.mobile)
-    .then(({ rows }) => {
-      if (rows.length === 0) {
-        res.status(301).json({ msg: "user doesn't exist, please register" });
-      } else {
-        const [user] = rows;
-        req.user = user;
-        next();
-      }
-    })
-    .catch(next);
+  try {
+    const result = await schema.isValid(req.body);
+    if (!result) {
+      const err = new Error();
+      err.msg = 'invalid inputs';
+      err.status = 400;
+      throw err;
+    }
+    const { rows } = await checkUserExist(req.body.mobile);
+    if (rows.length === 0) {
+      return res
+        .status(301)
+        .json({ msg: "user doesn't exist, please register" });
+    }
+    const [user] = rows;
+    req.user = user;
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
-const checkEventExist = (req, res, next) => {
-  getEventDetails(req.body.eventCode).then(({ rows }) => {
+const checkEventExist = async (req, res, next) => {
+  try {
+    const { rows } = await getEventDetails(req.body.eventCode);
     if (rows.length === 0) {
       const err = new Error();
       err.status = 400;
       err.msg = 'the event you are trying to book does not exist';
-      next(err);
+      throw err;
     } else {
       const [event] = rows;
       req.event = event;
       next();
     }
-  });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const checkAlreadBooked = (req, res, next) => {
-  alreadyBooked(req.user.id, req.event.id)
-    .then(({ rows }) => {
-      if (rows.length === 0) next();
-      else {
-        const err = new Error();
-        err.status = 400;
-        err.msg = 'you have already booked this event';
-        throw err;
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
+const checkAlreadyBooked = async (req, res, next) => {
+  try {
+    const { rows } = await alreadyBooked(req.user.id, req.event.id);
+    if (rows.length === 0) next();
+    else {
+      const err = new Error();
+      err.status = 400;
+      err.msg = 'you have already booked this event';
+      throw err;
+    }
+  } catch (error) {
+    next(error);
+  }
 };
 
 const generateRandom = (prevCodes) => {
@@ -74,23 +77,25 @@ const generateRandom = (prevCodes) => {
   return generateRandom(prevCodes);
 };
 
-const generateCode = (req, res, next) => {
-  getUsersCode(req.event.id)
-    .then(({ rows }) => {
-      const codes = rows.map((event) => event.user_code);
-      const randomCode = generateRandom(codes);
-      req.user.userCode = randomCode;
-      next();
-    })
-    .catch(next);
+const generateCode = async (req, res, next) => {
+  try {
+    const { rows } = await getUsersCode(req.event.id);
+    const codes = rows.map((event) => event.user_code);
+    const randomCode = generateRandom(codes);
+    req.user.userCode = randomCode;
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
-const userWillAttend = (req, res, next) => {
-  signUserAttend(req.user.id, req.event.id, req.user.userCode)
-    .then(() => {
-      next();
-    })
-    .catch(next);
+const userWillAttend = async (req, res, next) => {
+  try {
+    await signUserAttend(req.user.id, req.event.id, req.user.userCode);
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
 const sendInvitation = (req, res, next) => {
@@ -151,7 +156,7 @@ const sendInvitation = (req, res, next) => {
 module.exports = {
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
+  checkAlreadyBooked,
   generateCode,
   userWillAttend,
   sendInvitation,
