@@ -26,6 +26,7 @@ class Dashboard extends Component {
       let adminError;
       if (error.response) {
         adminError = error.response.data.error;
+        console.log(error.response.data.error)
       } else {
         adminError = 'Failed to get admin data!';
       }
