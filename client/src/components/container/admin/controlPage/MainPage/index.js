@@ -33,18 +33,24 @@ class Dashboard extends Component {
     }
   }
 
-  logout = () => {
-    axios
-      .get('/api/v1/logout')
-      .then((res) => {
-        const {
-          history: { push },
-        } = this.props;
-        push('/admin');
-      })
-      .catch((err) => {
-        message.error('error with logout process');
-      });
+  logout = async() => {
+    try{
+      const res =  await axios.get('/api/v1/logout');
+      const {
+        history: { push },
+      } = this.props;
+      push('/admin');
+
+    } catch(error){
+      let err
+      if (error.response) {
+        err = error.response.data.error;
+      } else {
+        err = 'Failed to log out!';
+      }
+      this.setState({ err: ('error with logout process'));
+
+    }
   };
 
   clickBtn = ({ target: { value } }) => {
