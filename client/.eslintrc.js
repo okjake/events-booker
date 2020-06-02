@@ -42,5 +42,14 @@ module.exports = {
       }
     ]
   },
-  plugins: ['react', 'prettier']
+  plugins: ['react', 'prettier'],
+
+  "camelcase": [0], //no-camelCase
+    "react/prop-types": [
+      0
+    ], //no propTypes
+    'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
+
+    "react/jsx-props-no-spreading": 0,
+
 };
