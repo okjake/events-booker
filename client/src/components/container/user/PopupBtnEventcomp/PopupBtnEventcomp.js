@@ -33,7 +33,7 @@ class PopupBtnEventcomp extends Component {
   handleOk = async () => {
     this.setState({ isLoad: true });
     const { mobile } = this.state;
-    const { eventCode, eventProg, type } = this.props;
+    const { eventCode, eventProg, type, push } = this.props;
     if (type === 'booking') {
       axios
         .post('/api/v1/checkUser', { mobile, eventCode })
@@ -53,7 +53,7 @@ class PopupBtnEventcomp extends Component {
             },
           }) => {
             if (status === 301) {
-              this.props.push(`/register/${eventProg}/${eventCode}/${mobile}`);
+              push(`/register/${eventProg}/${eventCode}/${mobile}`);
             } else {
               this.setState({
                 error: true,
@@ -94,13 +94,14 @@ class PopupBtnEventcomp extends Component {
 
   render() {
     const { visible, mobile, message, error, isLoad } = this.state;
+    const { purpose, title } = this.props;
     return (
       <div className="popup-modal">
         <Button type="primary" onClick={this.showModal} shape="round" autoFocus>
-          {this.props.purpose}
+          {purpose}
         </Button>
         <Modal
-          title={this.props.title}
+          title={title}
           visible={visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
