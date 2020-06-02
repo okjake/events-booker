@@ -1,75 +1,70 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Spin, Alert, message } from 'antd';
 import axios from 'axios';
-
 import './style.css';
 
 class PortalLogin extends Component {
   state = {
     isLoade: false,
-    pinCode: '',
-    serverError: '',
+    isFinish: false,
     msg: '',
     error: false,
   };
 
-  handleChange = ({ target: { value } }) => {
-    this.setState({ pinCode: value, error: false });
-  };
+  formRef = React.createRef();
 
   onFinish = async ({ pinCode }) => {
-    this.setState({ isLoade: true });
+    const {
+      props: {
+        history: { push },
+      },
+    } = this;
+    this.setState({ isLoade: true, isFinish: true });
     try {
       const { data } = await axios.post('/api/v1/portal/login', { pinCode });
-      this.props.history.push('/portal/attendance');
+      push('/portal/attendance');
       message.success(data.msg, 10);
-    } catch (err) {
+    } catch ({
+      response: {
+        data: { msg },
+      },
+    }) {
       this.setState({
         error: true,
-        msg: `incorrect pin code`,
+        msg,
         isLoade: false,
+        isFinish: true,
       });
     }
   };
-  //   axios
-  //     .post('/api/v1/portal/login', { pinCode })
-  //     .then(({ data }) => {
-  //       this.props.history.push('/portal/attendance');
-  //       message.success(data.msg, 10);
-  //     })
-  //     .catch(
-  //       ({
-  //         response: {
-  //           data: { msg },
-  //         },
-  //       }) => {
-  //         this.setState({
-  //           error: true,
-  //           msg,
-  //           pinCode: '',
-  //           isLoade: false,
-  //         });
-  //       }
-  //     );
-  // };
+
+  onReset = () => {
+    const {
+      formRef: {
+        current: { resetFields },
+      },
+    } = this;
+    resetFields();
+  };
 
   render() {
-    const { isLoade, error, msg } = this.state;
+    const { isLoade, error, msg, isFinish } = this.state;
+    const { formRef, onReset, onFinish } = this;
+    if (isFinish) {
+      onReset();
+    }
     return (
       <div className="portal-contant">
         <h1 className="title">
           Welcome to <span>GSG Events portal login page</span>
         </h1>
-        <Form className="main-form" onFinish={this.onFinish}>
+        <Form className="main-form" onFinish={onFinish} ref={formRef}>
           <Form.Item
             className="input-field"
             name="pinCode"
             rules={[{ message: 'Please input your pin-code!' }]}
           >
-            <Input.Password
-              placeholder="Enter your pin code"
-              onChange={this.handleChange}
-            />
+            <Input.Password placeholder="Enter your pin code" />
           </Form.Item>
           <Form.Item className="btn">
             <Button type="primary" htmlType="submit">
