@@ -49,7 +49,7 @@ class ViewEvents extends Component {
         events: data,
       });
     } catch (error) {
-      const serverError;
+      let serverError;
       if (error.response) {
         serverError = error.response.data.error;
       } else {
