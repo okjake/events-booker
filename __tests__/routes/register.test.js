@@ -4,10 +4,6 @@ const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
 const buildDB = require('../../server/database/config/build');
 
-const throwIfError = (err, res) => {
-  if (err) throw err;
-};
-
 describe('post request to /register', () => {
   beforeAll(() => buildDB());
   afterAll(() => connection.end());
