@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import reactRouterPropTypes from 'react-router-prop-types';
+import propTypes from 'prop-types';
 import { Button, Form, Input, Alert, Spin, message } from 'antd';
 import { UserOutlined, HomeOutlined, MailOutlined } from '@ant-design/icons';
 
@@ -140,8 +140,16 @@ class RegisterUser extends Component {
 }
 
 RegisterUser.propTypes = {
-  history: reactRouterPropTypes.history.isRequired,
-  match: reactRouterPropTypes.match.isRequired,
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
+  match: propTypes.shape({
+    params: propTypes.shape({
+      mobile: propTypes.string.isRequired,
+      eventCode: propTypes.string.isRequired,
+    }),
+  }).isRequired,
 };
 
 export default RegisterUser;
