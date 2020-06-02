@@ -19,13 +19,13 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     try {
-      const { data } = await axios.get('/api/v1/admin');
+      const { data } = await axios.get('/api/v1/admi');
       const { name, img } = data[0];
       this.setState({ name, img });
-    } catch (err) {
+    } catch (error) {
       let adminError;
-      if (err.response) {
-        adminError = err.response.data.msg;
+      if (error.response) {
+        adminError = error.response.data.error;
       } else {
         adminError = 'Failed to get admin data!';
       }
