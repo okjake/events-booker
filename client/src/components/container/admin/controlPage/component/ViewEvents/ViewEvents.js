@@ -83,13 +83,13 @@ class ViewEvents extends Component {
   };
 
   handelEventButtons = (record) => {
-    const eventcode = record.event_code;
+    const eventCode = record.event_code;
     return (
       <div className="action-btns">
         <Link
           className="show"
           to={{
-            pathname: `/dashboard/${eventcode}/users`,
+            pathname: `/dashboard/${eventCode}/users`,
             state: { title: record.title },
           }}
         >
