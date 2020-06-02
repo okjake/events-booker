@@ -42,19 +42,21 @@ class ViewEvents extends Component {
 
   async componentDidMount() {
     try {
-      const { data } = await axios.get('api/v1/users');
+      const { data } = await axios.get('/api/v1/users');
       this.setState({
         isLoaded: false,
         users: data,
       });
     } catch (error) {
       let serverError;
+
       if (error.response) {
-        serverError = error.response.data.msg;
+        serverError = error.response.data.error;
       } else {
         serverError = 'Something went wrong, please try again later';
       }
-      this.setState({ serverError, isLoaded: false });
+
+      this.setState({ serverError: error, isLoaded: false });
     }
   }
 

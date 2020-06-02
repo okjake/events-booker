@@ -42,5 +42,13 @@ module.exports = {
       }
     ]
   },
-  plugins: ['react', 'prettier']
+  
+  "react/jsx-props-no-spreading": 0,
+
+  plugins: ['react', 'prettier'],
+
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
 };
