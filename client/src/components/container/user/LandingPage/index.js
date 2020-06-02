@@ -15,25 +15,29 @@ class Landing extends React.Component {
     filteredEvents: [],
   };
 
-  componentDidMount() {
-    axios
-      .get('/api/v1/event')
-      .then(({ data }) => {
-        const response = [...data].sort(
-          (a, b) => new Date(a.date) - new Date(b.date)
-        );
-        this.setState({
-          isLoaded: true,
-          allEvents: response,
-          filteredEvents: response,
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          isLoaded: true,
-          error,
-        });
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('/api/v1/event');
+      const response = [...data].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
+      this.setState({
+        isLoaded: true,
+        allEvents: response,
+        filteredEvents: response,
       });
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.error;
+      } else {
+        error = 'Something went Wrong, please try again later!';
+      }
+      this.setState({
+        isLoaded: true,
+        error,
+      });
+    }
   }
 
   filterByCategory = (cat) => {
