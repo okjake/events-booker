@@ -20,11 +20,14 @@ class AdminLogin extends Component {
       const { history } = this.props;
       message.success(data.msg);
       history.push('/admin/dashboard');
-    } catch (error) {
-      console.log(error.response);
-      const { data } = error.response;
-      const { msg } = data;
-      this.setState({ error: msg, isLoaded: false });
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ error, isLoaded: false });
     }
   };
 
