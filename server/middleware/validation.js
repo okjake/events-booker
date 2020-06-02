@@ -25,7 +25,7 @@ const loginValidation = async (req, res, next) => {
     next();
   } catch (error) {
     if (error.name === 'ValidationError') {
-      res.status(400).json({ msg: 'Invalid Inputs!' });
+      res.status(400).json({ msg: error.errors[0] });
     } else {
       next(error);
     }
