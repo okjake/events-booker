@@ -74,13 +74,9 @@ class Attendance extends React.Component {
     error(err);
   };
 
-  handleModalSubmit = async ({
-    target: {
-      parentNode: {
-        firstChild: { value },
-      },
-    },
-  }) => {
+  handleModalSubmit = async (e) => {
+    const { value } = e.target.parentNode.firstChild;
+
     const { success, error } = this;
     const {
       props: {
