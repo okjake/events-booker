@@ -10,8 +10,7 @@ class PopupBtnEventcomp extends Component {
     message: '',
     visible: false,
     error: false,
-    isLoade: false,
-    errorMessage: null,
+    isLoad: false,
   };
 
   showModal = () => {
@@ -31,8 +30,8 @@ class PopupBtnEventcomp extends Component {
     this.setState({ mobile: value, error: false });
   };
 
-  handleOk = (e) => {
-    this.setState({ isLoade: true });
+  handleOk = async () => {
+    this.setState({ isLoad: true });
     const { mobile } = this.state;
     const { eventCode, eventProg, type } = this.props;
     if (type === 'booking') {
@@ -42,7 +41,7 @@ class PopupBtnEventcomp extends Component {
           this.setState({
             visible: false,
             mobile: '',
-            isLoade: false,
+            isLoad: false,
           });
           message.success(data.msg, 5);
         })
@@ -60,7 +59,7 @@ class PopupBtnEventcomp extends Component {
                 error: true,
                 message: msg,
                 mobile: '',
-                isLoade: false,
+                isLoad: false,
               });
             }
           }
@@ -72,7 +71,7 @@ class PopupBtnEventcomp extends Component {
           this.setState({
             visible: false,
             mobile: '',
-            isLoade: false,
+            isLoad: false,
           });
           message.warning(msg, 5);
         })
@@ -86,7 +85,7 @@ class PopupBtnEventcomp extends Component {
               error: true,
               message: msg,
               mobile: '',
-              isLoade: false,
+              isLoad: false,
             });
           }
         );
@@ -94,7 +93,7 @@ class PopupBtnEventcomp extends Component {
   };
 
   render() {
-    const { visible, mobile, message, error, isLoade } = this.state;
+    const { visible, mobile, message, error, isLoad } = this.state;
     return (
       <div className="popup-modal">
         <Button type="primary" onClick={this.showModal} shape="round" autoFocus>
@@ -120,7 +119,7 @@ class PopupBtnEventcomp extends Component {
             type="primary"
             onClick={this.handleOk}
           >
-            {isLoade ? <Spin /> : ' Submit '}
+            {isLoad ? <Spin /> : ' Submit '}
           </Button>
           {error ? (
             <Alert
