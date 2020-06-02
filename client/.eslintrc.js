@@ -47,8 +47,7 @@ module.exports = {
 
   plugins: ['react', 'prettier'],
 
-  history: propTypes.shape({
-    push: propTypes.func.isRequired,
-    goBack: propTypes.func.isRequired,
-  }).isRequired,
+  "react/prop-types": [
+    0
+  ], //no propTypes
 };
