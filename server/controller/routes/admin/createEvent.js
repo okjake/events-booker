@@ -36,11 +36,12 @@ const validateEvent = (req, res, next) => {
 };
 
 const createEvent = async (req, res, next) => {
-  await createEventSql(req.body);
-
-  res
-    .json({ msg: `Event ${req.body.title} has been created successfully` })
-    .catch(next);
+  try {
+    await createEventSql(req.body);
+    res.json({ msg: `Event ${req.body.title} has been created successfully` });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
