@@ -1,5 +1,5 @@
 const {
-  validateAttendance: validateAttendance,
+  validateAttendance,
   checkUserBooking,
   signAttendance,
 } = require('./attendance');

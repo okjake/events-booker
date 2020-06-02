@@ -10,7 +10,7 @@ const checkEmailIfExist = (req, res, next) => {
         next();
       } else {
         const error = new Error();
-        error.msg = 'email dosent exist';
+        error.msg = 'email docent exist';
         error.status = 403;
         throw error;
       }

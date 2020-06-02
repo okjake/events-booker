@@ -2,10 +2,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const checkPassword = (req, res, next) => {
-  const hsashPass = req.adminPassword;
+  const hashPass = req.adminPassword;
   const { password } = req.body;
   bcrypt
-    .compare(password, hsashPass)
+    .compare(password, hashPass)
     .then((result) => {
       if (result === false) {
         const err = new Error();
