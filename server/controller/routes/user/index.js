@@ -1,5 +1,5 @@
 const getEvents = require('./mainPage');
-const getEventDetails = require('./getEvent');
+const getEventDetails = require('./getEventDetails');
 const cancelRegistration = require('./cancelRegistration');
 const sendSms = require('./sendSmsMsg');
 const signUpUser = require('./registerNewUser');

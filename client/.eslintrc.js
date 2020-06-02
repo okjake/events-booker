@@ -33,6 +33,10 @@ module.exports = {
         allowTemplateLiterals: true // allows strings to use backticks
       }
     ],
+    'react/prop-types': [
+      0
+    ], //no propTypes
+    'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
     // configure the prettier plugin
     'prettier/prettier': [
       'error',
