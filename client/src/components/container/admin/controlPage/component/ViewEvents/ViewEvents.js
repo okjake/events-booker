@@ -41,18 +41,23 @@ class ViewEvents extends Component {
     },
   ];
 
-  componentDidMount() {
-    axios
-      .get('/api/v1/event')
-      .then(({ data }) => {
-        this.setState({
-          isLoaded: false,
-          events: data,
-        });
-      })
-      .catch((error) => {
-        this.setState({ serverError: error, isLoaded: false });
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('/api/v1/event');
+      this.setState({
+        isLoaded: false,
+        events: data,
       });
+    } catch (error) {
+      const serverError;
+      if (error.response) {
+        serverError = error.response.data.error;
+      } else {
+        serverError = 'Something went wrong, please try again later';
+      }
+
+      this.setState({ serverError: error, isLoaded: false });
+    }
   }
 
   handleAction = (currentEvent) => {
