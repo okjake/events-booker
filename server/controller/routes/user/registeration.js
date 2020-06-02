@@ -89,12 +89,13 @@ const generateCode = async (req, res, next) => {
   }
 };
 
-const userWillAttend = (req, res, next) => {
-  signUserAttend(req.user.id, req.event.id, req.user.userCode)
-    .then(() => {
-      next();
-    })
-    .catch(next);
+const userWillAttend = async (req, res, next) => {
+  try {
+    await signUserAttend(req.user.id, req.event.id, req.user.userCode);
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
 const sendInvitation = (req, res, next) => {
