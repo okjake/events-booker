@@ -35,35 +35,31 @@ class PopupBtnEventcomp extends Component {
     const { mobile } = this.state;
     const { eventCode, eventProg, type, push } = this.props;
     if (type === 'booking') {
-      axios
-        .post('/api/v1/checkUser', { mobile, eventCode })
-        .then(({ data }) => {
+      try {
+        const { data } = await axios.post('/api/v1/checkUser', {
+          mobile,
+          eventCode,
+        });
+        this.setState({
+          visible: false,
+          mobile: '',
+          isLoad: false,
+        });
+        message.success(data.msg, 5);
+      } catch (error) {
+        const { response } = error;
+        const { msg } = response.data;
+        if (response.status === 301) {
+          push(`/register/${eventProg}/${eventCode}/${mobile}`);
+        } else {
           this.setState({
-            visible: false,
+            error: true,
+            message: msg,
             mobile: '',
             isLoad: false,
           });
-          message.success(data.msg, 5);
-        })
-        .catch(
-          ({
-            response: {
-              data: { msg },
-              status,
-            },
-          }) => {
-            if (status === 301) {
-              push(`/register/${eventProg}/${eventCode}/${mobile}`);
-            } else {
-              this.setState({
-                error: true,
-                message: msg,
-                mobile: '',
-                isLoad: false,
-              });
-            }
-          }
-        );
+        }
+      }
     } else if (type === 'cancel') {
       axios
         .post('/api/v1/cancelUser', { mobile, eventCode })
