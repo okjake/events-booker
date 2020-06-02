@@ -35,11 +35,11 @@ const validateEvent = (req, res, next) => {
     });
 };
 
-const createEvent = (req, res, next) => {
-  createEventSql(req.body)
-    .then(() =>
-      res.json({ msg: `Event ${req.body.title} has been created successfully` })
-    )
+const createEvent = async (req, res, next) => {
+  await createEventSql(req.body);
+
+  res
+    .json({ msg: `Event ${req.body.title} has been created successfully` })
     .catch(next);
 };
 
