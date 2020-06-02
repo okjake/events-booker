@@ -61,30 +61,28 @@ class PopupBtnEvent extends Component {
         }
       }
     } else if (type === 'cancel') {
-      axios
-        .post('/api/v1/cancelUser', { mobile, eventCode })
-        .then(({ data: { msg } }) => {
-          this.setState({
-            visible: false,
-            mobile: '',
-            isLoad: false,
-          });
-          message.warning(msg, 5);
-        })
-        .catch(
-          ({
-            response: {
-              data: { msg },
-            },
-          }) => {
-            this.setState({
-              error: true,
-              message: msg,
-              mobile: '',
-              isLoad: false,
-            });
-          }
-        );
+      try {
+        const { data } = await axios.post('/api/v1/cancelUser', {
+          mobile,
+          eventCode,
+        });
+        const { msg } = data;
+        this.setState({
+          visible: false,
+          mobile: '',
+          isLoad: false,
+        });
+        message.warning(msg, 5);
+      } catch (error) {
+        const { response } = error;
+        const { msg } = response.data;
+        this.setState({
+          error: true,
+          message: msg,
+          mobile: '',
+          isLoad: false,
+        });
+      }
     }
   };
 
