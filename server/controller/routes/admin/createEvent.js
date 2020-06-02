@@ -3,7 +3,7 @@ const yup = require('yup');
 const { getEventDetails } = require('../../../database/queries/events');
 const { createEventSql } = require('../../../database/queries/events');
 
-const validateEvent = (req, res, next) => {
+const validateEvent = async (req, res, next) => {
   const schema = yup.object().shape({
     title: yup.string().required(),
     eventCode: yup.number().required().positive().integer().min(100).max(999),
@@ -13,26 +13,24 @@ const validateEvent = (req, res, next) => {
     date: yup.date().required(),
     duration: yup.number().required().positive().integer(),
   });
-
-  const result = schema.isValidSync(req.body);
-  if (!result) {
-    const err = new Error();
-    err.msg = 'invalid inputs';
-    err.status = 400;
-    return next(err);
+  try {
+    const result = schema.isValidSync(req.body);
+    if (!result) {
+      const err = new Error();
+      err.msg = 'invalid inputs';
+      err.status = 400;
+      return next(err);
+    }
+    const { rows } = await getEventDetails(req.body.eventCode);
+    if (rows.length) {
+      const err = new Error();
+      err.msg = `an event with code ${req.body.eventCode} already exist, try another code`;
+      err.status = 400;
+      throw err;
+    } else next();
+  } catch (error) {
+    next(error);
   }
-  return getEventDetails(req.body.eventCode)
-    .then(({ rows }) => {
-      if (rows.length) {
-        const err = new Error();
-        err.msg = `an event with code ${req.body.eventCode} already exist, try another code`;
-        err.status = 400;
-        throw err;
-      } else next();
-    })
-    .catch((err) => {
-      next(err);
-    });
 };
 
 const createEvent = async (req, res, next) => {
