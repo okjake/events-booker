@@ -3,7 +3,7 @@ import { Button, Result } from 'antd';
 
 import Axios from 'axios';
 import EventPageContent from '../EventPageContent/EventPageContent';
-import PopupBtnEventcomp from '../PopupBtnEventcomp/PopupBtnEventcomp';
+import PopupBtnEvent from '../PopupBtnEvent/PopupBtnEvent';
 
 import './style.css';
 
@@ -68,7 +68,7 @@ class EventPage extends Component {
         <div className="contant">
           <EventPageContent {...otherEventProps} />
           <div className="btns">
-            <PopupBtnEventcomp
+            <PopupBtnEvent
               title={`Register at ${title} event`}
               eventCode={eventCode}
               eventProg={eventProg}
@@ -77,7 +77,7 @@ class EventPage extends Component {
               type="booking"
             />
 
-            <PopupBtnEventcomp
+            <PopupBtnEvent
               title={`Cancel Registeration at ${title} event`}
               eventCode={eventCode}
               eventProg={eventProg}

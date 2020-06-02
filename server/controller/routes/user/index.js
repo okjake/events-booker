@@ -6,7 +6,7 @@ const signUpUser = require('./registerNewUser');
 const {
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
+  checkAlreadyBooked,
   generateCode,
   userWillAttend,
   sendInvitation,
@@ -17,7 +17,7 @@ module.exports = {
   getEvents,
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
+  checkAlreadyBooked,
   generateCode,
   userWillAttend,
   sendInvitation,
