@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import Axios from 'axios';
+import axios from 'axios';
 import { Button, Empty } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import propTypes from 'prop-types';
 
 import './style.css';
 
@@ -13,19 +14,24 @@ class UsersPage extends Component {
     error: null,
   };
 
-  componentDidMount() {
-    const {
-      match: {
-        params: { eventcode },
-      },
-    } = this.props;
-    Axios.get(`/api/v1/event/${eventcode}/users`)
-      .then(({ data }) => {
-        this.setState({ users: data, isLoaded: true });
-      })
-      .catch((error) => {
-        this.setState({ error, isLoaded: true });
-      });
+  async componentDidMount() {
+    try {
+      const {
+        match: {
+          params: { eventCode },
+        },
+      } = this.props;
+      const { data } = await axios.get(`/api/v1/events/${eventCode}/users`);
+      this.setState({ users: data, isLoaded: true });
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ error, isLoaded: true });
+    }
   }
 
   render() {
@@ -35,7 +41,7 @@ class UsersPage extends Component {
         state: { title },
       },
     } = this.props;
-    const eventName = title;
+
     return (
       <div className="tableSection">
         <header className="headerUsers">
@@ -57,18 +63,18 @@ class UsersPage extends Component {
             </Button>
           </div>
         </header>
-        <h2>All Users On Event :{eventName}</h2>
+        <h2>Users for {title} event</h2>
         <div className="content-t">
           <ReactHTMLTableToExcel
             id="test-table-xls-button"
             className="download-table-xls-button"
             table="table-to-xls"
-            filename="eventusers"
+            filename={title}
             sheet="tablexls"
-            buttonText="export users to xls"
+            buttonText="Export to Excel"
           />
           {error ? (
-            <div>Error: {error.message}</div>
+            <div>{error}</div>
           ) : !isLoaded ? (
             <div>
               <LoadingOutlined /> Loading
@@ -104,5 +110,16 @@ class UsersPage extends Component {
     );
   }
 }
+
+UsersPage.propTypes = {
+  history: propTypes.shape({
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
+  match: propTypes.shape({
+    params: propTypes.shape({
+      eventCode: propTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
 
 export default UsersPage;
