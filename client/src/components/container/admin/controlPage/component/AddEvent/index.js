@@ -21,7 +21,7 @@ class AddEvent extends React.Component {
 
   formRef = React.createRef();
 
-  onFinish = ({
+  onFinish = async ({
     title,
     image,
     category,
@@ -31,41 +31,36 @@ class AddEvent extends React.Component {
     eventCode,
     duration,
   }) => {
-    const { error, success } = this;
-    const date = `${moment(dayMonthYear._d).format('YYYY-MM-DD')} ${moment(
-      hourMinuteSecond._d
-    ).format('hh:mm:ss')}`;
-    const requestBody = {
-      title,
-      image,
-      category,
-      details,
-      date,
-      eventCode,
-      duration,
-    };
-    this.setState({ loading: true });
-    axios
-      .post('/api/v1/event', requestBody)
-      .then(({ data: { msg } }) => {
-        success(msg);
-        this.setState({ loading: false });
-      })
-      .catch(
-        ({
-          response: {
-            status,
-            data: { msg },
-          },
-        }) => {
-          status === 400
-            ? msg === 'invalid inputs'
-              ? error('image must be a valid url')
-              : error(msg)
-            : error('Something went wrong, please try again later');
-          this.setState({ loading: false });
-        }
-      );
+    try {
+      const { error, success } = this;
+      const date = `${moment(dayMonthYear._d).format('YYYY-MM-DD')} ${moment(
+        hourMinuteSecond._d
+      ).format('hh:mm:ss')}`;
+      const requestBody = {
+        title,
+        image,
+        category,
+        details,
+        date,
+        eventCode,
+        duration,
+      };
+      this.setState({ loading: true });
+
+      const {
+        data: { msg },
+      } = await axios.post('/api/v1/event', requestBody);
+      success(msg);
+      this.setState({ loading: false });
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ loading: false });
+    }
   };
 
   success = (msg) => {
