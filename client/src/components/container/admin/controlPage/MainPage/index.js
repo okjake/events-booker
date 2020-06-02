@@ -46,12 +46,12 @@ class Dashboard extends Component {
       if (error.response) {
         err = error.response.data.error;
       } else {
-        err = 'Failed to log out!';
+        err = 'Error with logout process!';
       }
-      this.setState({ err: ('error with logout process'));
+      this.setState({ err: ('Error with logout process!')});
 
-    }
-  };
+  }
+}
 
   clickBtn = ({ target: { value } }) => {
     this.setState({ renderView: value });
