@@ -38,9 +38,6 @@ module.exports = {
     ], //no propTypes
     'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
     "camelcase": [0], //no-camelCase
-    "react/prop-types": [
-      0
-    ], //no propTypes
     "react/jsx-props-no-spreading": 0,
     // configure the prettier plugin
     'prettier/prettier': [
