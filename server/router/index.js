@@ -91,7 +91,6 @@ router.get('/users', getUsersData);
 router.get('/events/:eventCode/users', getEventUsers);
 router.patch('/event', deleteEvent);
 router.post('/event', validateEvent, createEvent);
-router.get('/event/:eventcode', getEventDetails);
 
 router.use(clientError);
 router.use(serverError);
