@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Alert, message } from 'antd';
-import Axios from 'axios';
+import axios from 'axios';
 import { PlusSquareFilled } from '@ant-design/icons';
 
 import AddEvent from '../component/AddEvent';
@@ -17,29 +17,30 @@ class Dashboard extends Component {
     renderView: 'add',
   };
 
-  componentDidMount() {
-    Axios.get('/api/v1/admin')
-      .then(({ data }) => {
-        const { name, img } = data[0];
-        this.setState({ name, img });
-      })
-      .catch((err) => {
-        this.setState({ adminError: 'failed to get admin data' });
-      });
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('/api/v1/admin');
+      const { name, img } = data[0];
+      this.setState({ name, img });
+    } catch (error) {
+      let errorMsg =" failed to get admin data " ;
+      this.setState({ adminError : errorMsg });
+    }
   }
 
-  logout = () => {
-    Axios.get('/api/v1/logout')
-      .then((res) => {
-        const {
-          history: { push },
-        } = this.props;
-        push('/admin');
-      })
-      .catch((err) => {
-        message.error('error with logout process');
-      });
-  };
+  logout = async() => {
+    try{
+      const {data} =  await axios.get('/api/v1/logout');
+      message.success(data.message, 5)
+      const {
+        history: { push },
+      } = this.props;
+      push('/admin');
+
+    } catch(error){
+     message.error('error with logout process');
+  }
+}
 
   clickBtn = ({ target: { value } }) => {
     this.setState({ renderView: value });
