@@ -32,7 +32,7 @@ class AddEvent extends React.Component {
     duration,
   }) => {
     try {
-      const { error, success } = this;
+      const { success } = this;
       const date = `${moment(dayMonthYear._d).format('YYYY-MM-DD')} ${moment(
         hourMinuteSecond._d
       ).format('hh:mm:ss')}`;
@@ -53,6 +53,7 @@ class AddEvent extends React.Component {
       success(msg);
       this.setState({ loading: false });
     } catch (err) {
+      const { error} = this;
       let errorMsg;
       if (err.response) {
         errorMsg = err.response.data.msg;
