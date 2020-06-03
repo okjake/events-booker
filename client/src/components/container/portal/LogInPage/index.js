@@ -8,7 +8,6 @@ export default class PortalLogin extends Component {
   state = {
     isLoaded: false,
     msg: '',
-    error: false,
   };
 
   onFinish = async ({ pinCode }, resetFields) => {
@@ -30,12 +29,12 @@ export default class PortalLogin extends Component {
       } else {
         msg = 'Something went wrong, please try again later';
       }
-      this.setState({ msg, error: true, isLoaded: false });
+      this.setState({ msg, isLoaded: false });
     }
   };
 
   render() {
-    const { isLoaded, error, msg } = this.state;
+    const { isLoaded, msg } = this.state;
     const { onFinish } = this;
     const refInput = React.createRef();
     return (
@@ -66,7 +65,7 @@ export default class PortalLogin extends Component {
             </Button>
           </Form.Item>
         </Form>
-        {error ? (
+        {msg ? (
           <Alert className="alert" message={msg} type="error" showIcon />
         ) : null}
       </div>
