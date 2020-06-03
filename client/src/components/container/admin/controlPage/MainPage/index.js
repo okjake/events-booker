@@ -23,13 +23,8 @@ class Dashboard extends Component {
       const { name, img } = data[0];
       this.setState({ name, img });
     } catch (error) {
-      let adminError;
-      if (error.response) {
-        adminError = error.response.data.error;
-      } else {
-        adminError = 'Failed to get the admin data!';
-      }
-      this.setState({ adminError: 'Failed to get the admin data' });
+      let errorMsg =" failed to get admin data " ;
+      this.setState({ adminError : errorMsg });
     }
   }
 
