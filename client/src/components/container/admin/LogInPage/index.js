@@ -5,7 +5,7 @@ import { MailOutlined, LockOutlined } from '@ant-design/icons';
 
 import './style.css';
 import Logo from './images/logo.svg';
-import adminLoginImg from './images/adminlogin.png';
+import adminLoginImg from './images/adminLogin.png';
 
 class AdminLogin extends Component {
   state = {
@@ -13,26 +13,22 @@ class AdminLogin extends Component {
     isLoaded: false,
   };
 
-  onFinish = ({ email, password }) => {
-    this.setState({ isLoaded: true });
-    axios
-      .post(`/api/v1/login`, { email, password })
-      .then(({ data }) => {
-        const {
-          history: { push },
-        } = this.props;
-        message.success(data.msg);
-        push('/admin/dashboard');
-      })
-      .catch(
-        ({
-          response: {
-            data: { msg },
-          },
-        }) => {
-          this.setState({ error: msg, isLoaded: false });
-        }
-      );
+  onFinish = async ({ email, password }) => {
+    try {
+      this.setState({ isLoaded: true });
+      const { data } = await axios.post(`/api/v1/login`, { email, password });
+      const { history } = this.props;
+      message.success(data.msg);
+      history.push('/admin/dashboard');
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ error, isLoaded: false });
+    }
   };
 
   render() {

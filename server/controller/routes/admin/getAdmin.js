@@ -1,8 +1,12 @@
 const { getAdminData } = require('../../../database/queries/admin');
 
-const getAdmin = (req, res, next) => {
-  getAdminData()
-    .then(({ rows }) => res.json(rows))
-    .catch(next);
+const getAdmin = async (req, res, next) => {
+  try {
+    const { rows } = await getAdminData();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
 };
+
 module.exports = getAdmin;
