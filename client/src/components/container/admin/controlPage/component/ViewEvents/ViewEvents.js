@@ -59,26 +59,28 @@ class ViewEvents extends Component {
     }
   }
 
-  handleAction = (currentEvent) => {
-    axios
-      .patch('/api/v1/event', { id: currentEvent })
-      .then(({ data }) => {
-        const {
-          data: { rows },
-          msg,
-        } = data;
-        message.success(msg, 10);
-        const { events } = this.state;
-        const remainingEvents = events.filter(
-          (event) => event.id !== rows[0].id
-        );
-        this.setState({ events: remainingEvents });
-      })
-      .catch(() => {
-        const error = "Internal server error, the event hasn't deleted yet!!";
-        this.setState({ deleteError: error });
-        message.error(error);
-      });
+  handleAction = async(currentEvent) => {
+    try{
+      const {data} = await axios.patch('/api/v1/event', { id: currentEvent })
+      const {data: { rows },msg,} = data;
+      message.success(msg, 10);
+      const { events } = this.state;
+      const remainingEvents = events.filter(
+        (event) => event.id !== rows[0].id
+      );
+      this.setState({ events: remainingEvents });
+    } catch(error){
+      let errorMsg;
+      if (error.response) {
+        errorMsg ="Internal server error, the event hasn't deleted yet!!";
+        message.error(errorMsg)
+      } else {
+        errorMsg = 'Something went wrong, please try again later';
+      }
+      this.setState({ deleteError: error });
+      message.error(errorMsg)
+
+    }
   };
 
   handelEventButtons = (record) => {
