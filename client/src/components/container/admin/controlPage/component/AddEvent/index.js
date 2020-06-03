@@ -53,11 +53,15 @@ class AddEvent extends React.Component {
       success(msg);
       this.setState({ loading: false });
     } catch (err) {
-      let error;
+      let errorMsg;
       if (err.response) {
-        error = err.response.data.msg;
+        errorMsg = err.response.data.msg;
+        errorMsg === 'invalid inputs'
+          ? error('image must be a valid url')
+          : error(errorMsg);
       } else {
-        error = 'Something went wrong, please try again later';
+        errorMsg = 'Something went wrong, please try again later';
+        error(errorMsg);
       }
       this.setState({ loading: false });
     }
