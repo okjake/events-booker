@@ -37,13 +37,7 @@ class Dashboard extends Component {
       push('/admin');
 
     } catch(error){
-      let err
-      if (error.response) {
-        err = error.response.data.error;
-      } else {
-        err = 'Error with logout process!';
-      }
-      this.setState({ err: ('Error with logout process!')});
+           message.error('error with logout process');
 
   }
 }
