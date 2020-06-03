@@ -30,15 +30,15 @@ class Dashboard extends Component {
 
   logout = async() => {
     try{
-      const res =  await axios.get('/api/v1/logout');
+      const {data} =  await axios.get('/api/v1/logout');
+      message.success(data.message, 5)
       const {
         history: { push },
       } = this.props;
       push('/admin');
 
     } catch(error){
-           message.error('error with logout process');
-
+     message.error('error with logout process');
   }
 }
 
