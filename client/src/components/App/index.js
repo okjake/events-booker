@@ -48,7 +48,7 @@ const App = () => (
         />
         <Route
           exact
-          path="/dashboard/:eventcode/users"
+          path="/dashboard/:eventCode/users"
           component={WithAuth(UsersPage, 'admin')}
         />
         <Route

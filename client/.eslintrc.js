@@ -33,6 +33,15 @@ module.exports = {
         allowTemplateLiterals: true // allows strings to use backticks
       }
     ],
+    'react/prop-types': [
+      0
+    ], //no propTypes
+    'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
+    "camelcase": [0], //no-camelCase
+    "react/prop-types": [
+      0
+    ], //no propTypes
+    "react/jsx-props-no-spreading": 0,
     // configure the prettier plugin
     'prettier/prettier': [
       'error',
@@ -40,7 +49,7 @@ module.exports = {
         trailingComma: 'es5',
         singleQuote: true
       }
-    ]
+    ],
   },
-  plugins: ['react', 'prettier']
+  plugins: ['react', 'prettier'],
 };
