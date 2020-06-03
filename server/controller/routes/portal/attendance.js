@@ -32,7 +32,8 @@ const validateAttendance = async (req, res, next) => {
 
 const checkUserBooking = async (req, res, next) => {
   const {
-    body: { userCode, eventId },
+    body: { userCode },
+    eventId,
   } = req;
   try {
     const { rows } = await userHasBooked(userCode, eventId);
@@ -51,7 +52,8 @@ const checkUserBooking = async (req, res, next) => {
 
 const signAttendance = async (req, res, next) => {
   const {
-    body: { userCode, eventId },
+    body: { userCode },
+    eventId,
   } = req;
   try {
     await signAttendanceSql(userCode, eventId);
