@@ -69,9 +69,9 @@ class ViewEvents extends Component {
         (event) => event.id !== rows[0].id
       );
       this.setState({ events: remainingEvents });
-    } catch(error){
+    } catch(err){
       let errorMsg;
-      if (error.response) {
+      if (err.response) {
         errorMsg ="Internal server error, the event hasn't deleted yet!!";
         message.error(errorMsg)
       } else {
