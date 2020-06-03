@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Result } from 'antd';
+import { Button, Result, Spin } from 'antd';
 import axios from 'axios';
 import propTypes from 'prop-types';
 
@@ -62,7 +62,7 @@ class EventPage extends Component {
         {error ? (
           <Result status="404" title="404" subTitle="Page Not Found!" />
         ) : loading ? (
-          <div>Loading</div>
+          <Spin />
         ) : (
           <div className="container">
             <img src={image} alt="event page background" className="image" />
