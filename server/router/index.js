@@ -18,7 +18,7 @@ const {
   getUsersData,
   validateEvent,
   createEvent,
-  validateAttendance,
+  validateAttendence,
   checkUserBooking,
   signAttendance,
   pinCodeValidation,
@@ -81,7 +81,7 @@ router.all(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
 router.patch(
   '/attendance',
-  validateAttendance,
+  validateAttendence,
   checkUserBooking,
   signAttendance
 );
