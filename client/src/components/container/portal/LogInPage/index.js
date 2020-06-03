@@ -6,60 +6,53 @@ import './style.css';
 
 export default class PortalLogin extends Component {
   state = {
-    isLoade: false,
-    isFinish: false,
+    isLoaded: false,
     msg: '',
     error: false,
   };
 
-  formRef = React.createRef();
-
-  onFinish = async ({ pinCode }) => {
+  onFinish = async ({ pinCode }, resetFields) => {
     const {
       props: {
         history: { push },
       },
     } = this;
-    this.setState({ isLoade: true, isFinish: true });
+    this.setState({ isLoaded: true });
     try {
       const { data } = await axios.post('/api/v1/portal/login', { pinCode });
       push('/portal/attendance');
       message.success(data.msg, 10);
-    } catch ({
-      response: {
-        data: { msg },
-      },
-    }) {
-      this.setState({
-        error: true,
-        msg,
-        isLoade: false,
-        isFinish: true,
-      });
+    } catch (err) {
+      let msg;
+      resetFields();
+      if (err.response) {
+        msg = err.response.data.msg;
+      } else {
+        msg = 'Something went wrong, please try again later';
+      }
+      this.setState({ msg, isLoaded: false });
     }
-  };
-
-  onReset = () => {
-    const {
-      formRef: {
-        current: { resetFields },
-      },
-    } = this;
-    resetFields();
   };
 
   render() {
-    const { isLoade, error, msg, isFinish } = this.state;
-    const { formRef, onReset, onFinish } = this;
-    if (isFinish) {
-      onReset();
-    }
+    const { isLoaded, error, msg } = this.state;
+    const { onFinish } = this;
+    const refInput = React.createRef();
     return (
       <div className="portal-contant">
         <h1 className="title">
           Welcome to <span>GSG Events portal login page</span>
         </h1>
-        <Form className="main-form" onFinish={onFinish} ref={formRef}>
+        <Form
+          className="main-form"
+          ref={refInput}
+          onFinish={(values) => {
+            const {
+              current: { resetFields },
+            } = refInput;
+            onFinish(values, resetFields);
+          }}
+        >
           <Form.Item
             className="input-field"
             name="pinCode"
@@ -69,7 +62,7 @@ export default class PortalLogin extends Component {
           </Form.Item>
           <Form.Item className="btn">
             <Button type="primary" htmlType="submit">
-              {isLoade ? <Spin /> : ' Login '}
+              {isLoaded ? <Spin /> : ' Login '}
             </Button>
           </Form.Item>
         </Form>
