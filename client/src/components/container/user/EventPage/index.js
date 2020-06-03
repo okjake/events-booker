@@ -60,11 +60,7 @@ class EventPage extends Component {
     return (
       <div>
         {error ? (
-          <Result
-            status="404"
-            title="404"
-            subTitle="Page Not Found!"
-          />
+          <Result status="404" title="404" subTitle="Page Not Found!" />
         ) : loading ? (
           <div>Loading</div>
         ) : (
