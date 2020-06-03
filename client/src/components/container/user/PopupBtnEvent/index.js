@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Modal, Button, Input, message, Spin } from 'antd';
 import axios from 'axios';
 
-import './PopupBtnEvent.css';
+import './style.css';
 
 class PopupBtnEvent extends Component {
   state = {

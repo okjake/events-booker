@@ -14,11 +14,11 @@ const {
   cancelRegistration,
   getEvents,
   logout,
-  getUsersEvent,
+  getEventUsers,
   getUsersData,
   validateEvent,
   createEvent,
-  validateAttendence,
+  validateAttendance,
   checkUserBooking,
   signAttendance,
   pinCodeValidation,
@@ -43,6 +43,7 @@ const {
 
 router.get('/admin', getAdmin);
 router.get('/event', getEvents);
+router.get('/events/:code', getEventDetails);
 
 router.post('/register', signUpUser);
 router.post(
@@ -80,18 +81,16 @@ router.all(['/event/date', '/attendance'], protectedPortalRoute);
 router.get('/event/date', viewEventsOnDate);
 router.patch(
   '/attendance',
-  validateAttendence,
+  validateAttendance,
   checkUserBooking,
   signAttendance
 );
 
-router.all(['/users', '/event/:eventcode/users', '/event'], protectedRoute);
+router.all(['/users', '/event/:eventCode/users', '/event'], protectedRoute);
 router.get('/users', getUsersData);
-router.get('/event/:eventcode/users', getUsersEvent);
+router.get('/events/:eventCode/users', getEventUsers);
 router.patch('/event', deleteEvent);
 router.post('/event', validateEvent, createEvent);
-
-router.get('/event/:eventcode', getEventDetails);
 
 router.use(clientError);
 router.use(serverError);

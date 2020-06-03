@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import {
   Button,
   Result,
@@ -24,35 +25,44 @@ class Attendance extends React.Component {
     modalDisplay: false,
   };
 
-  componentDidMount() {
-    axios
-      .get('/api/v1/event/date')
-      .then(({ data }) => {
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('/api/v1/event/date');
+      if (data.length) {
         this.setState({
           isLoaded: true,
           events: data,
         });
-      })
-      .catch((error) => {
+      } else {
         this.setState({
           isLoaded: true,
-          error,
         });
+      }
+    } catch (error) {
+      this.setState({
+        isLoaded: true,
+        error,
       });
+    }
   }
 
-  onFinish = ({ userCode }, eventCode, resetFields) => {
+  onFinish = async ({ userCode }, eventCode, resetFields) => {
     const { success, error } = this;
-    axios
-      .patch('/api/v1/attendance', {
-        userCode,
-        eventCode,
-      })
-      .then(({ data: { msg } }) => {
-        success(msg);
-        resetFields();
-      })
-      .catch(({ response: { data: { msg } } }) => error(msg));
+    try {
+      const {
+        data: { msg },
+      } = await axios.patch('/api/v1/attendance', { userCode, eventCode });
+      success(msg);
+      resetFields();
+    } catch (err) {
+      let errorMsg;
+      if (err.response) {
+        errorMsg = err.response.data.msg;
+      } else {
+        errorMsg = 'Something went wrong, please try again later';
+      }
+      error(errorMsg);
+    }
   };
 
   onFinishFailed = ({
@@ -66,7 +76,7 @@ class Attendance extends React.Component {
     error(err);
   };
 
-  handleModalSubmit = ({
+  handleModalSubmit = async ({
     target: {
       parentNode: {
         firstChild: { value },
@@ -74,21 +84,26 @@ class Attendance extends React.Component {
     },
   }) => {
     const { success, error } = this;
-    axios
-      .post('/api/v1/portal/logout', { pinCode: value })
-      .then(({ data: { msg } }) => {
-        success(msg);
-        this.props.history.push('/portal');
-      })
-      .catch(
-        ({
-          response: {
-            data: { msg },
-          },
-        }) => {
-          error(msg);
-        }
-      );
+    const {
+      props: {
+        history: { push },
+      },
+    } = this;
+    try {
+      const {
+        data: { msg },
+      } = await axios.post('/api/v1/portal/logout', { pinCode: value });
+      success(msg);
+      push('/portal');
+    } catch (err) {
+      let errorMsg;
+      if (err.response) {
+        errorMsg = err.response.data.msg;
+      } else {
+        errorMsg = 'Something went wrong, please try again later';
+      }
+      error(errorMsg);
+    }
   };
 
   success = (msg) => {
@@ -263,5 +278,9 @@ class Attendance extends React.Component {
     );
   }
 }
-
+propTypes.shape({
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+  }).isRequired,
+});
 export default Attendance;
