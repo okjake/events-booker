@@ -29,7 +29,7 @@ class Landing extends React.Component {
     } catch (err) {
       let error;
       if (err.response) {
-        error = err.response.data.error;
+        error = err.message;
       } else {
         error = 'Something went Wrong, please try again later!';
       }
