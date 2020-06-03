@@ -6,7 +6,7 @@ const getEventByCode = async (req, res, next) => {
     const {  rows    } = await getEventDetails(code);
     if (rows.length === 0) {
       const err = new Error();
-      err.status = 400;
+      err.status = 404;
       err.msg = 'the event you are trying to book does not exist';
       throw err;
     } else {
