@@ -49,14 +49,13 @@ class ViewEvents extends Component {
         events: data,
       });
     } catch (error) {
-      let serverError;
+      let errorMsg;
       if (error.response) {
-        serverError = error.response.data.error;
+        errorMsg = error.message;
       } else {
-        serverError = 'Something went wrong, please try again later';
+        errorMsg = 'Something went wrong, please try again later';
       }
-
-      this.setState({ serverError: error, isLoaded: false });
+      this.setState({ serverError: errorMsg, isLoaded: false });
     }
   }
 
