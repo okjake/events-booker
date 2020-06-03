@@ -5,18 +5,19 @@ const { getEventsDate } = require('../../../database/queries/events');
 const today = moment().format('YYYY-MM-DD');
 
 const viewEventsOnDate = async (req, res, next) => {
-  try{
-    const {rows}=await getEventsDate()
-      if (!rows.length) {
-        const events = rows.filter((el) => moment(el.date).format('YYYY-MM-DD') === today);
-        return res.json(events);
-      } else {
-        return res.json({ events: 'no events available at GSG' });
-      }
+  try {
+    const { rows } = await getEventsDate();
+    if (!rows.length) {
+      return res.json({ events: 'no events available at GSG' });
+    }
+    const events = rows.filter(
+      (el) => moment(el.date).format('YYYY-MM-DD') === today
+    );
+    return res.json(events);
+  } catch (err) {
+    next(err);
   }
-  catch(err){
-    next(err)
-  };
+  return null;
 };
 
 module.exports = viewEventsOnDate;

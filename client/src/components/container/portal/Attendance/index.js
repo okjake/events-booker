@@ -54,14 +54,15 @@ class Attendance extends React.Component {
       } = await axios.patch('/api/v1/attendance', { userCode, eventCode });
       success(msg);
       resetFields();
-    } catch ({
-      response: {
-        data: { msg },
-      },
-    }) {
-      error(msg);
+    }  catch (err) {
+      let errorMsg;
+      if (err.response) {
+        errorMsg = err.response.data.msg;
+      } else {
+        errorMsg = 'Something went wrong, please try again later';
+      }
+      error(errorMsg);
     }
-  };
 
   onFinishFailed = ({
     errorFields: [
@@ -74,9 +75,11 @@ class Attendance extends React.Component {
     error(err);
   };
 
-  handleModalSubmit = async (e) => {
-    const { value } = e.target.parentNode.firstChild;
-
+  handleModalSubmit = async ({target: {
+    parentNode: {
+      firstChild: { value },
+    },
+  },}) => {
     const { success, error } = this;
     const {
       props: {
@@ -89,14 +92,15 @@ class Attendance extends React.Component {
       } = await axios.post('/api/v1/portal/logout', { pinCode: value });
       success(msg);
       push('/portal');
-    } catch ({
-      response: {
-        data: { msg },
-      },
-    }) {
-      error(msg);
+    }  catch (err) {
+      let errorMsg;
+      if (err.response) {
+        errorMsg = err.response.data.msg;
+      } else {
+        errorMsg = 'Something went wrong, please try again later';
+      }
+      error(errorMsg);
     }
-  };
 
   success = (msg) => {
     message.success(msg);
