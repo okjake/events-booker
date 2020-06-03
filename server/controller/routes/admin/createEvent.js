@@ -14,12 +14,12 @@ const validateEvent = async (req, res, next) => {
     duration: yup.number().required().positive().integer(),
   });
   try {
-    const result = schema.isValidSync(req.body);
+    const result = await schema.isValid(req.body);
     if (!result) {
       const err = new Error();
       err.msg = 'invalid inputs';
       err.status = 400;
-      return next(err);
+      throw err;
     }
     const { rows } = await getEventDetails(req.body.eventCode);
     if (rows.length) {
