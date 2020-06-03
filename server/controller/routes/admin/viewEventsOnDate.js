@@ -15,7 +15,7 @@ const viewEventsOnDate = async (req, res, next) => {
     );
     return res.json(events);
   } catch (err) {
-    next(err);
+    return next(err);
   }
 };
 
