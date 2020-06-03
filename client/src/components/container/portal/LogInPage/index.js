@@ -30,7 +30,7 @@ export default class PortalLogin extends Component {
       } else {
         msg = 'Something went wrong, please try again later';
       }
-      this.setState({ msg, isLoaded: false });
+      this.setState({ msg, error: true, isLoaded: false });
     }
   };
 
