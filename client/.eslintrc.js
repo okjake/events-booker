@@ -52,18 +52,6 @@ module.exports = {
     'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
     "react/jsx-props-no-spreading": 0, 
   },
-<<<<<<< HEAD
-  
-  "react/jsx-props-no-spreading": 0,
-
-  plugins: ['react', 'prettier'],
-
-  "react/prop-types": [
-    0
-  ], //no propTypes
-||||||| merged common ancestors
-  plugins: ['react', 'prettier']
-=======
   plugins: ['react', 'prettier'],
 
   "camelcase": [0], //no-camelCase
@@ -74,5 +62,4 @@ module.exports = {
 
     "react/jsx-props-no-spreading": 0,
 
->>>>>>> 0fabbb5ef33ff60e32aba308906c3f09dcbd9e28
 };
