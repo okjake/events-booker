@@ -8,7 +8,7 @@ const checkPinCode = (req, res, next) => {
     .then((valid) => {
       if (!valid) {
         const err = new Error();
-        err.msg = 'incorect pin code';
+        err.msg = 'incorrect pin code';
         err.status = 403;
         throw err;
       } else {
