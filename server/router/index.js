@@ -3,20 +3,18 @@ const router = require('express').Router();
 const {
   serverError,
   clientError,
-  registerValidation,
-  newUserExist,
-  addUserToDB,
+  signUpUser,
   sendSms,
   checkUser,
   checkEventExist,
   generateCode,
   userWillAttend,
-  checkAlreadBooked,
+  checkAlreadyBooked,
   sendInvitation,
   cancelRegistration,
   getEvents,
   logout,
-  getUsersEvent,
+  getEventUsers,
   getUsersData,
   validateEvent,
   createEvent,
@@ -45,23 +43,14 @@ const {
 
 router.get('/admin', getAdmin);
 router.get('/event', getEvents);
+router.get('/events/:code', getEventDetails);
 
-router.post(
-  '/register',
-  registerValidation,
-  newUserExist,
-  addUserToDB,
-  checkEventExist,
-  generateCode,
-  userWillAttend,
-  sendInvitation,
-  sendSms
-);
+router.post('/register', signUpUser);
 router.post(
   '/checkUser',
   checkUser,
   checkEventExist,
-  checkAlreadBooked,
+  checkAlreadyBooked,
   generateCode,
   userWillAttend,
   sendInvitation,
@@ -97,13 +86,11 @@ router.patch(
   signAttendance
 );
 
-router.all(['/users', '/event/:eventcode/users', '/event'], protectedRoute);
+router.all(['/users', '/event/:eventCode/users', '/event'], protectedRoute);
 router.get('/users', getUsersData);
-router.get('/event/:eventcode/users', getUsersEvent);
+router.get('/events/:eventCode/users', getEventUsers);
 router.patch('/event', deleteEvent);
 router.post('/event', validateEvent, createEvent);
-
-router.get('/event/:eventcode', getEventDetails);
 
 router.use(clientError);
 router.use(serverError);

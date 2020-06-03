@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Result } from 'antd';
+import axios from 'axios';
+import propTypes from 'prop-types';
 
-import Axios from 'axios';
-import EventPageContent from '../EventPageContent/EventPageContent';
-import PopupBtnEventcomp from '../PopupBtnEventcomp/PopupBtnEventcomp';
-
+import EventPageContent from '../EventPageContent';
+import PopupBtnEvent from '../PopupBtnEvent';
 import './style.css';
 
 class EventPage extends Component {
@@ -13,35 +13,37 @@ class EventPage extends Component {
     title: '',
     otherEventProps: null,
     error: '',
+    loading: true,
   };
 
-  componentDidMount() {
-    const {
-      match: {
-        params: { eventCode },
-      },
-    } = this.props;
-    const {
-      location: { state },
-    } = this.props;
-    if (state) {
+  async componentDidMount() {
+    try {
       const {
-        info: { image, ...otherEventProps },
-      } = state;
-      const {
-        info: { title },
-      } = state;
-      this.setState({ image, title, otherEventProps });
-    } else {
-      Axios.get(`/api/v1/event/${eventCode}`)
-        .then(({ data }) => {
-          const { image, ...otherEventProps } = data;
-          const { title } = data;
-          this.setState({ image, title, otherEventProps });
-        })
-        .catch((error) => {
-          this.setState({ error });
-        });
+        match: {
+          params: { eventCode },
+        },
+        location: { state },
+      } = this.props;
+
+      if (state) {
+        const {
+          info: { image, title, ...otherEventProps },
+        } = state;
+        this.setState({ image, title, otherEventProps, loading: false });
+      } else {
+        const { data } = await axios.get(`/api/v1/events/${eventCode}`);
+        const { title, image, ...otherEventProps } = data;
+        this.setState({ image, title, otherEventProps, loading: false });
+      }
+    } catch (err) {
+      let error;
+
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ error, loading: false });
     }
   }
 
@@ -54,45 +56,69 @@ class EventPage extends Component {
         params: { eventCode, eventProg },
       },
     } = this.props;
-    const { image, title, otherEventProps, error } = this.state;
+    const { image, title, otherEventProps, error, loading } = this.state;
     return (
-      <div className="container">
-        {error && (
+      <div>
+        {error ? (
           <Result
             status="500"
             title="500"
             subTitle="Something went Wrong, please try again later"
           />
-        )}
-        <img src={image} alt="event page background" className="image" />
-        <div className="contant">
-          <EventPageContent {...otherEventProps} />
-          <div className="btns">
-            <PopupBtnEventcomp
-              title={`Register at ${title} event`}
-              eventCode={eventCode}
-              eventProg={eventProg}
-              push={push}
-              purpose="Book Now"
-              type="booking"
-            />
+        ) : loading ? (
+          <div>Loading</div>
+        ) : (
+          <div className="container">
+            <img src={image} alt="event page background" className="image" />
+            <div className="contant">
+              <EventPageContent
+                title={title}
+                details={otherEventProps.details}
+                date={otherEventProps.date}
+                count={otherEventProps.count}
+              />
+              <div className="btns">
+                <PopupBtnEvent
+                  title={`Register at ${title} event`}
+                  eventCode={eventCode}
+                  eventProg={eventProg}
+                  push={push}
+                  purpose="Book Now"
+                  type="booking"
+                />
 
-            <PopupBtnEventcomp
-              title={`Cancel Registeration at ${title} event`}
-              eventCode={eventCode}
-              eventProg={eventProg}
-              purpose="Cancel Registeration"
-              type="cancel"
-            />
+                <PopupBtnEvent
+                  title={`Cancel Registration at ${title} event`}
+                  eventCode={eventCode}
+                  eventProg={eventProg}
+                  purpose="Cancel Registration"
+                  type="cancel"
+                />
 
-            <Button type="primary" shape="round" autoFocus onClick={goBack}>
-              {' '}
-              Back{' '}
-            </Button>
+                <Button type="primary" shape="round" autoFocus onClick={goBack}>
+                  {' '}
+                  Back{' '}
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   }
 }
+
+EventPage.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
+  match: propTypes.shape({
+    params: propTypes.shape({
+      eventCode: propTypes.string.isRequired,
+      eventProg: propTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
+
 export default EventPage;

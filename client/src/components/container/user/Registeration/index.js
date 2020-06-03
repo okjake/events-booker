@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { Button, Form, Input, Alert, Spin, message } from 'antd';
 import { UserOutlined, HomeOutlined, MailOutlined } from '@ant-design/icons';
 
@@ -8,53 +8,54 @@ import './style.css';
 
 class RegisterUser extends Component {
   state = {
-    errorMsg: '',
-    isLoade: false,
+    error: null,
+    loading: false,
   };
 
-  onFinish = ({ firstName, lastName, location, email }) => {
-    this.setState({ isLoade: true });
-    const {
-      match: {
-        params: { mobile, eventCode },
-      },
-      history: { push },
-    } = this.props;
-    axios
-      .post(`/api/v1/register`, {
+  onFinish = async ({ firstName, lastName, location, email }) => {
+    try {
+      const {
+        match: {
+          params: { mobile, eventCode },
+        },
+        history,
+      } = this.props;
+      this.setState({ loading: true });
+      await axios.post(`/api/v1/register`, {
         firstName,
         lastName,
         location,
         email,
         mobile,
         eventCode,
-      })
-      .then(({ data }) => {
-        this.setState({ isLoade: true });
-        message.success(data.msg);
-        push('/');
-      })
-      .catch(
-        ({
-          response: {
-            data: { msg },
-          },
-        }) => {
-          this.setState({ errorMsg: msg, isLoade: false });
-        }
-      );
+      });
+      const { data } = await axios.post('/api/v1/checkUser', {
+        mobile,
+        eventCode,
+      });
+      message.success(data.msg, 5);
+      this.setState({ loading: false }, () => history.push('/'));
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.msg;
+      } else {
+        error = 'Something went wrong, please try again later';
+      }
+      this.setState({ error, loading: false });
+    }
   };
 
   goBack = () => {
     const {
       history: { goBack },
     } = this.props;
-    message.warning('you has not registered yet !!');
+    message.warning("you haven't registered yet!");
     goBack();
   };
 
   render() {
-    const { errorMsg, isLoade } = this.state;
+    const { error, loading } = this.state;
     return (
       <div className="main-register">
         <div className="s1">
@@ -78,7 +79,7 @@ class RegisterUser extends Component {
               ]}
             >
               <Input
-                placeholder="fisrt name"
+                placeholder="first name"
                 prefix={<UserOutlined className="site-form-item-icon" />}
               />
             </Form.Item>
@@ -116,7 +117,7 @@ class RegisterUser extends Component {
 
             <Button htmlType="submit" type="primary">
               {' '}
-              {isLoade ? <Spin size="small" /> : 'Submit'}{' '}
+              {loading ? <Spin size="small" /> : 'Submit'}{' '}
             </Button>
 
             <Button type="danger" onClick={this.goBack}>
@@ -124,7 +125,7 @@ class RegisterUser extends Component {
               Exit{' '}
             </Button>
 
-            {errorMsg && <Alert message={errorMsg} type="error" />}
+            {error && <Alert message={error} type="error" />}
           </Form>
         </div>
         <div className="s2">
@@ -137,9 +138,18 @@ class RegisterUser extends Component {
     );
   }
 }
+
 RegisterUser.propTypes = {
-  mobileNo: PropTypes.string,
-  eventCode: PropTypes.number,
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
+  match: propTypes.shape({
+    params: propTypes.shape({
+      mobile: propTypes.string.isRequired,
+      eventCode: propTypes.string.isRequired,
+    }),
+  }).isRequired,
 };
 
 export default RegisterUser;

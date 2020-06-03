@@ -33,6 +33,10 @@ module.exports = {
         allowTemplateLiterals: true // allows strings to use backticks
       }
     ],
+    'react/prop-types': [
+      0
+    ], //no propTypes
+    'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
     // configure the prettier plugin
     'prettier/prettier': [
       'error',
@@ -40,8 +44,15 @@ module.exports = {
         trailingComma: 'es5',
         singleQuote: true
       }
-    ]
+    ],
+    "camelcase": [0], //no-camelCase
+    "react/prop-types": [
+      0
+    ], //no propTypes
+    'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
+    "react/jsx-props-no-spreading": 0, 
   },
+<<<<<<< HEAD
   
   "react/jsx-props-no-spreading": 0,
 
@@ -50,4 +61,18 @@ module.exports = {
   "react/prop-types": [
     0
   ], //no propTypes
+||||||| merged common ancestors
+  plugins: ['react', 'prettier']
+=======
+  plugins: ['react', 'prettier'],
+
+  "camelcase": [0], //no-camelCase
+    "react/prop-types": [
+      0
+    ], //no propTypes
+    'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
+
+    "react/jsx-props-no-spreading": 0,
+
+>>>>>>> 0fabbb5ef33ff60e32aba308906c3f09dcbd9e28
 };
