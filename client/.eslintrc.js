@@ -62,4 +62,7 @@ module.exports = {
 
     "react/jsx-props-no-spreading": 0,
 
+    "no-underscore-dangle": [0, { "allow": [] }],
+
+
 };
