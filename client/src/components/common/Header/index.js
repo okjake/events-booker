@@ -1,14 +1,11 @@
 import React from 'react';
 import './style.css';
+import Logo from './image/logo.svg';
 
 const Header = () => (
   <div className="header">
     <div className="header_logo">
-      <img
-        className="header_logo-img"
-        src="/static/media/logo.3912d0ae.svg"
-        alt="GSG Logo"
-      />
+      <img className="header_logo-img" src={Logo} alt="GSG Logo" />
       <div className="header_logo-title">
         Events <span className="header_logo-subtitle">Booker</span>
       </div>
