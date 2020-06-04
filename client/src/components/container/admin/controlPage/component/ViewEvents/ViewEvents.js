@@ -7,7 +7,6 @@ import './ViewEvents.css';
 
 class ViewEvents extends Component {
   state = {
-    deleteError: null,
     isLoaded: true,
     events: [],
     serverError: null,
@@ -73,11 +72,9 @@ class ViewEvents extends Component {
       let errorMsg;
       if (err.response) {
         errorMsg ="Internal server error, the event hasn't deleted yet!!";
-        message.error(errorMsg)
       } else {
         errorMsg = 'Something went wrong, please try again later';
       }
-      this.setState({ deleteError: error });
       message.error(errorMsg)
 
     }
