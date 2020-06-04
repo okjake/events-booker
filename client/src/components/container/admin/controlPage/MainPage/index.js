@@ -41,10 +41,7 @@ class Dashboard extends Component {
     }
   };
 
-  clickBtn = (event) => {
-    event.persist();
-    const { value } = event.target;
-    console.log(event);
+  clickBtn = ({ target: { value } }) => {
     this.setState({ renderView: value });
   };
 
