@@ -15,31 +15,35 @@ class Landing extends React.Component {
     filteredEvents: [],
   };
 
-  componentDidMount() {
-    axios
-      .get('/api/v1/event')
-      .then(({ data }) => {
-        const response = [...data].sort(
-          (a, b) => new Date(a.date) - new Date(b.date)
-        );
-        this.setState({
-          isLoaded: true,
-          allEvents: response,
-          filteredEvents: response,
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          isLoaded: true,
-          error,
-        });
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('/api/v1/event');
+      const response = [...data].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
+      this.setState({
+        isLoaded: true,
+        allEvents: response,
+        filteredEvents: response,
       });
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.message;
+      } else {
+        error = 'Something went Wrong, please try again later!';
+      }
+      this.setState({
+        isLoaded: true,
+        error,
+      });
+    }
   }
 
   filterByCategory = (cat) => {
     const { allEvents } = this.state;
     if (cat === 'Upcoming')
-      this.setState(({ allEvents }) => ({ filteredEvents: allEvents }));
+    this.setState((prevState) => ({ filteredEvents: prevState.allEvents }));
     else {
       const events = allEvents.filter((event) => event.category === cat);
       this.setState({ filteredEvents: events, title: cat });
