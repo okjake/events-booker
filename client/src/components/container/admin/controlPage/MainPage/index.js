@@ -23,24 +23,23 @@ class Dashboard extends Component {
       const { name, img } = data[0];
       this.setState({ name, img });
     } catch (error) {
-      let errorMsg =" failed to get admin data " ;
-      this.setState({ adminError : errorMsg });
+      const errorMsg = ' failed to get admin data ';
+      this.setState({ adminError: errorMsg });
     }
   }
 
-  logout = async() => {
-    try{
-      const {data} =  await axios.get('/api/v1/logout');
-      message.success(data.message, 5)
+  logout = async () => {
+    try {
+      const { data } = await axios.get('/api/v1/logout');
+      message.success(data.message, 5);
       const {
         history: { push },
       } = this.props;
       push('/admin');
-
-    } catch(error){
-     message.error('error with logout process');
-  }
-}
+    } catch (error) {
+      message.error('error with logout process');
+    }
+  };
 
   clickBtn = ({ target: { value } }) => {
     this.setState({ renderView: value });
