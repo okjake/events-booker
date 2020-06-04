@@ -27,7 +27,7 @@ const {
 } = require('./routes/admin');
 
 const {
-  validateAttendence,
+  validateAttendance,
   checkUserBooking,
   signAttendance,
   pinCodeValidation,
@@ -54,7 +54,7 @@ module.exports = {
   getUsersData,
   validateEvent,
   createEvent,
-  validateAttendence,
+  validateAttendance,
   checkUserBooking,
   signAttendance,
   deleteEvent,

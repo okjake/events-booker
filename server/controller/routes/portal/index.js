@@ -1,5 +1,5 @@
 const {
-  validateAttendence,
+  validateAttendance,
   checkUserBooking,
   signAttendance,
 } = require('./attendance');
@@ -11,7 +11,7 @@ const {
 const portalLogout = require('./portalLogout');
 
 module.exports = {
-  validateAttendence,
+  validateAttendance,
   checkUserBooking,
   signAttendance,
   pinCodeValidation,

@@ -1,9 +1,12 @@
 const { getUsers } = require('../../../database/queries/users');
 
-const getUsersData = (req, res, next) => {
-  getUsers()
-    .then(({ rows }) => res.json(rows))
-    .catch(next);
+const getUsersData = async (req, res, next) => {
+  try {
+    const { rows } = await getUsers();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = getUsersData;
