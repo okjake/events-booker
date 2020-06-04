@@ -83,6 +83,7 @@ class Attendance extends React.Component {
       },
     },
   }) => {
+    console.log(value, 11);
     const { success, error } = this;
     const {
       props: {
@@ -90,6 +91,8 @@ class Attendance extends React.Component {
       },
     } = this;
     try {
+      console.log(value, 22);
+
       const {
         data: { msg },
       } = await axios.post('/api/v1/portal/logout', { pinCode: value });
@@ -179,6 +182,7 @@ class Attendance extends React.Component {
               footer={[]}
             >
               <Input
+                name="pinCode"
                 type="password"
                 placeholder="Enter Pin Code Please"
                 style={{ width: '75%', margin: '0.25rem' }}

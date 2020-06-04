@@ -11,6 +11,7 @@ const pinCodeValidation = async (req, res, next) => {
     await schema.validate(req.body, { abortEarly: false });
     return next();
   } catch (err) {
+    console.log(5555, err.message);
     if (err.name === 'ValidationError') {
       return res.status(400).json({ msg: err.message });
     }
