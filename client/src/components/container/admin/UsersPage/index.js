@@ -21,7 +21,6 @@ class UsersPage extends Component {
           params: { eventCode },
         },
       } = this.props;
-      console.log(eventCode);
       const { data } = await axios.get(`/api/v1/events/${eventCode}/users`);
       this.setState({
         users: data,
@@ -40,12 +39,12 @@ class UsersPage extends Component {
 
   render() {
     const { error, isLoaded, users } = this.state;
-    // const {
-    //   location: {
-    //     state: { title },
-    //   },
-    // } = this.props;
-    const title = 'code';
+    const {
+      match: {
+        params: { eventCode },
+      },
+    } = this.props;
+    const title = `users-event-${eventCode}`;
 
     return (
       <div className="tableSection">
