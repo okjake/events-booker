@@ -76,9 +76,7 @@ class Attendance extends React.Component {
     error(err);
   };
 
-  handleModalSubmit = async (e) => {
-    const { value } = e.target.parentNode.firstChild;
-    console.log(value, 11);
+  handleModalSubmit = async ({ pinCode }) => {
     const { success, error } = this;
     const {
       props: {
@@ -86,11 +84,9 @@ class Attendance extends React.Component {
       },
     } = this;
     try {
-      console.log(value, 22);
-
       const {
         data: { msg },
-      } = await axios.post('/api/v1/portal/logout', { pinCode: value });
+      } = await axios.post('/api/v1/portal/logout', { pinCode });
       success(msg);
       push('/portal');
     } catch (err) {
@@ -176,19 +172,24 @@ class Attendance extends React.Component {
               onCancel={hideModal}
               footer={[]}
             >
-              <Input
-                name="pinCode"
-                type="password"
-                placeholder="Enter Pin Code Please"
-                style={{ width: '75%', margin: '0.25rem' }}
-              />
-              <Button
-                style={{ display: 'inline-block', margin: '0.25rem' }}
-                type="primary"
-                onClick={handleModalSubmit}
-              >
-                Log out
-              </Button>
+              <Form onFinish={handleModalSubmit}>
+                <Form.Item
+                  name="pinCode"
+                  rules={[{ message: 'Please input your pin-code!' }]}
+                  style={{ width: '75%', margin: '0.25rem' }}
+                >
+                  <Input.Password placeholder="Enter Pin Code Please" />
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    style={{ display: 'inline-block', margin: '0.25rem' }}
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Log out
+                  </Button>
+                </Form.Item>
+              </Form>
             </Modal>
           </div>
         </header>
