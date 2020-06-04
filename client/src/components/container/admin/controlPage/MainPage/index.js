@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Alert, message } from 'antd';
 import axios from 'axios';
-import { PlusSquareFilled } from '@ant-design/icons';
+import { PlusSquareFilled, EyeOutlined } from '@ant-design/icons';
 
 import AddEvent from '../component/AddEvent';
 import ViewEvents from '../component/ViewEvents/ViewEvents';
@@ -64,7 +64,8 @@ class Dashboard extends Component {
       }
       return (
         <Button value={el} key={el} onClick={this.clickBtn}>
-          {el}
+          view {el}
+          <EyeOutlined />
         </Button>
       );
     });

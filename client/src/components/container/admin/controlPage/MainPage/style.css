@@ -69,6 +69,8 @@
     font-size: 1rem;
     height: 40px;
     border-bottom: none;
+    background-color:#3B5A6F ;
+    color: aliceblue;
 }
 .dashboard .menue .btn-g button:hover{
     background-color:#F3F6F9 ;
@@ -78,9 +80,11 @@
     color:rgb(12, 78, 126);
 }
 .dashboard .ant-btn > .anticon + span, .ant-btn > span + .anticon{
-    margin-left: 90px;
     font-size: 1.3rem;
+    text-align: right;
+    margin-left: 30px;
 }
+
 .dashboard .block-el{
     align-self: start;
     width: 90%;

@@ -21,8 +21,12 @@ class UsersPage extends Component {
           params: { eventCode },
         },
       } = this.props;
+      console.log(eventCode);
       const { data } = await axios.get(`/api/v1/events/${eventCode}/users`);
-      this.setState({ users: data, isLoaded: true });
+      this.setState({
+        users: data,
+        isLoaded: true,
+      });
     } catch (err) {
       let error;
       if (err.response) {
@@ -36,11 +40,12 @@ class UsersPage extends Component {
 
   render() {
     const { error, isLoaded, users } = this.state;
-    const {
-      location: {
-        state: { title },
-      },
-    } = this.props;
+    // const {
+    //   location: {
+    //     state: { title },
+    //   },
+    // } = this.props;
+    const title = 'code';
 
     return (
       <div className="tableSection">
@@ -85,20 +90,29 @@ class UsersPage extends Component {
             <table id="table-to-xls" className="table-user">
               <thead>
                 <tr>
-                  <th>user name</th>
-                  <th>mobile</th>
-                  <th>email</th>
-                  <th>location</th>
+                  <th>User Name</th>
+                  <th>Mobile</th>
+                  <th>Email</th>
+                  <th>Location</th>
+                  <th>Attendance</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map(
-                  ({ first_name, last_name, location, email, mobile }) => (
+                  ({
+                    first_name,
+                    last_name,
+                    location,
+                    email,
+                    mobile,
+                    attendance,
+                  }) => (
                     <tr key={first_name}>
                       <td>{`${first_name} ${last_name}`} </td>
                       <td>{mobile}</td>
                       <td>{email}</td>
                       <td>{location}</td>
+                      <td>{attendance ? 'true' : 'false'}</td>
                     </tr>
                   )
                 )}
