@@ -6,7 +6,7 @@ const Header = () => (
     <div className="header_logo">
       <img
         className="header_logo-img"
-        src="https://svgshare.com/i/Jru.svg"
+        src="/static/media/logo.3912d0ae.svg"
         alt="GSG Logo"
       />
       <div className="header_logo-title">

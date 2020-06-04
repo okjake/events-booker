@@ -39,6 +39,7 @@ module.exports = {
     'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
     "camelcase": [0], //no-camelCase
     "react/jsx-props-no-spreading": 0,
+    "no-underscore-dangle": [0, { "allow": [] }],
     // configure the prettier plugin
     'prettier/prettier': [
       'error',
@@ -49,31 +50,4 @@ module.exports = {
     ],
   },
   plugins: ['react', 'prettier'],
-<<<<<<< HEAD
-
-  "camelcase": [0], //no-camelCase
-    "react/prop-types": [
-      0
-    ], //no propTypes
-    'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
-
-    "react/jsx-props-no-spreading": 0,
-
-    "no-underscore-dangle": [0, { "allow": [] }],
-
-
-};
-||||||| merged common ancestors
-
-  "camelcase": [0], //no-camelCase
-    "react/prop-types": [
-      0
-    ], //no propTypes
-    'no-nested-ternary': [0, {allowParensWrapped: true}], // nested ternary
-
-    "react/jsx-props-no-spreading": 0,
-
-};
-=======
-};
->>>>>>> 356c27b6e90dfcfa79a74a356491140ca22c9a56
+}; 
