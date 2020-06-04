@@ -144,7 +144,7 @@
         display: inline-block;
     }
     .dashboard .menue .btn-g button{
-        width: 90px;
+        width: 100px;
         margin-top: 10px;
         margin-left: 5px;
         border:1px solid rgb(12, 78, 126);
@@ -165,7 +165,7 @@
         overflow-y: hidden; 
     }
     .dashboard .header button{
-        width:90px;
+        width:100px;
         position: absolute;
         right: 20px;
         margin: 20px;
