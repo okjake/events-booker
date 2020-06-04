@@ -57,9 +57,11 @@ class AddEvent extends React.Component {
       let errorMsg;
       if (err.response) {
         errorMsg = err.response.data.msg;
-        errorMsg === 'invalid inputs'
-          ? error('image must be a valid url')
-          : error(errorMsg);
+        if (errorMsg === 'invalid inputs') {
+          error('image must be a valid url');
+        } else {
+          error(errorMsg);
+        }
       } else {
         errorMsg = 'Something went wrong, please try again later';
         error(errorMsg);
