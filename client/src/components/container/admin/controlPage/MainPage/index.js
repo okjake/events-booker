@@ -57,7 +57,7 @@ class Dashboard extends Component {
             key={el}
             onClick={this.clickBtn}
           >
-            add event
+            {el} event
             <PlusSquareFilled />
           </Button>
         );
@@ -91,23 +91,23 @@ class Dashboard extends Component {
             <div className="btn-g">{buttons}</div>
           </aside>
           <div className="block-el">
-            {renderView === 'add' && (
+            {renderView === 'add' ? (
               <div className="form-div">
                 <h1>Add Event</h1>
                 <AddEvent className="addEvC" />
               </div>
-            )}
-            {renderView === 'users' && (
+            ) : renderView === 'users' ? (
               <div className="user-div">
                 <h1>Users</h1>
                 <ViewUsers />
               </div>
-            )}
-            {renderView === 'events' && (
-              <div className="event-div">
-                <h1>events</h1>
-                <ViewEvents />
-              </div>
+            ) : (
+              renderView === 'events' && (
+                <div className="event-div">
+                  <h1>events</h1>
+                  <ViewEvents />
+                </div>
+              )
             )}
           </div>
         </div>
