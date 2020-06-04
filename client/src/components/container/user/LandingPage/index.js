@@ -43,7 +43,7 @@ class Landing extends React.Component {
   filterByCategory = (cat) => {
     const { allEvents } = this.state;
     if (cat === 'Upcoming')
-    this.setState((prevState) => ({ filteredEvents: prevState.allEvents }));
+      this.setState((prevState) => ({ filteredEvents: prevState.allEvents }));
     else {
       const events = allEvents.filter((event) => event.category === cat);
       this.setState({ filteredEvents: events, title: cat });
