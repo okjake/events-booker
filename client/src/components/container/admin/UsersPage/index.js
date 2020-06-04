@@ -40,12 +40,10 @@ class UsersPage extends Component {
   render() {
     const { error, isLoaded, users } = this.state;
     const {
-      match: {
-        params: { eventCode },
+      location: {
+        state: { title },
       },
     } = this.props;
-    const title = `users-event-${eventCode}`;
-
     return (
       <div className="tableSection">
         <header className="headerUsers">
