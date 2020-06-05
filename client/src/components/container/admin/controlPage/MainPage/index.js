@@ -41,13 +41,14 @@ class Dashboard extends Component {
     }
   };
 
-  clickBtn = ({ target: { value } }) => {
+  clickBtn = (value) => {
     this.setState({ renderView: value });
   };
 
   render() {
     const { name, img, adminError, renderView } = this.state;
     const arr = ['add', 'users', 'events'];
+    const { clickBtn } = this;
     const buttons = arr.map((el) => {
       if (el === 'add') {
         return (
@@ -55,7 +56,7 @@ class Dashboard extends Component {
             value={el}
             className="add-btn"
             key={el}
-            onClick={this.clickBtn}
+            onClick={() => clickBtn(el)}
           >
             {el} event
             <PlusSquareFilled />
@@ -63,7 +64,7 @@ class Dashboard extends Component {
         );
       }
       return (
-        <Button value={el} key={el} onClick={this.clickBtn}>
+        <Button value={el} key={el} onClick={() => clickBtn(el)}>
           view {el}
           <EyeOutlined />
         </Button>
