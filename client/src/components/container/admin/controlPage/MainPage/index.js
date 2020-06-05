@@ -41,8 +41,8 @@ class Dashboard extends Component {
     }
   };
 
-  clickBtn = (ele) => {
-    this.setState({ renderView: ele });
+  clickBtn = ({ target: { value } }) => {
+    this.setState({ renderView: value });
   };
 
   render() {
@@ -55,7 +55,7 @@ class Dashboard extends Component {
             value={el}
             className="add-btn"
             key={el}
-            onClick={() => this.clickBtn(el)}
+            onClick={this.clickBtn}
           >
             add event
             <PlusSquareFilled />
@@ -63,7 +63,7 @@ class Dashboard extends Component {
         );
       }
       return (
-        <Button value={el} key={el} onClick={() => this.clickBtn(el)}>
+        <Button value={el} key={el} onClick={this.clickBtn}>
           {el}
         </Button>
       );
