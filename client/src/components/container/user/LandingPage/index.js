@@ -31,9 +31,11 @@ class Landing extends React.Component {
     } catch (err) {
       let error;
       if (err.response) {
-        error = err.response.data.msg || 'Sorry, something went wrong.';
+        error =
+          err.response.data.msg ||
+          'Something went wrong, please try again later!';
       } else {
-        error = 'Sorry, something went wrong.';
+        error = 'Something went wrong, please try again later!';
       }
       this.setState({
         isLoaded: true,

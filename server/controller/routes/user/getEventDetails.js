@@ -3,7 +3,7 @@ const { getEventDetails } = require('../../../database/queries/events/index');
 const getEventByCode = async (req, res, next) => {
   try {
     const { code } = req.params;
-    const {  rows    } = await getEventDetails(code);
+    const { rows } = await getEventDetails(code);
     if (rows.length === 0) {
       const err = new Error();
       err.status = 404;

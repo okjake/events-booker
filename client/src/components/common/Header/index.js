@@ -1,7 +1,7 @@
 import React from 'react';
 
-import logoGSG from './1-logo-GSG.svg';
-import headerPic from './Group_114573.svg';
+import logoGSG from './image/logo.svg';
+import headerPic from './image/Group_114573.svg';
 import './style.css';
 
 const Header = () => (
