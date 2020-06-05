@@ -1,0 +1,19 @@
+.main__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22em, 1fr));
+    column-gap: 3vw;
+    row-gap: 1em;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .main__grid {
+      grid-template-columns: repeat(auto-fill, minmax(19em, 1fr));
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .main__grid {
+      grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
+    }
+  }

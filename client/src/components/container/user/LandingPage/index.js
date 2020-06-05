@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Result, Spin, Empty } from 'antd';
+import { Result, Spin, Empty } from 'antd';
 
-import Card from '../../../common/Card';
 import Header from '../../../common/Header';
+import Categories from './Categories';
+import EventsGrid from '../../../common/EventsGrid';
+import CardContent from './CardContent';
 import './style.css';
 
 class Landing extends React.Component {
@@ -15,91 +17,83 @@ class Landing extends React.Component {
     filteredEvents: [],
   };
 
-  componentDidMount() {
-    axios
-      .get('/api/v1/event')
-      .then(({ data }) => {
-        const response = [...data].sort(
-          (a, b) => new Date(a.date) - new Date(b.date)
-        );
-        this.setState({
-          isLoaded: true,
-          allEvents: response,
-          filteredEvents: response,
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          isLoaded: true,
-          error,
-        });
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get('/api/v1/event');
+      const events = [...data].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
+      this.setState({
+        isLoaded: true,
+        allEvents: events,
+        filteredEvents: events,
       });
+    } catch (err) {
+      let error;
+      if (err.response) {
+        error = err.response.data.msg || 'Sorry, something went wrong.';
+      } else {
+        error = 'Sorry, something went wrong.';
+      }
+      this.setState({
+        isLoaded: true,
+        error,
+      });
+    }
   }
 
-  filterByCategory = (cat) => {
-    const { allEvents } = this.state;
-    if (cat === 'Upcoming')
-      this.setState(({ allEvents }) => ({ filteredEvents: allEvents }));
-    else {
-      const events = allEvents.filter((event) => event.category === cat);
-      this.setState({ filteredEvents: events, title: cat });
-    }
-  };
+  setAllEvents = (cat) =>
+    this.setState((state) => ({
+      filteredEvents: state.allEvents,
+      title: cat,
+    }));
+
+  setFilteredEvents = (cat) =>
+    this.setState((state) => {
+      const events = state.allEvents.filter((event) => event.category === cat);
+      return { filteredEvents: events, title: cat };
+    });
 
   render() {
     const { error, isLoaded, title, filteredEvents } = this.state;
-    const { filterByCategory } = this;
-    const categories = [
-      'Code Academy',
-      'Freelance',
-      'Startups',
-      'Public',
-      'Upcoming',
-    ];
+    const { setAllEvents, setFilteredEvents } = this;
     return (
       <div className="wrapper">
         <header>
           <Header />
-          <div className="catagories">
-            {categories.map((cat) => (
-              <Button
-                shape="round"
-                key={cat}
-                autoFocus
-                className="catagories__btn"
-                onClick={() => filterByCategory(cat)}
-              >
-                {cat}
-              </Button>
-            ))}
-          </div>
+          <Categories
+            setAllEvents={setAllEvents}
+            setFilteredEvents={setFilteredEvents}
+          />
         </header>
         <div>
           {error ? (
             <Result
               status="500"
-              title="500"
-              subTitle="Something went Wrong, please try again later"
+              subTitle={error}
+              style={{ padding: '48px 0' }}
             />
           ) : !isLoaded ? (
-            <Spin size="large" />
+            <Spin
+              size="large"
+              style={{ display: 'block', margin: '50px auto 50px auto' }}
+            />
           ) : !filteredEvents.length ? (
             title === 'Upcoming' ? (
               <Empty
                 description={<span>no upcoming events at the meantime</span>}
+                style={{ margin: '50px 0' }}
               />
             ) : (
               <Empty
                 description={<span>no events for {title} at the meantime</span>}
+                style={{ margin: '50px 0' }}
               />
             )
           ) : (
             <main>
-              <ul className="main__grid">
-                {filteredEvents.map((event) => (
-                  <Card key={event.id} className="grid__item" info={event} />
-                ))}
-              </ul>
+              <h2 className="category-title">{title} events</h2>
+              <EventsGrid events={filteredEvents} CardContent={CardContent} />
             </main>
           )}
         </div>
