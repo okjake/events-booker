@@ -69,8 +69,6 @@
 }
 
 .card__btn {
-  display: grid;
-  place-content: center;
   width: 100%;
   height: 2.8em;
   box-shadow: 0 2px 4px #dce3ea;
