@@ -6,6 +6,7 @@ import Header from '../../../common/Header';
 import Categories from './Categories';
 import EventsGrid from '../../../common/EventsGrid';
 import CardContent from './CardContent';
+import Footer from '../../../common/Footer';
 import './style.css';
 
 class Landing extends React.Component {
@@ -68,7 +69,7 @@ class Landing extends React.Component {
             setFilteredEvents={setFilteredEvents}
           />
         </header>
-        <div>
+        <div className="main-content">
           {error ? (
             <Result
               status="500"
@@ -93,11 +94,12 @@ class Landing extends React.Component {
               />
             )
           ) : (
-            <main>
+            <main className="grid-wrapper">
               <h2 className="category-title">{title} events</h2>
               <EventsGrid events={filteredEvents} CardContent={CardContent} />
             </main>
           )}
+          <Footer />
         </div>
       </div>
     );

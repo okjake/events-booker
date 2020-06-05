@@ -8,7 +8,6 @@
 .wrapper {
   margin: 0 7.2vw;
   font-size: 16px;
-  min-height: 100vw;
 }
 
 .catagories {
@@ -37,13 +36,22 @@
 .catagories__btn:active {
   border: 1px solid #fb6c04;
   background: #fb6c04;
-  color: #ebebeb;
+  color: #fcfcfc;
 }
 
 .catagories__btn:focus {
   border: 1px solid #fb6c04;
   background: #fb6c04;
-  color: #ebebeb;
+  color: #fcfcfc;
+}
+
+.main-content {
+  min-height: 100vh;
+  position: relative;
+}
+
+.grid-wrapper {
+  padding-bottom: 5em;
 }
 
 .category-title {
