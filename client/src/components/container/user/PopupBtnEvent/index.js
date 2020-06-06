@@ -27,7 +27,7 @@ class PopupBtnEvent extends Component {
   };
 
   handleChange = ({ target: { value } }) => {
-    this.setState({ mobile: value, error: false });
+    this.setState({ mobile: value });
   };
 
   handleOk = async () => {
