@@ -7,7 +7,7 @@ import './style.css';
 class PopupBtnEvent extends Component {
   state = {
     mobile: '',
-    message: '',
+    errorMsg: '',
     visible: false,
     error: false,
     isLoad: false,
@@ -54,7 +54,7 @@ class PopupBtnEvent extends Component {
         } else {
           this.setState({
             error: true,
-            message: msg,
+            errorMsg: msg,
             mobile: '',
             isLoad: false,
           });
@@ -78,7 +78,7 @@ class PopupBtnEvent extends Component {
         const { msg } = response.data;
         this.setState({
           error: true,
-          message: msg,
+          errorMsg: msg,
           mobile: '',
           isLoad: false,
         });
@@ -87,7 +87,7 @@ class PopupBtnEvent extends Component {
   };
 
   render() {
-    const { visible, mobile, message, error, isLoad } = this.state;
+    const { visible, mobile, errorMsg, error, isLoad } = this.state;
     const { purpose, title } = this.props;
     return (
       <div className="popup-modal">
@@ -119,7 +119,7 @@ class PopupBtnEvent extends Component {
           {error ? (
             <Alert
               style={{ width: '75%' }}
-              message={message}
+              message={errorMsg}
               type="error"
               showIcon
             />
