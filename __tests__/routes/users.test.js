@@ -4,7 +4,7 @@ const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
 const dbBuild = require('../../server/database/config/build');
 
-describe('get request to /users', () => {
+describe('get request to /api/v1/users', () => {
   beforeAll(() => dbBuild());
   afterAll(() => connection.end());
 
