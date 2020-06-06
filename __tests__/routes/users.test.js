@@ -1,8 +1,11 @@
+require('env2')('./config.env');
 const request = require('supertest');
 
 const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
 const dbBuild = require('../../server/database/config/build');
+
+const { TOKEN } = process.env;
 
 describe('get request to /api/v1/users', () => {
   beforeAll(() => dbBuild());
@@ -14,9 +17,7 @@ describe('get request to /api/v1/users', () => {
       request(app)
         .get('/api/v1/users')
         .set('Accept', 'application/json')
-        .set('Cookie', [
-          'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTkxNDU3MjI2fQ.XLz9kuFBBcFjpKGGXABZyHUP0k0UBy-JiJpLm4KBZdY',
-        ])
+        .set('Cookie', [`token=${TOKEN}`])
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
