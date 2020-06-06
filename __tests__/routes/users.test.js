@@ -10,11 +10,24 @@ describe('get request to /users', () => {
 
   it('respond with json containing a list of all users', () =>
     new Promise((done) => {
-      expect.assertions(0);
+      expect.assertions(5);
       request(app)
-        .get('/users')
+        .get('/api/v1/users')
         .set('Accept', 'application/json')
+        .set('Cookie', [
+          'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTkxNDU3MjI2fQ.XLz9kuFBBcFjpKGGXABZyHUP0k0UBy-JiJpLm4KBZdY',
+        ])
         .expect('Content-Type', /json/)
-        .expect(200, done);
+        .expect(200)
+        .end((err, res) => {
+          if (err) done(err);
+          const data = res.body[0];
+          expect(data.first_name).toBe('Ahmed');
+          expect(data.last_name).toBe('Safi');
+          expect(data.mobile).toBe('0567365545');
+          expect(data.email).toBe('ahmadhsafi1997@gmail.com');
+          expect(data.location).toBe('Rafah');
+          return done();
+        });
     }));
 });
