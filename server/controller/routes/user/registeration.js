@@ -34,7 +34,7 @@ const checkUser = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -49,10 +49,10 @@ const checkEventExist = async (req, res, next) => {
     } else {
       const [event] = rows;
       req.event = event;
-      next();
+      return next();
     }
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -67,7 +67,7 @@ const checkAlreadyBooked = async (req, res, next) => {
       throw err;
     }
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -83,18 +83,18 @@ const generateCode = async (req, res, next) => {
     const codes = rows.map((event) => event.user_code);
     const randomCode = generateRandom(codes);
     req.user.userCode = randomCode;
-    next();
+    return next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
 const userWillAttend = async (req, res, next) => {
   try {
     await signUserAttend(req.user.id, req.event.id, req.user.userCode);
-    next();
+    return next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
