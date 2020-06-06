@@ -3,12 +3,16 @@
 ## Live Demo :
 [Heroku link , Click here to visit our app](https://eventsbooker.herokuapp.com/)
 
-## Team Members :
+## Team 
 
+**Team Lead**
+- Alaa Taima
+
+**Team members**
 - Ahmed Safi.
 - Mariam Isa.
 - Mohammed Irheem.
-- Rawan Abudahrouj.
+- Rawan Abu dahrouj.
 
 ## Summary :
 
