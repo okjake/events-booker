@@ -20,7 +20,7 @@ describe('get request to /api/v1/users', () => {
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
-          if (err) done(err);
+          if (err) throw err;
           const data = res.body[0];
           expect(data.first_name).toBe('Ahmed');
           expect(data.last_name).toBe('Safi');
