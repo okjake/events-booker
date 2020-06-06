@@ -32,9 +32,9 @@ const checkUser = async (req, res, next) => {
     }
     const [user] = rows;
     req.user = user;
-    next();
+    return next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -49,10 +49,10 @@ const checkEventExist = async (req, res, next) => {
     } else {
       const [event] = rows;
       req.event = event;
-      next();
+      return next();
     }
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
