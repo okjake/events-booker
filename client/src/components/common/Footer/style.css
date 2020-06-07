@@ -1,22 +1,14 @@
+.footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
 
-* {
+.footer_copyright {
+    opacity: 0.6;
+    color: #abadae;
+    font-size: 1.25em;
+    font-weight: 400;
     font-family: 'Poppins', sans-serif;
 }
-
-.footer {
-    box-sizing: border-box;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: #3b5a6f;
-    text-align: center;
-    display: flex;
-    margin-top: 30px;
-    justify-content: center;
-}
-
-.footer_copyright{
-	color: #ffffff;
-   }
