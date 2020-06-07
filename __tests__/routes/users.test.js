@@ -11,24 +11,20 @@ describe('get request to /api/v1/users', () => {
   beforeAll(() => dbBuild());
   afterAll(() => connection.end());
 
-  it('respond with json containing a list of all users', () =>
-    new Promise((done) => {
-      expect.assertions(5);
-      request(app)
-        .get('/api/v1/users')
-        .set('Accept', 'application/json')
-        .set('Cookie', [`token=${TOKEN}`])
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .end((err, res) => {
-          if (err) throw err;
-          const data = res.body[0];
-          expect(data.first_name).toBe('Ahmed');
-          expect(data.last_name).toBe('Safi');
-          expect(data.mobile).toBe('0567365545');
-          expect(data.email).toBe('ahmadhsafi1997@gmail.com');
-          expect(data.location).toBe('Rafah');
-          return done();
-        });
-    }));
+  it('respond with json containing a list of all users', async () => {
+    expect.assertions(1);
+    const res = await request(app)
+      .get('/api/v1/users')
+      .set('Accept', 'application/json')
+      .set('Cookie', [`token=${TOKEN}`])
+      .expect('Content-Type', /json/)
+      .expect(200);
+    expect(res.body[0]).toStrictEqual({
+      first_name: 'Ahmed',
+      last_name: 'Safi',
+      mobile: '0567365545',
+      email: 'ahmadhsafi1997@gmail.com',
+      location: 'Rafah',
+    });
+  });
 });
