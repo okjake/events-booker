@@ -50,7 +50,13 @@ class AdminLogin extends Component {
             <Form.Item
               name="email"
               className="messageColor"
-              rules={[{ required: true, message: 'Please input your email!' }]}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your email!',
+                  type: 'email',
+                },
+              ]}
             >
               <Input placeholder="email" prefix={<MailOutlined />} />
             </Form.Item>
