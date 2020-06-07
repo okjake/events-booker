@@ -23,7 +23,7 @@ describe('get request to /api/v1/event', () => {
     expect(res.body).toContainEqual({
       category: 'Code Academy',
       count: '0',
-      date: '2020-05-09T12:00:00.000Z',
+      date: new Date('2020-05-09 15:00.00').toJSON(),
       details: 'lorem ipsum',
       duration: 90,
       event_code: 303,
