@@ -75,10 +75,6 @@
   .header {
     font-size: 10px;
   }
-  .sub_header {
-    width: 100%;
-    padding: 0;
-  }
 }
 
 @media only screen and (max-width: 400px) {
