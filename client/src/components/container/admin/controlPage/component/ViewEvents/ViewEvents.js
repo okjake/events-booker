@@ -58,25 +58,25 @@ class ViewEvents extends Component {
     }
   }
 
-  handleAction = async(currentEvent) => {
-    try{
-      const {data} = await axios.patch('/api/v1/event', { id: currentEvent })
-      const {data: { rows },msg,} = data;
+  handleAction = async (currentEvent) => {
+    try {
+      const { data } = await axios.patch('/api/v1/event', { id: currentEvent });
+      const {
+        data: { rows },
+        msg,
+      } = data;
       message.success(msg, 10);
       const { events } = this.state;
-      const remainingEvents = events.filter(
-        (event) => event.id !== rows[0].id
-      );
+      const remainingEvents = events.filter((event) => event.id !== rows[0].id);
       this.setState({ events: remainingEvents });
-    } catch(err){
+    } catch (err) {
       let errorMsg;
       if (err.response) {
-        errorMsg ="Internal server error, the event hasn't deleted yet!!";
+        errorMsg = "Internal server error, the event hasn't deleted yet!!";
       } else {
         errorMsg = 'Something went wrong, please try again later';
       }
-      message.error(errorMsg)
-
+      message.error(errorMsg);
     }
   };
 

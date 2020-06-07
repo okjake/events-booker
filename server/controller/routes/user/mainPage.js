@@ -1,9 +1,12 @@
 const { getAllEvents } = require('../../../database/queries/events');
 
-const getEvents = (req, res, next) => {
-  getAllEvents()
-    .then(({ rows }) => res.json(rows))
-    .catch(next);
+const getEvents = async (req, res, next) => {
+  try {
+    const { rows } = await getAllEvents();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = getEvents;
