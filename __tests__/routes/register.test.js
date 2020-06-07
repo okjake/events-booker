@@ -25,7 +25,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if email is already taken', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: 'new',
       lastName: 'user',
@@ -44,7 +44,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if mobile number is already taken', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: 'new',
       lastName: 'user',
@@ -63,7 +63,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if firstName field is missing', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: '',
       lastName: 'user',
@@ -80,7 +80,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if lastName field is missing', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: 'new',
       lastName: '',
@@ -97,7 +97,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if email field is missing', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: 'new',
       lastName: 'user',
@@ -114,7 +114,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if mobile field is missing', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: 'new',
       lastName: 'user',
@@ -131,7 +131,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if location field is missing', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: 'new',
       lastName: 'user',
@@ -148,7 +148,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if mobile number is invalid', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: 'new',
       lastName: 'user',
@@ -165,7 +165,7 @@ describe('post request to /register', () => {
   });
 
   it('return bad request with status 400 if email is invalid', async () => {
-    expect.assertions(0);
+    expect.assertions(1);
     const reqBody = {
       firstName: 'new',
       lastName: 'user',
