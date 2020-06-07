@@ -1,9 +1,8 @@
 import React from 'react';
-import { LoadingOutlined } from '@ant-design/icons';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { Empty } from 'antd';
 
-const UserTable = ({ title, error, isLoaded, users }) => (
+const UserTable = ({ title, users }) => (
   <div className="content-t">
     <ReactHTMLTableToExcel
       id="test-table-xls-button"
@@ -13,13 +12,8 @@ const UserTable = ({ title, error, isLoaded, users }) => (
       sheet="tablexls"
       buttonText="Export to Excel"
     />
-    {error ? (
-      <div>{error}</div>
-    ) : !isLoaded ? (
-      <div>
-        <LoadingOutlined /> Loading
-      </div>
-    ) : !users.length ? (
+
+    {!users.length ? (
       <Empty description={<span>No users for this event</span>} />
     ) : (
       <table id="table-to-xls" className="table-user">

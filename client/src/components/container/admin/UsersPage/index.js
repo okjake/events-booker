@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button } from 'antd';
+import { Button, Spin, Result } from 'antd';
 import propTypes from 'prop-types';
 import UserTable from './TableUser';
 
@@ -65,12 +65,17 @@ class UsersPage extends Component {
           </div>
         </header>
         <h2>Users for {title} event</h2>
-        <UserTable
-          title={title}
-          users={users}
-          error={error}
-          isLoaded={isLoaded}
-        />
+        {error ? (
+          <Result
+            status="500"
+            title="500"
+            subTitle="Sorry, something went wrong."
+          />
+        ) : !isLoaded ? (
+          <Spin size="large" />
+        ) : (
+          <UserTable title={title} users={users} />
+        )}
       </div>
     );
   }
