@@ -33,14 +33,14 @@ describe('post request to /register', () => {
       mobile: '05123456',
       location: 'Gaza',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({
-        msg: 'email is already taken!',
-      });
+      .expect(400);
+    expect(res.body).toStrictEqual({
+      msg: 'email is already taken!',
+    });
   });
 
   it('return bad request with status 400 if mobile number is already taken', async () => {
@@ -52,14 +52,14 @@ describe('post request to /register', () => {
       mobile: '05123456',
       location: 'Gaza',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({
-        msg: 'mobile number is already taken!',
-      });
+      .expect(400);
+    expect(res.body).toStrictEqual({
+      msg: 'mobile number is already taken!',
+    });
   });
 
   it('return bad request with status 400 if firstName field is missing', async () => {
@@ -71,12 +71,12 @@ describe('post request to /register', () => {
       mobile: '0567365545',
       location: 'Gaza',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({ msg: 'firstName is a required field' });
+      .expect(400);
+    expect(res.body).toStrictEqual({ msg: 'firstName is a required field' });
   });
 
   it('return bad request with status 400 if lastName field is missing', async () => {
@@ -88,12 +88,12 @@ describe('post request to /register', () => {
       mobile: '0567365545',
       location: 'Gaza',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({ msg: 'lastName is a required field' });
+      .expect(400);
+    expect(res.body).toStrictEqual({ msg: 'lastName is a required field' });
   });
 
   it('return bad request with status 400 if email field is missing', async () => {
@@ -105,12 +105,12 @@ describe('post request to /register', () => {
       mobile: '0567365545',
       location: 'Gaza',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({ msg: 'email is a required field' });
+      .expect(400);
+    expect(res.body).toStrictEqual({ msg: 'email is a required field' });
   });
 
   it('return bad request with status 400 if mobile field is missing', async () => {
@@ -122,12 +122,12 @@ describe('post request to /register', () => {
       mobile: '',
       location: 'Gaza',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({ msg: 'mobile is a required field' });
+      .expect(400);
+    expect(res.body).toStrictEqual({ msg: 'mobile is a required field' });
   });
 
   it('return bad request with status 400 if location field is missing', async () => {
@@ -139,12 +139,12 @@ describe('post request to /register', () => {
       mobile: '7365545',
       location: '',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({ msg: 'location is a required field' });
+      .expect(400);
+    expect(res.body).toStrictEqual({ msg: 'location is a required field' });
   });
 
   it('return bad request with status 400 if mobile number is invalid', async () => {
@@ -156,12 +156,12 @@ describe('post request to /register', () => {
       mobile: 'hi world',
       location: 'Gaza',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({ msg: 'invalid mobile number' });
+      .expect(400);
+    expect(res.body).toStrictEqual({ msg: 'invalid mobile number' });
   });
 
   it('return bad request with status 400 if email is invalid', async () => {
@@ -173,11 +173,11 @@ describe('post request to /register', () => {
       mobile: '0567365545',
       location: 'Gaza',
     };
-    await request(app)
+    const res = await request(app)
       .post('/api/v1/register')
       .set('Accept', 'application/json')
       .send(reqBody)
-      .expect(400)
-      .expect({ msg: 'email must be a valid email' });
+      .expect(400);
+    expect(res.body).toStrictEqual({ msg: 'email must be a valid email' });
   });
 });
