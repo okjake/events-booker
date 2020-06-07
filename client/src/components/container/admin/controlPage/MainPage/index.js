@@ -103,12 +103,10 @@ class Dashboard extends Component {
                 <ViewUsers />
               </div>
             ) : (
-              renderView === 'events' && (
-                <div className="event-div">
-                  <h1>events</h1>
-                  <ViewEvents />
-                </div>
-              )
+              <div className="event-div">
+                <h1>events</h1>
+                <ViewEvents />
+              </div>
             )}
           </div>
         </div>
