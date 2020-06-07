@@ -20,7 +20,7 @@ describe('get request to /api/v1/event', () => {
       .set('Cookie', [`token=${TOKEN}`])
       .expect('Content-Type', /json/)
       .expect(200);
-    expect(res.body[0]).toStrictEqual({
+    expect(res.body).toContainEqual({
       category: 'Code Academy',
       count: '0',
       date: '2020-05-09T12:00:00.000Z',
