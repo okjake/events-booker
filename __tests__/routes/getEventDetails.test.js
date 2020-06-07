@@ -21,7 +21,7 @@ describe('get request to /events/:code', () => {
       event_code: 302,
       details: 'lorem ipsum',
       image: 'https://i.imgur.com/VgTVTNA.jpg',
-      date: '2038-01-09T01:14:07.000Z',
+      date: new Date('2038-01-09 03:14:07').toJSON(),
       duration: 120,
       count: '3',
     });
