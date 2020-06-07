@@ -21,15 +21,15 @@ describe('get request to /api/v1/event', () => {
       .expect('Content-Type', /json/)
       .expect(200);
     expect(res.body[0]).toStrictEqual({
-      title: 'Express',
-      id: 2,
-      event_code: 303,
       category: 'Code Academy',
-      details: 'lorem ipsum',
-      image: 'https://i.imgur.com/VgTVTNA.jpg',
-      date: '2020-05-09T12:00:00.000Z',
-      duration: 90,
       count: '0',
+      date: '2020-05-09T12:00:00.000Z',
+      details: 'lorem ipsum',
+      duration: 90,
+      event_code: 303,
+      id: 2,
+      image: 'https://i.imgur.com/VgTVTNA.jpg',
+      title: 'Express',
     });
   });
 
