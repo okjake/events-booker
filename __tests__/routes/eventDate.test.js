@@ -1,11 +1,26 @@
 const request = require('supertest');
 
+const moment = require('moment');
 const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
 const buildDB = require('../../server/database/config/build');
+const createEvent = require('../../server/database/queries/events/creatEventSql');
 
 describe('get request to /event/date', () => {
-  beforeAll(() => buildDB());
+  beforeAll(() => {
+    buildDB();
+    const today = moment().format('YYYY-MM-DD');
+    console.log(today);
+    createEvent({
+      title: 'test event',
+      category: 'Code Academy',
+      date: today,
+      details: 'lorem',
+      duration: '90',
+      event_code: '505',
+      image: 'https://i.imgur.com/VgTVTNA.jpg',
+    });
+  });
   afterAll(() => connection.end());
 
   it('respond with json containing a list of all events on this day', async () => {
@@ -16,17 +31,8 @@ describe('get request to /event/date', () => {
       .expect('Content-Type', /json/)
       .set('Accept', 'application/json')
       .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`]);
-    expect(res.body[0]).toStrictEqual({
-      category: 'Code Academy',
-      date: '2020-06-08T12:00:00.000Z',
-      details: 'lorem ipsum',
-      duration: 90,
-      event_code: 303,
-      expired: false,
-      id: 2,
-      image: 'https://i.imgur.com/VgTVTNA.jpg',
-      title: 'Express',
-    });
+    expect(res.body[0]).toStrictEqual({ events: 'no events available at GSG' });
+    console.log(res.body[0]);
   });
 
   it("respond with un-auth msg if he doesn't login", async () => {
