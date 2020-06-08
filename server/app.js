@@ -13,7 +13,6 @@ app.disabled('x-powered-by');
 app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 app.set('port', process.env.PORT || 8000);
 

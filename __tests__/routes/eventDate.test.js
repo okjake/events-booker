@@ -15,7 +15,7 @@ describe('get request to /event/date', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .set('Accept', 'application/json')
-      .set('Cookie', [`portalToken=${process.env.TOKEN}`]);
+      .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`]);
     expect(res.body[0]).toStrictEqual({
       category: 'Code Academy',
       date: '2020-06-08T12:00:00.000Z',
