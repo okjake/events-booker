@@ -130,7 +130,7 @@ const sendInvitation = (req, res, next) => {
     html: `<h4 style="text-align : left">Dear ${req.user.first_name} ${req.user.last_name}</h4>
            <p style="text-align : left; margin-bottom:0px;">We would love to see you among us at ${req.event.title} in Gaza Sky Geeks so, add this event to your calendar to be remembered 
            </p> 
-           <p style="text-align : left; margin-top:0px;">You will need this code to confirm attendance : ${req.user.userCode}</p>
+           <p style="text-align : left; margin-top:0px;">You will need this code to confirm attendance : <b>${req.user.userCode}</b></p>
            <p style="text-align : left">Gaza Sky Geeks Team</p>
           `,
     icalEvent: {
