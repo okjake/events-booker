@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { Button, Form, Modal, Input, message } from 'antd';
+import { Button, Form, Modal, Input, message, Alert } from 'antd';
 
 class AttendanceLogout extends Component {
   state = {
     modalDisplay: false,
+    errorMsg: '',
+    error: false,
   };
 
   handleModalSubmit = async ({ pinCode }) => {
-    const { success, error } = this;
     const {
       props: {
         history: { push },
@@ -19,16 +20,20 @@ class AttendanceLogout extends Component {
       const {
         data: { msg },
       } = await axios.post('/api/v1/portal/logout', { pinCode });
-      success(msg);
+      message.success(msg);
       push('/portal');
     } catch (err) {
-      let errorMsg;
       if (err.response) {
-        errorMsg = err.response.data.msg;
+        this.setState({
+          error: true,
+          errorMsg: err.response.data.msg,
+        });
       } else {
-        errorMsg = 'Something went wrong, please try again later';
+        this.setState({
+          error: true,
+          errorMsg: 'Something went wrong, please try again later',
+        });
       }
-      error(errorMsg);
     }
   };
 
@@ -44,16 +49,8 @@ class AttendanceLogout extends Component {
     });
   };
 
-  success = (msg) => {
-    message.success(msg);
-  };
-
-  error = (msg) => {
-    message.error(msg);
-  };
-
   render() {
-    const { modalDisplay } = this.state;
+    const { modalDisplay, error, errorMsg } = this.state;
     const { showModal, hideModal, handleModalSubmit } = this;
     return (
       <div className="popup-modal">
@@ -82,6 +79,14 @@ class AttendanceLogout extends Component {
               </Button>
             </Form.Item>
           </Form>
+          {error ? (
+            <Alert
+              style={{ width: '75%' }}
+              message={errorMsg}
+              type="error"
+              showIcon
+            />
+          ) : null}
         </Modal>
       </div>
     );
