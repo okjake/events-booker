@@ -10,9 +10,9 @@ const { signUserAttend } = require('../../../database/queries/users');
 const { alreadyBooked } = require('../../../database/queries/events');
 
 const checkUser = async (req, res, next) => {
-  const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
+  const mobileRegExp = /^(05[69])?(\(?\d{3}\)?)(\(?\d{4}\)?)\s?$/;
   const schema = yup.object().shape({
-    mobile: yup.string().matches(mobileRegExp),
+    mobile: yup.string().matches(mobileRegExp).length(10),
     eventCode: yup.number().required().positive().integer().min(100).max(999),
   });
 
@@ -130,7 +130,7 @@ const sendInvitation = (req, res, next) => {
     html: `<h4 style="text-align : left">Dear ${req.user.first_name} ${req.user.last_name}</h4>
            <p style="text-align : left; margin-bottom:0px;">We would love to see you among us at ${req.event.title} in Gaza Sky Geeks so, add this event to your calendar to be remembered 
            </p> 
-           <p style="text-align : left; margin-top:0px;">You will need this code to confirm attendance : ${req.user.userCode}</p>
+           <p style="text-align : left; margin-top:0px;">You will need this code to confirm attendance : <b>${req.user.userCode}</b></p>
            <p style="text-align : left">Gaza Sky Geeks Team</p>
           `,
     icalEvent: {
