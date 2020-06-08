@@ -1,28 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import {
-  Button,
-  Result,
-  Spin,
-  Empty,
-  Form,
-  InputNumber,
-  message,
-  Modal,
-  Input,
-} from 'antd';
+import { Button, Result, Spin, Empty, Form, InputNumber, message } from 'antd';
 import moment from 'moment';
 
 import './style.css';
+import Header from './Header/Header';
 
 class Attendance extends React.Component {
   state = {
     error: null,
     isLoaded: false,
     events: [],
-    modalDisplay: false,
   };
 
   async componentDidMount() {
@@ -76,30 +65,6 @@ class Attendance extends React.Component {
     error(err);
   };
 
-  handleModalSubmit = async ({ pinCode }) => {
-    const { success, error } = this;
-    const {
-      props: {
-        history: { push },
-      },
-    } = this;
-    try {
-      const {
-        data: { msg },
-      } = await axios.post('/api/v1/portal/logout', { pinCode });
-      success(msg);
-      push('/portal');
-    } catch (err) {
-      let errorMsg;
-      if (err.response) {
-        errorMsg = err.response.data.msg;
-      } else {
-        errorMsg = 'Something went wrong, please try again later';
-      }
-      error(errorMsg);
-    }
-  };
-
   success = (msg) => {
     message.success(msg);
   };
@@ -108,91 +73,13 @@ class Attendance extends React.Component {
     message.error(msg);
   };
 
-  showModal = () => {
-    this.setState({
-      modalDisplay: true,
-    });
-  };
-
-  hideModal = () => {
-    this.setState({
-      modalDisplay: false,
-    });
-  };
-
   render() {
-    const { error, isLoaded, events, modalDisplay } = this.state;
-    const {
-      onFinish,
-      onFinishFailed,
-      showModal,
-      hideModal,
-      handleModalSubmit,
-    } = this;
+    const { error, isLoaded, events } = this.state;
+    const { onFinish, onFinishFailed } = this;
     const refs = events.map(() => React.createRef());
     return (
       <div className="wrapper">
-        <header>
-          <div className="header">
-            <div className="header_logo">
-              <img
-                className="header_logo-img"
-                src="https://svgshare.com/i/Jru.svg"
-                alt="GSG Logo"
-              />
-              <div className="header_logo-title">
-                Events <span className="header_logo-subtitle">Booker</span>
-              </div>
-            </div>
-            <div className="attendance_header">
-              <h3 className="header_title">
-                Welcome to
-                <span className="header_subTitle"> GSG</span>
-              </h3>
-              <h2 className="sub-header">
-                Please enter your code to approve your attendance
-              </h2>
-              <h3 className="sub-header">
-                You haven&apos;t booked any event yet ?{' '}
-                <span>
-                  <Link to="/" target="_blank">
-                    Click here please
-                  </Link>
-                </span>
-              </h3>
-            </div>
-            <div className="attendance__logout">
-              <Button onClick={showModal}>Log out</Button>
-            </div>
-          </div>
-          <div className="popup-modal">
-            <Modal
-              title="Do you really want to Log out ?"
-              visible={modalDisplay}
-              onCancel={hideModal}
-              footer={[]}
-            >
-              <Form onFinish={handleModalSubmit}>
-                <Form.Item
-                  name="pinCode"
-                  rules={[{ message: 'Please input your pin-code!' }]}
-                  style={{ width: '75%', margin: '0.25rem' }}
-                >
-                  <Input.Password placeholder="Enter Pin Code Please" />
-                </Form.Item>
-                <Form.Item>
-                  <Button
-                    style={{ display: 'inline-block', margin: '0.25rem' }}
-                    type="primary"
-                    htmlType="submit"
-                  >
-                    Log out
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Modal>
-          </div>
-        </header>
+        <Header />
         <div>
           {error ? (
             <Result
