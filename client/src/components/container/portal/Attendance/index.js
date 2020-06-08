@@ -2,10 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import propTypes from 'prop-types';
 import { Button, Result, Spin, Empty, Form, InputNumber, message } from 'antd';
-import moment from 'moment';
 
 import './style.css';
 import Header from './Header/Header';
+import CardContent from './CardContent';
+import EventsGrid from '../../../common/EventsGrid';
 
 class Attendance extends React.Component {
   state = {
@@ -35,48 +36,8 @@ class Attendance extends React.Component {
     }
   }
 
-  onFinish = async ({ userCode }, eventCode, resetFields) => {
-    const { success, error } = this;
-    try {
-      const {
-        data: { msg },
-      } = await axios.patch('/api/v1/attendance', { userCode, eventCode });
-      success(msg);
-      resetFields();
-    } catch (err) {
-      let errorMsg;
-      if (err.response) {
-        errorMsg = err.response.data.msg;
-      } else {
-        errorMsg = 'Something went wrong, please try again later';
-      }
-      error(errorMsg);
-    }
-  };
-
-  onFinishFailed = ({
-    errorFields: [
-      {
-        errors: [err],
-      },
-    ],
-  }) => {
-    const { error } = this;
-    error(err);
-  };
-
-  success = (msg) => {
-    message.success(msg);
-  };
-
-  error = (msg) => {
-    message.error(msg);
-  };
-
   render() {
     const { error, isLoaded, events } = this.state;
-    const { onFinish, onFinishFailed } = this;
-    const refs = events.map(() => React.createRef());
     return (
       <div className="wrapper">
         <Header />
@@ -93,71 +54,24 @@ class Attendance extends React.Component {
             <Empty description={<span>no events for today</span>} />
           ) : (
             <main>
-              <ul className="main__grid">
+              <EventsGrid events={events} CardContent={CardContent} />
+              {/* <ul className="main__grid">
                 {events.map(
                   ({ id, image, title, category, event_code, date }, i) => (
                     <li className="card grid_item" key={id}>
+                      {console.log(refs[i])}
                       <img className="card__image" src={image} alt={title} />
-                      <div className="card__content">
-                        <h3 className="card__p">
-                          <b>{title}</b>
-                        </h3>
-                        <p className="card__p">
-                          <b>By :</b> {category}
-                        </p>
-                        <p className="card__p">
-                          <b>Time :</b> {moment(date).format('hh:mm a')}
-                        </p>
-                      </div>
-                      <div>
-                        <Form
-                          layout="inline"
-                          hideRequiredMark
-                          size="middle"
-                          ref={refs[i]}
-                          onFinishFailed={onFinishFailed}
-                          onFinish={(values) => {
-                            const {
-                              current: { resetFields },
-                            } = refs[i];
-                            onFinish(values, event_code, resetFields);
-                          }}
-                          className="attendance-form"
-                        >
-                          <Form.Item
-                            name="userCode"
-                            validateTrigger={onFinish}
-                            rules={[
-                              {
-                                required: true,
-                                type: 'integer',
-                                min: 100,
-                                max: 999,
-                                message:
-                                  "Event's code must be a number of 3 digits",
-                              },
-                            ]}
-                          >
-                            <InputNumber
-                              className="attendance-form__code"
-                              placeholder="userCode"
-                            />
-                          </Form.Item>
-                          <Form.Item>
-                            <Button
-                              type="primary"
-                              className="attendance-form__btn"
-                              htmlType="submit"
-                            >
-                              Submit
-                            </Button>
-                          </Form.Item>
-                        </Form>
-                      </div>
+                      <CardContent
+                        title={title}
+                        category={category}
+                        event_code={event_code}
+                        date={date}
+                        ref={refs[i]}
+                      />
                     </li>
                   )
                 )}
-              </ul>
+              </ul> */}
             </main>
           )}
         </div>
