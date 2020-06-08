@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import propTypes from 'prop-types';
-import { Button, Result, Spin, Empty, Form, InputNumber, message } from 'antd';
+import { Result, Spin, Empty } from 'antd';
 
 import './style.css';
 import Header from './Header/Header';
@@ -55,23 +55,6 @@ class Attendance extends React.Component {
           ) : (
             <main>
               <EventsGrid events={events} CardContent={CardContent} />
-              {/* <ul className="main__grid">
-                {events.map(
-                  ({ id, image, title, category, event_code, date }, i) => (
-                    <li className="card grid_item" key={id}>
-                      {console.log(refs[i])}
-                      <img className="card__image" src={image} alt={title} />
-                      <CardContent
-                        title={title}
-                        category={category}
-                        event_code={event_code}
-                        date={date}
-                        ref={refs[i]}
-                      />
-                    </li>
-                  )
-                )}
-              </ul> */}
             </main>
           )}
         </div>
