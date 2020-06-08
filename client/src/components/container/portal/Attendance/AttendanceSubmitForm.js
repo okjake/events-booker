@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
 import { Button, Form, InputNumber, message } from 'antd';
+import './style.css';
 
 const AttendanceSubmitForm = (props) => {
   const { event_code } = props;
