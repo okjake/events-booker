@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Alert, message } from 'antd';
 import axios from 'axios';
-import { PlusSquareFilled } from '@ant-design/icons';
+import { PlusSquareFilled, EyeOutlined } from '@ant-design/icons';
 
 import AddEvent from '../component/AddEvent';
 import ViewEvents from '../component/ViewEvents/ViewEvents';
@@ -41,13 +41,14 @@ class Dashboard extends Component {
     }
   };
 
-  clickBtn = ({ target: { value } }) => {
+  clickBtn = (value) => {
     this.setState({ renderView: value });
   };
 
   render() {
     const { name, img, adminError, renderView } = this.state;
     const arr = ['add', 'users', 'events'];
+    const { clickBtn } = this;
     const buttons = arr.map((el) => {
       if (el === 'add') {
         return (
@@ -55,16 +56,17 @@ class Dashboard extends Component {
             value={el}
             className="add-btn"
             key={el}
-            onClick={this.clickBtn}
+            onClick={() => clickBtn(el)}
           >
-            add event
+            {el} event
             <PlusSquareFilled />
           </Button>
         );
       }
       return (
-        <Button value={el} key={el} onClick={this.clickBtn}>
-          {el}
+        <Button value={el} key={el} onClick={() => clickBtn(el)}>
+          view {el}
+          <EyeOutlined />
         </Button>
       );
     });
@@ -90,19 +92,17 @@ class Dashboard extends Component {
             <div className="btn-g">{buttons}</div>
           </aside>
           <div className="block-el">
-            {renderView === 'add' && (
+            {renderView === 'add' ? (
               <div className="form-div">
                 <h1>Add Event</h1>
                 <AddEvent className="addEvC" />
               </div>
-            )}
-            {renderView === 'users' && (
+            ) : renderView === 'users' ? (
               <div className="user-div">
                 <h1>Users</h1>
                 <ViewUsers />
               </div>
-            )}
-            {renderView === 'events' && (
+            ) : (
               <div className="event-div">
                 <h1>events</h1>
                 <ViewEvents />

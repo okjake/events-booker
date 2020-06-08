@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import axios from 'axios';
-import { Button, Empty } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Button, Spin, Result } from 'antd';
 import propTypes from 'prop-types';
+import UserTable from './TableUser';
 
 import './style.css';
 
@@ -22,7 +21,10 @@ class UsersPage extends Component {
         },
       } = this.props;
       const { data } = await axios.get(`/api/v1/events/${eventCode}/users`);
-      this.setState({ users: data, isLoaded: true });
+      this.setState({
+        users: data,
+        isLoaded: true,
+      });
     } catch (err) {
       let error;
       if (err.response) {
@@ -41,7 +43,6 @@ class UsersPage extends Component {
         state: { title },
       },
     } = this.props;
-
     return (
       <div className="tableSection">
         <header className="headerUsers">
@@ -64,48 +65,17 @@ class UsersPage extends Component {
           </div>
         </header>
         <h2>Users for {title} event</h2>
-        <div className="content-t">
-          <ReactHTMLTableToExcel
-            id="test-table-xls-button"
-            className="download-table-xls-button"
-            table="table-to-xls"
-            filename={title}
-            sheet="tablexls"
-            buttonText="Export to Excel"
+        {error ? (
+          <Result
+            status="500"
+            title="500"
+            subTitle="Sorry, something went wrong."
           />
-          {error ? (
-            <div>{error}</div>
-          ) : !isLoaded ? (
-            <div>
-              <LoadingOutlined /> Loading
-            </div>
-          ) : !users.length ? (
-            <Empty description={<span>No users for this event</span>} />
-          ) : (
-            <table id="table-to-xls" className="table-user">
-              <thead>
-                <tr>
-                  <th>user name</th>
-                  <th>mobile</th>
-                  <th>email</th>
-                  <th>location</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map(
-                  ({ first_name, last_name, location, email, mobile }) => (
-                    <tr key={first_name}>
-                      <td>{`${first_name} ${last_name}`} </td>
-                      <td>{mobile}</td>
-                      <td>{email}</td>
-                      <td>{location}</td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </table>
-          )}
-        </div>
+        ) : !isLoaded ? (
+          <Spin size="large" />
+        ) : (
+          <UserTable title={title} users={users} />
+        )}
       </div>
     );
   }
