@@ -116,10 +116,11 @@ const sendInvitation = (req, res, next) => {
   }).toString();
 
   const transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE,
+    port: process.env.Ports,
+    host: process.env.Server,
     auth: {
-      user: process.env.EMAIL_ADMIN,
-      pass: process.env.EMAIL_PASS,
+      user: process.env.Username,
+      pass: process.env.Password,
     },
   });
 
