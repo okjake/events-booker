@@ -1,13 +1,13 @@
-.ant-form{
+.logout-modal .ant-form{
   display: flex;
 }
 
-.ant-form-item{
+.logout-modal .ant-form-item{
   margin-bottom: 0px;
   margin: 0.25rem;
   margin-right: 0px;
 }
 
-.ant-modal-body {
+.logout-modal .ant-modal-body {
   padding: 20px;
 }
