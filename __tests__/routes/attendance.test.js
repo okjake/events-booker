@@ -1,4 +1,5 @@
 const request = require('supertest');
+require('env2')('./config.env');
 
 const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
@@ -16,11 +17,11 @@ describe('patch request to /attendance', () => {
     };
     const res = await request(app)
       .patch('/api/v1/attendance')
-      .expect(400)
       .send(reqBody)
-      .expect('Content-Type', /json/)
+      .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`])
       .set('Accept', 'application/json')
-      .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`]);
+      .expect('Content-Type', /json/)
+      .expect(400);
     expect(res.body).toStrictEqual({
       msg:
         "user hasn't booked this event yet, please book the event then try again",
@@ -35,11 +36,11 @@ describe('patch request to /attendance', () => {
     };
     const res = await request(app)
       .patch('/api/v1/attendance')
-      .expect(200)
       .send(reqBody)
-      .expect('Content-Type', /json/)
       .set('Accept', 'application/json')
-      .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`]);
+      .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`])
+      .expect('Content-Type', /json/)
+      .expect(200);
     expect(res.body).toStrictEqual({
       msg: 'thanks for attending',
     });
@@ -48,10 +49,10 @@ describe('patch request to /attendance', () => {
     expect.assertions(1);
     const res = await request(app)
       .patch('/api/v1/attendance')
-      .expect(400)
-      .expect('Content-Type', /json/)
       .set('Accept', 'application/json')
-      .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`]);
+      .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`])
+      .expect(400)
+      .expect('Content-Type', /json/);
     expect(res.body).toStrictEqual({
       msg: 'eventCode is a required field',
     });

@@ -1,4 +1,5 @@
 const request = require('supertest');
+require('env2')('./config.env');
 
 const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
