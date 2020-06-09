@@ -10,7 +10,6 @@ describe('test for event queries', () => {
   it('return an array of all the events', async () => {
     expect.assertions(1);
     const { rows } = await getAllEvents();
-    console.log(rows);
     const expectedEvents = [
       {
         id: 2,
