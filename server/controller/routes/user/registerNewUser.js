@@ -4,13 +4,13 @@ const { getUser } = require('../../../database/queries/users');
 const { newUser } = require('../../../database/queries/users');
 const { checkUserExist } = require('../../../database/queries/users');
 
-const mobileRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
+const mobileRegExp = /^(05[69])(\d{7})$/;
 
 const schema = yup.object().shape({
   firstName: yup.string().required().max(10),
   lastName: yup.string().required().max(10),
   email: yup.string().email().required().max(50),
-  mobile: yup.string().required().max(20).matches(mobileRegExp),
+  mobile: yup.string().required().length(10).matches(mobileRegExp),
   location: yup.string().required().max(50),
 });
 
