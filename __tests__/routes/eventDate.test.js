@@ -5,13 +5,13 @@ const moment = require('moment');
 const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
 const buildDB = require('../../server/database/config/build');
-const createEvent = require('../../server/database/queries/events/creatEventSql');
+const { createEventSql } = require('../../server/database/queries/events');
 
 describe('get request to /event/date route', () => {
   beforeAll(async () => {
     buildDB();
     const date = moment().format('YYYY-MM-DD h:mm:ss');
-    await createEvent({
+    await createEventSql({
       title: 'test event',
       eventCode: 505,
       category: 'Code Academy',
@@ -32,6 +32,7 @@ describe('get request to /event/date route', () => {
       .expect(200)
       .expect('Content-Type', /json/);
 
+    console.log(res.body);
     expect(res.body[0].title).toStrictEqual('test event');
   });
 
