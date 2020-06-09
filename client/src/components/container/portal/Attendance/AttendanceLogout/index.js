@@ -58,6 +58,7 @@ class AttendanceLogout extends Component {
       <div className="popup-modal">
         <Button onClick={showModal}>Log out</Button>
         <Modal
+          className="logout-modal"
           title="Do you really want to Log out ?"
           visible={modalDisplay}
           onCancel={hideModal}
