@@ -7,7 +7,7 @@ const connection = require('../../server/database/config/connection');
 const buildDB = require('../../server/database/config/build');
 const createEvent = require('../../server/database/queries/events/creatEventSql');
 
-describe('get request to /event/date', () => {
+describe('get request to /event/date route', () => {
   beforeAll(async () => {
     buildDB();
     const date = moment().format('YYYY-MM-DD h:mm:ss');
