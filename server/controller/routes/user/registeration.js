@@ -10,7 +10,7 @@ const { signUserAttend } = require('../../../database/queries/users');
 const { alreadyBooked } = require('../../../database/queries/events');
 
 const checkUser = async (req, res, next) => {
-  const mobileRegExp = /^(05[69])?(\(?\d{3}\)?)(\(?\d{4}\)?)\s?$/;
+  const mobileRegExp = /^(05[69])(\d{7})$/;
   const schema = yup.object().shape({
     mobile: yup.string().matches(mobileRegExp).length(10),
     eventCode: yup.number().required().positive().integer().min(100).max(999),
