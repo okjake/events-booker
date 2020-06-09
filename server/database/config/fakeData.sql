@@ -58,7 +58,7 @@ VALUES
         'Code Academy',
         'lorem ipsum',
         'https://i.imgur.com/VgTVTNA.jpg',
-        '2020-06-07 15:00:00',
+        '2020-05-09 15:00:00',
         90
     ),
     (
@@ -67,7 +67,7 @@ VALUES
         'Freelance',
         'lorem ipsum',
         'https://i.imgur.com/VgTVTNA.jpg',
-        '2020-06-8 14:30:00',
+        '2020-06-12 14:30:00',
         180
     );
 
