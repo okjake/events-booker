@@ -5,13 +5,13 @@ const moment = require('moment');
 const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
 const buildDB = require('../../server/database/config/build');
-const createEvent = require('../../server/database/queries/events/creatEventSql');
+const { createEventSql } = require('../../server/database/queries/events');
 
-describe('get request to /event/date', () => {
-  beforeAll(() => {
+describe('get request to /event/date route', () => {
+  beforeAll(async () => {
     buildDB();
     const date = moment().format('YYYY-MM-DD h:mm:ss');
-    createEvent({
+    await createEventSql({
       title: 'test event',
       eventCode: 505,
       category: 'Code Academy',
@@ -31,8 +31,9 @@ describe('get request to /event/date', () => {
       .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`])
       .expect(200)
       .expect('Content-Type', /json/);
-    expect(res.body).toStrictEqual({ events: 'no events available at GSG' });
-    console.log(res.body);
+
+    const receivedData = res.body;
+    expect(receivedData[0].title).toStrictEqual('test event');
   });
 
   it("respond with un-auth msg if he doesn't login", async () => {
