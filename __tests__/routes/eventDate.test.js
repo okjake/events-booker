@@ -13,12 +13,12 @@ describe('get request to /event/date', () => {
     const date = moment().format('YYYY-MM-DD h:mm:ss');
     createEvent({
       title: 'test event',
+      eventCode: 505,
       category: 'Code Academy',
-      date,
       details: 'lorem',
-      duration: '90',
-      eventCode: '505',
       image: 'https://i.imgur.com/VgTVTNA.jpg',
+      date,
+      duration: 90,
     });
   });
   afterAll(() => connection.end());
@@ -32,6 +32,7 @@ describe('get request to /event/date', () => {
       .expect(200)
       .expect('Content-Type', /json/);
     expect(res.body).toStrictEqual({ events: 'no events available at GSG' });
+    console.log(res.body);
   });
 
   it("respond with un-auth msg if he doesn't login", async () => {
