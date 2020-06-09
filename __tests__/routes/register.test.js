@@ -14,7 +14,7 @@ describe('post request to /register', () => {
       firstName: 'new',
       lastName: 'user',
       email: 'ahmad@hotmail.com',
-      mobile: '05123456',
+      mobile: '0597123456',
       location: 'Gaza',
     };
     await request(app)
@@ -30,7 +30,7 @@ describe('post request to /register', () => {
       firstName: 'new',
       lastName: 'user',
       email: 'ahmad@hotmail.com',
-      mobile: '05123456',
+      mobile: '059623123456',
       location: 'Gaza',
     };
     const res = await request(app)
@@ -39,7 +39,7 @@ describe('post request to /register', () => {
       .send(reqBody)
       .expect(400);
     expect(res.body).toStrictEqual({
-      msg: 'email is already taken!',
+      msg: 'mobile must be exactly 10 characters',
     });
   });
 
@@ -58,7 +58,7 @@ describe('post request to /register', () => {
       .send(reqBody)
       .expect(400);
     expect(res.body).toStrictEqual({
-      msg: 'mobile number is already taken!',
+      msg: 'mobile must be exactly 10 characters',
     });
   });
 
@@ -136,7 +136,7 @@ describe('post request to /register', () => {
       firstName: 'new',
       lastName: 'user',
       email: 'newemail@gmail.com',
-      mobile: '7365545',
+      mobile: '0597736554',
       location: '',
     };
     const res = await request(app)
@@ -161,7 +161,9 @@ describe('post request to /register', () => {
       .set('Accept', 'application/json')
       .send(reqBody)
       .expect(400);
-    expect(res.body).toStrictEqual({ msg: 'invalid mobile number' });
+    expect(res.body).toStrictEqual({
+      msg: 'mobile must be exactly 10 characters',
+    });
   });
 
   it('return bad request with status 400 if email is invalid', async () => {
