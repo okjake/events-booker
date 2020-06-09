@@ -1,0 +1,10 @@
+.attendance_header {
+  margin-top: 2rem;
+}
+
+.attendance__logout {
+  position: absolute;
+  right: 0.25rem;
+  top: 0.25rem;
+  margin-top: 30px;
+}
