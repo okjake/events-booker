@@ -33,7 +33,6 @@ describe('get request to /event/date route', () => {
       .expect('Content-Type', /json/);
 
     const receivedData = res.body;
-    console.log(receivedData);
     expect(receivedData[0].title).toStrictEqual('test event');
   });
 
