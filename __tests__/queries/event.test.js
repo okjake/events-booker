@@ -10,43 +10,20 @@ describe('test for event queries', () => {
   it('return an array of all the events', async () => {
     expect.assertions(1);
     const { rows } = await getAllEvents();
-    // const expectedEvents = [
-    //   {
-    //     id: 2,
-    //     title: 'Express',
-    //     category: 'Code Academy',
-    //     event_code: 303,
-    //     details: 'lorem ipsum',
-    //     image: 'https://i.imgur.com/VgTVTNA.jpg',
-    //     date: new Date('2020-05-09 15:00:00'),
-    //     duration: 90,
-    //     count: '0',
-    //   },
-    //   {
-    //     id: 3,
-    //     title: 'How to Start freelance',
-    //     category: 'Freelance',
-    //     event_code: 502,
-    //     details: 'lorem ipsum',
-    //     image: 'https://i.imgur.com/VgTVTNA.jpg',
-    //     date: new Date('2020-06-12 14:30:00'),
-    //     duration: 180,
-    //     count: '1',
-    //   },
-    //   {
-    //     id: 1,
-    //     title: 'ReactJS',
-    //     category: 'Code Academy',
-    //     event_code: 302,
-    //     details: 'lorem ipsum',
-    //     image: 'https://i.imgur.com/VgTVTNA.jpg',
-    //     date: new Date('2038-01-09 03:14:07'),
-    //     duration: 120,
-    //     count: '3',
-    //   },
-    // ];
 
-    expect(rows).toHaveLength(3);
+    const expectedEvent = {
+      category: 'Freelance',
+      count: '1',
+      date: new Date('2020-06-12 14:30:00'),
+      details: 'lorem ipsum',
+      duration: 180,
+      event_code: 502,
+      id: 3,
+      image: 'https://i.imgur.com/VgTVTNA.jpg',
+      title: 'How to Start freelance',
+    };
+
+    expect(rows).toContainEqual(expectedEvent);
   });
 
   it('return the admin information', async () => {
