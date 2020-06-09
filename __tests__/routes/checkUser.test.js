@@ -71,17 +71,4 @@ describe('post request to /checkUser', () => {
       msg: 'you have already booked this event',
     });
   });
-
-  // it('return status 201 if booking success', async () => {
-  //   expect.assertions(0);
-  //   const reqBody = {
-  //     mobile: '0567365545',
-  //     eventCode: '505',
-  //   };
-  //   const res = await request(app)
-  //     .post('/api/v1/checkUser')
-  //     .send(reqBody)
-  //     .set('Accept', 'application/json')
-  //     .expect(201);
-  // });
 });
