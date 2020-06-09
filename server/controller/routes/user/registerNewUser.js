@@ -4,7 +4,7 @@ const { getUser } = require('../../../database/queries/users');
 const { newUser } = require('../../../database/queries/users');
 const { checkUserExist } = require('../../../database/queries/users');
 
-const mobileRegExp = /^(05[69])?(\(?\d{3}\)?)(\(?\d{4}\)?)\s?$/;
+const mobileRegExp = /^(05[69])(\d{7})$/;
 
 const schema = yup.object().shape({
   firstName: yup.string().required().max(10),
