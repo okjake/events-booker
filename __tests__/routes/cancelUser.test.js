@@ -4,7 +4,7 @@ const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
 const buildDB = require('../../server/database/config/build');
 
-describe('post request to /register', () => {
+describe('post request to /cancelUser', () => {
   beforeAll(() => buildDB());
   afterAll(() => connection.end());
 
