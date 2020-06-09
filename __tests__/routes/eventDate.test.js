@@ -32,8 +32,9 @@ describe('get request to /event/date route', () => {
       .expect(200)
       .expect('Content-Type', /json/);
 
-    console.log(res.body);
-    expect(res.body[0].title).toStrictEqual('test event');
+    const receivedData = res.body;
+    console.log(receivedData);
+    expect(receivedData[0].title).toStrictEqual('test event');
   });
 
   it("respond with un-auth msg if he doesn't login", async () => {
