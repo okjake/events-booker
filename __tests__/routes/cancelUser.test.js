@@ -52,20 +52,4 @@ describe('post request to /register', () => {
       .set('Accept', 'application/json')
       .expect(200);
   });
-
-  it('return status 400 if the mobile not register', async () => {
-    expect.assertions(1);
-    const reqBody = {
-      mobile: '0597755124',
-      eventCode: '502',
-    };
-    const res = await request(app)
-      .post('/api/v1/cancelUser')
-      .send(reqBody)
-      .set('Accept', 'application/json')
-      .expect(400);
-    expect(res.body).toStrictEqual({
-      msg: 'This mobile did not register at this event',
-    });
-  });
 });
