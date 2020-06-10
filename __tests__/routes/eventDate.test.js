@@ -8,18 +8,8 @@ const buildDB = require('../../server/database/config/build');
 const { createEventSql } = require('../../server/database/queries/events');
 
 describe('get request to /event/date route', () => {
-  beforeAll(async () => {
+  beforeAll(() => {
     buildDB();
-    const date = moment().format('YYYY-MM-DD h:mm:ss');
-    await createEventSql({
-      title: 'test event',
-      eventCode: 505,
-      category: 'Code Academy',
-      details: 'lorem',
-      image: 'https://i.imgur.com/VgTVTNA.jpg',
-      date,
-      duration: 90,
-    });
   });
   afterAll(() => connection.end());
 
@@ -32,8 +22,7 @@ describe('get request to /event/date route', () => {
       .expect(200)
       .expect('Content-Type', /json/);
 
-    const receivedData = res.body;
-    expect(receivedData[0].title).toStrictEqual('test event');
+    expect(res.body).toStrictEqual({ events: 'no events available at GSG' });
   });
 
   it("respond with un-auth msg if he doesn't login", async () => {

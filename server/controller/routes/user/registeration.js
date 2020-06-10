@@ -1,7 +1,9 @@
 const yup = require('yup');
 const nodemailer = require('nodemailer');
+
 const ical = require('ical-generator');
 const moment = require('moment');
+const googleAuth = require('./google_auth');
 
 const { checkUserExist } = require('../../../database/queries/users');
 const { getEventDetails } = require('../../../database/queries/events');
@@ -115,13 +117,26 @@ const sendInvitation = (req, res, next) => {
     ],
   }).toString();
 
-  const transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE,
+  const EMAIL_USERNAME = process.env.EMAIL_ADMIN;
+  const COMMON_NAME = 'Gaza Sky Geeks';
+  const nodemailerSettings = {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    service: 'Gmail',
+    from: `"${COMMON_NAME}" <${EMAIL_USERNAME}>`,
     auth: {
-      user: process.env.EMAIL_ADMIN,
-      pass: process.env.EMAIL_PASS,
+      type: 'OAuth2',
+      user: EMAIL_USERNAME,
+      clientId: googleAuth.credentials.web.client_id,
+      clientSecret: googleAuth.credentials.web.client_secret,
+      refreshToken: googleAuth.tokens.refresh_token,
+      accessToken: googleAuth.tokens.access_token,
+      expires: googleAuth.tokens.expiry_date,
     },
-  });
+  };
+
+  const transporter = nodemailer.createTransport(nodemailerSettings);
 
   const options = {
     from: `"Gaza Sky Geeks" <${process.env.EMAIL_ADMIN}>`,
