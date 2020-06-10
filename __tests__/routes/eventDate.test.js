@@ -1,11 +1,9 @@
 const request = require('supertest');
 require('env2')('./config.env');
 
-const moment = require('moment');
 const app = require('../../server/app');
 const connection = require('../../server/database/config/connection');
 const buildDB = require('../../server/database/config/build');
-const { createEventSql } = require('../../server/database/queries/events');
 
 describe('get request to /event/date route', () => {
   beforeAll(() => {
