@@ -4,13 +4,12 @@ const scope = 'https://mail.google.com/';
 
 const credentials = {
   web: {
-    client_id:
-      '1060633768920-n4nhh73vpurc6qjbmh3vkr3c806u5lvn.apps.googleusercontent.com',
-    project_id: 'events-booker',
-    auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-    token_uri: 'https://oauth2.googleapis.com/token',
-    auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-    client_secret: 'yRAzLTMj-lkestICZ42qOCAw',
+    client_id: process.env.CLIENT_ID,
+    project_id: process.env.PROJECT_ID,
+    auth_uri: process.env.AUTH_URI,
+    token_uri: process.env.TOKEN_URI,
+    auth_provider_x509_cert_url: process.env.AUTH_PROVIDER,
+    client_secret: process.env.CLIENT_SECRET,
     redirect_uris: ['https://developers.google.com/oauthplayground'],
     javascript_origins: ['http://localhost:3000'],
   },
@@ -29,8 +28,7 @@ function getAuthorizeUrl(callback) {
   callback(null, authUrl);
 }
 
-const code =
-  '4/0wHKIq1yVObo_KzASqW9M6Pn06G1loGHNCbA-j4lC_eHPf9UxUMTj7weZ0LktwHAxNEsSO12O6_jkwBoHz2htrE&scope=https://mail.google.com/ HTTP/1.1';
+const code = process.env.CODE;
 
 function getAccessToken(callback) {
   const oauth2Client = new googleAuth.OAuth2Client(
@@ -46,13 +44,11 @@ function getAccessToken(callback) {
 }
 
 const tokens = {
-  access_token:
-    'ya29.a0AfH6SMBpUzGMzYhdO32YZZskjiOjuWuEDQQVqowy_2hivWkzgxhyugKsj5FQi7QYAFc56B31_DAliTZPJPnJzlyZOW4evpS74ZykwN7ZkPGBrdOa6gqO7GSqdanB47SKgeCcxBsisczxm8Pu5CiSS0S2VivXjpTwXxM',
-  refresh_token:
-    '1//03gkKMJUuiL3CCgYIARAAGAMSNwF-L9IrBwcBc85JW02KA5npfqnrT9Lzd5K0eC2CNvo1qs30W02wLOUlg9ehThA_EUUL9_mETpM',
-  scope: 'https://mail.google.com/',
-  token_type: 'Bearer',
-  expiry_date: 1591751464071,
+  access_token: process.env.ACCESS_TOKEN,
+  refresh_token: process.env.REFRESH_TOKEN,
+  scope: process.env.SCOPE,
+  token_type: process.env.TOKEN_TYPE,
+  expiry_date: process.env.EXPIRE_DATE,
 };
 
 module.exports = { credentials, tokens };

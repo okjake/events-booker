@@ -123,7 +123,7 @@ const sendInvitation = (req, res, next) => {
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
-    service: 'Gmail',
+    service: process.env.EMAIL_SERVICE,
     from: `"${COMMON_NAME}" <${EMAIL_USERNAME}>`,
     auth: {
       type: 'OAuth2',
