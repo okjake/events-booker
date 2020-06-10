@@ -21,7 +21,6 @@ describe('get request to /event/date route', () => {
       .set('Cookie', [`portalToken=${process.env.PORTAL_TOKEN}`])
       .expect(200)
       .expect('Content-Type', /json/);
-
     expect(res.body).toStrictEqual({ events: 'no events available at GSG' });
   });
 
