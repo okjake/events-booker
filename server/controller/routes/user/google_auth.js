@@ -1,7 +1,4 @@
 const googleAuth = require('google-auth-library');
-const {
-  Credentials,
-} = require('google-auth-library/build/src/auth/credentials');
 
 const scope = 'https://mail.google.com/';
 
@@ -42,6 +39,7 @@ function getAccessToken(callback) {
     credentials.web.redirect_uris[0]
   );
   oauth2Client.getToken(code, (err, token) => {
+    // eslint-disable-next-line no-console
     if (err) return console.log(err);
     return callback(null, token);
   });
