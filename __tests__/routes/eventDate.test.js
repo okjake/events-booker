@@ -13,7 +13,7 @@ describe('get request to /event/date route', () => {
   });
   afterAll(() => connection.end());
 
-  it('respond with json containing a list of all events on this day', async () => {
+  it('respond with json containing a list of all events on current day', async () => {
     expect.assertions(1);
     const res = await request(app)
       .get('/api/v1/event/date')
