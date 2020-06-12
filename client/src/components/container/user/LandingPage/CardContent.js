@@ -4,8 +4,6 @@ import { withRouter } from 'react-router-dom';
 
 const CardContent = ({ history, info }) => {
   const { category, event_code, title, date } = info;
-  console.log(date);
-  console.log(moment(date).format('LLLL'));
   const takePart = () =>
     history.push({
       pathname: `/events/${category}/${event_code}`,
@@ -18,7 +16,7 @@ const CardContent = ({ history, info }) => {
         <b>{title}</b>
       </h3>
       <p className="card__p">{category}</p>
-      <p className="card__p">{moment(date).format('LLLL')}</p>
+      <p className="card__p">{moment(date).utc().format('LLLL')}</p>
       <button onClick={takePart} type="button" className="card__btn">
         Take A Part
       </button>
