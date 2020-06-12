@@ -53,7 +53,7 @@ class AddEvent extends React.Component {
       success(msg);
       this.setState({ loading: false });
     } catch (err) {
-      const { error} = this;
+      const { error } = this;
       let errorMsg;
       if (err.response) {
         errorMsg = err.response.data.msg;
@@ -182,6 +182,8 @@ class AddEvent extends React.Component {
             <TimePicker
               className="ant-input-override"
               placeholder="Event Time"
+              use12Hours
+              format="h:mm:ss A"
             />
           </Form.Item>
           <Form.Item
