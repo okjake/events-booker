@@ -35,7 +35,7 @@ class AddEvent extends React.Component {
       const { success } = this;
       const date = `${moment(dayMonthYear._d).format('YYYY-MM-DD')} ${moment(
         hourMinuteSecond._d
-      ).format('hh:mm:ss')}`;
+      ).format('HH:mm:ss')}`;
       const requestBody = {
         title,
         image,
@@ -183,7 +183,6 @@ class AddEvent extends React.Component {
               className="ant-input-override"
               placeholder="Event Time"
               use12Hours
-              format="h:mm:ss A"
             />
           </Form.Item>
           <Form.Item
