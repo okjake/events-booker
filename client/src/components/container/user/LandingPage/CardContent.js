@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 const CardContent = ({ history, info }) => {
   const { category, event_code, title, date } = info;
+  console.log(date);
   console.log(moment(date).format('LLLL'));
   const takePart = () =>
     history.push({
