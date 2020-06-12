@@ -36,6 +36,8 @@ class AddEvent extends React.Component {
       const date = `${moment(dayMonthYear._d).format('YYYY-MM-DD')} ${moment(
         hourMinuteSecond._d
       ).format('HH:mm:ss')}`;
+      console.log(date);
+
       const requestBody = {
         title,
         image,
