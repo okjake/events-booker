@@ -182,8 +182,6 @@ class AddEvent extends React.Component {
             <TimePicker
               className="ant-input-override"
               placeholder="Event Time"
-              use12Hours
-              format="h:mm:ss A"
             />
           </Form.Item>
           <Form.Item
