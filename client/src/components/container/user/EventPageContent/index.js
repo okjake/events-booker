@@ -17,7 +17,7 @@ const EventPageContent = ({ title, details, date, count }) => (
       <span className="icons">
         <FaRegClock />{' '}
       </span>
-      {moment(date).format('LT')}
+      {moment(date).utc().format('LT')}
     </p>
     <p>
       <span className="icons">
