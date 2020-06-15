@@ -3,16 +3,13 @@ import { Link } from 'react-router-dom';
 
 import AttendanceLogout from '../AttendanceLogout';
 import './Header.css';
+import logo from '../../../../common/Header/image/logo.svg';
 
 const Header = () => (
   <header>
     <div className="header">
       <div className="header_logo">
-        <img
-          className="header_logo-img"
-          src="https://svgshare.com/i/Jru.svg"
-          alt="GSG Logo"
-        />
+        <img className="header_logo-img" src={logo} alt="GSG Logo" />
         <div className="header_logo-title">
           Events <span className="header_logo-subtitle">Booker</span>
         </div>
