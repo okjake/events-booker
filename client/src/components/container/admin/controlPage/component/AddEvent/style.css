@@ -1,0 +1,31 @@
+.event-form{
+    width: 80%;
+    margin: auto;
+    padding: 5px 0;
+}
+.ant-input-override {
+  width: 100%;
+  border-radius: 24px;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  border-radius: 24px;
+}
+.event-form__btns > div > div > div {
+  display: flex;
+  justify-content: space-between;
+}
+.event-form__btn {
+  width: 49%;
+  border-radius: 24px;
+  margin: 3px;
+}
+
+@media (max-width: 600px) {
+  .event-form__btns > div > div > div {
+    flex-direction: column;
+  }
+  .event-form__btn {
+    width: 100%;
+    border-radius: 24px;
+  }
+}

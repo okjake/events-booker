@@ -1,0 +1,132 @@
+    .main-register{
+        display: flex;
+        overflow: hidden;
+        height: 100vh;
+    }
+    .s1{
+        align-self: center;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .s1 img{
+        width:90px;
+    }
+    .s1 h1{
+        font-weight: bold;
+        color: #FB6C04;
+    }
+    .s1 h2{
+        width: 590px;
+        text-align: center;
+        margin-top: -10px;
+        line-height: 32px;
+        color: rgb(8, 67, 109);
+        margin-bottom: 20px;
+        font-weight: normal;
+    
+    }
+    .blue{
+        color: #186AA5;
+    }
+    .s1 input{
+        width:370px;
+        padding: 20px;
+        border-radius: 40px;
+        margin-top: 5px;
+    }
+    .s1 .ant-btn-primary{
+        background-color: #236abb;
+        margin: 10px 5px 0px 0px;
+        border-radius: 40px;
+        width: 180px;
+        height: 50px;
+    }
+    .s1 .ant-btn-danger{
+        background-color: white;
+        color: red;
+        border-radius: 40px;
+        width: 180px;
+        height: 50px;
+    }
+    .s2{
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .s2 img{
+        width: 100%;
+        height: 100vh;
+        display: block;
+    }
+    .s1 .ant-alert-error{
+        margin-top: 10px;
+    }
+    .s1 .ant-input-affix-wrapper {
+        width:370px ;
+        border-radius: 40px;
+        box-sizing: border-box;
+    }
+    .s1 .anticon svg{
+        margin:5px;
+    }
+    .s1 input.ant-input{
+        margin-top: -2px;
+        text-align: left;
+    }
+@media  (max-width: 1200px) {
+
+    .s2{
+        display: none;
+    }
+    .s1{
+        width: 100%;
+        height: 100%;
+        margin:50px auto;
+    }
+
+}
+@media  (max-width: 580px) {
+    .main-register{
+        height: 100%;
+    }
+    .s1 img{
+        width:100px;
+    }
+    .s1 h1{
+        font-size: 1.2rem;
+    }
+    .s1 h2{
+        width: 80%;
+        text-align: center;
+        margin-top: -10px;
+        line-height: 25px;
+        font-size: .9rem;
+        color: rgb(8, 67, 109);
+        margin-bottom: 10px;
+    }
+    .s1 input{
+        width:250px;
+        margin-top: 5px;
+        padding: 15px;
+    }
+    .s1 .ant-btn-primary{
+        margin:10px 0px 0px 0px;
+        width: 250px;
+        display: block;
+    }
+    .s1 .ant-btn-danger{
+        width: 250px;
+        margin-top: 10px;
+    }
+    .s1 .ant-input-affix-wrapper {
+        width:250px ;
+        border-radius: 40px;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+}
+

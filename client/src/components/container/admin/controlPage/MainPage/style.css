@@ -1,0 +1,188 @@
+.dashboard{
+    width:100%;
+
+}
+.dashboard .header{
+    width: 100%;
+    height: 90px;
+    display:inline-block;
+    padding-top: 0px;
+}
+.dashboard .header .logo{
+    height: 50px;
+    position: absolute;
+    left:25px;
+    margin:30px 20px;
+    font-weight: bold;
+    color: #3B5A6F;
+}
+.dashboard .header button{
+    width:120px;
+    position: absolute;
+    right: 20px;
+    margin: 20px;
+    margin-top: 30px;
+    border-radius: 5px;
+    background-color: white;
+    color: #FB6C04;
+    border: 1px solid #FB6C04;
+}
+.dashboard .header button:hover{
+    color: white;
+    background-color: #FB6C04;
+
+
+}
+.main-el{
+    display: flex;
+    flex-direction: row;
+}
+.dashboard .menue{
+    margin-top:-6px;
+    width:270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: start;
+}
+.dashboard .menue img{
+    width: 120px;
+    margin: 20px 20px;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+.dashboard .menue h3{
+    text-align: center;
+    margin-top: -10px;
+    color: #3B5A6F;
+}
+.dashboard .menue .btn-g{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+.dashboard .menue .btn-g button{
+    text-align: center;
+    width: 240px;
+    border:1px solid white;
+    outline: none;
+    font-size: 1rem;
+    height: 40px;
+    border-bottom: none;
+    background-color:#3B5A6F ;
+    color: aliceblue;
+}
+.dashboard .menue .btn-g button:hover{
+    background-color:#F3F6F9 ;
+    color: rgb(12, 78, 126);
+}
+.dashboard .add-btn{
+    color:rgb(12, 78, 126);
+}
+.dashboard .ant-btn > .anticon + span, .ant-btn > span + .anticon{
+    font-size: 1.3rem;
+    text-align: right;
+    margin-left: 30px;
+}
+
+.dashboard .block-el{
+    align-self: start;
+    width: 90%;
+    box-sizing: border-box;
+    background-color:#F3F6F9;
+    margin: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+}
+.dashboard .block-el h1{
+    color: #FB6C04;
+}
+.dashboard .block-el button,input{
+    border-radius: 4px;
+}
+.dashboard .form-div{
+    margin: 20px;
+
+}
+.dashboard .event-div{
+    margin: 20px;
+    width: auto;
+}
+.dashboard .user-div{
+    margin: 20px;
+}
+@media (max-width:750px){
+    .main-el{
+        flex-direction: column;
+        width: 100%;
+    }
+    .dashboard .header{
+        height: 70px;
+        background-color: #3B5A6F;
+
+    }
+    .dashboard .header .logo{
+        left:20px;
+        color: white;
+        margin: 25px;
+        font-size: 1rem;
+    }
+    .dashboard .menue{
+        width:100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: start;
+    }
+    .dashboard .menue img{
+        margin: 20px 50px;
+    }
+    .dashboard .menue .btn-g{
+        margin-top: 10px;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+    .dashboard .menue .btn-g button{
+        width: 100px;
+        margin-top: 10px;
+        margin-left: 5px;
+        border:1px solid rgb(12, 78, 126);
+        border-radius: 20px;
+        font-size: .7rem;
+        box-sizing: border-box;
+        height: 30px;
+    }
+    .dashboard .ant-btn > .anticon + span, .ant-btn > span + .anticon{
+        display: none;
+    }
+    .block-el{
+        align-self: center;
+        width: 95%;
+        margin: auto;
+        background-color:#f9fafc;
+        overflow-x: scroll;
+        overflow-y: hidden; 
+    }
+    .dashboard .header button{
+        width:100px;
+        position: absolute;
+        right: 20px;
+        margin: 20px;
+        margin-top: 20px;
+        color: #FB6C04;
+        background-color: white;
+        border: 1px solid #FB6C04;
+    }
+    .dashboard .form-div{
+        font-size: .7rem;
+    
+    }
+    .dashboard .event-div{
+        font-size: .5rem;
+    }
+    .dashboard .user-div{
+        font-size: .5rem;
+    }
+}

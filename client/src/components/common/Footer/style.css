@@ -1,0 +1,14 @@
+.footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+
+.footer_copyright {
+    opacity: 0.6;
+    color: #abadae;
+    font-size: 1.25em;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}

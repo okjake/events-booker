@@ -1,0 +1,40 @@
+
+.action-btns .show{
+  cursor: pointer;
+  height: 32px;
+  padding:6px 21px;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #1890ff;
+  border-color: #1890ff;
+  margin-right: 10px;
+}
+
+.action-btns .delete{
+  width: 80px;
+  margin-top: 10px;
+  text-align: center;
+}
+.action-btns .show:hover{
+  color: #fff;
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+.ant-table-content{
+  width: 100%;
+}
+@media  (max-width: 800px) {
+  .table-event{
+    font-size: .5rem;
+  }
+  .action-btns .delete{
+    margin-top: 10px;
+    font-size: .6rem;
+    width: 68px;
+    height: 25px;
+  }
+  .action-btns .show{
+    font-size: .6rem;
+  }
+}
